@@ -14,12 +14,14 @@
   <div class="wrap">
 
     <div class="tabs" id="tabs">
+      <span class="tabs-rule" aria-hidden="true"></span>
       <select class="tab font-select" id="font-select"></select>
       <div class="tab-group">
         <button class="tab active" data-panel="glyphsheet">Glyphs</button>
         <button class="tab" data-panel="sizeramp">Sizes</button>
         <button class="tab" data-panel="poster">Custom</button>
       </div>
+      <span class="tabs-rule" aria-hidden="true"></span>
     </div>
 
     <div class="panel active" id="panel-glyphsheet">
@@ -181,7 +183,11 @@
     if (row4) row4.style.fontSize = midSize + "px";
   }
 
-  var RAMP_SIZES = [144, 96, 64, 42, 28, 18];
+  // Cascades from a 144px max down to a 12px min. Labels (below) are size
+  // names (XXL/XL/L/M/S) rather than point values now, so this array's
+  // length must stay in sync with RAMP_LABELS.
+  var RAMP_SIZES = [144, 96, 64, 36, 20, 12];
+  var RAMP_LABELS = ["XXL", "XL", "L", "M", "S", "XS"];
 
   // Tracks whether the user has hand-edited the size-ramp sample text. Until
   // they do, the sample text defaults to (and updates with) the active
@@ -198,6 +204,11 @@
       var word = document.createElement("div");
       word.className = "ramp-word";
       word.dataset.pt = pt;
+      // Smallest (S) row only -- a touch of letter-spacing keeps it legible
+      // at the tightest size instead of feeling cramped.
+      if (i === RAMP_SIZES.length - 1) {
+        word.classList.add("ramp-word-tight");
+      }
       if (i === 0) {
         word.id = "ramp-master";
         word.contentEditable = "true";
@@ -213,7 +224,7 @@
       }
       var label = document.createElement("span");
       label.className = "ramp-label";
-      label.textContent = pt + "PT";
+      label.textContent = RAMP_LABELS[i] || (pt + "PT");
       row.appendChild(word);
       row.appendChild(label);
       container.appendChild(row);

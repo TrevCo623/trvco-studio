@@ -45,12 +45,28 @@ body {
   justify-content: center;
 }
 
+/* Flanks the select + tab-group on either side. flex: 1 (rather than a
+   fixed width) means the two rules always eat exactly the leftover space
+   in the row, keeping the select/tab-group cluster perfectly centered no
+   matter the container width -- doesn't rely on justify-content at all. */
+.tabs-rule {
+  flex: 1 1 auto;
+  min-width: 24px;
+  height: 1px;
+  background: var(--rule);
+  align-self: center;
+}
+
 /* Applied via JS whenever the select and tab-group no longer fit on one
    line -- catches every width where wrapping happens, not just the fixed
    mobile breakpoint below. */
 .tabs.stacked {
   flex-direction: column;
   align-items: stretch;
+}
+
+.tabs.stacked .tabs-rule {
+  display: none;
 }
 
 .tabs.stacked .font-select {
@@ -291,6 +307,12 @@ body {
   white-space: nowrap;
   line-height: 1;
   overflow: hidden;
+}
+
+/* Applied only to the smallest (S) ramp row -- a little extra letter-spacing
+   keeps the tightest size legible instead of feeling cramped. */
+.ramp-word-tight {
+  letter-spacing: 0.1em;
 }
 
 .ramp-label {
