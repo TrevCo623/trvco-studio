@@ -256,11 +256,11 @@ body {
   word-break: break-all;
   letter-spacing: 0.03em;
   text-align: center;
-  line-height: 1.15;
+  line-height: 0.95;
   margin-bottom: 2px;
 }
 
-/* The uppercase/lowercase rows are hardcoded A-N / O-Z splits (see the
+/* The uppercase/lowercase rows are hardcoded A-M / N-Z splits (see the
    markup built in specimen.js and the fitGlyphSheet function there) rather
    than one wrapping string -- that guarantees the same two-line shape on
    every font, instead of the wrap point drifting with each font's own

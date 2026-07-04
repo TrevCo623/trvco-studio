@@ -23,10 +23,10 @@
     </div>
 
     <div class="panel active" id="panel-glyphsheet">
-      <div class="glyph-row" id="gs-row-upper1">ABCDEFGHIJKLMN</div>
-      <div class="glyph-row" id="gs-row-upper2">OPQRSTUVWXYZ</div>
-      <div class="glyph-row" id="gs-row-lower1">abcdefghijklmn</div>
-      <div class="glyph-row" id="gs-row-lower2">opqrstuvwxyz</div>
+      <div class="glyph-row" id="gs-row-upper1">ABCDEFGHIJKLM</div>
+      <div class="glyph-row" id="gs-row-upper2">NOPQRSTUVWXYZ</div>
+      <div class="glyph-row" id="gs-row-lower1">abcdefghijklm</div>
+      <div class="glyph-row" id="gs-row-lower2">nopqrstuvwxyz</div>
       <div class="glyph-row" id="gs-row3">0123456789</div>
       <div class="glyph-row" id="gs-row4"></div>
       <div class="footer-cap"><span id="glyph-caption"></span></div>
@@ -156,11 +156,11 @@
     // so all of them (A-N, O-Z, a-n, o-z) render at one shared size -- keeps
     // the two/four lines visually matched instead of each drifting to its
     // own best-fit size.
-    var upperSize = fitToWidth(upper1 ? upper1.textContent : "", w, {max: 120});
-    if (upper2) upperSize = Math.min(upperSize, fitToWidth(upper2.textContent, w, {max: 120}));
+    var upperSize = fitToWidth(upper1 ? upper1.textContent : "", w, {max: 100});
+    if (upper2) upperSize = Math.min(upperSize, fitToWidth(upper2.textContent, w, {max: 100}));
     if (lowerVisible) {
-      upperSize = Math.min(upperSize, fitToWidth(lower1.textContent, w, {max: 120}));
-      upperSize = Math.min(upperSize, fitToWidth(lower2.textContent, w, {max: 120}));
+      upperSize = Math.min(upperSize, fitToWidth(lower1.textContent, w, {max: 100}));
+      upperSize = Math.min(upperSize, fitToWidth(lower2.textContent, w, {max: 100}));
     }
     upperSize = Math.max(upperSize, GLYPH_MIN_SIZE);
     if (upper1) upper1.style.fontSize = upperSize + "px";
