@@ -17,6 +17,19 @@ html, body {
   margin: 0;
   padding: 0;
   min-height: 100%;
+  /* iOS Safari has a well-known bug where 100vw (used by .tabs' full-bleed
+     breakout below) is sized off the viewport WITHOUT the address bar --
+     wider than the actual visible layout width -- creating a real,
+     scrollable horizontal overflow on-device that Chrome/desktop testing
+     never shows. Once that overflow exists, anything else that's correctly
+     centered relative to the full document (e.g. the Custom-tab text) can
+     render visually shifted within the on-screen viewport, since the page
+     loads scrolled to the left edge of that wider-than-visible document.
+     Clipping it here, at the true outermost box, is safe -- unlike the
+     earlier .grain overflow-x bug (see .grain below), this box's width is
+     ALWAYS the real viewport by definition, so it can't clip the bleed at
+     the wrong edge the way a nested/offset ancestor did. */
+  overflow-x: hidden;
 }
 
 body {
@@ -299,13 +312,16 @@ body {
   margin-bottom: 2px;
 }
 
-/* The uppercase/lowercase rows are hardcoded A-M / N-Z splits (see the
-   markup built in specimen.js and the fitGlyphSheet function there) rather
-   than one wrapping string -- that guarantees the same two-line shape on
-   every font, instead of the wrap point drifting with each font's own
-   letter widths. Each half is sized to always fit on its own single line,
-   so no wrapping is needed here. */
-#gs-row-upper1, #gs-row-upper2, #gs-row-lower1, #gs-row-lower2 {
+/* The uppercase/lowercase rows are hardcoded splits -- A-M / N-Z on desktop,
+   A-I / J-Q / R-Z on mobile (see GLYPH_SPLIT_DESKTOP/GLYPH_SPLIT_MOBILE and
+   applyGlyphSplit() in specimen.js) -- rather than one wrapping string. That
+   guarantees the same line shape on every font, instead of the wrap point
+   drifting with each font's own letter widths. Each row is sized to always
+   fit on its own single line, so no wrapping is needed here. The upper3/
+   lower3 rows only render content on mobile; they're empty and hidden via
+   inline style otherwise. */
+#gs-row-upper1, #gs-row-upper2, #gs-row-upper3,
+#gs-row-lower1, #gs-row-lower2, #gs-row-lower3 {
   white-space: nowrap;
 }
 

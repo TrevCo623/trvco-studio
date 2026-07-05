@@ -27,8 +27,10 @@
     <div class="panel active" id="panel-glyphsheet">
       <div class="glyph-row" id="gs-row-upper1">ABCDEFGHIJKLM</div>
       <div class="glyph-row" id="gs-row-upper2">NOPQRSTUVWXYZ</div>
+      <div class="glyph-row" id="gs-row-upper3" style="display:none;"></div>
       <div class="glyph-row" id="gs-row-lower1">abcdefghijklm</div>
       <div class="glyph-row" id="gs-row-lower2">nopqrstuvwxyz</div>
+      <div class="glyph-row" id="gs-row-lower3" style="display:none;"></div>
       <div class="glyph-row" id="gs-row3">0123456789</div>
       <div class="glyph-row" id="gs-row4"></div>
       <div class="footer-cap"><span id="glyph-caption"></span></div>
@@ -174,16 +176,60 @@
     return total > 0 && (distinct / total) > 0.5;
   }
 
-  function updateGlyphSheetCase() {
-    var lower1 = document.getElementById("gs-row-lower1");
-    var lower2 = document.getElementById("gs-row-lower2");
-    if (!lower1 || !lower2) return;
-    var display = detectHasLowercase(FONT_NAME) ? "" : "none";
-    lower1.style.display = display;
-    lower2.style.display = display;
+  // Two-line split on desktop, three-line split on mobile -- narrower phones
+  // can't fit a 13-character nowrap row without either overflowing or
+  // shrinking below legibility, so under GLYPH_MOBILE_BREAKPOINT the
+  // alphabet is redealt across three shorter rows instead. Order matters:
+  // these must concatenate back to the full A-Z run.
+  var GLYPH_SPLIT_DESKTOP = ["ABCDEFGHIJKLM", "NOPQRSTUVWXYZ"];
+  var GLYPH_SPLIT_MOBILE = ["ABCDEFGHI", "JKLMNOPQ", "RSTUVWXYZ"];
+  var GLYPH_MOBILE_BREAKPOINT = 600; // matches the CSS @media breakpoint used elsewhere
+
+  var GLYPH_UPPER_IDS = ["gs-row-upper1", "gs-row-upper2", "gs-row-upper3"];
+  var GLYPH_LOWER_IDS = ["gs-row-lower1", "gs-row-lower2", "gs-row-lower3"];
+
+  // Cached across calls so a plain resize (see applyGlyphSplit below) never
+  // has to re-run the canvas rasterization in detectHasLowercase -- that
+  // only needs to happen when the active font itself changes.
+  var glyphHasLowercase = false;
+
+  // Rewrites the upper/lowercase row text + visibility from two independent
+  // inputs: how many lines the current viewport should use (2 or 3, from
+  // GLYPH_SPLIT_DESKTOP/MOBILE above) and whether the active font has
+  // distinct lowercase forms at all (glyphHasLowercase, set by
+  // updateGlyphSheetCase). Cheap/no canvas work, so safe to call on every
+  // resize to keep the split in sync as the viewport crosses the breakpoint.
+  function applyGlyphSplit() {
+    var mobile = window.innerWidth <= GLYPH_MOBILE_BREAKPOINT;
+    var split = mobile ? GLYPH_SPLIT_MOBILE : GLYPH_SPLIT_DESKTOP;
+    for (var i = 0; i < 3; i++) {
+      var text = split[i] || "";
+      var upperEl = document.getElementById(GLYPH_UPPER_IDS[i]);
+      if (upperEl) {
+        upperEl.textContent = text;
+        upperEl.style.display = text ? "" : "none";
+      }
+      var lowerEl = document.getElementById(GLYPH_LOWER_IDS[i]);
+      if (lowerEl) {
+        lowerEl.textContent = text.toLowerCase();
+        lowerEl.style.display = (text && glyphHasLowercase) ? "" : "none";
+      }
+    }
   }
 
-  // Floor size for glyph rows -- keeps the sheet legible on narrow phones.
+  // Detects whether the active font has true lowercase letterforms (see
+  // detectHasLowercase above), caches the result, and applies it (together
+  // with the current line-split) to the DOM. Run this on font load/switch;
+  // for plain resizes use applyGlyphSplit() directly instead, since the
+  // case detection itself can't change without the font changing.
+  function updateGlyphSheetCase() {
+    glyphHasLowercase = detectHasLowercase(FONT_NAME);
+    applyGlyphSplit();
+  }
+
+  // Floor size for gs-row3/row4 (the numbers/symbols rows) only -- safe
+  // there since they use normal white-space and wrap to compensate. NOT
+  // applied to the upper/lowercase nowrap rows above -- see fitGlyphSheet.
   var GLYPH_MIN_SIZE = 48;
 
   // The numbers/symbols row (gs-row4, plus gs-row3) still renders as ONE
@@ -202,29 +248,33 @@
     var panel = document.getElementById("panel-glyphsheet");
     var w = contentWidth(panel);
 
-    var upper1 = document.getElementById("gs-row-upper1");
-    var upper2 = document.getElementById("gs-row-upper2");
-    var lower1 = document.getElementById("gs-row-lower1");
-    var lower2 = document.getElementById("gs-row-lower2");
-    var lowerVisible = !!lower1 && lower1.style.display !== "none";
+    // Collect whichever upper/lowercase rows are actually showing right now
+    // (2 or 3 lines per case, depending on applyGlyphSplit's mobile/desktop
+    // split, further gated by whether lowercase is visible at all) rather
+    // than assuming a fixed set of 4 -- lets this same loop handle both
+    // layouts without duplicating it per breakpoint.
+    var visible = [];
+    GLYPH_UPPER_IDS.concat(GLYPH_LOWER_IDS).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el && el.style.display !== "none" && el.textContent) visible.push(el);
+    });
 
-    // Fit every visible half-row independently, then use the smallest result
-    // so all of them (A-N, O-Z, a-n, o-z) render at one shared size -- keeps
-    // the two/four lines visually matched instead of each drifting to its
-    // own best-fit size.
-    var upperSize = fitToWidth(upper1 ? upper1.textContent : "", w, {max: 100});
-    if (upper2) upperSize = Math.min(upperSize, fitToWidth(upper2.textContent, w, {max: 100}));
-    if (lowerVisible) {
-      upperSize = Math.min(upperSize, fitToWidth(lower1.textContent, w, {max: 100}));
-      upperSize = Math.min(upperSize, fitToWidth(lower2.textContent, w, {max: 100}));
-    }
-    upperSize = Math.max(upperSize, GLYPH_MIN_SIZE);
-    if (upper1) upper1.style.fontSize = upperSize + "px";
-    if (upper2) upper2.style.fontSize = upperSize + "px";
-    if (lowerVisible) {
-      lower1.style.fontSize = upperSize + "px";
-      lower2.style.fontSize = upperSize + "px";
-    }
+    // Fit every visible row independently to the container width, then use
+    // the smallest result so all of them render at one shared size -- keeps
+    // the whole block visually matched instead of each line drifting to its
+    // own best-fit size. Deliberately no minimum floor here (there used to
+    // be one, GLYPH_MIN_SIZE) -- these rows are white-space:nowrap, so a
+    // forced floor on a narrow container just pushes them past the edge
+    // instead of shrinking to fit. fitToWidth's own math is exact for a
+    // single nowrap line, so it's safe to trust completely, even down to
+    // very small phone widths.
+    var upperSize = 100;
+    visible.forEach(function(el) {
+      upperSize = Math.min(upperSize, fitToWidth(el.textContent, w, {max: 100}));
+    });
+    visible.forEach(function(el) {
+      el.style.fontSize = upperSize + "px";
+    });
 
     var row3 = document.getElementById("gs-row3");
     var row4 = document.getElementById("gs-row4");
@@ -396,7 +446,14 @@
     fitPoster();
   });
 
-  window.addEventListener("resize", refitActive);
+  // applyGlyphSplit runs on every resize (cheap -- no canvas work) so the
+  // 2-line/3-line split stays correct the moment the viewport crosses
+  // GLYPH_MOBILE_BREAKPOINT, even if the glyph tab isn't the one currently
+  // showing. refitActive then re-sizes whichever panel IS active.
+  window.addEventListener("resize", function() {
+    applyGlyphSplit();
+    refitActive();
+  });
   window.addEventListener("resize", updateTabsLayout);
 
   buildRampRows();
