@@ -204,11 +204,6 @@
       var word = document.createElement("div");
       word.className = "ramp-word";
       word.dataset.pt = pt;
-      // Smallest (S) row only -- a touch of letter-spacing keeps it legible
-      // at the tightest size instead of feeling cramped.
-      if (i === RAMP_SIZES.length - 1) {
-        word.classList.add("ramp-word-tight");
-      }
       if (i === 0) {
         word.id = "ramp-master";
         word.contentEditable = "true";
@@ -237,7 +232,12 @@
     var text = (master ? master.textContent : "") || FONT_NAME;
     var w = contentWidth(panel) - 90;
     var words = document.querySelectorAll("#ramp-rows .ramp-word");
-    var basePx = fitToWidth(text, w, {max: 340});
+    // Cap at RAMP_SIZES[0] (144) -- the XXL row should render at literally
+    // 144px whenever it fits, only shrinking below that if the container is
+    // too narrow. (Previously hardcoded to a 340 cap here, which let XXL --
+    // and everything scaled off it -- balloon well past the configured
+    // 144/96/64/36/20/12 cascade for any short sample word.)
+    var basePx = fitToWidth(text, w, {max: RAMP_SIZES[0]});
     var scale = basePx / RAMP_SIZES[0];
     var sizes = RAMP_SIZES.map(function(pt) { return pt * scale; });
     var widest = 0;

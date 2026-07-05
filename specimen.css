@@ -6,7 +6,9 @@
   --ink: inherit;
   --ink-dim: #E5E0E0;
   --gray: #999999;
-  --rule: #3a352f;
+  /* Subtle -- matches the pill background (#EBE5E5) at low opacity rather
+     than a hard-contrast line. */
+  --rule: rgba(235, 229, 229, 0.18);
 }
 
 * { box-sizing: border-box; }
@@ -23,6 +25,10 @@ body {
 
 .grain {
   position: relative;
+  /* .tabs below intentionally bleeds to 100vw; clip any sub-pixel/scrollbar
+     overflow here so it can never introduce horizontal scroll on the host
+     Squarespace page. */
+  overflow-x: hidden;
 }
 
 .wrap {
@@ -38,7 +44,13 @@ body {
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin: 24px 0 0;
+  margin-top: 24px;
+  /* Breaks the row out of .wrap's max-width/padding so the flanking rules
+     can reach the true viewport edges. calc(-50vw + 50%) is the standard
+     full-bleed-inside-a-centered-container trick -- works regardless of
+     .wrap's own width/padding as long as its ancestors stay centered. */
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
 }
 
 .tabs.single-font {
@@ -59,10 +71,14 @@ body {
 
 /* Applied via JS whenever the select and tab-group no longer fit on one
    line -- catches every width where wrapping happens, not just the fixed
-   mobile breakpoint below. */
+   mobile breakpoint below. Restores .wrap's horizontal inset (lost when
+   .tabs went full-bleed above) since the rules are hidden here anyway and
+   the select/tab-group need to stay clear of the true screen edges. */
 .tabs.stacked {
   flex-direction: column;
   align-items: stretch;
+  padding: 0 56px;
+  box-sizing: border-box;
 }
 
 .tabs.stacked .tabs-rule {
@@ -148,6 +164,10 @@ body {
 @media (max-width: 600px) {
   .wrap {
     padding: 24px 20px 24px;
+  }
+
+  .tabs.stacked {
+    padding: 0 20px;
   }
 
   .tabs {
@@ -307,12 +327,6 @@ body {
   white-space: nowrap;
   line-height: 1;
   overflow: hidden;
-}
-
-/* Applied only to the smallest (S) ramp row -- a little extra letter-spacing
-   keeps the tightest size legible instead of feeling cramped. */
-.ramp-word-tight {
-  letter-spacing: 0.1em;
 }
 
 .ramp-label {
