@@ -75,22 +75,74 @@
     return panelEl.getBoundingClientRect().width;
   }
 
-  function pixelsMatch(a, b) {
-    if (a.length !== b.length) return false;
-    for (var i = 3; i < a.length; i += 4) { // alpha channel only
-      if (a[i] !== b[i]) return false;
+  // Tight bounding box of the "inked" (alpha > threshold) pixels in a
+  // rasterized glyph. Returns null for a blank raster (e.g. a glyph the
+  // font doesn't actually contain).
+  function glyphBBox(data, dim) {
+    var minX = dim, minY = dim, maxX = -1, maxY = -1;
+    for (var y = 0; y < dim; y++) {
+      for (var x = 0; x < dim; x++) {
+        if (data[(y * dim + x) * 4 + 3] > 10) {
+          if (x < minX) minX = x;
+          if (x > maxX) maxX = x;
+          if (y < minY) minY = y;
+          if (y > maxY) maxY = y;
+        }
+      }
     }
-    return true;
+    if (maxX < minX) return null;
+    return {minX: minX, minY: minY, width: maxX - minX + 1, height: maxY - minY + 1};
+  }
+
+  // Compares two rasterized glyphs by cropping each to its own ink bounding
+  // box (aligning on top-left) and measuring pixel overlap (IoU), rather
+  // than comparing raw canvas buffers position-for-position. A unicase font
+  // that duplicates the same outline for e.g. "a" and "A" can still render
+  // it a pixel or two off from an exact match -- different sidebearings/
+  // advance widths, hinting, subpixel snapping -- even though the shape is
+  // identical, so a strict per-pixel comparison flags it as "distinct" and
+  // wrongly shows the lowercase row. Aligning by bounding box first absorbs
+  // that noise while still catching genuinely different letterforms, whose
+  // bbox size or shape will differ far more than a couple of pixels.
+  function glyphsMatch(dataA, dataB, dim) {
+    var bboxA = glyphBBox(dataA, dim);
+    var bboxB = glyphBBox(dataB, dim);
+    if (!bboxA && !bboxB) return true;
+    if (!bboxA || !bboxB) return false;
+
+    if (Math.abs(bboxA.width - bboxB.width) > 3 || Math.abs(bboxA.height - bboxB.height) > 3) {
+      return false;
+    }
+
+    var w = Math.max(bboxA.width, bboxB.width);
+    var h = Math.max(bboxA.height, bboxB.height);
+    var union = 0, intersect = 0;
+    for (var y = 0; y < h; y++) {
+      for (var x = 0; x < w; x++) {
+        var af = x < bboxA.width && y < bboxA.height &&
+          data_alpha(dataA, dim, bboxA.minX + x, bboxA.minY + y) > 10;
+        var bf = x < bboxB.width && y < bboxB.height &&
+          data_alpha(dataB, dim, bboxB.minX + x, bboxB.minY + y) > 10;
+        if (af || bf) union++;
+        if (af && bf) intersect++;
+      }
+    }
+    if (union === 0) return true;
+    return (intersect / union) > 0.82;
+  }
+
+  function data_alpha(data, dim, x, y) {
+    return data[(y * dim + x) * 4 + 3];
   }
 
   // Detects whether the active font has true lowercase letterforms, vs. a
   // unicase font where a-z is just a duplicate of A-Z -- runs live in the
   // browser against whatever font is currently selected, by rasterizing each
-  // a/A pair on a canvas and comparing pixel alpha data. Doing this at
-  // runtime (rather than baking a yes/no in at build time) means it keeps
-  // working correctly no matter which font this page's FONTS array names,
-  // and it re-checks on every style switch rather than assuming every style
-  // in the dropdown shares one font's case behavior.
+  // a/A pair on a canvas and comparing shapes (see glyphsMatch above).
+  // Doing this at runtime (rather than baking a yes/no in at build time)
+  // means it keeps working correctly no matter which font this page's
+  // FONTS array names, and it re-checks on every style switch rather than
+  // assuming every style in the dropdown shares one font's case behavior.
   function detectHasLowercase(fam) {
     var size = 64;
     var pad = 12;
@@ -113,7 +165,9 @@
     var distinct = 0;
     for (var i = 97; i <= 122; i++) {
       total++;
-      if (!pixelsMatch(raster(String.fromCharCode(i)), raster(String.fromCharCode(i - 32)))) {
+      var lower = raster(String.fromCharCode(i));
+      var upper = raster(String.fromCharCode(i - 32));
+      if (!glyphsMatch(lower, upper, dim)) {
         distinct++;
       }
     }
