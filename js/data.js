@@ -72,6 +72,7 @@ export const TYPE = [
 // `soldOut` disables Add to Cart. `variants` adds a small picker to the Product Nav.
 export const GOODS = [
   { slug: 'go-outside-hat', name: 'Go Outside Hat', title: 'Go outside hat', price: 30,
+    comingSoon: true, // remove once it's in Shopify (and add shopify: '<handle>' if the handle differs)
     desc: ['Go outside. Talk to people. Be happy.', 'A simple mantra to help people get more out of life.'],
     variants: { label: 'Color', options: ['Black', 'Navy', 'Spruce', 'Green Camo'] },
     images: ['goods/go-outside-hat-1', 'goods/go-outside-hat-2', 'goods/go-outside-hat-3'] },

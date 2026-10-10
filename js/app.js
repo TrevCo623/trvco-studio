@@ -98,6 +98,7 @@ addEventListener('resize', () => { clearTimeout(toneTimer); toneTimer = setTimeo
 // Type and Goods tiles show the price (lowest option, if options are priced differently) or Sold out.
 function priceLabel(p) {
   if (p.soldOut) return 'Sold out';
+  if (p.comingSoon) return 'Coming soon';
   const ps = [p.price, ...(p.variants?.options || []).map((o) => o?.price)].filter((n) => n != null && n !== '');
   if (!ps.length) return '';
   const lo = Math.min(...ps.map(Number)), hi = Math.max(...ps.map(Number));
@@ -487,7 +488,8 @@ function pricePicker(p) {
     <ul class="opt-list" role="listbox">${opts.map((o, i) => `<li role="option" tabindex="-1" data-i="${i}" aria-selected="${i === 0}"><span>${esc(o.name)}</span><span>${money(o.price)}</span></li>`).join('')}</ul>
   </div>`;
 }
-const buyButton = (soldOut) => `<button class="btn btn-buy" type="button" data-add ${soldOut ? 'disabled' : ''}>${soldOut ? 'Sold out' : 'Add to Cart'}</button>`;
+// Sold out, or not in the shop yet (comingSoon), shows a disabled button instead of Add to Cart.
+const buyButton = (p) => { const off = p.soldOut ? 'Sold out' : p.comingSoon ? 'Coming soon' : ''; return `<button class="btn btn-buy" type="button" data-add ${off ? 'disabled' : ''}>${off || 'Add to Cart'}</button>`; };
 
 // Hidden until the in-page buy row scrolls up under the header.
 function productNav(p, cat) {
@@ -495,10 +497,10 @@ function productNav(p, cat) {
   return `<div class="pnav" aria-hidden="true"><div class="pnav-inner">
     <a class="pnav-back" href="/${cat}" aria-label="Back to ${esc(label)}"><svg width="10" height="18" viewBox="0 0 10 18" aria-hidden="true"><path d="M9 1L1.5 9 9 17" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></a>
     <h2 class="pnav-name">${esc(p.name)}</h2>
-    <div class="pnav-actions">${pricePicker(p)}${buyButton(p.soldOut)}</div>
+    <div class="pnav-actions">${pricePicker(p)}${buyButton(p)}</div>
   </div></div>`;
 }
-const buyRow = (p) => `<div class="buy-row">${pricePicker(p)}${buyButton(p.soldOut)}</div>`;
+const buyRow = (p) => `<div class="buy-row">${pricePicker(p)}${buyButton(p)}</div>`;
 
 // Close any open option list when clicking elsewhere or pressing Escape.
 document.addEventListener('click', (e) => $$('.opt.open').forEach((o) => { if (!o.contains(e.target)) setOpen(o, false); }));
