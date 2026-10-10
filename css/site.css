@@ -169,6 +169,7 @@ body.pnav-on .pnav { opacity: 1; transform: none; visibility: visible; transitio
 .pnav-name { flex: 1; min-width: 0; margin: 0; font-weight: 400; font-size: 28px; line-height: 36px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: opacity .25s ease; }
 .pnav-actions, .buy-row { display: flex; align-items: center; gap: 20px; }
 .pnav .opt, .pnav .btn-buy { width: 202px; }
+.pnav .opt-price { font-size: 28px; line-height: 36px; } /* same size as the title */
 .buy-row { flex-wrap: wrap; justify-content: center; margin-top: 44px; }
 /* The category nav steps aside while the Product Nav is in the header. */
 .filter { transition: opacity .3s ease, transform .4s var(--ease); }
@@ -210,7 +211,7 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .btn-buy:hover { background: #c08b81; }
 .btn[disabled] { background: transparent; color: var(--grey); box-shadow: inset 0 0 0 1px rgba(153, 153, 153, .5); cursor: default; }
 @media (max-width: 760px) {
-  .pnav { padding: 0 58px 0 62px; }
+  .pnav { padding: 0 78px 0 62px; } /* extra room on the right so the cart icon can breathe */
   .pnav-inner { gap: 8px; }
   .pnav-back { display: none; }
   .pnav-name { font-size: 16px; line-height: 20px; }
@@ -222,6 +223,7 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
   .opt-btn { height: 44px; font-size: 15px; gap: 8px; }
   .opt-list li { font-size: 15px; padding: 10px 16px; }
   .opt-price { font-size: 18px; }
+  .pnav .opt-price { font-size: 16px; line-height: 20px; }
   .btn-buy { width: auto; height: 44px; padding: 0 16px; font-size: 16px; }
   .buy-row { margin-top: 28px; }
   .buy-row .opt-btn, .buy-row .btn-buy { height: 52px; }
