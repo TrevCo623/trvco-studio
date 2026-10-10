@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>trvco studio</title>
+  <meta name="description" content="The design studio of Trevor Connolly — type, digital, print and goods.">
+  <meta property="og:title" content="trvco studio">
+  <meta property="og:description" content="The design studio of Trevor Connolly — type, digital, print and goods.">
+  <meta name="theme-color" content="#0E1009">
+  <link rel="icon" href="/assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Mono:wght@400&display=swap">
+  <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+  <a class="skip" href="#view">Skip to content</a>
+
+  <!-- Glass refraction for the header backdrop (used by .glass-fx .chrome-bg in Chromium browsers). -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="glass" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.06" numOctaves="3" seed="11" result="ripple"/>
+      <feDisplacementMap in="SourceGraphic" in2="ripple" scale="160" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+  <div class="chrome-bg" aria-hidden="true"></div>
+  <header class="site-header" id="header">
+    <a class="logo" href="/" data-link aria-label="trvco studio — home"><span class="logo-mark" aria-hidden="true"></span></a>
+    <div class="nav-dock" id="navDock"></div>
+    <button class="cart" id="cartButton" type="button" aria-label="Cart">
+      <svg width="25" height="20" viewBox="0 0 61 49" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M.5 2C.5 1.17 1.17.5 2 .5h11.64c.75 0 1.39.56 1.49 1.3l1.3 9.79H59c.51 0 .99.26 1.26.69.28.43.31.98.1 1.44L50.18 35.63c-.25.53-.78.87-1.36.87H18.05c-.75 0-1.39-.56-1.49-1.3L12.32 3.5H2C1.17 3.5.5 2.83.5 2Zm16.33 12.59 2.53 18.91h28.5l8.79-18.91H16.83Z"/><path fill="currentColor" d="M18.59 35H49.7L60 13H16l2.59 22Z"/><circle fill="currentColor" cx="21" cy="44" r="4.5"/><circle fill="currentColor" cx="46" cy="44" r="4.5"/></svg>
+      <span id="cartCount">0</span>
+    </button>
+  </header>
+
+  <!-- The one persistent nav. JS moves it between the homepage slot and the header dock. -->
+  <nav class="filter" id="filter" aria-label="Work"></nav>
+
+  <main id="view" tabindex="-1"></main>
+
+  <footer class="site-footer"><p id="copyright"></p></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

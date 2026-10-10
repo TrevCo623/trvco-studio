@@ -1,0 +1,5 @@
+# Netlify: old Squarespace URLs → new routes, then send every app route to index.html
+/goods/p/:slug   /goods/:slug   301
+/feelgoodapp     /digital/feelgood   301
+/storyright      /digital/storyright 301
+/*               /index.html    200
