@@ -560,26 +560,20 @@ function testerHTML(t) {
     ? `<label class="sr-only" for="styleSel">Style</label><select class="pill-select" id="styleSel">${t.styles.map(([n, f]) => `<option value="${f}">${esc(t.name)}${n === 'Regular' ? '' : ' ' + esc(n)}</option>`).join('')}</select>`
     : `<span class="pill-select" style="display:inline-flex;align-items:center;background-image:none">${esc(t.name)}</span>`;
   return `<section class="tester paper" style="--tester-font:'${t.family}'">
-    <div class="tester-controls" role="tablist">
-      ${sel}
-      <button class="pill" role="tab" data-tab="glyphs" aria-selected="true">Glyphs</button>
-      <button class="pill" role="tab" data-tab="sizes" aria-selected="false">Sizes</button>
-      <button class="pill" role="tab" data-tab="custom" aria-selected="false">Custom</button>
-    </div>
+    <div class="tester-controls">${sel}</div>
     <div class="tester-panel" style="font-family:var(--tester-font)"></div>
   </section>`;
 }
-function testerPanel(t, tab) {
-  if (tab === 'glyphs') {
-    const lower = t.lowercase ? `<div class="g-xl">abcdefghijklm</div><div class="g-xl">nopqrstuvwxyz</div>` : '';
-    return `<div class="glyphs"><div class="g-xl">ABCDEFGHIJKLM</div><div class="g-xl">NOPQRSTUVWXYZ</div>${lower}<div class="g-md">0123456789</div><div class="g-md">!@#$%&amp;*?/[{(.,;:'"~)}]</div></div>`;
-  }
-  if (tab === 'sizes') {
-    const s = t.lowercase ? 'Sphinx of black quartz, judge my vow' : 'SPHINX OF BLACK QUARTZ, JUDGE MY VOW';
-    return `<div class="sizes">${[120, 72, 48, 32, 20].map((px) => `<div><small>${px}px</small><p style="font-size:${px}px">${s}</p></div>`).join('')}</div>`;
-  }
-  return `<textarea class="custom-input" rows="2" spellcheck="false" aria-label="Type to preview">${esc(t.lowercase ? 'Type something here' : 'TYPE SOMETHING')}</textarea>
+// The specimen: glyphs, then the size chart, then a type-your-own box, stacked.
+function testerPanel(t) {
+  const lower = t.lowercase ? `<div class="g-xl">abcdefghijklm</div><div class="g-xl">nopqrstuvwxyz</div>` : '';
+  const glyphs = `<div class="glyphs"><div class="g-xl">ABCDEFGHIJKLM</div><div class="g-xl">NOPQRSTUVWXYZ</div>${lower}<div class="g-md">0123456789</div><div class="g-md">!@#$%&amp;*?/[{(.,;:'"~)}]</div></div>`;
+  const line = t.lowercase ? 'Sphinx of black quartz, judge my vow' : 'SPHINX OF BLACK QUARTZ, JUDGE MY VOW';
+  const sizes = `<div class="sizes">${[120, 72, 48, 32, 20].map((px) => `<div><small>${px}px</small><p style="font-size:${px}px">${line}</p></div>`).join('')}</div>`;
+  const custom = `<textarea class="custom-input" rows="2" spellcheck="false" aria-label="Type to preview">${esc(t.lowercase ? 'Type something here' : 'TYPE SOMETHING')}</textarea>
     <div class="custom-size"><span>Size</span><input type="range" min="24" max="200" value="96" aria-label="Preview size"><span class="custom-size-val">96px</span></div>`;
+  const block = (label, html) => `<div class="tester-block"><h3 class="tester-label">${label}</h3>${html}</div>`;
+  return block('Glyphs', glyphs) + block('Sizes', sizes) + block('Try it', custom);
 }
 
 function typeBodyHTML(t) {
@@ -612,9 +606,8 @@ function TypePage(route) {
   const tc = $('.tc', el), items = $$('.tc-item', el), meta = $('.type-meta', el), body = $('.type-body', el);
   const pName = $('.pnav-name', el), prices = $$('.js-price', el);
   let offs = new Array(n).fill(null);
-  let tab = 'glyphs';
 
-  const spacing = () => innerWidth < 760 ? innerWidth * 0.66 : Math.min(674, innerWidth * 0.468);
+  const spacing = () => innerWidth < 760 ? innerWidth * 0.5 : Math.min(674, innerWidth * 0.468);
   let slideTimer;
   function place(animate = true) {
     const sp = spacing();
@@ -649,27 +642,10 @@ function TypePage(route) {
   }
   function paintTester(t) {
     const panel = $('.tester-panel', body);
-    panel.innerHTML = testerPanel(t, tab);
-    $$('[data-tab]', body).forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
+    panel.innerHTML = testerPanel(t);
     const sel = $('#styleSel', body); const fam = sel ? sel.value : t.family;
     $('.tester', body).style.setProperty('--tester-font', `'${fam}'`);
   }
-  // Tabs: fade the panel out, swap it, fade it in (same timing as page transitions). The panel
-  // holds its height through the swap so nothing below jumps, and the tabs never move.
-  let swapTimer;
-  body.addEventListener('click', (e) => {
-    const b = e.target.closest('[data-tab]'); if (!b || b.dataset.tab === tab) return;
-    tab = b.dataset.tab;
-    $$('[data-tab]', body).forEach((x) => x.setAttribute('aria-selected', String(x.dataset.tab === tab)));
-    const panel = $('.tester-panel', body);
-    clearTimeout(swapTimer);
-    panel.classList.remove('is-entering'); panel.classList.add('is-swapping');
-    swapTimer = setTimeout(() => {
-      paintTester(TYPE[idx]);
-      panel.classList.remove('is-swapping'); void panel.offsetWidth; panel.classList.add('is-entering');
-      panel.addEventListener('animationend', () => panel.classList.remove('is-entering'), { once: true });
-    }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 260);
-  });
   body.addEventListener('change', (e) => { if (e.target.id === 'styleSel') $('.tester', body).style.setProperty('--tester-font', `'${e.target.value}'`); });
   body.addEventListener('input', (e) => {
     if (e.target.type === 'range') { body.style.setProperty('--custom-size', `${e.target.value}px`); $('.custom-size-val', body).textContent = `${e.target.value}px`; }
