@@ -1,18 +1,18 @@
-/* Studio typefaces. Each loads the local file first, then the current Squarespace copy as a fallback.
+/* Studio typefaces. Files live in /assets/fonts.
    To add a font: drop the file in /assets/fonts, add a block here, and add an entry to TYPE in js/data.js. */
-@font-face { font-family: 'Oxomoco'; src: url('/assets/fonts/Oxomoco.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/6a473a02b19e9128ec7c0a0a/1783052802621/Oxomoco.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Oxomoco-Round'; src: url('/assets/fonts/Oxomoco-Round.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/6a4739e86452dc773705aea0/1783052776551/Oxomoco-Round.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Arroyo'; src: url('/assets/fonts/Arroyo.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/6a46030139e45f4a77037318/1782973185036/Arroyo-site.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Bastrop'; src: url('/assets/fonts/Bastrop.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/6a45eea712767a358a9fe522/1782967975419/Bastrop3.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Bastrop-Semibold'; src: url('/assets/fonts/Bastrop-Semibold.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/6a4974419947b63e3e5fddd8/1783198786347/Bastrop-Semibold.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Bastrop-Bold'; src: url('/assets/fonts/Bastrop-Bold.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/6a49748d001e946a7418414b/1783198861992/Bastrop-Bold.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Hombre'; src: url('/assets/fonts/Hombre.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/6a494f361749f32d0d079530/1783189302652/Hombre.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Marfa'; src: url('/assets/fonts/Marfa.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/6a4602f51ea1750920dc5fd0/1782973173172/Marfa-site.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Midland'; src: url('/assets/fonts/Midland.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/66f9e1a187a3782ec9a057d2/1727652257790/Midland.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Pinyon'; src: url('/assets/fonts/Pinyon.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/66f4c4f2a75cfe28de46c678/1707190646493/Pinyon.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Redwood'; src: url('/assets/fonts/Redwood.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/6a49bf2e5875c34557a5ddd5/1783217966870/Redwood.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Sotol'; src: url('/assets/fonts/Sotol.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/6a4601e1648e3936731aba37/1782972897271/Sotol-site.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Tamarisk'; src: url('/assets/fonts/Tamarisk.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/6a49b1fbad862b324af386e0/1783214587397/Tamarisk.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Walter'; src: url('/assets/fonts/Walter.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/66f4c4f2a75cfe28de46c680/1706663693388/Walter.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Walter-Light'; src: url('/assets/fonts/Walter-Light.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/6a49b2b93538825e2ba19712/1783214777732/Walter-Light.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Widebrim'; src: url('/assets/fonts/Widebrim.otf') format('opentype'), url('https://static1.squarespace.com/static/66f4c4dfa75cfe28de46c1a0/t/66f9f53a2a8f4518f572a1eb/1727657275383/Widebrim.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Oxomoco'; src: url('/assets/fonts/Oxomoco.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Oxomoco-Round'; src: url('/assets/fonts/Oxomoco-Round.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Arroyo'; src: url('/assets/fonts/Arroyo.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Bastrop'; src: url('/assets/fonts/Bastrop.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Bastrop-Semibold'; src: url('/assets/fonts/Bastrop-Semibold.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Bastrop-Bold'; src: url('/assets/fonts/Bastrop-Bold.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Hombre'; src: url('/assets/fonts/Hombre.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Marfa'; src: url('/assets/fonts/Marfa.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Midland'; src: url('/assets/fonts/Midland.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Pinyon'; src: url('/assets/fonts/Pinyon.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Redwood'; src: url('/assets/fonts/Redwood.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Sotol'; src: url('/assets/fonts/Sotol.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Tamarisk'; src: url('/assets/fonts/Tamarisk.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Walter'; src: url('/assets/fonts/Walter.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Walter-Light'; src: url('/assets/fonts/Walter-Light.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Widebrim'; src: url('/assets/fonts/Widebrim.otf') format('opentype'); font-display: block; }
