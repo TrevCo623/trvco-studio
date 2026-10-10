@@ -316,7 +316,7 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .sizes p { margin: 0; line-height: 1.05; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .custom-input {
   width: 100%; max-width: 1200px; margin: 0 auto; display: block; border: 0; outline: none; background: transparent; resize: none;
-  font-size: var(--custom-size, 96px); line-height: 1.05; text-align: center; color: var(--ink); min-height: 2.2em;
+  font-family: inherit; font-size: var(--custom-size, 96px); line-height: 1.05; text-align: center; color: var(--ink); min-height: 2.2em;
 }
 .custom-size { display: flex; gap: 12px; justify-content: center; align-items: center; margin-top: 28px; font-family: var(--mono); font-size: 11px; color: var(--grey); }
 .custom-size input { accent-color: var(--clay); width: 220px; }
