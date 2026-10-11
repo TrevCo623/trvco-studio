@@ -61,3 +61,34 @@ export async function checkoutUrl(lines) {
   if (err) throw new Error(err.message);
   return d.cartCreate.cart.checkoutUrl;
 }
+
+// ── The Type catalog comes from Shopify ─────────────────────────────────────────
+// Every product whose Product type is "typeface" (and is published to the Headless
+// storefront) is listed on the site. Two optional product fields (metafields) fill in
+// what Shopify doesn't have on its own:
+//   custom.web_font    File: the font file the site displays (.woff2, .woff or .otf)
+//   custom.descriptor  Single line text: the one-liner under the name ("A fun, flowy slab")
+// If Shopify can't be reached, the site falls back to the list in js/data.js.
+export async function fetchTypeCatalog(timeoutMs = 2500) {
+  if (!shopReady()) return null;
+  const query = `{ products(first: 100, query: "product_type:typeface") { nodes {
+    handle title description availableForSale
+    variants(first: 1) { nodes { price { amount } } }
+    webFont: metafield(namespace: "custom", key: "web_font") { reference { ... on GenericFile { url } ... on MediaImage { image { url } } } }
+    descriptor: metafield(namespace: "custom", key: "descriptor") { value }
+  } } }`;
+  try {
+    const d = await Promise.race([gql(query), new Promise((_, no) => setTimeout(() => no(new Error('timeout')), timeoutMs))]);
+    return d.products.nodes.map((p) => ({
+      handle: p.handle,
+      name: p.title.replace(/\s+font$/i, '').trim(),
+      price: Number(p.variants.nodes[0]?.price.amount) || null,
+      available: p.availableForSale,
+      fontUrl: p.webFont?.reference?.url || null,
+      descriptor: p.descriptor?.value || p.description.split(/(?<=[.!?])\s/)[0].trim() || '',
+    }));
+  } catch (err) {
+    console.warn('[trvco] Shopify catalog unavailable, using the built-in list.', err.message);
+    return null;
+  }
+}

@@ -1,6 +1,6 @@
 import { SITE, TYPE, GOODS, PRINT, DIGITAL, HOME_ORDER, TILE_COLORS } from './data.js';
 import { IMG } from './assets.js';
-import { shopReady, checkoutUrl } from './shop.js';
+import { shopReady, checkoutUrl, fetchTypeCatalog } from './shop.js';
 import { LICENSE_VERSION, LICENSE_SUMMARY, LICENSE_SECTIONS } from './license.js';
 
 /* ═════════════════════════════ helpers ═════════════════════════════ */
@@ -95,6 +95,32 @@ addEventListener('resize', () => { clearTimeout(toneTimer); toneTimer = setTimeo
 })();
 
 /* ═════════════════════════════ content model ═════════════════════════════ */
+// The Type list follows the Shopify store: fonts in the store are shown (new ones added
+// automatically), fonts no longer in the store are hidden. js/data.js keeps the richer
+// design details (hero size, details images…) for fonts it already knows.
+await (async () => {
+  const shop = await fetchTypeCatalog();
+  if (!shop) return; // Shopify unreachable: keep the built-in list
+  const key = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '');
+  const known = new Map(TYPE.map((t) => [key(t.name), t]));
+  const next = [];
+  for (const p of shop) {
+    const t = TYPE.find((x) => x.shopify === p.handle) || known.get(key(p.name));
+    if (t) {
+      next.push(Object.assign(t, { shopify: p.handle, price: p.price ?? t.price, soldOut: !p.available, ...(p.descriptor && !t.descriptor ? { descriptor: p.descriptor } : {}) }));
+      continue;
+    }
+    if (!p.fontUrl) { console.warn(`[trvco] ${p.name} is in Shopify but has no web font file (custom.web_font), so it isn't shown yet.`); continue; }
+    const family = `shop-${key(p.name)}`;
+    try { const ff = new FontFace(family, `url("${p.fontUrl}")`, { display: 'swap' }); document.fonts.add(ff); ff.load().catch(() => {}); } catch {}
+    next.push({ slug: key(p.name), shopify: p.handle, name: p.name, display: p.name.toUpperCase(), family, scale: 1, heroSize: 100,
+      descriptor: p.descriptor, styles: [['Regular', family]], price: p.price, soldOut: !p.available });
+  }
+  // Keep the built-in order for known fonts, new ones go at the end.
+  next.sort((a, b) => { const ia = TYPE.indexOf(a), ib = TYPE.indexOf(b); return (ia < 0 ? 1e3 : ia) - (ib < 0 ? 1e3 : ib); });
+  TYPE.splice(0, TYPE.length, ...next);
+})();
+
 // Type and Goods tiles show the price (lowest option, if options are priced differently) or Sold out.
 function priceLabel(p) {
   if (p.soldOut) return 'Sold out';

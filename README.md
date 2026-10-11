@@ -28,6 +28,18 @@ A hand-built, one-page-app version of trvco.studio, made from the Figma file. Pl
 - **Digital `/digital/:project`**: the case-study template. Feel Good and Storyright are built.
 - Between pages, the content fades out and in while the nav stays put.
 
+## Adding a font (no code needed)
+
+The Type section reads the font list from Shopify every time the site loads.
+
+1. In Shopify, add the font as a product with **Product type** `typeface`, and publish it to the **Headless** storefront.
+2. Fill in two fields on the product (Settings → Custom data → Products, set up once):
+   - **Web font** (`custom.web_font`, File): the font file the site shows, ideally .woff2.
+   - **Descriptor** (`custom.descriptor`, Single line text): the one-liner under the name.
+3. That's it. The font appears on the homepage and in Type with its own page. Removing or unpublishing it in Shopify takes it off the site.
+
+Fonts listed in `js/data.js` keep their hand-tuned details (hero size, detail images); new ones get sensible defaults.
+
 ## Cart and checkout
 
 - **`/cart`** lists what's in the cart (kept in the visitor's browser). Goods have a quantity stepper. Fonts are one license each.
