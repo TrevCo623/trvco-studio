@@ -38,25 +38,25 @@ export const IMG = {
   "h": 1200
  },
  "type/oxomoco-detail-1": {
-  "src": "assets/img/type/oxomoco-detail-1.png",
+  "src": "assets/img/type/oxomoco-detail-1.webp",
   "cdn": "https://images.squarespace-cdn.com/content/v1/66f4c4dfa75cfe28de46c1a0/26811021-5b88-4c6a-a419-58518a98650e/Asset+6.png?format=1500w",
   "w": 900,
   "h": 1220
  },
  "type/oxomoco-detail-2": {
-  "src": "assets/img/type/oxomoco-detail-2.png",
+  "src": "assets/img/type/oxomoco-detail-2.webp",
   "cdn": "https://images.squarespace-cdn.com/content/v1/66f4c4dfa75cfe28de46c1a0/ff52733c-2acc-4fbd-815e-fd94f4504dc3/Asset+8.png?format=1500w",
   "w": 900,
   "h": 1220
  },
  "type/oxomoco-detail-3": {
-  "src": "assets/img/type/oxomoco-detail-3.png",
+  "src": "assets/img/type/oxomoco-detail-3.webp",
   "cdn": "https://images.squarespace-cdn.com/content/v1/66f4c4dfa75cfe28de46c1a0/f40afef7-a455-4105-9aa0-862c1ed324bc/Asset+2.png?format=1500w",
   "w": 900,
   "h": 1220
  },
  "type/oxomoco-detail-4": {
-  "src": "assets/img/type/oxomoco-detail-4.png",
+  "src": "assets/img/type/oxomoco-detail-4.webp",
   "cdn": "https://images.squarespace-cdn.com/content/v1/66f4c4dfa75cfe28de46c1a0/f3596b74-1950-4d3a-9a52-0de2ec17a81a/Asset+4.png?format=1500w",
   "w": 900,
   "h": 1221

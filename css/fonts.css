@@ -1,14 +1,14 @@
 /* Studio typefaces. Files live in /assets/fonts.
    To add a font: drop the file in /assets/fonts, add a block here, and add an entry to TYPE in js/data.js. */
-@font-face { font-family: 'Oxomoco'; src: url('/assets/fonts/Oxomoco.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Oxomoco-Round'; src: url('/assets/fonts/Oxomoco-Round.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Arroyo'; src: url('/assets/fonts/Arroyo.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Bastrop'; src: url('/assets/fonts/Bastrop.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Bastrop-Semibold'; src: url('/assets/fonts/Bastrop-Semibold.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Bastrop-Bold'; src: url('/assets/fonts/Bastrop-Bold.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Hombre'; src: url('/assets/fonts/Hombre.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Redwood'; src: url('/assets/fonts/Redwood.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Tamarisk'; src: url('/assets/fonts/Tamarisk.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Walter'; src: url('/assets/fonts/Walter.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Walter-Light'; src: url('/assets/fonts/Walter-Light.otf') format('opentype'); font-display: block; }
-@font-face { font-family: 'Widebrim'; src: url('/assets/fonts/Widebrim.otf') format('opentype'); font-display: block; }
+@font-face { font-family: 'Oxomoco'; src: url('/assets/fonts/Oxomoco.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Oxomoco-Round'; src: url('/assets/fonts/Oxomoco-Round.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Arroyo'; src: url('/assets/fonts/Arroyo.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Bastrop'; src: url('/assets/fonts/Bastrop.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Bastrop-Semibold'; src: url('/assets/fonts/Bastrop-Semibold.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Bastrop-Bold'; src: url('/assets/fonts/Bastrop-Bold.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Hombre'; src: url('/assets/fonts/Hombre.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Redwood'; src: url('/assets/fonts/Redwood.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Tamarisk'; src: url('/assets/fonts/Tamarisk.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Walter'; src: url('/assets/fonts/Walter.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Walter-Light'; src: url('/assets/fonts/Walter-Light.woff2') format('woff2'); font-display: block; }
+@font-face { font-family: 'Widebrim'; src: url('/assets/fonts/Widebrim.woff2') format('woff2'); font-display: block; }
