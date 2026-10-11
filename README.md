@@ -12,7 +12,9 @@ A hand-built, one-page-app version of trvco.studio, made from the Figma file. Pl
 
 | To change… | Edit |
 |---|---|
-| Any copy, product, price, font, project, or the homepage order | `js/data.js` |
+| Print and Digital projects | the admin page, or `content/` |
+| Fonts and goods | Shopify (see below) |
+| Homepage order, font display tweaks | `js/data.js` |
 | Type tile colours (placeholder palette) | `tile` and `ink` on each font in `js/data.js` |
 | Fonts | Drop files in `assets/fonts/`, add a line to `css/fonts.css` |
 | Colours, spacing, type styles | Top of `css/site.css` (the tokens match the Figma variables) |
@@ -27,6 +29,14 @@ A hand-built, one-page-app version of trvco.studio, made from the Figma file. Pl
 - **Print `/print/:item`**: the same template, without the Product Nav.
 - **Digital `/digital/:project`**: the case-study template. Feel Good and Storyright are built.
 - Between pages, the content fades out and in while the nav stays put.
+
+## Adding a Print or Digital project (no code needed)
+
+1. Go to **trvco.studio/admin** and sign in with GitHub.
+2. Pick **Print** or **Digital**, click **New**, fill in the form and add photos.
+3. Click **Publish**. The site updates in about a minute.
+
+Each project is a file in `content/print/` or `content/digital/`. On every deploy, Netlify runs `tools/build-content.mjs` (set in `netlify.toml`), which turns them into `js/content.js`. Photos uploaded in the admin go to `assets/uploads/`.
 
 ## Adding a font (no code needed)
 

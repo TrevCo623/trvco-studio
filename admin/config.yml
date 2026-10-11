@@ -1,0 +1,107 @@
+# The admin page at trvco.studio/admin. Sign in with GitHub; "Publish" saves to the repo and
+# Netlify rebuilds the site (about a minute). Type and Goods come from Shopify, not from here.
+backend:
+  name: github
+  repo: TrevCo623/trvco-studio
+  branch: main
+  commit_messages:
+    create: 'Add {{collection}} project “{{slug}}”'
+    update: 'Update {{collection}} project “{{slug}}”'
+    delete: 'Remove {{collection}} project “{{slug}}”'
+    uploadMedia: 'Upload “{{path}}”'
+    deleteMedia: 'Delete “{{path}}”'
+
+site_url: https://trvco.studio
+display_url: https://trvco.studio
+logo_url: /assets/icons/icon-192.png
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  - name: print
+    label: Print
+    label_singular: Print project
+    description: Invitations, posters, packaging… Shown with the same layout as Goods.
+    folder: content/print
+    extension: json
+    format: json
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    preview_path: 'print/{{slug}}'
+    summary: '{{title}}'
+    sortable_fields: [order, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text, required: false, hint: 'A blank line starts a new paragraph.' }
+      - label: Photos
+        name: images
+        widget: list
+        hint: The first photo is the thumbnail on the homepage. Drag to reorder.
+        field: { label: Photo, name: image, widget: image }
+      - { label: Order, name: order, widget: number, value_type: int, required: false, hint: 'Lower numbers come first in Print. Leave empty to go last.' }
+      - { label: Hidden, name: draft, widget: boolean, required: false, default: false, hint: 'Hide this project from the site without deleting it.' }
+
+  - name: digital
+    label: Digital
+    label_singular: Digital project
+    description: Apps and digital case studies.
+    folder: content/digital
+    extension: json
+    format: json
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    preview_path: 'digital/{{slug}}'
+    summary: '{{title}}'
+    sortable_fields: [order, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Intro, name: intro, widget: text, hint: 'The paragraph under the title.' }
+      - { label: Thumbnail, name: thumbnail, widget: image, hint: 'Shown on the homepage grid.' }
+      - { label: Hero image, name: hero, widget: image, hint: 'The big image at the top of the page.' }
+      - { label: Wide hero, name: hero_wide, widget: boolean, required: false, default: false, hint: 'Turn on for landscape (desktop) screenshots.' }
+      - label: Sections
+        name: sections
+        label_singular: section
+        widget: list
+        required: false
+        hint: The case study, top to bottom. Add a section and pick its layout.
+        typeKey: type
+        types:
+          - label: Full-bleed image
+            name: full
+            summary: '{{fields.caption}}'
+            fields:
+              - { label: Image, name: image, widget: image }
+              - { label: Caption, name: caption, widget: string, required: false }
+              - { label: Text colour, name: tone, widget: select, options: [{ label: Light, value: light }, { label: Dark, value: dark }], default: light }
+          - label: Image on a colour band
+            name: feature
+            summary: '{{fields.title}} {{fields.caption}}'
+            fields:
+              - { label: Image, name: image, widget: image }
+              - { label: Heading, name: title, widget: string, required: false }
+              - { label: Caption, name: caption, widget: text, required: false }
+              - &bg { label: Background, name: background, widget: select, required: false, options: [{ label: Rose, value: rose }, { label: Sand, value: sand }, { label: Paper (off-white), value: paper }, { label: Ink (black), value: ink }, { label: Clay, value: clay }] }
+              - &tone { label: Text colour, name: tone, widget: select, options: [{ label: Light, value: light }, { label: Dark, value: dark }], default: dark }
+              - { label: Image width (px), name: image_width, widget: number, value_type: int, required: false, hint: 'e.g. 400 for a phone screen, 1100 for a desktop screen.' }
+          - label: Slideshow
+            name: slides
+            summary: '{{fields.caption}}'
+            fields:
+              - { label: Images, name: images, widget: list, field: { label: Image, name: image, widget: image } }
+              - { label: Caption, name: caption, widget: string, required: false }
+              - *bg
+              - *tone
+          - label: Grid of small images (icons)
+            name: icons
+            summary: '{{fields.caption}}'
+            fields:
+              - { label: Images, name: images, widget: list, field: { label: Image, name: image, widget: image } }
+              - { label: Caption, name: caption, widget: string, required: false }
+              - { label: Note, name: note, widget: string, required: false, hint: 'Small text under the grid, e.g. "Coming soon to App Store".' }
+              - *bg
+              - *tone
+      - { label: Order, name: order, widget: number, value_type: int, required: false, hint: 'Lower numbers come first in Digital. Leave empty to go last.' }
+      - { label: Hidden, name: draft, widget: boolean, required: false, default: false, hint: 'Hide this project from the site without deleting it.' }

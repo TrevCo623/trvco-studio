@@ -101,42 +101,10 @@ export const GOODS = [
     desc: ['A bandana with a cactus design.'], images: ['goods/cactus-1', 'goods/cactus-2', 'goods/cactus-3', 'goods/cactus-4'] },
 ];
 
-// ─── PRINT ───────────────────────────────────────────────────────────────────
-// Uses the Goods page template (without the Product Nav). Titles/copy are placeholders.
-export const PRINT = [
-  { slug: 'wedding-invitation', title: 'Wedding invitation', desc: ['Invitation suite for Alex & Andi — San Juan, Puerto Rico.'], images: ['print/wedding-invite'] },
-  { slug: 'save-the-date', title: 'Save the date', desc: ['Save-the-date postcard and envelope.'], images: ['print/save-the-date'] },
-  { slug: 'fiesta', title: 'Fiesta', desc: ['Party coaster — food & fiesta to follow.'], images: ['print/fiesta'] },
-];
-
-// ─── DIGITAL ─────────────────────────────────────────────────────────────────
-// Case-study template. Section types:
-//   full    — full-bleed image with caption over the top
-//   feature — caption + contained image on a coloured band
-//   slides  — full-bleed carousel with arrows
-//   icons   — grid of small images
-export const DIGITAL = [
-  { slug: 'feelgood', title: 'Feel Good app', thumb: 'digital/feelgood-thumb',
-    intro: 'A mental health check-in app to help people understand their emotions, explore their thoughts, and find peace in their every day.',
-    hero: 'feelgood/hero',
-    sections: [
-      { type: 'full', img: 'feelgood/profile', caption: 'A profile page to see your progress over time', tone: 'light' },
-      { type: 'feature', img: 'feelgood/insights', caption: 'AI-generated insights, patterns, and themes based on your entries', bg: 'var(--rose)', tone: 'light', w: 397 },
-      { type: 'slides', imgs: ['feelgood/quiz-1', 'feelgood/quiz-2', 'feelgood/quiz-3'], caption: 'An introductory quiz to personalize the app to your specific personality and mental space', bg: 'var(--sand)', tone: 'dark' },
-      { type: 'feature', img: 'feelgood/tracking', caption: 'Scroll to see your moods over time so you can understand patterns and revisit past entries.', bg: 'var(--paper)', tone: 'dark', w: 739 },
-      { type: 'icons', imgs: ['feelgood/icon-original', 'feelgood/icon-greenink', 'feelgood/icon-sage', 'feelgood/icon-orange', 'feelgood/icon-white', 'feelgood/icon-moss'],
-        caption: 'Interchangeable app icons so you can make it your own', note: 'Coming soon to App Store', bg: 'var(--sand)', tone: 'dark' },
-    ] },
-  { slug: 'storyright', title: 'Storyright', thumb: 'digital/storyright-thumb',
-    intro: 'An AI-assisted writing editor that understands your unique style, makes suggestions to maintain your voice, prose, and story.',
-    hero: 'storyright/hero', heroWide: true,
-    sections: [
-      { type: 'feature', img: 'storyright/just-write', title: 'Just write.', caption: 'Write your story free from distraction – let it flow uninterrupted. No suggested edits will be surfaced until you’re ready to review.', bg: 'var(--ink)', tone: 'light', w: 1100 },
-      { type: 'feature', img: 'storyright/review', title: 'Review & Edit.', caption: 'When you’re ready, hit the review button. Your personalized AI will review for style & voice consistency, story structure cohesion, and pacing.', bg: 'var(--ink)', tone: 'light', w: 1100 },
-      { type: 'feature', img: 'storyright/focus', title: 'Focus mode.', caption: 'Focus on editing one suggestion at a time, or dismiss the suggestion. Hit done to lock in the change.', bg: 'var(--ink)', tone: 'light', w: 1100 },
-      { type: 'feature', img: 'storyright/projects', title: 'All your stories.', caption: 'The AI assistant will maintain story details and style within each project, while also making suggestions on how to keep your unique voice across all.', bg: 'var(--ink)', tone: 'light', w: 1100 },
-    ] },
-];
+// ─── PRINT + DIGITAL ─────────────────────────────────────────────────────────
+// Print and Digital projects live in content/ (one file per project) and are edited on the
+// admin page at /admin. tools/build-content.mjs turns them into js/content.js.
+export { PRINT, DIGITAL } from './content.js';
 
 // ─── HOMEPAGE ORDER ──────────────────────────────────────────────────────────
 // The unfiltered grid mixes everything. Each entry is 'category/slug'.

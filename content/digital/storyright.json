@@ -1,0 +1,46 @@
+{
+  "title": "Storyright",
+  "order": 2,
+  "thumbnail": "/assets/img/digital/storyright-thumb.jpg",
+  "intro": "An AI-assisted writing editor that understands your unique style, makes suggestions to maintain your voice, prose, and story.",
+  "hero": "/assets/img/storyright/hero.jpg",
+  "hero_wide": true,
+  "sections": [
+    {
+      "type": "feature",
+      "title": "Just write.",
+      "caption": "Write your story free from distraction – let it flow uninterrupted. No suggested edits will be surfaced until you’re ready to review.",
+      "image": "/assets/img/storyright/just-write.jpg",
+      "background": "ink",
+      "tone": "light",
+      "image_width": 1100
+    },
+    {
+      "type": "feature",
+      "title": "Review & Edit.",
+      "caption": "When you’re ready, hit the review button. Your personalized AI will review for style & voice consistency, story structure cohesion, and pacing.",
+      "image": "/assets/img/storyright/review.jpg",
+      "background": "ink",
+      "tone": "light",
+      "image_width": 1100
+    },
+    {
+      "type": "feature",
+      "title": "Focus mode.",
+      "caption": "Focus on editing one suggestion at a time, or dismiss the suggestion. Hit done to lock in the change.",
+      "image": "/assets/img/storyright/focus.jpg",
+      "background": "ink",
+      "tone": "light",
+      "image_width": 1100
+    },
+    {
+      "type": "feature",
+      "title": "All your stories.",
+      "caption": "The AI assistant will maintain story details and style within each project, while also making suggestions on how to keep your unique voice across all.",
+      "image": "/assets/img/storyright/projects.jpg",
+      "background": "ink",
+      "tone": "light",
+      "image_width": 1100
+    }
+  ]
+}

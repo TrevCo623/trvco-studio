@@ -1,0 +1,4 @@
+# Netlify: rebuild js/content.js from the admin page's project files on every deploy.
+[build]
+  command = "node tools/build-content.mjs"
+  publish = "."

@@ -1,0 +1,58 @@
+{
+  "title": "Feel Good app",
+  "order": 1,
+  "thumbnail": "/assets/img/digital/feelgood-thumb.jpg",
+  "intro": "A mental health check-in app to help people understand their emotions, explore their thoughts, and find peace in their every day.",
+  "hero": "/assets/img/feelgood/hero.png",
+  "hero_wide": false,
+  "sections": [
+    {
+      "type": "full",
+      "caption": "A profile page to see your progress over time",
+      "image": "/assets/img/feelgood/profile.jpg",
+      "tone": "light"
+    },
+    {
+      "type": "feature",
+      "caption": "AI-generated insights, patterns, and themes based on your entries",
+      "image": "/assets/img/feelgood/insights.png",
+      "background": "rose",
+      "tone": "light",
+      "image_width": 397
+    },
+    {
+      "type": "slides",
+      "caption": "An introductory quiz to personalize the app to your specific personality and mental space",
+      "images": [
+        "/assets/img/feelgood/quiz-1.png",
+        "/assets/img/feelgood/quiz-2.png",
+        "/assets/img/feelgood/quiz-3.png"
+      ],
+      "background": "sand",
+      "tone": "dark"
+    },
+    {
+      "type": "feature",
+      "caption": "Scroll to see your moods over time so you can understand patterns and revisit past entries.",
+      "image": "/assets/img/feelgood/tracking.jpg",
+      "background": "paper",
+      "tone": "dark",
+      "image_width": 739
+    },
+    {
+      "type": "icons",
+      "caption": "Interchangeable app icons so you can make it your own",
+      "note": "Coming soon to App Store",
+      "images": [
+        "/assets/img/feelgood/icon-original.png",
+        "/assets/img/feelgood/icon-greenink.png",
+        "/assets/img/feelgood/icon-sage.png",
+        "/assets/img/feelgood/icon-orange.png",
+        "/assets/img/feelgood/icon-white.png",
+        "/assets/img/feelgood/icon-moss.png"
+      ],
+      "background": "sand",
+      "tone": "dark"
+    }
+  ]
+}

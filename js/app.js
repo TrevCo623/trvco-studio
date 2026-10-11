@@ -1,5 +1,7 @@
 import { SITE, TYPE, TYPE_OVERRIDES, GOODS, PRINT, DIGITAL, HOME_ORDER, TILE_COLORS } from './data.js';
 import { IMG } from './assets.js';
+import { CONTENT_IMG } from './content.js';
+Object.assign(IMG, CONTENT_IMG); // photos used by Print and Digital projects (from the admin page)
 import { shopReady, checkoutUrl, fetchTypeCatalog, fetchGoodsCatalog } from './shop.js';
 import { LICENSE_VERSION, LICENSE_SUMMARY, LICENSE_SECTIONS } from './license.js';
 
