@@ -572,8 +572,8 @@ function testerPanel(t) {
   const sizes = `<div class="sizes">${[120, 72, 48, 32, 20].map((px) => `<div><small>${px}px</small><p style="font-size:${px}px">${line}</p></div>`).join('')}</div>`;
   const custom = `<textarea class="custom-input" rows="2" spellcheck="false" aria-label="Type to preview">${esc(t.lowercase ? 'Type something here' : 'TYPE SOMETHING')}</textarea>
     <div class="custom-size"><span>Size</span><input type="range" min="24" max="200" value="96" aria-label="Preview size"><span class="custom-size-val">96px</span></div>`;
-  const block = (label, html) => `<div class="tester-block"><h3 class="tester-label">${label}</h3>${html}</div>`;
-  return block('Glyphs', glyphs) + block('Sizes', sizes) + block('Try it', custom);
+  const block = (label, html, cls = '') => `<div class="tester-block${cls}"><h3 class="tester-label">${label}</h3>${html}</div>`;
+  return block('Glyphs', glyphs) + block('Sizes', sizes, ' is-left') + block('Try it', custom);
 }
 
 function typeBodyHTML(t) {

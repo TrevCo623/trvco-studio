@@ -311,6 +311,10 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .glyphs .g-md { font-size: clamp(24px, 4.29vw, 61.8px); margin-top: 20px; word-break: break-all; }
 .sizes { display: grid; gap: 36px; text-align: center; max-width: 1200px; margin: 0 auto; }
 .sizes div { display: grid; gap: 10px; justify-items: center; min-width: 0; }
+/* Sizes reads left-aligned, label included, inside the same centred column. */
+.tester-block.is-left { width: 100%; max-width: 1200px; margin: 0 auto; text-align: left; }
+.tester-block.is-left .sizes { text-align: left; }
+.tester-block.is-left .sizes div { justify-items: start; }
 .sizes p { max-width: 100%; }
 .sizes small { font-family: var(--mono); font-size: 11px; color: var(--grey); }
 .sizes p { margin: 0; line-height: 1.05; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
