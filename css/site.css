@@ -32,6 +32,8 @@ img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 :focus-visible { outline: 1px solid var(--clay); outline-offset: 4px; }
+/* The page area gets focus after each page change (for screen readers); it shouldn't draw a frame. */
+#view:focus, #view:focus-visible { outline: none; }
 .skip { position: absolute; left: -999px; top: 8px; z-index: 100; background: var(--clay); color: var(--ink); padding: 8px 14px; }
 .skip:focus { left: 8px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -347,7 +349,7 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 @media (max-width: 760px) { .featured-item { grid-template-columns: 1fr; gap: 20px; } .featured-item h3 { margin-top: 0; } }
 
 .cta { padding: 118px 18px 116px; text-align: center; background: var(--ink); color: var(--paper); }
-.cta h2 { margin: 0 auto 37px; max-width: 423px; font-weight: 300; font-style: italic; font-size: 32px; line-height: 40px; letter-spacing: .96px; }
+.cta h2 { margin: 0 auto 37px; max-width: 423px; font-weight: 300; font-style: normal; font-size: 32px; line-height: 40px; letter-spacing: .96px; }
 .cta .btn { width: 292px; }
 
 /* ───────────────────────── Goods / Print detail ───────────────────────── */
