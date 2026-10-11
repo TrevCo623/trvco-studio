@@ -1,4 +1,4 @@
-import { SITE, TYPE, GOODS, PRINT, DIGITAL, HOME_ORDER, TILE_COLORS } from './data.js';
+import { SITE, TYPE, TYPE_OVERRIDES, GOODS, PRINT, DIGITAL, HOME_ORDER, TILE_COLORS } from './data.js';
 import { IMG } from './assets.js';
 import { shopReady, checkoutUrl, fetchTypeCatalog } from './shop.js';
 import { LICENSE_VERSION, LICENSE_SUMMARY, LICENSE_SECTIONS } from './license.js';
@@ -112,7 +112,8 @@ await (async () => {
     }
     if (!p.fontUrl) { console.warn(`[trvco] ${p.name} is in Shopify but has no web font file (custom.web_font), so it isn't shown yet.`); continue; }
     const family = `shop-${key(p.name)}`;
-    const display = p.name.toUpperCase();
+    const over = TYPE_OVERRIDES?.[key(p.name)] || {};
+    const display = over.display || p.name.toUpperCase();
     // Size new fonts to match the others: the existing names run about 430px wide in the carousel.
     let heroSize = 100, scale = 1;
     try {
@@ -125,7 +126,7 @@ await (async () => {
       }
     } catch {}
     next.push({ slug: key(p.name), shopify: p.handle, name: p.name, display, family, scale, heroSize,
-      descriptor: p.descriptor, styles: [['Regular', family]], price: p.price, soldOut: !p.available });
+      descriptor: p.descriptor, styles: [['Regular', family]], price: p.price, soldOut: !p.available, ...over });
   }
   // Keep the built-in order for known fonts, new ones go at the end.
   next.sort((a, b) => { const ia = TYPE.indexOf(a), ib = TYPE.indexOf(b); return (ia < 0 ? 1e3 : ia) - (ib < 0 ? 1e3 : ib); });

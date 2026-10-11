@@ -60,6 +60,13 @@ export const TYPE = [
     descriptor: 'A blocky, hand-painted print', styles: [['Regular', 'Widebrim']], price: 10, tile: 'stone' },
 ];
 
+// Tweaks for fonts that come from Shopify (keyed by lowercase name). Anything set here wins
+// over the automatic defaults: display (the word shown), lowercase (specimen in sentence case),
+// heroSize / scale (carousel and thumbnail size).
+export const TYPE_OVERRIDES = {
+  kadoka: { display: 'Kadoka', lowercase: true },
+};
+
 // ─── GOODS ───────────────────────────────────────────────────────────────────
 // `soldOut` disables Add to Cart. `variants` adds a small picker to the Product Nav.
 export const GOODS = [
