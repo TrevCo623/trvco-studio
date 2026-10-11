@@ -112,8 +112,19 @@ await (async () => {
     }
     if (!p.fontUrl) { console.warn(`[trvco] ${p.name} is in Shopify but has no web font file (custom.web_font), so it isn't shown yet.`); continue; }
     const family = `shop-${key(p.name)}`;
-    try { const ff = new FontFace(family, `url("${p.fontUrl}")`, { display: 'swap' }); document.fonts.add(ff); ff.load().catch(() => {}); } catch {}
-    next.push({ slug: key(p.name), shopify: p.handle, name: p.name, display: p.name.toUpperCase(), family, scale: 1, heroSize: 100,
+    const display = p.name.toUpperCase();
+    // Size new fonts to match the others: the existing names run about 430px wide in the carousel.
+    let heroSize = 100, scale = 1;
+    try {
+      const ff = new FontFace(family, `url("${p.fontUrl}")`, { display: 'swap' }); document.fonts.add(ff);
+      await Promise.race([ff.load(), new Promise((r) => setTimeout(r, 1500))]);
+      if (ff.status === 'loaded') {
+        const c = document.createElement('canvas').getContext('2d'); c.font = `100px "${family}"`;
+        const w = c.measureText(display).width;
+        if (w > 0) { heroSize = Math.round(Math.min(150, Math.max(70, 100 * 430 / w))); scale = Math.min(1.3, Math.max(0.7, 0.95 * 430 / w)); }
+      }
+    } catch {}
+    next.push({ slug: key(p.name), shopify: p.handle, name: p.name, display, family, scale, heroSize,
       descriptor: p.descriptor, styles: [['Regular', family]], price: p.price, soldOut: !p.available });
   }
   // Keep the built-in order for known fonts, new ones go at the end.
