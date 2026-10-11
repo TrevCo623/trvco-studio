@@ -240,11 +240,13 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
   .type-hero { --shift: max(0px, calc((100svh - var(--header-h) - var(--block)) / 2)); height: max(calc(var(--header-h) + var(--block)), 100svh); }
 }
 .tc { position: absolute; left: 0; right: 0; top: calc(var(--header-h) + var(--shift) + 60px); height: 270px; }
+/* All the names share one grid cell and sit on a common baseline, whatever their size. */
+.tc { display: grid; grid-template-areas: "tc"; justify-items: center; align-items: baseline; align-content: center; }
 .tc-item {
-  position: absolute; left: 50%; top: 50%; white-space: nowrap; line-height: 1;
+  grid-area: tc; position: relative; white-space: nowrap; line-height: 1;
   font-size: calc(var(--tc-size, 90px) * var(--tc-k, 1));
   padding: 24px 56px; /* generous, stationary hover target */
-  transform: translate3d(calc(-50% + var(--x, 0px)), -50%, 0);
+  transform: translate3d(var(--x, 0px), 0, 0);
   transition: transform .8s var(--ease), opacity .5s ease;
   will-change: transform; backface-visibility: hidden;
 }
