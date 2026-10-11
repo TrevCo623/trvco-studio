@@ -466,3 +466,6 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 
 /* Fonts not in the shop yet: shown, not sold. */
 .type-page.no-sale .buy-row, .type-page.no-sale .pnav-actions { visibility: hidden; }
+
+/* Let horizontal swipes on the type carousel through to the page script. */
+.type-hero { touch-action: pan-y; }

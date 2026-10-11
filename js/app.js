@@ -720,6 +720,19 @@ function TypePage(route) {
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); const j = (idx + (e.key === 'ArrowRight' ? 1 : -1) + n) % n; navigate(`/type/${TYPE[j].slug}`); }
   };
   const onResize = () => place(false);
+  // Swipe the carousel on touch screens: right-to-left = next font (same as tapping the one on
+  // the right), left-to-right = previous. Vertical scrolling is left alone.
+  const step = (d) => navigate(`/type/${TYPE[(idx + d + n) % n].slug}`);
+  let sx = 0, sy = 0, swiping = false, swipedAt = 0;
+  const hero = $('.type-hero', el);
+  hero.addEventListener('touchstart', (e) => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; swiping = e.touches.length === 1; }, { passive: true });
+  hero.addEventListener('touchend', (e) => {
+    if (!swiping) return; swiping = false;
+    const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) { swipedAt = Date.now(); step(dx < 0 ? 1 : -1); }
+  }, { passive: true });
+  // A swipe that ends on a font name shouldn't also count as tapping it.
+  hero.addEventListener('click', (e) => { if (Date.now() - swipedAt < 400) { e.preventDefault(); e.stopPropagation(); } }, true);
 
   paintMeta(t0); paintBody(t0);
   return {
