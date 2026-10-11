@@ -92,3 +92,31 @@ export async function fetchTypeCatalog(timeoutMs = 2500) {
     return null;
   }
 }
+
+// ── Goods come from Shopify too (Printify publishes them there) ─────────────────
+// Every published product that isn't a typeface is a Good: title, description, photos,
+// price and each variant (e.g. "Black / L") come straight from Shopify.
+export async function fetchGoodsCatalog(timeoutMs = 2500) {
+  if (!shopReady()) return null;
+  const query = `{ products(first: 100, query: "-product_type:typeface") { nodes {
+    handle title description availableForSale
+    images(first: 12) { nodes { url width height altText } }
+    options { name }
+    variants(first: 100) { nodes { title availableForSale price { amount } } }
+  } } }`;
+  try {
+    const d = await Promise.race([gql(query), new Promise((_, no) => setTimeout(() => no(new Error('timeout')), timeoutMs))]);
+    return d.products.nodes.map((p) => ({
+      handle: p.handle,
+      title: p.title,
+      paragraphs: p.description.split(/\n+/).map((s) => s.trim()).filter(Boolean),
+      available: p.availableForSale,
+      images: p.images.nodes.map((i) => ({ url: i.url, w: i.width, h: i.height, alt: i.altText || p.title })),
+      optionLabel: p.options.map((o) => o.name).filter((n) => n !== 'Title').join(' / '),
+      variants: p.variants.nodes.map((v) => ({ name: v.title, price: Number(v.price.amount), available: v.availableForSale })),
+    }));
+  } catch (err) {
+    console.warn('[trvco] Shopify goods unavailable, using the built-in list.', err.message);
+    return null;
+  }
+}

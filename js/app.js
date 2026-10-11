@@ -1,6 +1,6 @@
 import { SITE, TYPE, TYPE_OVERRIDES, GOODS, PRINT, DIGITAL, HOME_ORDER, TILE_COLORS } from './data.js';
 import { IMG } from './assets.js';
-import { shopReady, checkoutUrl, fetchTypeCatalog } from './shop.js';
+import { shopReady, checkoutUrl, fetchTypeCatalog, fetchGoodsCatalog } from './shop.js';
 import { LICENSE_VERSION, LICENSE_SUMMARY, LICENSE_SECTIONS } from './license.js';
 
 /* ═════════════════════════════ helpers ═════════════════════════════ */
@@ -25,7 +25,8 @@ const dock = $('#navDock');
 function img(key, { alt = '', lazy = true, cls = '' } = {}) {
   const a = IMG[key];
   if (!a) return '';
-  return `<img src="/${a.src}" data-cdn="${a.cdn}" width="${a.w}" height="${a.h}" alt="${esc(alt)}"${lazy ? ' loading="lazy"' : ''} decoding="async"${cls ? ` class="${cls}"` : ''}>`;
+  const src = /^https?:/.test(a.src) ? a.src : `/${a.src}`; // Shopify photos are full URLs
+  return `<img src="${src}" data-cdn="${a.cdn}" width="${a.w}" height="${a.h}" alt="${esc(alt)}"${lazy ? ' loading="lazy"' : ''} decoding="async"${cls ? ` class="${cls}"` : ''}>`;
 }
 document.addEventListener('error', (e) => {
   const t = e.target;
@@ -95,6 +96,27 @@ addEventListener('resize', () => { clearTimeout(toneTimer); toneTimer = setTimeo
 })();
 
 /* ═════════════════════════════ content model ═════════════════════════════ */
+// Goods follow Shopify (Printify publishes there). A Shopify product that matches one in
+// js/data.js (by handle or name) takes over its price, options and stock; new products
+// get a page built from their Shopify title, description and photos. Older pieces in
+// data.js that were never in Shopify stay on the site as sold out.
+const goodsReady = (async () => {
+  const shop = await fetchGoodsCatalog();
+  if (!shop) return;
+  const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '');
+  for (const p of shop) {
+    const g = GOODS.find((x) => x.shopify === p.handle || norm(x.name) === norm(p.title) || norm(x.title) === norm(p.title) || x.slug === p.handle);
+    const forSale = p.variants.filter((v) => v.available);
+    const prices = p.variants.map((v) => v.price);
+    const variants = p.variants.length > 1 ? { label: p.optionLabel || 'Option', options: forSale.map((v) => ({ name: v.name, price: v.price })) } : undefined;
+    const live = { shopify: p.handle, price: Math.min(...prices), variants, soldOut: !p.available || !forSale.length, comingSoon: false };
+    if (g) { Object.assign(g, live); continue; }
+    const images = p.images.map((im, i) => { const k = `shop/${p.handle}/${i}`; IMG[k] = { src: im.url, cdn: im.url, w: im.w, h: im.h }; return k; });
+    if (!images.length) { console.warn(`[trvco] ${p.title} has no photos in Shopify, so it isn't shown yet.`); continue; }
+    GOODS.unshift({ slug: p.handle, name: p.title, title: p.title, desc: p.paragraphs, images, ...live });
+  }
+})();
+
 // The Type list follows the Shopify store: fonts in the store are shown (new ones added
 // automatically), fonts no longer in the store are hidden. js/data.js keeps the richer
 // design details (hero size, details images…) for fonts it already knows.
@@ -134,6 +156,7 @@ await (async () => {
 })();
 
 // Type and Goods tiles show the price (lowest option, if options are priced differently) or Sold out.
+await goodsReady;
 function priceLabel(p) {
   if (p.soldOut) return 'Sold out';
   if (p.comingSoon) return 'Coming soon';
