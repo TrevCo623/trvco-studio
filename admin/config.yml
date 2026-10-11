@@ -29,6 +29,7 @@ collections:
     delete: true
     slug: '{{slug}}'
     preview_path: 'print/{{slug}}'
+    editor: { preview: false }
     summary: '{{title}}'
     sortable_fields: [order, title]
     fields:
@@ -53,6 +54,7 @@ collections:
     delete: true
     slug: '{{slug}}'
     preview_path: 'digital/{{slug}}'
+    editor: { preview: false }
     summary: '{{title}}'
     sortable_fields: [order, title]
     fields:

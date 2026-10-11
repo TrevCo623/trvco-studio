@@ -1,0 +1,81 @@
+/* trvco studio skin for the admin page (Decap CMS).
+   Decap's class names end in a readable label (e.g. css-1abc-AppHeader), so these rules
+   match on that label. Colours and type follow the site: ink, paper, sand, rose; Crimson Pro
+   for headings and text, DM Mono for labels and buttons. */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --ink: #0E1009; --paper: #F8F6F6; --nav: #E6DBD9; --sand: #EBE5E5; --clay: #C4937E; --rose: #B17C72; --grey: #8b8a87;
+  --serif: 'Crimson Pro', Georgia, serif; --mono: 'DM Mono', ui-monospace, Menlo, monospace;
+}
+body { background: var(--paper) !important; color: var(--ink); font-family: var(--serif) !important; font-size: 17px; }
+input, textarea, select { font-family: var(--serif) !important; }
+
+/* ── Header bar: ink, like the site header, with the logo ── */
+[class*="-AppHeader-css"] { background: var(--ink) !important; box-shadow: none !important; border: 0 !important; }
+[class*="-AppHeaderContent"] { min-height: 72px; align-items: center; }
+[class*="-AppHeaderContent"]::before {
+  content: ''; order: -1; flex: none; width: 38px; height: 38px; margin-right: 28px; background: var(--paper);
+  -webkit-mask: url('/assets/img/logo.png') center / contain no-repeat; mask: url('/assets/img/logo.png') center / contain no-repeat;
+}
+[class*="-AppHeader-css"] :is([class*="-AppHeaderNavLink"], [class*="-AppHeaderButton"], [class*="-AppHeaderSiteLink"], [class*="-AppHeaderTestRepoIndicator"]) {
+  font-family: var(--mono) !important; font-size: 12px !important; letter-spacing: 1.2px; text-transform: uppercase;
+  color: rgba(248, 246, 246, .55) !important; background: none !important;
+}
+[class*="-AppHeaderNavLink"]:hover, [class*="-AppHeaderNavLink"][aria-current="page"],
+[class*="-AppHeaderSiteLink"]:hover { color: var(--paper) !important; }
+[class*="-AppHeaderNavLink"] svg, [class*="-AppHeaderButton"] svg, [class*="-AppHeaderNavLink"] [class*="IconWrapper"] { fill: currentColor !important; color: inherit !important; }
+[class*="-AppHeaderNavLink"] svg path { fill: currentColor !important; }
+[class*="-AppHeaderQuickNewButton"] { font-family: var(--mono) !important; font-size: 12px !important; letter-spacing: 1.2px; text-transform: uppercase; background: var(--rose) !important; color: var(--ink) !important; border-radius: 0 !important; }
+
+/* ── Cards: flat, square, hairline ── */
+[class*="-card-card"], [class*="-ListCard"], [class*="-GridCard"] { border-radius: 0 !important; box-shadow: none !important; border: 1px solid rgba(14, 16, 9, .08); background: #fff; }
+[class*="cardTopHeading"], [class*="-SidebarHeading"] { font-family: var(--serif) !important; font-weight: 300 !important; font-size: 34px !important; letter-spacing: -.2px; color: var(--ink) !important; }
+[class*="cardTopDescription"] { font-family: var(--serif) !important; font-size: 17px !important; color: #565555 !important; }
+
+/* Sidebar */
+[class*="-SidebarNavLink"] { font-size: 18px !important; color: var(--ink) !important; background: none !important; border-left: 3px solid transparent !important; }
+[class*="-SidebarNavLink"][aria-current="page"] { background: var(--sand) !important; border-left-color: var(--rose) !important; }
+[class*="-SidebarNavLink"] svg { color: var(--rose); fill: currentColor; }
+[class*="-SearchInput"] { background: var(--paper) !important; border-radius: 0 !important; }
+
+/* Entry list */
+[class*="-ListCardLink"] h2, [class*="-ListCardTitle"], [class*="-CardHeading"] { font-family: var(--serif) !important; font-weight: 400 !important; font-size: 22px !important; }
+[class*="-ListCard"]:hover, [class*="-GridCard"]:hover { border-color: var(--rose); }
+
+/* ── Buttons: rose, square, mono caps ── */
+[class*="-CollectionTopNewButton"], [class*="-PublishButton"], [class*="-SaveButton"], [class*="-ToolbarButton"], [class*="-DropdownButton"] {
+  font-family: var(--mono) !important; font-size: 12px !important; letter-spacing: 1.2px; text-transform: uppercase; border-radius: 0 !important;
+}
+[class*="-CollectionTopNewButton"] { background: var(--rose) !important; color: var(--ink) !important; }
+[class*="-CollectionTopNewButton"]:hover { background: #c08b81 !important; }
+[class*="-ViewControls"], [class*="-ControlButton"] { font-family: var(--mono) !important; font-size: 12px !important; letter-spacing: 1px; text-transform: uppercase; }
+
+/* ── Editor ── */
+[class*="-ToolbarContainer"] { background: var(--paper) !important; box-shadow: none !important; border-bottom: 1px solid rgba(14, 16, 9, .1) !important; }
+[class*="-ToolbarContainer"] [class*="-AppHeaderSiteLink"] { font-family: var(--mono) !important; font-size: 12px !important; letter-spacing: 1.2px; text-transform: uppercase; color: #565555 !important; }
+[class*="-BackCollection"] { font-family: var(--serif) !important; font-size: 16px !important; color: var(--ink) !important; }
+[class*="-BackStatus"] { font-family: var(--mono) !important; font-size: 11px !important; letter-spacing: 1px; text-transform: uppercase; }
+[class*="-ToolbarSubSectionFirst"] [class*="-StyledDropdownButton"], [class*="-ToolbarSubSectionFirst"] button {
+  background: var(--rose) !important; color: var(--ink) !important; border-radius: 0 !important;
+  font-family: var(--mono) !important; font-size: 12px !important; letter-spacing: 1.2px; text-transform: uppercase;
+}
+[class*="-EditorContainer"], [class*="-ControlPaneContainer"] { background: var(--paper) !important; }
+[class*="-FieldLabel"] {
+  font-family: var(--mono) !important; font-size: 11px !important; font-weight: 400 !important; letter-spacing: 1.2px; text-transform: uppercase;
+  background: var(--sand) !important; color: var(--ink) !important; border-color: var(--sand) !important; border-radius: 0 !important;
+}
+.nc-controlPane-widget, [class*="-ControlContainer"] textarea, [class*="-ControlContainer"] input[type="text"], [class*="-ControlContainer"] input[type="number"] {
+  border-color: var(--sand) !important; border-radius: 0 !important; background: #fff !important; font-size: 18px !important; color: var(--ink) !important;
+}
+.nc-controlPane-widget:focus, .nc-controlPane-widget:focus-within { border-color: var(--rose) !important; }
+[class*="-ControlContainer"]:focus-within [class*="-FieldLabel"] { background: var(--rose) !important; border-color: var(--rose) !important; color: var(--ink) !important; }
+[class*="-ControlHint"] { font-family: var(--serif) !important; font-size: 15px !important; color: #565555 !important; }
+[class*="-TopBarContainer"] { background: var(--sand) !important; border-radius: 0 !important; }
+[class*="-AddButton"], [class*="-TypesButton"] { font-family: var(--mono) !important; font-size: 11px !important; letter-spacing: 1px; text-transform: uppercase; border-radius: 0 !important; background: var(--paper) !important; color: var(--ink) !important; }
+[class*="-ExpandButton"], [class*="-TopBarContainer"] { font-family: var(--serif) !important; font-size: 16px !important; }
+a { color: var(--rose); }
+[class*="-ControlContainer"] button:not([class*="Toggle"]):not([class*="-ExpandButton"]) {
+  font-family: var(--mono) !important; font-size: 11px !important; letter-spacing: 1px; text-transform: uppercase;
+  background: var(--sand) !important; color: var(--ink) !important; border-radius: 0 !important;
+}
