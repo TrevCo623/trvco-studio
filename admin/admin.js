@@ -6,6 +6,7 @@
 
 const SHOP = { domain: 'trvcostudio.myshopify.com', token: '79322106676146621e95872ea4af1f11', store: 'trvcostudio' };
 const shopData = new Map(); // handle -> product
+const builtIn = new Set(); // fonts whose files live in the site itself
 const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
 const productId = (gid) => String(gid).split('/').pop();
 const shopifyEditUrl = (p) => `https://admin.shopify.com/store/${SHOP.store}/products/${productId(p.id)}`;
@@ -53,22 +54,22 @@ const ShopifyInfo = createClass({
     ];
     if (kind === 'type') {
       rows.push(['Descriptor', p.descriptor?.value || '— (add one in Shopify: Descriptor field)']);
-      rows.push(['Web font', p.webFont?.reference?.url ? h('a', { href: p.webFont.reference.url, target: '_blank', rel: 'noopener' }, decodeURIComponent(p.webFont.reference.url.split('/').pop().split('?')[0])) : '— missing: upload one in Shopify (Web font field) or the font won\'t show on the site']);
+      rows.push(['Web font', builtIn.has(p.handle) && !p.webFont?.reference?.url ? 'Built into the site (no upload needed)' : p.webFont?.reference?.url ? h('a', { href: p.webFont.reference.url, target: '_blank', rel: 'noopener' }, decodeURIComponent(p.webFont.reference.url.split('/').pop().split('?')[0])) : '— missing: upload one in Shopify (Web font field) or the font won\'t show on the site']);
     } else {
       if (p.variants.nodes.length > 1) rows.push(['Options', p.variants.nodes.map((v) => v.title + (v.availableForSale ? '' : ' (sold out)')).join(', ')]);
       rows.push(['Description', p.description ? p.description.slice(0, 220) + (p.description.length > 220 ? '…' : '') : '—']);
     }
     const slug = field.get('slug');
     return h('div', { className: 'trv-shop' },
+      h('p', { className: 'trv-shop-note' }, kind === 'type'
+        ? 'Name, price, descriptor and the font file are managed in Shopify. Changes there show on the site on the next page load.'
+        : 'Price, options and stock come from Shopify (via Printful). Changes there show on the site on the next page load.'),
       h('dl', null, ...rows.flatMap(([k, v]) => [h('dt', { key: k + 't' }, k), h('dd', { key: k + 'd' }, v)])),
       kind === 'goods' && p.images.nodes.length ? h('div', { className: 'trv-shop-photos' }, ...p.images.nodes.map((im, i) => h('img', { key: i, src: im.url + (im.url.includes('?') ? '&' : '?') + 'width=240', alt: '' }))) : null,
       h('div', { className: 'trv-shop-actions' },
         h('a', { className: 'trv-btn trv-btn--primary', href: shopifyEditUrl(p), target: '_blank', rel: 'noopener' }, 'Edit in Shopify ↗'),
         kind === 'goods' ? h('a', { className: 'trv-btn', href: 'https://www.printful.com/dashboard/store', target: '_blank', rel: 'noopener' }, 'Open Printful ↗') : null,
-        h('a', { className: 'trv-btn', href: `/${kind}/${slug}`, target: '_blank', rel: 'noopener' }, 'View on site ↗')),
-      h('p', { className: 'trv-shop-note' }, kind === 'type'
-        ? 'Name, price, descriptor and the font file are managed in Shopify. Changes there show on the site on the next page load.'
-        : 'Price, options and stock come from Shopify (via Printful). Changes there show on the site on the next page load.'));
+        h('a', { className: 'trv-btn', href: `/${kind}/${slug}`, target: '_blank', rel: 'noopener' }, 'View on site ↗')));
   },
 });
 CMS.registerWidget('shopify-info', ShopifyInfo, () => null);
@@ -82,6 +83,7 @@ CMS.registerWidget('shopify-info', ShopifyInfo, () => null);
   ]);
   const config = jsyaml.load(configText);
   products.forEach((p) => shopData.set(p.handle, p));
+  (index.builtInFonts || []).forEach((hd) => builtIn.add(hd));
   const fonts = products.filter((p) => p.productType.toLowerCase() === 'typeface');
   const goods = products.filter((p) => p.productType.toLowerCase() !== 'typeface');
   const info = (handle, kind, slug) => ({ label: 'From Shopify', name: 'shopify', widget: 'shopify-info', required: false, handle, kind, slug });

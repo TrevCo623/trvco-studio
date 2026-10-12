@@ -117,6 +117,7 @@ writeFileSync(join(root, 'js', 'content.js'), out);
 writeFileSync(join(root, 'admin', 'site-index.json'), JSON.stringify({
   goods: load('goods', { all: true }).map((g) => ({ slug: g.slug, name: g.name || g.title, title: g.title || g.name, shopify: g.shopify_handle || null })),
   type: Object.keys(TYPE_TWEAKS),
+  builtInFonts: [...readFileSync(join(root, 'js', 'data.js'), 'utf8').matchAll(/shopify:\s*'([^']+)'/g)].map((m) => m[1]),
 }, null, 2) + '\n');
 console.log(`content.js: ${PRINT.length} print, ${DIGITAL.length} digital, ${GOODS.length} goods, ${Object.keys(images).length} images`);
 problems.forEach((p) => console.warn('  ! ' + p));

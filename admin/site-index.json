@@ -81,5 +81,15 @@
   ],
   "type": [
     "kadoka"
+  ],
+  "builtInFonts": [
+    "oxomoco-font",
+    "digital-product",
+    "digital-product-1",
+    "digital-product-4",
+    "digital-product-3",
+    "digital-product-6",
+    "digital-product-7",
+    "digital-product-2"
   ]
 }
