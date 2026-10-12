@@ -32,7 +32,7 @@ export const TYPE = [
     descriptor: 'A geometric filled display font', styles: [['Regular', 'Oxomoco'], ['Round', 'Oxomoco-Round']],
     price: 10, tile: 'terracotta',
     details: [
-      { img: 'type/oxomoco-detail-1', text: 'Nine squares. Every letter starts there.' },
+      { img: 'type/oxomoco-detail-1', text: 'A 3×3 grid of nine squares. Every letter starts there, so they all share one height and width.' },
       { img: 'type/oxomoco-detail-2', text: 'Then come the circles, to loosen up the hard lines.' },
       { img: 'type/oxomoco-detail-3', text: 'Squares, right triangles, circles. That’s the whole toolkit.' },
       { img: 'type/oxomoco-detail-4', text: 'Regular for sharp corners. Round for something friendlier.' },
