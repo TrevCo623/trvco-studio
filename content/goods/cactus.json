@@ -1,0 +1,14 @@
+{
+  "title": "Cactus",
+  "name": "Cactus Bandana",
+  "order": 13,
+  "description": "A bandana with a cactus design.",
+  "photos": [
+    "/assets/img/goods/cactus-1.jpg",
+    "/assets/img/goods/cactus-2.jpg",
+    "/assets/img/goods/cactus-3.jpg",
+    "/assets/img/goods/cactus-4.jpg"
+  ],
+  "sold_out": true,
+  "price": 30
+}

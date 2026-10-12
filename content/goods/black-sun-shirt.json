@@ -1,0 +1,14 @@
+{
+  "title": "Black Sun t-shirt",
+  "name": "Black Sun T-Shirt",
+  "order": 2,
+  "description": "Get lost. Have fun. Find peace.",
+  "photos": [
+    "/assets/img/goods/black-sun-shirt-1.jpg",
+    "/assets/img/goods/black-sun-shirt-2.jpg",
+    "/assets/img/goods/black-sun-shirt-3.jpg",
+    "/assets/img/goods/black-sun-shirt-4.jpg"
+  ],
+  "sold_out": true,
+  "price": 45
+}

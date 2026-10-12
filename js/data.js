@@ -63,43 +63,11 @@ export const TYPE = [
 // Tweaks for fonts that come from Shopify (keyed by lowercase name). Anything set here wins
 // over the automatic defaults: display (the word shown), lowercase (specimen in sentence case),
 // heroSize / scale (carousel and thumbnail size).
-export const TYPE_OVERRIDES = {
-  kadoka: { display: 'Kadoka', lowercase: true },
-};
+export { TYPE_TWEAKS as TYPE_OVERRIDES } from './content.js'; // edited in the admin page (Type)
 
 // ─── GOODS ───────────────────────────────────────────────────────────────────
 // `soldOut` disables Add to Cart. `variants` adds a small picker to the Product Nav.
-export const GOODS = [
-  { slug: 'go-outside-hat', name: 'Go Outside Hat', title: 'Go outside hat', price: 30,
-    comingSoon: true, // remove once it's in Shopify (and add shopify: '<handle>' if the handle differs)
-    desc: ['Go outside. Talk to people. Be happy.', 'A simple mantra to help people get more out of life.'],
-    variants: { label: 'Color', options: ['Black', 'Navy', 'Spruce', 'Green Camo'] },
-    images: ['goods/go-outside-hat-1', 'goods/go-outside-hat-2', 'goods/go-outside-hat-3'] },
-  { slug: 'black-sun-shirt', name: 'Black Sun T-Shirt', title: 'Black Sun t-shirt', price: 45, soldOut: true,
-    desc: ['Get lost. Have fun. Find peace.'], images: ['goods/black-sun-shirt-1', 'goods/black-sun-shirt-2', 'goods/black-sun-shirt-3', 'goods/black-sun-shirt-4'] },
-  { slug: 'shapes', name: 'Shapes Bandana', title: 'Shapes', price: 30, soldOut: true,
-    desc: ['A blue bandana with shapes.'], images: ['goods/shapes-1', 'goods/shapes-2', 'goods/shapes-3', 'goods/shapes-4'] },
-  { slug: 'rose', name: 'Rose Bandana', title: 'Rose', price: 30, soldOut: true,
-    desc: ['A blooming geometric rose motif hanky.'], images: ['goods/rose-1', 'goods/rose-2', 'goods/rose-3', 'goods/rose-4'] },
-  { slug: 'black-sun-hat', name: 'Black Sun Hat', title: 'Black Sun hat', price: 30, soldOut: true,
-    desc: ['Get lost. Have fun. Find peace.'], images: ['goods/black-sun-hat-1', 'goods/black-sun-hat-2', 'goods/black-sun-hat-3'] },
-  { slug: 'feed-bandana', name: 'Feed Bandana', title: 'Feed bandana', price: 30, soldOut: true,
-    desc: ['Curiosity feeds desire feeds curiosity feeds desire…'], images: ['goods/feed-bandana-1', 'goods/feed-bandana-2', 'goods/feed-bandana-3', 'goods/feed-bandana-4'] },
-  { slug: 'rose-hat', name: 'Rose Hat', title: 'Rose hat', price: 30, soldOut: true,
-    desc: ['A hat with a geometric rose.'], images: ['goods/rose-hat-1', 'goods/rose-hat-2', 'goods/rose-hat-3', 'goods/rose-hat-4'] },
-  { slug: 'feed-t-shirt', name: 'Feed T-Shirt', title: 'Feed t-shirt', price: 45, soldOut: true,
-    desc: ['Feed your curiosity.'], images: ['goods/feed-t-shirt-1', 'goods/feed-t-shirt-2', 'goods/feed-t-shirt-3', 'goods/feed-t-shirt-4'] },
-  { slug: 'feed-hat', name: 'Feed Hat', title: 'Feed hat', price: 30, soldOut: true,
-    desc: ['A hat with a tangled snake.'], images: ['goods/feed-hat-1', 'goods/feed-hat-2', 'goods/feed-hat-3', 'goods/feed-hat-4'] },
-  { slug: 'rose-t-shirt', name: 'Rose T-Shirt', title: 'Rose t-shirt', price: 45, soldOut: true,
-    desc: ['Growth comes in bunches.'], images: ['goods/rose-t-shirt-1', 'goods/rose-t-shirt-2', 'goods/rose-t-shirt-3', 'goods/rose-t-shirt-4'] },
-  { slug: 'nothing-hat', name: 'Nothing Hat', title: 'Nothing hat', price: 30, soldOut: true,
-    desc: ['Nothing is wrong.'], images: ['goods/nothing-hat-1', 'goods/nothing-hat-2', 'goods/nothing-hat-3', 'goods/nothing-hat-4'] },
-  { slug: 'sentinel-sun', name: 'Sentinel Sun Bandana', title: 'Sentinel Sun', price: 30, soldOut: true,
-    desc: ['You can find me here, enjoying peace, underneath the sentinel sun.'], images: ['goods/sentinel-sun-1', 'goods/sentinel-sun-2', 'goods/sentinel-sun-3', 'goods/sentinel-sun-4'] },
-  { slug: 'cactus', name: 'Cactus Bandana', title: 'Cactus', price: 30, soldOut: true,
-    desc: ['A bandana with a cactus design.'], images: ['goods/cactus-1', 'goods/cactus-2', 'goods/cactus-3', 'goods/cactus-4'] },
-];
+export { GOODS } from './content.js'; // edited in the admin page (Goods)
 
 // ─── PRINT + DIGITAL ─────────────────────────────────────────────────────────
 // Print and Digital projects live in content/ (one file per project) and are edited on the

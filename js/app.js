@@ -112,8 +112,9 @@ const goodsReady = (async () => {
     const prices = p.variants.map((v) => v.price);
     const variants = p.variants.length > 1 ? { label: p.optionLabel || 'Option', options: forSale.map((v) => ({ name: v.name, price: v.price })) } : undefined;
     const live = { shopify: p.handle, price: Math.min(...prices), variants, soldOut: !p.available || !forSale.length, comingSoon: false };
-    if (g) { Object.assign(g, live); continue; }
     const images = p.images.map((im, i) => { const k = `shop/${p.handle}/${i}`; IMG[k] = { src: im.url, cdn: im.url, w: im.w, h: im.h }; return k; });
+    // A Goods page from the admin keeps its own photos and copy; Shopify fills any gaps.
+    if (g) { Object.assign(g, live); g.name ||= p.title; g.title ||= p.title; if (!g.images?.length) g.images = images; if (!g.desc?.length) g.desc = p.paragraphs; continue; }
     if (!images.length) { console.warn(`[trvco] ${p.title} has no photos in Shopify, so it isn't shown yet.`); continue; }
     GOODS.unshift({ slug: p.handle, name: p.title, title: p.title, desc: p.paragraphs, images, ...live });
   }
@@ -131,7 +132,8 @@ await (async () => {
   for (const p of shop) {
     const t = TYPE.find((x) => x.shopify === p.handle) || known.get(key(p.name));
     if (t) {
-      next.push(Object.assign(t, { shopify: p.handle, price: p.price ?? t.price, soldOut: !p.available, ...(p.descriptor && !t.descriptor ? { descriptor: p.descriptor } : {}) }));
+      next.push(Object.assign(t, { shopify: p.handle, price: p.price ?? t.price, soldOut: !p.available, ...(p.descriptor && !t.descriptor ? { descriptor: p.descriptor } : {}) },
+        TYPE_OVERRIDES?.[t.slug] || TYPE_OVERRIDES?.[key(p.name)] || {}));
       continue;
     }
     if (!p.fontUrl) { console.warn(`[trvco] ${p.name} is in Shopify but has no web font file (custom.web_font), so it isn't shown yet.`); continue; }

@@ -1,0 +1,14 @@
+{
+  "title": "Feed hat",
+  "name": "Feed Hat",
+  "order": 9,
+  "description": "A hat with a tangled snake.",
+  "photos": [
+    "/assets/img/goods/feed-hat-1.jpg",
+    "/assets/img/goods/feed-hat-2.jpg",
+    "/assets/img/goods/feed-hat-3.jpg",
+    "/assets/img/goods/feed-hat-4.jpg"
+  ],
+  "sold_out": true,
+  "price": 30
+}

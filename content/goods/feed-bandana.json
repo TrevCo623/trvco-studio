@@ -1,0 +1,14 @@
+{
+  "title": "Feed bandana",
+  "name": "Feed Bandana",
+  "order": 6,
+  "description": "Curiosity feeds desire feeds curiosity feeds desire…",
+  "photos": [
+    "/assets/img/goods/feed-bandana-1.jpg",
+    "/assets/img/goods/feed-bandana-2.jpg",
+    "/assets/img/goods/feed-bandana-3.jpg",
+    "/assets/img/goods/feed-bandana-4.jpg"
+  ],
+  "sold_out": true,
+  "price": 30
+}

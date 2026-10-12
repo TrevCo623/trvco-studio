@@ -1,0 +1,14 @@
+{
+  "title": "Rose",
+  "name": "Rose Bandana",
+  "order": 4,
+  "description": "A blooming geometric rose motif hanky.",
+  "photos": [
+    "/assets/img/goods/rose-1.jpg",
+    "/assets/img/goods/rose-2.jpg",
+    "/assets/img/goods/rose-3.jpg",
+    "/assets/img/goods/rose-4.jpg"
+  ],
+  "sold_out": true,
+  "price": 30
+}

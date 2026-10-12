@@ -1,0 +1,12 @@
+{
+  "title": "Go outside hat",
+  "name": "Go Outside Hat",
+  "order": 1,
+  "description": "Go outside. Talk to people. Be happy.\n\nA simple mantra to help people get more out of life.",
+  "photos": [
+    "/assets/img/goods/go-outside-hat-1.jpg",
+    "/assets/img/goods/go-outside-hat-2.jpg",
+    "/assets/img/goods/go-outside-hat-3.jpg"
+  ],
+  "price": 30
+}

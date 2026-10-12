@@ -1,0 +1,85 @@
+{
+  "goods": [
+    {
+      "slug": "go-outside-hat",
+      "name": "Go Outside Hat",
+      "title": "Go outside hat",
+      "shopify": null
+    },
+    {
+      "slug": "black-sun-shirt",
+      "name": "Black Sun T-Shirt",
+      "title": "Black Sun t-shirt",
+      "shopify": null
+    },
+    {
+      "slug": "shapes",
+      "name": "Shapes Bandana",
+      "title": "Shapes",
+      "shopify": null
+    },
+    {
+      "slug": "rose",
+      "name": "Rose Bandana",
+      "title": "Rose",
+      "shopify": null
+    },
+    {
+      "slug": "black-sun-hat",
+      "name": "Black Sun Hat",
+      "title": "Black Sun hat",
+      "shopify": null
+    },
+    {
+      "slug": "feed-bandana",
+      "name": "Feed Bandana",
+      "title": "Feed bandana",
+      "shopify": null
+    },
+    {
+      "slug": "rose-hat",
+      "name": "Rose Hat",
+      "title": "Rose hat",
+      "shopify": null
+    },
+    {
+      "slug": "feed-t-shirt",
+      "name": "Feed T-Shirt",
+      "title": "Feed t-shirt",
+      "shopify": null
+    },
+    {
+      "slug": "feed-hat",
+      "name": "Feed Hat",
+      "title": "Feed hat",
+      "shopify": null
+    },
+    {
+      "slug": "rose-t-shirt",
+      "name": "Rose T-Shirt",
+      "title": "Rose t-shirt",
+      "shopify": null
+    },
+    {
+      "slug": "nothing-hat",
+      "name": "Nothing Hat",
+      "title": "Nothing hat",
+      "shopify": null
+    },
+    {
+      "slug": "sentinel-sun",
+      "name": "Sentinel Sun Bandana",
+      "title": "Sentinel Sun",
+      "shopify": null
+    },
+    {
+      "slug": "cactus",
+      "name": "Cactus Bandana",
+      "title": "Cactus",
+      "shopify": null
+    }
+  ],
+  "type": [
+    "kadoka"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Sentinel Sun",
+  "name": "Sentinel Sun Bandana",
+  "order": 12,
+  "description": "You can find me here, enjoying peace, underneath the sentinel sun.",
+  "photos": [
+    "/assets/img/goods/sentinel-sun-1.jpg",
+    "/assets/img/goods/sentinel-sun-2.jpg",
+    "/assets/img/goods/sentinel-sun-3.jpg",
+    "/assets/img/goods/sentinel-sun-4.jpg"
+  ],
+  "sold_out": true,
+  "price": 30
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Nothing hat",
+  "name": "Nothing Hat",
+  "order": 11,
+  "description": "Nothing is wrong.",
+  "photos": [
+    "/assets/img/goods/nothing-hat-1.jpg",
+    "/assets/img/goods/nothing-hat-2.jpg",
+    "/assets/img/goods/nothing-hat-3.jpg",
+    "/assets/img/goods/nothing-hat-4.jpg"
+  ],
+  "sold_out": true,
+  "price": 30
+}

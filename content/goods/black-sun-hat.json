@@ -1,0 +1,13 @@
+{
+  "title": "Black Sun hat",
+  "name": "Black Sun Hat",
+  "order": 5,
+  "description": "Get lost. Have fun. Find peace.",
+  "photos": [
+    "/assets/img/goods/black-sun-hat-1.jpg",
+    "/assets/img/goods/black-sun-hat-2.jpg",
+    "/assets/img/goods/black-sun-hat-3.jpg"
+  ],
+  "sold_out": true,
+  "price": 30
+}

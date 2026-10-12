@@ -79,3 +79,20 @@ a { color: var(--rose); }
   font-family: var(--mono) !important; font-size: 11px !important; letter-spacing: 1px; text-transform: uppercase;
   background: var(--sand) !important; color: var(--ink) !important; border-radius: 0 !important;
 }
+
+/* ── "From Shopify" panel on Type and Goods ── */
+.trv-shop { padding: 18px 20px; background: #fff; border: 2px solid var(--sand); }
+.trv-shop dl { display: grid; grid-template-columns: 120px 1fr; gap: 8px 16px; margin: 0 0 16px; }
+.trv-shop dt { font-family: var(--mono); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--grey); padding-top: 4px; }
+.trv-shop dd { margin: 0; font-size: 18px; color: var(--ink); word-break: break-word; }
+.trv-shop dd a { color: var(--rose); }
+.trv-shop-photos { display: flex; gap: 8px; margin: 0 0 16px; }
+.trv-shop-photos img { width: 96px; height: 96px; object-fit: cover; background: var(--sand); }
+.trv-shop-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.trv-btn { display: inline-flex; align-items: center; height: 38px; padding: 0 16px; background: var(--sand); color: var(--ink) !important; text-decoration: none;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; }
+.trv-btn:hover { background: #ddd3d3; }
+.trv-btn--primary { background: var(--rose); }
+.trv-btn--primary:hover { background: #c08b81; }
+.trv-shop-note { margin: 14px 0 0; font-size: 15px; color: #565555; }
+.trv-shop--none p { margin: 0 0 14px; font-size: 17px; }

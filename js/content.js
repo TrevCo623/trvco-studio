@@ -138,6 +138,220 @@ export const DIGITAL = [
     ]
   }
 ];
+export const GOODS = [
+  {
+    "slug": "go-outside-hat",
+    "name": "Go Outside Hat",
+    "title": "Go outside hat",
+    "desc": [
+      "Go outside. Talk to people. Be happy.",
+      "A simple mantra to help people get more out of life."
+    ],
+    "images": [
+      "/assets/img/goods/go-outside-hat-1.jpg",
+      "/assets/img/goods/go-outside-hat-2.jpg",
+      "/assets/img/goods/go-outside-hat-3.jpg"
+    ],
+    "price": 30
+  },
+  {
+    "slug": "black-sun-shirt",
+    "name": "Black Sun T-Shirt",
+    "title": "Black Sun t-shirt",
+    "desc": [
+      "Get lost. Have fun. Find peace."
+    ],
+    "images": [
+      "/assets/img/goods/black-sun-shirt-1.jpg",
+      "/assets/img/goods/black-sun-shirt-2.jpg",
+      "/assets/img/goods/black-sun-shirt-3.jpg",
+      "/assets/img/goods/black-sun-shirt-4.jpg"
+    ],
+    "price": 45,
+    "soldOut": true
+  },
+  {
+    "slug": "shapes",
+    "name": "Shapes Bandana",
+    "title": "Shapes",
+    "desc": [
+      "A blue bandana with shapes."
+    ],
+    "images": [
+      "/assets/img/goods/shapes-1.jpg",
+      "/assets/img/goods/shapes-2.jpg",
+      "/assets/img/goods/shapes-3.jpg",
+      "/assets/img/goods/shapes-4.jpg"
+    ],
+    "price": 30,
+    "soldOut": true
+  },
+  {
+    "slug": "rose",
+    "name": "Rose Bandana",
+    "title": "Rose",
+    "desc": [
+      "A blooming geometric rose motif hanky."
+    ],
+    "images": [
+      "/assets/img/goods/rose-1.jpg",
+      "/assets/img/goods/rose-2.jpg",
+      "/assets/img/goods/rose-3.jpg",
+      "/assets/img/goods/rose-4.jpg"
+    ],
+    "price": 30,
+    "soldOut": true
+  },
+  {
+    "slug": "black-sun-hat",
+    "name": "Black Sun Hat",
+    "title": "Black Sun hat",
+    "desc": [
+      "Get lost. Have fun. Find peace."
+    ],
+    "images": [
+      "/assets/img/goods/black-sun-hat-1.jpg",
+      "/assets/img/goods/black-sun-hat-2.jpg",
+      "/assets/img/goods/black-sun-hat-3.jpg"
+    ],
+    "price": 30,
+    "soldOut": true
+  },
+  {
+    "slug": "feed-bandana",
+    "name": "Feed Bandana",
+    "title": "Feed bandana",
+    "desc": [
+      "Curiosity feeds desire feeds curiosity feeds desire…"
+    ],
+    "images": [
+      "/assets/img/goods/feed-bandana-1.jpg",
+      "/assets/img/goods/feed-bandana-2.jpg",
+      "/assets/img/goods/feed-bandana-3.jpg",
+      "/assets/img/goods/feed-bandana-4.jpg"
+    ],
+    "price": 30,
+    "soldOut": true
+  },
+  {
+    "slug": "rose-hat",
+    "name": "Rose Hat",
+    "title": "Rose hat",
+    "desc": [
+      "A hat with a geometric rose."
+    ],
+    "images": [
+      "/assets/img/goods/rose-hat-1.jpg",
+      "/assets/img/goods/rose-hat-2.jpg",
+      "/assets/img/goods/rose-hat-3.jpg",
+      "/assets/img/goods/rose-hat-4.jpg"
+    ],
+    "price": 30,
+    "soldOut": true
+  },
+  {
+    "slug": "feed-t-shirt",
+    "name": "Feed T-Shirt",
+    "title": "Feed t-shirt",
+    "desc": [
+      "Feed your curiosity."
+    ],
+    "images": [
+      "/assets/img/goods/feed-t-shirt-1.jpg",
+      "/assets/img/goods/feed-t-shirt-2.jpg",
+      "/assets/img/goods/feed-t-shirt-3.jpg",
+      "/assets/img/goods/feed-t-shirt-4.jpg"
+    ],
+    "price": 45,
+    "soldOut": true
+  },
+  {
+    "slug": "feed-hat",
+    "name": "Feed Hat",
+    "title": "Feed hat",
+    "desc": [
+      "A hat with a tangled snake."
+    ],
+    "images": [
+      "/assets/img/goods/feed-hat-1.jpg",
+      "/assets/img/goods/feed-hat-2.jpg",
+      "/assets/img/goods/feed-hat-3.jpg",
+      "/assets/img/goods/feed-hat-4.jpg"
+    ],
+    "price": 30,
+    "soldOut": true
+  },
+  {
+    "slug": "rose-t-shirt",
+    "name": "Rose T-Shirt",
+    "title": "Rose t-shirt",
+    "desc": [
+      "Growth comes in bunches."
+    ],
+    "images": [
+      "/assets/img/goods/rose-t-shirt-1.jpg",
+      "/assets/img/goods/rose-t-shirt-2.jpg",
+      "/assets/img/goods/rose-t-shirt-3.jpg",
+      "/assets/img/goods/rose-t-shirt-4.jpg"
+    ],
+    "price": 45,
+    "soldOut": true
+  },
+  {
+    "slug": "nothing-hat",
+    "name": "Nothing Hat",
+    "title": "Nothing hat",
+    "desc": [
+      "Nothing is wrong."
+    ],
+    "images": [
+      "/assets/img/goods/nothing-hat-1.jpg",
+      "/assets/img/goods/nothing-hat-2.jpg",
+      "/assets/img/goods/nothing-hat-3.jpg",
+      "/assets/img/goods/nothing-hat-4.jpg"
+    ],
+    "price": 30,
+    "soldOut": true
+  },
+  {
+    "slug": "sentinel-sun",
+    "name": "Sentinel Sun Bandana",
+    "title": "Sentinel Sun",
+    "desc": [
+      "You can find me here, enjoying peace, underneath the sentinel sun."
+    ],
+    "images": [
+      "/assets/img/goods/sentinel-sun-1.jpg",
+      "/assets/img/goods/sentinel-sun-2.jpg",
+      "/assets/img/goods/sentinel-sun-3.jpg",
+      "/assets/img/goods/sentinel-sun-4.jpg"
+    ],
+    "price": 30,
+    "soldOut": true
+  },
+  {
+    "slug": "cactus",
+    "name": "Cactus Bandana",
+    "title": "Cactus",
+    "desc": [
+      "A bandana with a cactus design."
+    ],
+    "images": [
+      "/assets/img/goods/cactus-1.jpg",
+      "/assets/img/goods/cactus-2.jpg",
+      "/assets/img/goods/cactus-3.jpg",
+      "/assets/img/goods/cactus-4.jpg"
+    ],
+    "price": 30,
+    "soldOut": true
+  }
+];
+export const TYPE_TWEAKS = {
+  "kadoka": {
+    "display": "Kadoka",
+    "lowercase": true
+  }
+};
 export const CONTENT_IMG = {
   "/assets/img/print/wedding-invite.jpg": {
     "src": "assets/img/print/wedding-invite.jpg",
@@ -276,5 +490,305 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 2500,
     "h": 1379
+  },
+  "/assets/img/goods/go-outside-hat-1.jpg": {
+    "src": "assets/img/goods/go-outside-hat-1.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 2000
+  },
+  "/assets/img/goods/go-outside-hat-2.jpg": {
+    "src": "assets/img/goods/go-outside-hat-2.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 2000
+  },
+  "/assets/img/goods/go-outside-hat-3.jpg": {
+    "src": "assets/img/goods/go-outside-hat-3.jpg",
+    "cdn": "",
+    "w": 1680,
+    "h": 1682
+  },
+  "/assets/img/goods/black-sun-shirt-1.jpg": {
+    "src": "assets/img/goods/black-sun-shirt-1.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1125
+  },
+  "/assets/img/goods/black-sun-shirt-2.jpg": {
+    "src": "assets/img/goods/black-sun-shirt-2.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1875
+  },
+  "/assets/img/goods/black-sun-shirt-3.jpg": {
+    "src": "assets/img/goods/black-sun-shirt-3.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1125
+  },
+  "/assets/img/goods/black-sun-shirt-4.jpg": {
+    "src": "assets/img/goods/black-sun-shirt-4.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1125
+  },
+  "/assets/img/goods/shapes-1.jpg": {
+    "src": "assets/img/goods/shapes-1.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/shapes-2.jpg": {
+    "src": "assets/img/goods/shapes-2.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/shapes-3.jpg": {
+    "src": "assets/img/goods/shapes-3.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/shapes-4.jpg": {
+    "src": "assets/img/goods/shapes-4.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/rose-1.jpg": {
+    "src": "assets/img/goods/rose-1.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/rose-2.jpg": {
+    "src": "assets/img/goods/rose-2.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/rose-3.jpg": {
+    "src": "assets/img/goods/rose-3.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/rose-4.jpg": {
+    "src": "assets/img/goods/rose-4.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/black-sun-hat-1.jpg": {
+    "src": "assets/img/goods/black-sun-hat-1.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 2000
+  },
+  "/assets/img/goods/black-sun-hat-2.jpg": {
+    "src": "assets/img/goods/black-sun-hat-2.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1667
+  },
+  "/assets/img/goods/black-sun-hat-3.jpg": {
+    "src": "assets/img/goods/black-sun-hat-3.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1875
+  },
+  "/assets/img/goods/feed-bandana-1.jpg": {
+    "src": "assets/img/goods/feed-bandana-1.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/feed-bandana-2.jpg": {
+    "src": "assets/img/goods/feed-bandana-2.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/feed-bandana-3.jpg": {
+    "src": "assets/img/goods/feed-bandana-3.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/feed-bandana-4.jpg": {
+    "src": "assets/img/goods/feed-bandana-4.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/rose-hat-1.jpg": {
+    "src": "assets/img/goods/rose-hat-1.jpg",
+    "cdn": "",
+    "w": 1750,
+    "h": 1400
+  },
+  "/assets/img/goods/rose-hat-2.jpg": {
+    "src": "assets/img/goods/rose-hat-2.jpg",
+    "cdn": "",
+    "w": 1750,
+    "h": 1313
+  },
+  "/assets/img/goods/rose-hat-3.jpg": {
+    "src": "assets/img/goods/rose-hat-3.jpg",
+    "cdn": "",
+    "w": 1750,
+    "h": 1400
+  },
+  "/assets/img/goods/rose-hat-4.jpg": {
+    "src": "assets/img/goods/rose-hat-4.jpg",
+    "cdn": "",
+    "w": 1750,
+    "h": 1167
+  },
+  "/assets/img/goods/feed-t-shirt-1.jpg": {
+    "src": "assets/img/goods/feed-t-shirt-1.jpg",
+    "cdn": "",
+    "w": 707,
+    "h": 531
+  },
+  "/assets/img/goods/feed-t-shirt-2.jpg": {
+    "src": "assets/img/goods/feed-t-shirt-2.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1125
+  },
+  "/assets/img/goods/feed-t-shirt-3.jpg": {
+    "src": "assets/img/goods/feed-t-shirt-3.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1125
+  },
+  "/assets/img/goods/feed-t-shirt-4.jpg": {
+    "src": "assets/img/goods/feed-t-shirt-4.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1125
+  },
+  "/assets/img/goods/feed-hat-1.jpg": {
+    "src": "assets/img/goods/feed-hat-1.jpg",
+    "cdn": "",
+    "w": 1750,
+    "h": 1400
+  },
+  "/assets/img/goods/feed-hat-2.jpg": {
+    "src": "assets/img/goods/feed-hat-2.jpg",
+    "cdn": "",
+    "w": 1750,
+    "h": 1313
+  },
+  "/assets/img/goods/feed-hat-3.jpg": {
+    "src": "assets/img/goods/feed-hat-3.jpg",
+    "cdn": "",
+    "w": 1750,
+    "h": 1400
+  },
+  "/assets/img/goods/feed-hat-4.jpg": {
+    "src": "assets/img/goods/feed-hat-4.jpg",
+    "cdn": "",
+    "w": 1750,
+    "h": 1167
+  },
+  "/assets/img/goods/rose-t-shirt-1.jpg": {
+    "src": "assets/img/goods/rose-t-shirt-1.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1125
+  },
+  "/assets/img/goods/rose-t-shirt-2.jpg": {
+    "src": "assets/img/goods/rose-t-shirt-2.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1125
+  },
+  "/assets/img/goods/rose-t-shirt-3.jpg": {
+    "src": "assets/img/goods/rose-t-shirt-3.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1125
+  },
+  "/assets/img/goods/rose-t-shirt-4.jpg": {
+    "src": "assets/img/goods/rose-t-shirt-4.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1125
+  },
+  "/assets/img/goods/nothing-hat-1.jpg": {
+    "src": "assets/img/goods/nothing-hat-1.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 2000
+  },
+  "/assets/img/goods/nothing-hat-2.jpg": {
+    "src": "assets/img/goods/nothing-hat-2.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 2000
+  },
+  "/assets/img/goods/nothing-hat-3.jpg": {
+    "src": "assets/img/goods/nothing-hat-3.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1875
+  },
+  "/assets/img/goods/nothing-hat-4.jpg": {
+    "src": "assets/img/goods/nothing-hat-4.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1667
+  },
+  "/assets/img/goods/sentinel-sun-1.jpg": {
+    "src": "assets/img/goods/sentinel-sun-1.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/sentinel-sun-2.jpg": {
+    "src": "assets/img/goods/sentinel-sun-2.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/sentinel-sun-3.jpg": {
+    "src": "assets/img/goods/sentinel-sun-3.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/sentinel-sun-4.jpg": {
+    "src": "assets/img/goods/sentinel-sun-4.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/cactus-1.jpg": {
+    "src": "assets/img/goods/cactus-1.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/cactus-2.jpg": {
+    "src": "assets/img/goods/cactus-2.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/cactus-3.jpg": {
+    "src": "assets/img/goods/cactus-3.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
+  },
+  "/assets/img/goods/cactus-4.jpg": {
+    "src": "assets/img/goods/cactus-4.jpg",
+    "cdn": "",
+    "w": 1500,
+    "h": 1000
   }
 };

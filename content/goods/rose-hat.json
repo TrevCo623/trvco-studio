@@ -1,0 +1,14 @@
+{
+  "title": "Rose hat",
+  "name": "Rose Hat",
+  "order": 7,
+  "description": "A hat with a geometric rose.",
+  "photos": [
+    "/assets/img/goods/rose-hat-1.jpg",
+    "/assets/img/goods/rose-hat-2.jpg",
+    "/assets/img/goods/rose-hat-3.jpg",
+    "/assets/img/goods/rose-hat-4.jpg"
+  ],
+  "sold_out": true,
+  "price": 30
+}

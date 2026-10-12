@@ -1,0 +1,14 @@
+{
+  "title": "Shapes",
+  "name": "Shapes Bandana",
+  "order": 3,
+  "description": "A blue bandana with shapes.",
+  "photos": [
+    "/assets/img/goods/shapes-1.jpg",
+    "/assets/img/goods/shapes-2.jpg",
+    "/assets/img/goods/shapes-3.jpg",
+    "/assets/img/goods/shapes-4.jpg"
+  ],
+  "sold_out": true,
+  "price": 30
+}

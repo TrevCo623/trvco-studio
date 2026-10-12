@@ -1,0 +1,14 @@
+{
+  "title": "Rose t-shirt",
+  "name": "Rose T-Shirt",
+  "order": 10,
+  "description": "Growth comes in bunches.",
+  "photos": [
+    "/assets/img/goods/rose-t-shirt-1.jpg",
+    "/assets/img/goods/rose-t-shirt-2.jpg",
+    "/assets/img/goods/rose-t-shirt-3.jpg",
+    "/assets/img/goods/rose-t-shirt-4.jpg"
+  ],
+  "sold_out": true,
+  "price": 45
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Feed t-shirt",
+  "name": "Feed T-Shirt",
+  "order": 8,
+  "description": "Feed your curiosity.",
+  "photos": [
+    "/assets/img/goods/feed-t-shirt-1.jpg",
+    "/assets/img/goods/feed-t-shirt-2.jpg",
+    "/assets/img/goods/feed-t-shirt-3.jpg",
+    "/assets/img/goods/feed-t-shirt-4.jpg"
+  ],
+  "sold_out": true,
+  "price": 45
+}
