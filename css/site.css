@@ -334,32 +334,29 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 /* Full-width background; only the grid is held to the content width. */
 .details { padding: 72px var(--gutter) 120px; }
 .section-title { text-align: center; margin: 0 0 47px; font-weight: 400; font-style: italic; font-size: 28.8px; line-height: 36px; }
-/* One detail at a time: the stage pins under the header while the steps scroll past. */
-.dsteps { --step: 75svh; position: relative; height: calc(100svh - var(--header-h) + (var(--n) - 1) * var(--step)); max-width: 1200px; margin: 0 auto; }
-.dstage { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
-.dstage-figs { display: grid; justify-items: end; }
-.dfig { grid-area: 1 / 1; margin: 0; height: min(68svh, 620px); aspect-ratio: 292 / 394; opacity: 0; transform: scale(.97); transition: opacity .6s ease, transform .9s var(--ease); }
-.dfig.is-on { opacity: 1; transform: none; }
+/* Details carousel: images slide left to right, the note below follows. */
+.dcar { max-width: 1200px; margin: 0 auto; }
+.dcar-view { overflow: hidden; margin-right: calc(-1 * var(--gutter)); }
+.dcar-track { display: flex; gap: 24px; transition: transform .7s var(--ease); touch-action: pan-y; }
+.dfig { flex: none; width: min(440px, 72vw); aspect-ratio: 292 / 394; padding: 0; border: 0; background: none; cursor: pointer; opacity: .35; transition: opacity .5s ease; }
+.dfig.is-on { opacity: 1; cursor: default; }
+@media (hover: hover) { .dfig:not(.is-on):hover { opacity: .6; } }
 .dfig img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.dstage-copy { max-width: 420px; }
-.dcount { margin: 0 0 28px; font-family: var(--mono); font-size: 11px; letter-spacing: 1.2px; color: var(--grey); }
+.dcar-copy { width: min(440px, 72vw); margin-top: 32px; }
+.dcount { margin: 0 0 16px; font-family: var(--mono); font-size: 11px; letter-spacing: 1.2px; color: var(--grey); }
 .dtexts { display: grid; }
-.dtext { grid-area: 1 / 1; margin: 0; font-size: 28px; line-height: 1.3; opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .7s var(--ease); }
-.dtext.is-on { opacity: 1; transform: none; transition-delay: .08s; }
-.dbar { display: flex; gap: 6px; margin-top: 40px; }
-.dbar span { width: 28px; height: 2px; background: var(--sand); transition: background .4s ease; }
-.dbar span.is-on { background: var(--clay); }
-.dtrigger { position: absolute; left: 0; right: 0; top: calc(var(--i) * var(--step)); height: var(--step); pointer-events: none; }
+.dtext { grid-area: 1 / 1; margin: 0; font-size: 24px; line-height: 1.3; opacity: 0; transform: translateY(10px); transition: opacity .4s ease, transform .6s var(--ease); pointer-events: none; }
+.dtext.is-on { opacity: 1; transform: none; transition-delay: .1s; pointer-events: auto; }
+.dnav { display: flex; gap: 10px; margin-top: 28px; }
+.dbtn { width: 52px; height: 52px; display: inline-grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; transition: background .2s ease, color .2s ease, opacity .2s ease; }
+@media (hover: hover) { .dbtn:not(:disabled):hover { background: var(--ink); color: var(--paper); } }
+.dbtn:disabled { opacity: .25; cursor: default; }
 @media (max-width: 760px) {
-  .dstage { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: center; gap: 28px; }
-  .dstage-figs { justify-items: center; }
-  .dfig { height: min(50svh, 440px); }
-  .dstage-copy { max-width: none; padding: 0 8px; }
-  .dcount { margin-bottom: 14px; }
-  .dtext { font-size: 21px; }
-  .dbar { margin-top: 24px; }
+  .dcar-track { gap: 14px; }
+  .dfig, .dcar-copy { width: 78vw; }
+  .dtext { font-size: 20px; }
 }
-@media (prefers-reduced-motion: reduce) { .dfig, .dtext { transition: none; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .dcar-track, .dtext { transition: none; } }
 
 .featured { padding: 143px var(--gutter) 155px; text-align: center; }
 .featured h2 { margin: 0 0 101px; font-weight: 300; font-style: italic; font-size: 32px; line-height: 40px; letter-spacing: .96px; }

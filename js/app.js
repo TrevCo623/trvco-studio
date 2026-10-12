@@ -642,21 +642,18 @@ function testerPanel(t) {
 }
 
 function typeBodyHTML(t) {
-  // Details: one image and its note at a time. The stage pins while you scroll through the steps.
+  // Details: a carousel. Images slide left to right; the note and counter below follow along.
   const ds = (t.details || []).filter((d) => d.img || d.text);
   const pad = (k) => String(k).padStart(2, '0');
   const details = ds.length ? `<section class="details paper">
       <h2 class="section-title reveal">Details</h2>
-      <div class="dsteps" style="--n:${ds.length}">
-        <div class="dstage">
-          <div class="dstage-figs">${ds.map((d, i) => `<figure class="dfig${i ? '' : ' is-on'}" data-i="${i}">${d.img ? img(d.img, { alt: `${t.name} construction detail` }) : ''}</figure>`).join('')}</div>
-          <div class="dstage-copy">
-            <p class="dcount"><span class="dcount-now">${pad(1)}</span> / ${pad(ds.length)}</p>
-            <div class="dtexts">${ds.map((d, i) => `<p class="dtext${i ? '' : ' is-on'}" data-i="${i}">${esc(d.text || '')}</p>`).join('')}</div>
-            ${ds.length > 1 ? `<div class="dbar" aria-hidden="true">${ds.map((_, i) => `<span class="${i ? '' : 'is-on'}"></span>`).join('')}</div>` : ''}
-          </div>
+      <div class="dcar reveal" style="--n:${ds.length}">
+        <div class="dcar-view"><div class="dcar-track">${ds.map((d, i) => `<button class="dfig${i ? '' : ' is-on'}" type="button" data-i="${i}" tabindex="-1" aria-label="Detail ${i + 1}">${d.img ? img(d.img, { alt: `${t.name} construction detail` }) : ''}</button>`).join('')}</div></div>
+        <div class="dcar-copy">
+          <p class="dcount"><span class="dcount-now">${pad(1)}</span> / ${pad(ds.length)}</p>
+          <div class="dtexts" aria-live="polite">${ds.map((d, i) => `<p class="dtext${i ? '' : ' is-on'}" data-i="${i}">${esc(d.text || '')}</p>`).join('')}</div>
+          ${ds.length > 1 ? `<div class="dnav"><button class="dbtn" type="button" data-d="-1" aria-label="Previous detail" disabled>${arrow('left')}</button><button class="dbtn" type="button" data-d="1" aria-label="Next detail">${arrow('right')}</button></div>` : ''}
         </div>
-        ${ds.map((_, i) => `<div class="dtrigger" data-i="${i}" style="--i:${i}"></div>`).join('')}
       </div>
     </section>` : '';
   const featured = t.featured?.length ? `<section class="featured paper">
@@ -666,17 +663,35 @@ function typeBodyHTML(t) {
   return testerHTML(t) + details + featured;
 }
 
+const arrow = (dir) => `<svg width="22" height="14" viewBox="0 0 22 14" aria-hidden="true"><path d="${dir === 'left' ? 'M21 7H2M8 1L2 7l6 6' : 'M1 7h19M14 1l6 6-6 6'}" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
 function wireDetails(root) {
-  const wrap = $('.dsteps', root); if (!wrap) return;
-  const figs = $$('.dfig', wrap), texts = $$('.dtext', wrap), bars = $$('.dbar span', wrap), now = $('.dcount-now', wrap);
-  let cur = 0;
-  const show = (i) => {
-    if (i === cur) return; cur = i;
-    [figs, texts, bars].forEach((list) => list.forEach((x, j) => x.classList.toggle('is-on', j === i)));
+  const car = $('.dcar', root); if (!car) return;
+  const track = $('.dcar-track', car), figs = $$('.dfig', car), texts = $$('.dtext', car), now = $('.dcount-now', car);
+  const [prev, next] = $$('.dbtn', car);
+  const n = figs.length; let cur = 0;
+  const go = (i) => {
+    i = Math.max(0, Math.min(n - 1, i)); cur = i;
+    const f = figs[i];
+    track.style.transform = `translate3d(${figs[0].offsetLeft - f.offsetLeft}px,0,0)`;
+    figs.forEach((x, j) => { x.classList.toggle('is-on', j === i); x.tabIndex = -1; });
+    texts.forEach((x, j) => x.classList.toggle('is-on', j === i));
     if (now) now.textContent = String(i + 1).padStart(2, '0');
+    if (prev) { prev.disabled = i === 0; next.disabled = i === n - 1; }
   };
-  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) show(Number(e.target.dataset.i)); }), { rootMargin: '-50% 0px -50% 0px' });
-  $$('.dtrigger', wrap).forEach((t) => io.observe(t));
+  car.addEventListener('click', (e) => {
+    const b = e.target.closest('.dbtn'); if (b) return go(cur + Number(b.dataset.d));
+    const f = e.target.closest('.dfig'); if (f && !f.classList.contains('is-on')) go(Number(f.dataset.i));
+  });
+  // Swipe: right-to-left = next, left-to-right = previous. Vertical scrolling is left alone.
+  let sx = 0, sy = 0, on = false;
+  const view = $('.dcar-view', car);
+  view.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; on = e.touches.length === 1; }, { passive: true });
+  view.addEventListener('touchend', (e) => {
+    if (!on) return; on = false;
+    const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) go(cur + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+  addEventListener('resize', () => { if (car.isConnected) go(cur); });
 }
 
 function TypePage(route) {
