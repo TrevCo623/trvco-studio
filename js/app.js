@@ -672,7 +672,8 @@ function wireDetails(root) {
   const go = (i) => {
     i = Math.max(0, Math.min(n - 1, i)); cur = i;
     const f = figs[i];
-    track.style.transform = `translate3d(${figs[0].offsetLeft - f.offsetLeft}px,0,0)`;
+    const view = track.parentElement; // centre the current image in the view
+    track.style.transform = `translate3d(${view.clientWidth / 2 - (f.offsetLeft - figs[0].offsetLeft) - f.offsetWidth / 2}px,0,0)`;
     figs.forEach((x, j) => { x.classList.toggle('is-on', j === i); x.tabIndex = -1; });
     texts.forEach((x, j) => x.classList.toggle('is-on', j === i));
     if (now) now.textContent = String(i + 1).padStart(2, '0');
@@ -692,6 +693,7 @@ function wireDetails(root) {
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) go(cur + (dx < 0 ? 1 : -1));
   }, { passive: true });
   addEventListener('resize', () => { if (car.isConnected) go(cur); });
+  track.style.transition = 'none'; go(0); void track.offsetWidth; track.style.transition = '';
 }
 
 function TypePage(route) {
