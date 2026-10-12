@@ -344,9 +344,9 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .section-title { text-align: center; margin: 0 0 47px; font-weight: 400; font-style: italic; font-size: 28.8px; line-height: 36px; }
 /* Details carousel: images slide left to right, the note below follows. */
 /* Sized so the title, image, note and arrows fit on one screen. */
-.dcar { --fh: clamp(240px, calc(100svh - var(--header-h) - 400px), 480px); --fw: min(78vw, calc(var(--fh) * 292 / 394)); }
+.dcar { --i: 0; --gap: 24px; --fh: clamp(240px, calc(100svh - var(--header-h) - 400px), 480px); --fw: min(78vw, calc(var(--fh) * 292 / 394)); }
 .dcar-view { overflow: hidden; margin: 0 calc(-1 * var(--gutter)); }
-.dcar-track { display: flex; gap: 24px; transition: transform .7s var(--ease); touch-action: pan-y; }
+.dcar-track { display: flex; gap: var(--gap); padding-left: calc(50% - var(--fw) / 2); transform: translate3d(calc(-1 * var(--i) * (var(--fw) + var(--gap))), 0, 0); transition: transform .7s var(--ease); touch-action: pan-y; }
 .dfig { flex: none; width: var(--fw); aspect-ratio: 292 / 394; padding: 0; border: 0; background: none; cursor: pointer; opacity: .3; transition: opacity .5s ease; }
 .dfig.is-on { opacity: 1; cursor: default; }
 @media (hover: hover) { .dfig:not(.is-on):hover { opacity: .55; } }
@@ -362,7 +362,7 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .dbtn:disabled { opacity: .25; cursor: default; }
 @media (max-width: 760px) {
   .dcar { --fh: clamp(240px, calc(100svh - var(--header-h) - 360px), 480px); }
-  .dcar-track { gap: 14px; }
+  .dcar { --gap: 14px; }
   .dtext { font-size: 19px; }
 }
 @media (prefers-reduced-motion: reduce) { .dcar-track, .dtext { transition: none; } }
