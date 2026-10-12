@@ -636,7 +636,7 @@ function testerPanel(t) {
   const line = t.lowercase ? 'Sphinx of black quartz, judge my vow' : 'SPHINX OF BLACK QUARTZ, JUDGE MY VOW';
   const sizes = `<div class="sizes">${[120, 72, 48, 32, 20].map((px) => `<div><small>${px}px</small><p style="font-size:${px}px">${line}</p></div>`).join('')}</div>`;
   const custom = `<textarea class="custom-input" rows="2" spellcheck="false" aria-label="Type to preview">${esc(t.lowercase ? 'Type something here' : 'TYPE SOMETHING')}</textarea>
-    <div class="custom-size"><span>Size</span><input type="range" min="24" max="200" value="96" aria-label="Preview size"><span class="custom-size-val">96px</span></div>`;
+    <div class="custom-size"><span>Size</span><input type="range" min="24" max="200" value="96" aria-label="Preview size" style="--pct:40.9%"><span class="custom-size-val">96px</span></div>`;
   const block = (label, html, cls = '') => `<div class="tester-block${cls}"><h3 class="tester-label">${label}</h3>${html}</div>`;
   return block('Glyphs', glyphs) + block('Sizes', sizes, ' is-left') + block('Try it', custom);
 }
@@ -755,7 +755,7 @@ function TypePage(route) {
   }
   body.addEventListener('change', (e) => { if (e.target.id === 'styleSel') $('.tester', body).style.setProperty('--tester-font', `'${e.target.value}'`); });
   body.addEventListener('input', (e) => {
-    if (e.target.type === 'range') { body.style.setProperty('--custom-size', `${e.target.value}px`); $('.custom-size-val', body).textContent = `${e.target.value}px`; }
+    if (e.target.type === 'range') { const r = e.target; r.style.setProperty('--pct', `${((r.value - r.min) / (r.max - r.min)) * 100}%`); body.style.setProperty('--custom-size', `${e.target.value}px`); $('.custom-size-val', body).textContent = `${e.target.value}px`; }
   });
   $('.scroll-cue', el).addEventListener('click', () => body.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }));
   wireBuy(el, () => ({ slug: TYPE[idx].slug, shopify: TYPE[idx].shopify, name: `${TYPE[idx].name} font`, price: TYPE[idx].price }), 'type');
