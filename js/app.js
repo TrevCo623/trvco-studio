@@ -642,15 +642,41 @@ function testerPanel(t) {
 }
 
 function typeBodyHTML(t) {
-  const details = t.details?.length ? `<section class="details paper">
+  // Details: one image and its note at a time. The stage pins while you scroll through the steps.
+  const ds = (t.details || []).filter((d) => d.img || d.text);
+  const pad = (k) => String(k).padStart(2, '0');
+  const details = ds.length ? `<section class="details paper">
       <h2 class="section-title reveal">Details</h2>
-      <div class="details-grid">${t.details.map((d, i) => `<div class="reveal" style="transition-delay:${(i % 4) * 70}ms">${d.img ? img(d.img, { alt: `${t.name} construction detail` }) : `<div class="detail-card" style="--h:${d.h || 320}px">${esc(d.text)}</div>`}</div>`).join('')}</div>
+      <div class="dsteps" style="--n:${ds.length}">
+        <div class="dstage">
+          <div class="dstage-figs">${ds.map((d, i) => `<figure class="dfig${i ? '' : ' is-on'}" data-i="${i}">${d.img ? img(d.img, { alt: `${t.name} construction detail` }) : ''}</figure>`).join('')}</div>
+          <div class="dstage-copy">
+            <p class="dcount"><span class="dcount-now">${pad(1)}</span> / ${pad(ds.length)}</p>
+            <div class="dtexts">${ds.map((d, i) => `<p class="dtext${i ? '' : ' is-on'}" data-i="${i}">${esc(d.text || '')}</p>`).join('')}</div>
+            ${ds.length > 1 ? `<div class="dbar" aria-hidden="true">${ds.map((_, i) => `<span class="${i ? '' : 'is-on'}"></span>`).join('')}</div>` : ''}
+          </div>
+        </div>
+        ${ds.map((_, i) => `<div class="dtrigger" data-i="${i}" style="--i:${i}"></div>`).join('')}
+      </div>
     </section>` : '';
   const featured = t.featured?.length ? `<section class="featured paper">
       <h2 class="reveal">Featured in</h2>
       ${t.featured.map((f) => `<a class="featured-item reveal" href="${f.href || '#'}">${img(f.img, { alt: f.title })}<div><h3>${esc(f.title)}</h3><p>${esc(f.text)}</p></div></a>`).join('')}
     </section>` : '';
   return testerHTML(t) + details + featured;
+}
+
+function wireDetails(root) {
+  const wrap = $('.dsteps', root); if (!wrap) return;
+  const figs = $$('.dfig', wrap), texts = $$('.dtext', wrap), bars = $$('.dbar span', wrap), now = $('.dcount-now', wrap);
+  let cur = 0;
+  const show = (i) => {
+    if (i === cur) return; cur = i;
+    [figs, texts, bars].forEach((list) => list.forEach((x, j) => x.classList.toggle('is-on', j === i)));
+    if (now) now.textContent = String(i + 1).padStart(2, '0');
+  };
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) show(Number(e.target.dataset.i)); }), { rootMargin: '-50% 0px -50% 0px' });
+  $$('.dtrigger', wrap).forEach((t) => io.observe(t));
 }
 
 function TypePage(route) {
@@ -704,6 +730,7 @@ function TypePage(route) {
     body.innerHTML = typeBodyHTML(t);
     paintTester(t);
     observeReveals();
+    wireDetails(body);
   }
   function paintTester(t) {
     const panel = $('.tester-panel', body);
