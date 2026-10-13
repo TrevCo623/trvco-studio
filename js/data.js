@@ -45,7 +45,7 @@ export const TYPE = [
     styles: [['Regular', 'Bastrop'], ['Semibold', 'Bastrop-Semibold'], ['Bold', 'Bastrop-Bold']], price: 10, tile: 'stone' ,
     details: [
       { img: 'type/bastrop-detail-1', text: 'Every serif is a slab, scooped into the stem with a quarter circle and flared at the ends.' },
-      { img: 'type/bastrop-detail-2', text: 'A tall x-height. Lowercase stands 70% as tall as the capitals, so it reads big at small sizes.' },
+      { img: 'type/bastrop-detail-2', text: 'A tall x-height. The lowercase reaches 70% of the height of the capitals.' },
       { img: 'type/bastrop-detail-3', text: 'Three weights. Only the stems thicken; the serifs stay put.' },
       { img: 'type/bastrop-detail-4', text: 'When letters meet, they share. Fs and ts join up across one crossbar.' },
     ] },
