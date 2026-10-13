@@ -353,19 +353,19 @@ export const TYPE_TWEAKS = {
     "details": [
       {
         "img": "/assets/img/type/kadoka-detail-1.webp",
-        "text": "Straight stems, cut square. Every one is the same width."
+        "text": "Arches peel off the stem as a hairline, then swell to full weight."
       },
       {
         "img": "/assets/img/type/kadoka-detail-2.webp",
-        "text": "Arches split off the stem low and thin, then swell as they climb."
+        "text": "Weight sits on the sides. Tops and bottoms thin right down."
       },
       {
         "img": "/assets/img/type/kadoka-detail-3.webp",
-        "text": "Heavy on the sides, hairline thin on top. Counters run tall and narrow."
+        "text": "Some capitals borrow from the lowercase. The K is an h with a flag on top."
       },
       {
         "img": "/assets/img/type/kadoka-detail-4.webp",
-        "text": "Some capitals borrow from the lowercase. The K is an h with a flag on top."
+        "text": "The S skips the curve in the middle. Its spine is one straight, slanted bar."
       }
     ]
   }
