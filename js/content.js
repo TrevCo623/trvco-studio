@@ -349,7 +349,25 @@ export const GOODS = [
 export const TYPE_TWEAKS = {
   "kadoka": {
     "display": "Kadoka",
-    "lowercase": true
+    "lowercase": true,
+    "details": [
+      {
+        "img": "/assets/img/type/kadoka-detail-1.webp",
+        "text": "Straight stems, cut square. Every one is the same width."
+      },
+      {
+        "img": "/assets/img/type/kadoka-detail-2.webp",
+        "text": "Arches split off the stem low and thin, then swell as they climb."
+      },
+      {
+        "img": "/assets/img/type/kadoka-detail-3.webp",
+        "text": "Heavy on the sides, hairline thin on top. Counters run tall and narrow."
+      },
+      {
+        "img": "/assets/img/type/kadoka-detail-4.webp",
+        "text": "Some capitals borrow from the lowercase. The K is an h with a flag on top."
+      }
+    ]
   }
 };
 export const CONTENT_IMG = {
@@ -790,5 +808,29 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 1500,
     "h": 1000
+  },
+  "/assets/img/type/kadoka-detail-1.webp": {
+    "src": "assets/img/type/kadoka-detail-1.webp",
+    "cdn": "",
+    "w": 1600,
+    "h": 2170
+  },
+  "/assets/img/type/kadoka-detail-2.webp": {
+    "src": "assets/img/type/kadoka-detail-2.webp",
+    "cdn": "",
+    "w": 1600,
+    "h": 2170
+  },
+  "/assets/img/type/kadoka-detail-3.webp": {
+    "src": "assets/img/type/kadoka-detail-3.webp",
+    "cdn": "",
+    "w": 1600,
+    "h": 2170
+  },
+  "/assets/img/type/kadoka-detail-4.webp": {
+    "src": "assets/img/type/kadoka-detail-4.webp",
+    "cdn": "",
+    "w": 1600,
+    "h": 2170
   }
 };

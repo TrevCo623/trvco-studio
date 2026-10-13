@@ -101,6 +101,7 @@ for (const t of load('type')) {
   if (t.lowercase != null) o.lowercase = !!t.lowercase;
   if (t.hero_size) o.heroSize = Number(t.hero_size);
   if (t.thumbnail_scale) o.scale = Number(t.thumbnail_scale);
+  if (t.details?.length) o.details = t.details.map((d, i) => ({ img: useImage(d.image, `Type "${t.slug}" detail ${i + 1}`), text: d.text || '' })).filter((d) => d.img || d.text);
   if (Object.keys(o).length) TYPE_TWEAKS[t.slug] = o;
 }
 
