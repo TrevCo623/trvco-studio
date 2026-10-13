@@ -37,6 +37,30 @@ export const IMG = {
   "w": 1800,
   "h": 1200
  },
+ "type/arroyo-detail-1": {
+  "src": "assets/img/type/arroyo-detail-1.webp",
+  "cdn": "",
+  "w": 1600,
+  "h": 2170
+ },
+ "type/arroyo-detail-2": {
+  "src": "assets/img/type/arroyo-detail-2.webp",
+  "cdn": "",
+  "w": 1600,
+  "h": 2170
+ },
+ "type/arroyo-detail-3": {
+  "src": "assets/img/type/arroyo-detail-3.webp",
+  "cdn": "",
+  "w": 1600,
+  "h": 2170
+ },
+ "type/arroyo-detail-4": {
+  "src": "assets/img/type/arroyo-detail-4.webp",
+  "cdn": "",
+  "w": 1600,
+  "h": 2170
+ },
  "type/oxomoco-detail-1": {
   "src": "assets/img/type/oxomoco-detail-1.webp",
   "cdn": "https://images.squarespace-cdn.com/content/v1/66f4c4dfa75cfe28de46c1a0/26811021-5b88-4c6a-a419-58518a98650e/Asset+6.png?format=1500w",
