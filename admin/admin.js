@@ -213,7 +213,7 @@ CMS.registerWidget('photos', Photos, () => null);
         { label: 'Description', name: 'description', widget: 'text', required: false, hint: inShop ? 'Optional. Leave empty to use the Shopify description. A blank line starts a new paragraph.' : 'A blank line starts a new paragraph.' },
         { label: 'Photos', name: 'photos', widget: 'photos', multiple: true, required: false, hint: inShop ? 'Optional. Leave empty to use the Printful mockups from Shopify. The first photo is the thumbnail.' : 'The first photo is the thumbnail.' },
         ...(inShop ? [{ label: 'Shopify handle', name: 'shopify_handle', widget: 'hidden', default: handle }] : [{ label: 'Sold out', name: 'sold_out', widget: 'boolean', required: false, default: true }]),
-        { label: 'Order', name: 'order', widget: 'number', value_type: 'int', required: false, hint: 'Lower numbers come first in Goods.' },
+        { label: 'Position on the Goods page', name: 'order', widget: 'number', value_type: 'int', min: 1, required: false, hint: 'Type 1 to show this first, 2 for second, and so on. Leave it empty to put it at the end.' },
         { label: 'Hidden', name: 'draft', widget: 'boolean', required: false, default: false, hint: 'Hide this from the site without deleting it.' },
       ],
     };
