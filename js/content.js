@@ -30,6 +30,19 @@ export const PRINT = [
     "images": [
       "/assets/img/print/fiesta.jpg"
     ]
+  },
+  {
+    "slug": "intention-journal",
+    "title": "Intention Journal",
+    "desc": [
+      "A weekly intention journal that helps users focus on their best life."
+    ],
+    "images": [
+      "/assets/uploads/the-intent-journal-on-cream-background.webp",
+      "/assets/uploads/intent-journal-morning-still-life.webp",
+      "/assets/uploads/cozy-weekly-reflection-journal-flat-lay.webp",
+      "/assets/uploads/morning-intentions-journal-setup.webp"
+    ]
   }
 ];
 export const DIGITAL = [
@@ -370,6 +383,30 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 750,
     "h": 717
+  },
+  "/assets/uploads/the-intent-journal-on-cream-background.webp": {
+    "src": "assets/uploads/the-intent-journal-on-cream-background.webp",
+    "cdn": "",
+    "w": 1448,
+    "h": 1086
+  },
+  "/assets/uploads/intent-journal-morning-still-life.webp": {
+    "src": "assets/uploads/intent-journal-morning-still-life.webp",
+    "cdn": "",
+    "w": 1448,
+    "h": 1086
+  },
+  "/assets/uploads/cozy-weekly-reflection-journal-flat-lay.webp": {
+    "src": "assets/uploads/cozy-weekly-reflection-journal-flat-lay.webp",
+    "cdn": "",
+    "w": 1536,
+    "h": 1024
+  },
+  "/assets/uploads/morning-intentions-journal-setup.webp": {
+    "src": "assets/uploads/morning-intentions-journal-setup.webp",
+    "cdn": "",
+    "w": 1536,
+    "h": 1024
   },
   "/assets/img/digital/feelgood-thumb.jpg": {
     "src": "assets/img/digital/feelgood-thumb.jpg",

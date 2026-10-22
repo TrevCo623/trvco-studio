@@ -37,9 +37,9 @@ collections:
       - { label: Description, name: description, widget: text, required: false, hint: 'A blank line starts a new paragraph.' }
       - label: Photos
         name: images
-        widget: list
-        hint: The first photo is the thumbnail on the homepage. Drag to reorder.
-        field: { label: Photo, name: image, widget: image }
+        widget: photos
+        multiple: true
+        hint: The first photo is the thumbnail on the homepage. Pick or drop several at once; drag to reorder.
       - { label: Order, name: order, widget: number, value_type: int, required: false, hint: 'Lower numbers come first in Print. Leave empty to go last.' }
       - { label: Hidden, name: draft, widget: boolean, required: false, default: false, hint: 'Hide this project from the site without deleting it.' }
 
@@ -60,8 +60,8 @@ collections:
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Intro, name: intro, widget: text, hint: 'The paragraph under the title.' }
-      - { label: Thumbnail, name: thumbnail, widget: image, hint: 'Shown on the homepage grid.' }
-      - { label: Hero image, name: hero, widget: image, hint: 'The big image at the top of the page.' }
+      - { label: Thumbnail, name: thumbnail, widget: photos, hint: 'Shown on the homepage grid.' }
+      - { label: Hero image, name: hero, widget: photos, hint: 'The big image at the top of the page.' }
       - { label: Wide hero, name: hero_wide, widget: boolean, required: false, default: false, hint: 'Turn on for landscape (desktop) screenshots.' }
       - label: Sections
         name: sections
@@ -75,14 +75,14 @@ collections:
             name: full
             summary: '{{fields.caption}}'
             fields:
-              - { label: Image, name: image, widget: image }
+              - { label: Image, name: image, widget: photos }
               - { label: Caption, name: caption, widget: string, required: false }
               - { label: Text colour, name: tone, widget: select, options: [{ label: Light, value: light }, { label: Dark, value: dark }], default: light }
           - label: Image on a colour band
             name: feature
             summary: '{{fields.title}} {{fields.caption}}'
             fields:
-              - { label: Image, name: image, widget: image }
+              - { label: Image, name: image, widget: photos }
               - { label: Heading, name: title, widget: string, required: false }
               - { label: Caption, name: caption, widget: text, required: false }
               - &bg { label: Background, name: background, widget: select, required: false, options: [{ label: Rose, value: rose }, { label: Sand, value: sand }, { label: Paper (off-white), value: paper }, { label: Ink (black), value: ink }, { label: Clay, value: clay }] }
@@ -92,7 +92,7 @@ collections:
             name: slides
             summary: '{{fields.caption}}'
             fields:
-              - { label: Images, name: images, widget: list, field: { label: Image, name: image, widget: image } }
+              - { label: Images, name: images, widget: photos, multiple: true }
               - { label: Caption, name: caption, widget: string, required: false }
               - *bg
               - *tone
@@ -100,7 +100,7 @@ collections:
             name: icons
             summary: '{{fields.caption}}'
             fields:
-              - { label: Images, name: images, widget: list, field: { label: Image, name: image, widget: image } }
+              - { label: Images, name: images, widget: photos, multiple: true }
               - { label: Caption, name: caption, widget: string, required: false }
               - { label: Note, name: note, widget: string, required: false, hint: 'Small text under the grid, e.g. "Coming soon to App Store".' }
               - *bg

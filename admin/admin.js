@@ -74,6 +74,94 @@ const ShopifyInfo = createClass({
 });
 CMS.registerWidget('shopify-info', ShopifyInfo, () => null);
 
+// ── Photos widget: pick or drop many images at once, see real thumbnails, drag to reorder ──
+// Images are resized in the browser (2000 px max, WebP, or JPEG where the browser can't make WebP)
+// and saved straight to the repo in one commit, so "Publish" only has to save the list of paths.
+const REPO = 'TrevCo623/trvco-studio', RAW = `https://raw.githubusercontent.com/${REPO}/main`;
+const ghToken = () => { for (const k of ['decap-cms-user', 'netlify-cms-user']) { try { const t = JSON.parse(localStorage.getItem(k))?.token; if (t) return t; } catch {} } return null; };
+async function gh(path, opts = {}) {
+  const r = await fetch(`https://api.github.com/repos/${REPO}${path}`, { ...opts, headers: { Authorization: `token ${ghToken()}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' } });
+  if (!r.ok) throw new Error(`GitHub ${r.status}: ${(await r.text()).slice(0, 160)}`);
+  return r.json();
+}
+async function commitFiles(files, message) {   // files: [{ path, base64 }] -> one commit on main
+  const ref = await gh('/git/ref/heads/main');
+  const base = await gh(`/git/commits/${ref.object.sha}`);
+  const tree = await Promise.all(files.map(async (f) => ({ path: f.path, mode: '100644', type: 'blob',
+    sha: (await gh('/git/blobs', { method: 'POST', body: JSON.stringify({ content: f.base64, encoding: 'base64' }) })).sha })));
+  const t = await gh('/git/trees', { method: 'POST', body: JSON.stringify({ base_tree: base.tree.sha, tree }) });
+  const c = await gh('/git/commits', { method: 'POST', body: JSON.stringify({ message, tree: t.sha, parents: [ref.object.sha] }) });
+  await gh('/git/refs/heads/main', { method: 'PATCH', body: JSON.stringify({ sha: c.sha }) });
+}
+async function prepare(file) {                   // resize + re-encode; returns { name, blob }
+  const bmp = await createImageBitmap(file);
+  const k = Math.min(1, 2000 / Math.max(bmp.width, bmp.height));
+  const cv = document.createElement('canvas'); cv.width = Math.round(bmp.width * k); cv.height = Math.round(bmp.height * k);
+  cv.getContext('2d').drawImage(bmp, 0, 0, cv.width, cv.height);
+  let blob = await new Promise((r) => cv.toBlob(r, 'image/webp', 0.86));
+  if (!blob || blob.type !== 'image/webp') blob = await new Promise((r) => cv.toBlob(r, 'image/jpeg', 0.88));
+  const ext = blob.type === 'image/webp' ? 'webp' : 'jpg';
+  const stem = file.name.replace(/\.[^.]+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'photo';
+  return { name: `${stem}-${Date.now().toString(36).slice(-4)}.${ext}`, blob };
+}
+const b64 = (blob) => new Promise((r) => { const fr = new FileReader(); fr.onload = () => r(String(fr.result).split(',')[1]); fr.readAsDataURL(blob); });
+const thumbUrl = (path) => /^https?:/.test(path) ? path : `${RAW}${path.startsWith('/') ? '' : '/'}${path}`;
+const toList = (v) => (v == null ? [] : v.toJS ? v.toJS() : Array.isArray(v) ? v : [v]).filter(Boolean);
+
+const Photos = createClass({
+  getInitialState() { return { local: {}, busy: 0, error: '', drag: null, over: false }; },
+  multiple() { return !!this.props.field.get('multiple'); },
+  items() { return toList(this.props.value); },
+  set(list) { this.props.onChange(this.multiple() ? list : (list[0] || '')); },
+  async add(files) {
+    files = [...files].filter((f) => f.type.startsWith('image/'));
+    if (!files.length) return;
+    if (!this.multiple()) files = files.slice(0, 1);
+    if (!ghToken() && !window.TRV_TEST_BACKEND) { this.setState({ error: 'Sign in again to upload.' }); return; }
+    this.setState((s) => ({ busy: s.busy + files.length, error: '' }));
+    try {
+      const prepared = await Promise.all(files.map(prepare));
+      const local = { ...this.state.local };
+      const paths = prepared.map((p) => { const path = `/assets/uploads/${p.name}`; local[path] = URL.createObjectURL(p.blob); return path; });
+      this.setState({ local });
+      if (!window.TRV_TEST_BACKEND) await commitFiles(await Promise.all(prepared.map(async (p) => ({ path: `assets/uploads/${p.name}`, base64: await b64(p.blob) }))),
+        `Upload ${prepared.length} photo${prepared.length > 1 ? 's' : ''}`);
+      this.set(this.multiple() ? [...this.items(), ...paths] : paths);
+    } catch (e) { this.setState({ error: `Upload failed. ${e.message}` }); }
+    this.setState((s) => ({ busy: Math.max(0, s.busy - files.length) }));
+  },
+  remove(i) { const l = this.items(); l.splice(i, 1); this.set(l); },
+  move(from, to) { const l = this.items(); const [x] = l.splice(from, 1); l.splice(to, 0, x); this.set(l); },
+  render() {
+    const items = this.items(), multi = this.multiple(), { busy, error, over, drag } = this.state;
+    const pick = () => this.input && this.input.click();
+    return h('div', {
+      className: 'trv-photos' + (over ? ' is-over' : ''),
+      onDragOver: (e) => { if (e.dataTransfer.types.includes('Files')) { e.preventDefault(); this.setState({ over: true }); } },
+      onDragLeave: () => this.setState({ over: false }),
+      onDrop: (e) => { if (e.dataTransfer.files.length) { e.preventDefault(); this.setState({ over: false }); this.add(e.dataTransfer.files); } },
+    },
+      items.length ? h('div', { className: 'trv-photos-grid' }, ...items.map((path, i) => h('figure', {
+        key: path + i, className: 'trv-photo' + (drag === i ? ' is-drag' : ''), draggable: multi,
+        onDragStart: (e) => { e.dataTransfer.effectAllowed = 'move'; this.setState({ drag: i }); },
+        onDragOver: (e) => { if (this.state.drag != null) e.preventDefault(); },
+        onDrop: (e) => { if (this.state.drag != null) { e.preventDefault(); e.stopPropagation(); this.move(this.state.drag, i); this.setState({ drag: null }); } },
+        onDragEnd: () => this.setState({ drag: null }),
+      },
+        h('img', { src: this.state.local[path] || thumbUrl(path), alt: '', onError: (e) => { const s = location.origin + (path.startsWith('/') ? '' : '/') + path; if (e.target.src !== s) e.target.src = s; } }),
+        multi && i === 0 ? h('span', { className: 'trv-photo-tag' }, 'Thumbnail') : null,
+        h('button', { type: 'button', className: 'trv-photo-x', 'aria-label': 'Remove photo', onClick: () => this.remove(i) }, '×')))) : null,
+      h('div', { className: 'trv-photos-bar' },
+        h('button', { type: 'button', className: 'trv-btn', onClick: pick, disabled: busy > 0 },
+          busy ? `Uploading ${busy} photo${busy > 1 ? 's' : ''}…` : multi ? (items.length ? 'Add photos' : 'Choose photos') : (items.length ? 'Replace photo' : 'Choose photo')),
+        h('span', { className: 'trv-photos-hint' }, multi ? 'or drop them here · drag to reorder' : 'or drop one here'),
+        error ? h('span', { className: 'trv-photos-error' }, error) : null),
+      h('input', { type: 'file', accept: 'image/*', multiple: multi, hidden: true, ref: (el) => { this.input = el; },
+        onChange: (e) => { this.add(e.target.files); e.target.value = ''; } }));
+  },
+});
+CMS.registerWidget('photos', Photos, () => null);
+
 // ── Build the config: Type and Goods from Shopify, then Print and Digital ─────
 (async () => {
   const [configText, index, products] = await Promise.all([
@@ -123,7 +211,7 @@ CMS.registerWidget('shopify-info', ShopifyInfo, () => null);
         { label: 'Thumbnail name', name: 'name', widget: 'string', required: !inShop, hint: inShop ? 'Optional. Leave empty to use the Shopify name.' : '' },
         { label: 'Page title', name: 'title', widget: 'string', required: !inShop, hint: inShop ? 'Optional. Leave empty to use the Shopify name.' : '' },
         { label: 'Description', name: 'description', widget: 'text', required: false, hint: inShop ? 'Optional. Leave empty to use the Shopify description. A blank line starts a new paragraph.' : 'A blank line starts a new paragraph.' },
-        { label: 'Photos', name: 'photos', widget: 'list', required: false, field: { label: 'Photo', name: 'photo', widget: 'image' }, hint: inShop ? 'Optional. Leave empty to use the Printful mockups from Shopify. The first photo is the thumbnail.' : 'The first photo is the thumbnail.' },
+        { label: 'Photos', name: 'photos', widget: 'photos', multiple: true, required: false, hint: inShop ? 'Optional. Leave empty to use the Printful mockups from Shopify. The first photo is the thumbnail.' : 'The first photo is the thumbnail.' },
         ...(inShop ? [{ label: 'Shopify handle', name: 'shopify_handle', widget: 'hidden', default: handle }] : [{ label: 'Sold out', name: 'sold_out', widget: 'boolean', required: false, default: true }]),
         { label: 'Order', name: 'order', widget: 'number', value_type: 'int', required: false, hint: 'Lower numbers come first in Goods.' },
         { label: 'Hidden', name: 'draft', widget: 'boolean', required: false, default: false, hint: 'Hide this from the site without deleting it.' },
