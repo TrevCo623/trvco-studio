@@ -40,7 +40,7 @@ collections:
         widget: photos
         multiple: true
         hint: The first photo is the thumbnail on the homepage. Pick or drop several at once; drag to reorder.
-      - { label: Position on the Print page, name: order, widget: number, value_type: int, min: 1, required: false, hint: 'Type 1 to show this first, 2 for second, and so on. Leave it empty to put it at the end.' }
+      - { label: Position on the Print page, name: order, widget: position, folder: content/print, required: false }
       - { label: Hidden, name: draft, widget: boolean, required: false, default: false, hint: 'Hide this project from the site without deleting it.' }
 
   - name: digital
@@ -105,5 +105,5 @@ collections:
               - { label: Note, name: note, widget: string, required: false, hint: 'Small text under the grid, e.g. "Coming soon to App Store".' }
               - *bg
               - *tone
-      - { label: Position on the Digital page, name: order, widget: number, value_type: int, min: 1, required: false, hint: 'Type 1 to show this first, 2 for second, and so on. Leave it empty to put it at the end.' }
+      - { label: Position on the Digital page, name: order, widget: position, folder: content/digital, required: false }
       - { label: Hidden, name: draft, widget: boolean, required: false, default: false, hint: 'Hide this project from the site without deleting it.' }

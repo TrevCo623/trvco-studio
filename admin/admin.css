@@ -112,3 +112,20 @@ a { color: var(--rose); }
 .trv-photos-bar .trv-btn:disabled { opacity: .6; cursor: default; }
 .trv-photos-hint { font-family: var(--mono); font-size: 11px; letter-spacing: 1px; color: var(--grey); text-transform: uppercase; }
 .trv-photos-error { flex-basis: 100%; color: #a33; font-size: 15px; }
+
+/* ── Position: the page's projects as a draggable list ── */
+.trv-pos { padding: 12px; background: #fff; border: 2px solid var(--sand); }
+.trv-pos-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.trv-pos-row { display: flex; align-items: center; gap: 14px; padding: 8px 12px; background: var(--paper); border: 1px solid transparent; cursor: grab; user-select: none; }
+.trv-pos-row:hover { border-color: var(--sand); }
+.trv-pos-row.is-self { background: #f6ebe8; border-color: var(--rose); }
+.trv-pos-row.is-drag { opacity: .4; }
+.trv-pos-row.is-hidden .trv-pos-title, .trv-pos-row.is-hidden .trv-pos-thumb { opacity: .5; }
+.trv-pos-num { width: 22px; font-family: var(--mono); font-size: 12px; color: var(--grey); text-align: right; }
+.trv-pos-thumb { width: 44px; height: 44px; flex: none; background: var(--sand); overflow: hidden; }
+.trv-pos-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.trv-pos-title { flex: 1; font-size: 17px; }
+.trv-pos-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 3px 7px; background: var(--rose); color: #fff; }
+.trv-pos-tag.is-muted { background: var(--sand); color: var(--ink); }
+.trv-pos-grip { color: var(--grey); letter-spacing: -2px; font-size: 16px; }
+.trv-pos-note { margin: 10px 4px 0; font-size: 15px; color: #565555; }

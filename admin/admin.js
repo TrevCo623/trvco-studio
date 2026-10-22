@@ -80,7 +80,7 @@ CMS.registerWidget('shopify-info', ShopifyInfo, () => null);
 const REPO = 'TrevCo623/trvco-studio', RAW = `https://raw.githubusercontent.com/${REPO}/main`;
 const ghToken = () => { for (const k of ['decap-cms-user', 'netlify-cms-user']) { try { const t = JSON.parse(localStorage.getItem(k))?.token; if (t) return t; } catch {} } return null; };
 async function gh(path, opts = {}) {
-  const r = await fetch(`https://api.github.com/repos/${REPO}${path}`, { ...opts, headers: { Authorization: `token ${ghToken()}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' } });
+  const r = await fetch(`https://api.github.com/repos/${REPO}${path}`, { ...opts, headers: { ...(ghToken() ? { Authorization: `token ${ghToken()}` } : {}), Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' } });
   if (!r.ok) throw new Error(`GitHub ${r.status}: ${(await r.text()).slice(0, 160)}`);
   return r.json();
 }
@@ -162,6 +162,81 @@ const Photos = createClass({
 });
 CMS.registerWidget('photos', Photos, () => null);
 
+// ── Position widget: the whole page as a list; drag this project (or any other) into place ──
+// Dropping renumbers every project 1, 2, 3… This project's number saves when you Publish; the
+// others are saved straight away in one commit, so the page order is exactly what you see.
+const enc = (str) => btoa(unescape(encodeURIComponent(str)));
+const dec = (b) => decodeURIComponent(escape(atob(b.replace(/\n/g, ''))));
+const firstPhoto = (d) => [].concat(d.images || [], d.photos || [], d.thumbnail || [], d.hero || []).find((x) => typeof x === 'string' && x);
+const Position = createClass({
+  getInitialState() { return { rows: null, error: '', drag: null, saving: false }; },
+  folder() { return this.props.field.get('folder'); },
+  selfSlug() { return this.props.entry && this.props.entry.get('slug'); },
+  async componentDidMount() {
+    try {
+      const dir = await gh(`/contents/${this.folder()}?ref=main`);
+      const files = await Promise.all(dir.filter((f) => f.name.endsWith('.json')).map(async (f) => {
+        const j = await gh(`/contents/${f.path}?ref=main`);
+        const text = dec(j.content); const data = JSON.parse(text);
+        return { slug: f.name.replace(/\.json$/, ''), path: f.path, data, title: data.title || data.name || f.name, order: data.order, hidden: !!data.draft, thumb: firstPhoto(data) };
+      }));
+      const self = this.selfSlug();
+      const others = files.filter((r) => r.slug !== self)
+        .sort((a, b) => (a.order ?? 1e9) - (b.order ?? 1e9) || String(a.title).localeCompare(String(b.title)));
+      const mine = { self: true };
+      const want = Number(this.props.value);
+      const at = Number.isFinite(want) && want > 0 ? Math.min(others.length, want - 1) : others.length;
+      others.splice(at, 0, mine);
+      this.setState({ rows: others });
+      if (!(want > 0)) this.props.onChange(at + 1);
+    } catch (e) { this.setState({ error: e.message }); }
+  },
+  async drop(to) {
+    const { drag, rows } = this.state; if (drag == null || drag === to) return this.setState({ drag: null });
+    const next = rows.slice(); const [x] = next.splice(drag, 1); next.splice(to, 0, x);
+    this.setState({ rows: next, drag: null });
+    const changed = [];
+    next.forEach((r, i) => {
+      if (r.self) { this.props.onChange(i + 1); return; }
+      if (r.order !== i + 1) { r.order = i + 1; r.data = { ...r.data, order: i + 1 }; changed.push(r); }
+    });
+    if (!changed.length) return;
+    this.setState({ saving: true, error: '' });
+    try {
+      if (window.TRV_TEST_BACKEND) window.TRV_LAST_REORDER = changed.map((r) => [r.slug, r.order]);
+      else await commitFiles(changed.map((r) => ({ path: r.path, base64: enc(JSON.stringify(r.data, null, 2) + '\n') })), `Reorder ${this.folder().split('/').pop()}`);
+    } catch (e) { this.setState({ error: `Couldn't save the new order. ${e.message}` }); }
+    this.setState({ saving: false });
+  },
+  render() {
+    const { rows, error, drag, saving } = this.state;
+    const d = this.props.entry ? this.props.entry.get('data') : null;
+    const data = d && d.toJS ? d.toJS() : {};
+    const myTitle = data.title || data.name || 'This project';
+    const myThumb = firstPhoto(data);
+    if (!rows) return h('div', { className: 'trv-pos' }, h('p', { className: 'trv-pos-note' }, error || 'Loading the page…'));
+    return h('div', { className: 'trv-pos' },
+      h('ol', { className: 'trv-pos-list' }, ...rows.map((r, i) => {
+        const thumb = r.self ? myThumb : r.thumb;
+        return h('li', {
+          key: r.self ? '__self' : r.slug, draggable: true,
+          className: 'trv-pos-row' + (r.self ? ' is-self' : '') + (drag === i ? ' is-drag' : '') + (r.hidden ? ' is-hidden' : ''),
+          onDragStart: (e) => { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', String(i)); this.setState({ drag: i }); },
+          onDragOver: (e) => { if (this.state.drag != null) e.preventDefault(); },
+          onDrop: (e) => { e.preventDefault(); this.drop(i); },
+          onDragEnd: () => this.setState({ drag: null }),
+        },
+          h('span', { className: 'trv-pos-num' }, String(i + 1)),
+          h('span', { className: 'trv-pos-thumb' }, thumb ? h('img', { src: thumbUrl(thumb), alt: '', onError: (e) => { const u = location.origin + (thumb.startsWith('/') ? '' : '/') + thumb; if (e.target.src !== u) e.target.src = u; } }) : null),
+          h('span', { className: 'trv-pos-title' }, r.self ? myTitle : r.title),
+          r.self ? h('span', { className: 'trv-pos-tag' }, 'This project') : r.hidden ? h('span', { className: 'trv-pos-tag is-muted' }, 'Hidden') : null,
+          h('span', { className: 'trv-pos-grip', 'aria-hidden': true }, '⋮⋮'));
+      })),
+      h('p', { className: 'trv-pos-note' }, saving ? 'Saving the new order…' : error || 'Drag to reorder. Top of the list shows first on the page.'));
+  },
+});
+CMS.registerWidget('position', Position, () => null);
+
 // ── Build the config: Type and Goods from Shopify, then Print and Digital ─────
 (async () => {
   const [configText, index, products] = await Promise.all([
@@ -213,7 +288,7 @@ CMS.registerWidget('photos', Photos, () => null);
         { label: 'Description', name: 'description', widget: 'text', required: false, hint: inShop ? 'Optional. Leave empty to use the Shopify description. A blank line starts a new paragraph.' : 'A blank line starts a new paragraph.' },
         { label: 'Photos', name: 'photos', widget: 'photos', multiple: true, required: false, hint: inShop ? 'Optional. Leave empty to use the Printful mockups from Shopify. The first photo is the thumbnail.' : 'The first photo is the thumbnail.' },
         ...(inShop ? [{ label: 'Shopify handle', name: 'shopify_handle', widget: 'hidden', default: handle }] : [{ label: 'Sold out', name: 'sold_out', widget: 'boolean', required: false, default: true }]),
-        { label: 'Position on the Goods page', name: 'order', widget: 'number', value_type: 'int', min: 1, required: false, hint: 'Type 1 to show this first, 2 for second, and so on. Leave it empty to put it at the end.' },
+        { label: 'Position on the Goods page', name: 'order', widget: 'position', folder: 'content/goods', required: false },
         { label: 'Hidden', name: 'draft', widget: 'boolean', required: false, default: false, hint: 'Hide this from the site without deleting it.' },
       ],
     };
