@@ -641,18 +641,35 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 
 /* Byways-style phone carousel on Digital pages. Frame image is 2224x3336; its screen is the
    1320x2866 rect at (452,197), corner radius 189. Cards are that screen. */
-.cs-pcar { padding: 102px 0 120px; overflow: hidden; text-align: center; --W: calc(var(--phone-w, 286px) / var(--pf, .6403)); --cw: calc(var(--W) * 1320 / 2224); --gap: 64px; }
+.cs-pcar { padding: 102px 0 120px; overflow: hidden; text-align: center; --W: calc(var(--phone-w, 286px) / var(--pf, .6403)); --cw: calc(var(--W) * 1320 / 2224); --cgap: 64px; }
 .cs-pcar .cs-caption { max-width: 292px; }
 .pcar-stage { position: relative; margin: 48px auto 0; width: var(--W); aspect-ratio: 2224 / 3336; touch-action: pan-y; }
 .pcar-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; -webkit-mask-image: linear-gradient(to bottom, #000 88%, transparent); mask-image: linear-gradient(to bottom, #000 88%, transparent); }
 .pcar-row { position: absolute; left: calc(var(--W) * 452 / 2224); top: calc(var(--W) * 197 / 2224); width: var(--cw); aspect-ratio: 1320 / 2866; }
 .pcar-card { --x: 0; --near: 0; position: absolute; inset: 0; padding: 0; border: 0; background: #f3f3f1; overflow: hidden; cursor: pointer;
-  transform: translateX(calc(var(--x) * (var(--cw) + var(--gap)))); opacity: calc(.5 + .5 * var(--near));
+  transform: translateX(calc(var(--x) * (var(--cw) + var(--cgap)))); opacity: calc(.5 + .5 * var(--near));
   border-radius: calc(var(--cw) * 189 / 1320 * var(--near));
   -webkit-mask-image: linear-gradient(to bottom, #000 calc(55% + 45% * var(--near)), transparent calc(100% + 45% * var(--near)));
   mask-image: linear-gradient(to bottom, #000 calc(55% + 45% * var(--near)), transparent calc(100% + 45% * var(--near))); }
 .pcar-card.is-on { cursor: default; }
 .pcar-card img { display: block; width: 100%; height: 100%; }
 .cs-pcar .dnav { position: relative; margin-top: calc(var(--W) * -0.06); }
-@media (max-width: 760px) { .cs-pcar { padding: 32px 0 72px; --gap: 28px; } .pcar-stage { margin-top: 24px; } }
+@media (max-width: 760px) { .cs-pcar { padding: 32px 0 72px; --cgap: 28px; } .pcar-stage { margin-top: 24px; } }
 .uniform-phones .cs-media.has-phone img, .uniform-phones .case-hero img.has-phone { -webkit-mask-image: linear-gradient(to bottom, #000 88%, transparent); mask-image: linear-gradient(to bottom, #000 88%, transparent); }
+
+/* uniform_phones pages (VibeFit): every section is caption, phone, then button/arrows, sized by JS
+   (--phone-w) so it all fits on one screen. Phone images carry transparent margins: 0.107 x phone
+   width above the phone body and 0.163 x below it; negative margins cancel them. */
+.uniform-phones { --gap: 32px; --top: calc(var(--header-h) + 40px); }
+.uniform-phones .cs-panel, .uniform-phones .cs-pcar { padding: var(--top) 18px 140px; }
+.uniform-phones .cs-panel .cs-caption, .uniform-phones .cs-pcar .cs-caption, .uniform-phones .cs-scroll .cs-caption { max-width: 292px; font-size: 16px; line-height: 20px; }
+.uniform-phones .cs-panel-img.has-phone { margin-top: calc(var(--gap) - var(--phone-w) * .107); margin-bottom: calc(var(--phone-w) * -.163); }
+.uniform-phones .cs-panel-btn { margin-top: var(--gap); }
+.uniform-phones .pcar-stage { margin-top: calc(var(--gap) - var(--phone-w) * .107); }
+.uniform-phones .cs-pcar .dnav { margin-top: calc(24px - var(--phone-w) * .163); }
+.uniform-phones .cs-scroll { height: calc(var(--vh, 100vh) * 2.5); }
+.uniform-phones .cs-scroll-stage { top: 0; height: var(--vh, 100vh); display: flex; flex-direction: column; align-items: center; padding: var(--top) 18px 0; box-sizing: border-box; }
+.uniform-phones .cs-scroll .cs-caption { position: static; }
+.uniform-phones .cs-scroll-phone { position: relative; top: auto; margin-top: calc(var(--gap) - var(--phone-w) * .107); }
+@media (max-width: 760px) { .uniform-phones { --gap: 24px; --top: calc(var(--header-h) + 24px); } .uniform-phones .cs-panel, .uniform-phones .cs-pcar { padding-bottom: 96px; } }
+.cs-scroll-frame { -webkit-mask-image: linear-gradient(to bottom, #000 88%, transparent); mask-image: linear-gradient(to bottom, #000 88%, transparent); }

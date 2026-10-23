@@ -10,13 +10,15 @@
   ],
   "sections": [
     {
-      "type": "full",
-      "image": "/assets/img/vibefit/choose-vibe.jpg",
+      "type": "panel",
+      "image": "/assets/img/vibefit/choose-vibe-phone.webp",
       "tone": "light",
-      "caption": "Step 1: Choose the vibe for the night"
+      "caption": "Step 1: Choose the vibe for the night",
+      "background": "#998A9D",
+      "phone": 0.6403
     },
     {
-      "type": "feature",
+      "type": "panel",
       "tone": "dark",
       "image": "/assets/img/vibefit/looks.webp",
       "background": "paper",
@@ -39,10 +41,12 @@
       "caption": "Step 3: Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet"
     },
     {
-      "type": "full",
-      "image": "/assets/img/vibefit/invite.jpg",
+      "type": "panel",
+      "image": "/assets/img/vibefit/invite-phone.webp",
       "tone": "light",
-      "caption": "Share with a partner to sync your vibe and fits for the night"
+      "caption": "Share with a partner to sync your vibe and fits for the night",
+      "background": "#998A9D",
+      "phone": 0.6403
     },
     {
       "type": "phone-carousel",
@@ -59,10 +63,12 @@
       "frame": "/assets/img/vibefit/phone-frame.webp"
     },
     {
-      "type": "full",
-      "image": "/assets/img/vibefit/closet.jpg",
+      "type": "panel",
+      "image": "/assets/img/vibefit/closet-phone.webp",
       "tone": "light",
-      "caption": "Add clothes you have to Your Closet to make the app more tailored to your style"
+      "caption": "Add clothes you have to Your Closet to make the app more tailored to your style",
+      "background": "#B5A784",
+      "phone": 0.6403
     },
     {
       "type": "panel",

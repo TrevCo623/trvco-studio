@@ -258,13 +258,15 @@ export const DIGITAL = [
     "heroPhone": 0.6403,
     "sections": [
       {
-        "type": "full",
+        "type": "panel",
         "tone": "light",
         "caption": "Step 1: Choose the vibe for the night",
-        "img": "/assets/img/vibefit/choose-vibe.jpg"
+        "bg": "#998A9D",
+        "phone": 0.6403,
+        "img": "/assets/img/vibefit/choose-vibe-phone.webp"
       },
       {
-        "type": "feature",
+        "type": "panel",
         "tone": "dark",
         "caption": "Step 2: Choose an outfit that matches your vibe for the night",
         "bg": "var(--paper)",
@@ -287,10 +289,12 @@ export const DIGITAL = [
         }
       },
       {
-        "type": "full",
+        "type": "panel",
         "tone": "light",
         "caption": "Share with a partner to sync your vibe and fits for the night",
-        "img": "/assets/img/vibefit/invite.jpg"
+        "bg": "#998A9D",
+        "phone": 0.6403,
+        "img": "/assets/img/vibefit/invite-phone.webp"
       },
       {
         "type": "phone-carousel",
@@ -307,10 +311,12 @@ export const DIGITAL = [
         ]
       },
       {
-        "type": "full",
+        "type": "panel",
         "tone": "light",
         "caption": "Add clothes you have to Your Closet to make the app more tailored to your style",
-        "img": "/assets/img/vibefit/closet.jpg"
+        "bg": "#B5A784",
+        "phone": 0.6403,
+        "img": "/assets/img/vibefit/closet-phone.webp"
       },
       {
         "type": "panel",
@@ -844,11 +850,11 @@ export const CONTENT_IMG = {
     "w": 2224,
     "h": 3336
   },
-  "/assets/img/vibefit/choose-vibe.jpg": {
-    "src": "assets/img/vibefit/choose-vibe.jpg",
+  "/assets/img/vibefit/choose-vibe-phone.webp": {
+    "src": "assets/img/vibefit/choose-vibe-phone.webp",
     "cdn": "",
-    "w": 4000,
-    "h": 2656
+    "w": 2224,
+    "h": 3336
   },
   "/assets/img/vibefit/looks.webp": {
     "src": "assets/img/vibefit/looks.webp",
@@ -868,11 +874,11 @@ export const CONTENT_IMG = {
     "w": 1320,
     "h": 5146
   },
-  "/assets/img/vibefit/invite.jpg": {
-    "src": "assets/img/vibefit/invite.jpg",
+  "/assets/img/vibefit/invite-phone.webp": {
+    "src": "assets/img/vibefit/invite-phone.webp",
     "cdn": "",
-    "w": 4000,
-    "h": 2656
+    "w": 2224,
+    "h": 3336
   },
   "/assets/img/vibefit/quiz-fit-screen.webp": {
     "src": "assets/img/vibefit/quiz-fit-screen.webp",
@@ -898,11 +904,11 @@ export const CONTENT_IMG = {
     "w": 1320,
     "h": 2866
   },
-  "/assets/img/vibefit/closet.jpg": {
-    "src": "assets/img/vibefit/closet.jpg",
+  "/assets/img/vibefit/closet-phone.webp": {
+    "src": "assets/img/vibefit/closet-phone.webp",
     "cdn": "",
-    "w": 4000,
-    "h": 2656
+    "w": 2224,
+    "h": 3336
   },
   "/assets/img/vibefit/vibe-result.webp": {
     "src": "assets/img/vibefit/vibe-result.webp",

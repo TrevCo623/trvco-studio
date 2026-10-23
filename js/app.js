@@ -1147,7 +1147,31 @@ function DigitalPage(route) {
     const len = Math.max(0, im.offsetHeight - box.offsetHeight);
     im.style.transform = `translate3d(0, ${-ramp(f, 0.1, 0.9) * len}px, 0)`;
   });
-  return { el, title: d.title, onScroll: paintScroll, mount() { paintScroll(); $$('.cs-scroll img', el).forEach((im) => im.complete || im.addEventListener('load', paintScroll, { once: true })); } };
+  // uniform_phones pages: one phone size for the whole page, the largest that lets every section's
+  // caption, phone and button/arrows fit on screen at once (like Byways). Phone images share one
+  // geometry: body height = 2.073 x body width.
+  let lastW = 0, lastH = 0;
+  const sizePhones = () => {
+    if (!d.phones) return;
+    const vw = innerWidth, hh = $('#header')?.offsetHeight || 84, mobile = vw <= 760;
+    const touch = matchMedia('(pointer: coarse)').matches;
+    if (!(touch && vw === lastW && Math.abs(innerHeight - lastH) < 160)) lastH = innerHeight;
+    lastW = vw;
+    const vh = lastH, top = hh + (mobile ? 24 : 40), gap = mobile ? 24 : 32;
+    const fits = [400, (vw - 36) * 0.6403];
+    $$('.cs-panel, .cs-pcar, .cs-scroll', el).forEach((sec) => {
+      const cap = $('.cs-caption', sec), btn = $('.cs-panel-btn', sec), nav = $('.dnav', sec);
+      const extra = btn ? btn.offsetHeight + gap : nav ? nav.offsetHeight + 24 : 0;
+      fits.push((vh - top - (cap ? cap.offsetHeight + gap : 0) - extra - 24) / 2.073);
+    });
+    el.style.setProperty('--phone-w', `${Math.floor(Math.min(...fits))}px`);
+    el.style.setProperty('--vh', `${vh}px`);
+    paintScroll();
+  };
+  addEventListener('resize', sizePhones);
+  return { el, title: d.title, onScroll: paintScroll,
+    mount() { sizePhones(); requestAnimationFrame(sizePhones); $$('.cs-scroll img', el).forEach((im) => im.complete || im.addEventListener('load', paintScroll, { once: true })); },
+    destroy() { removeEventListener('resize', sizePhones); } };
 }
 
 /* ═════════════════════════════ CART ═════════════════════════════ */
