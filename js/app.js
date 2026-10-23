@@ -846,9 +846,10 @@ const BYWAYS = {
   ],
   // Scroll timeline, in screen-heights of scrolling. Each colour change wipes up from the bottom.
   // Every screen gets a pause after it finishes scrolling, before the next one takes over.
-  wipes: [[0.3, 0.95, '#0E1009', '#D9D9D9'], [2.2, 2.75, '#D9D9D9', '#145A42'], [5.2, 5.75, '#145A42', '#C8DDF7'], [8.2, 8.75, '#C8DDF7', '#F8F6F6']],
+  // After the Plan screen's pause, the blue section (phone and all) scrolls up and away.
+  wipes: [[0.3, 0.95, '#0E1009', '#D9D9D9'], [2.2, 2.75, '#D9D9D9', '#145A42'], [5.2, 5.75, '#145A42', '#C8DDF7']],
   route: [2.75, 4.5], plan: [5.75, 7.5],
-  end: 8.75,
+  end: 8.2,
 };
 const lerp = (a, b, t) => a + (b - a) * t;
 const clamp01 = (t) => Math.max(0, Math.min(1, t));
@@ -912,7 +913,7 @@ function BywaysPage(d) {
     const ty = [0, scrollFor(1, ...B.route), scrollFor(2, ...B.plan)];
     shots.forEach((sh, i) => { sh.style.opacity = op[i]; sh.style.transform = `translate3d(0, ${ty[i]}px, 0)`; });
     // Steps dissolve in and out
-    const vis = [ramp(u, 0.7, 1) * (1 - ramp(u, 2.2, 2.45)), ramp(u, 2.5, 2.75) * (1 - ramp(u, 5.2, 5.45)), ramp(u, 5.5, 5.75) * (1 - ramp(u, 8.2, 8.45))];
+    const vis = [ramp(u, 0.7, 1) * (1 - ramp(u, 2.2, 2.45)), ramp(u, 2.5, 2.75) * (1 - ramp(u, 5.2, 5.45)), ramp(u, 5.5, 5.75)];
     steps.forEach((st, i) => { st.style.opacity = vis[i]; st.style.transform = `translate3d(0, ${(1 - vis[i]) * 18}px, 0)`; st.style.visibility = vis[i] > 0.01 ? 'visible' : 'hidden'; });
     hero.style.opacity = 1 - ramp(u, 0.05, 0.5);
   }
