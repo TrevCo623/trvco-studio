@@ -313,17 +313,10 @@ export const DIGITAL = [
         "img": "/assets/img/vibefit/closet.jpg"
       },
       {
-        "type": "feature",
-        "tone": "light",
-        "bg": "var(--ink)",
-        "phone": 0.6403,
-        "img": "/assets/img/vibefit/home.webp"
-      },
-      {
         "type": "panel",
         "tone": "light",
         "caption": "Check out VibeFit for yourself",
-        "bg": "#998A9D",
+        "bg": "var(--ink)",
         "phone": 0.6403,
         "button": "See VibeFit app",
         "url": "",

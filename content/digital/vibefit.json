@@ -65,16 +65,9 @@
       "caption": "Add clothes you have to Your Closet to make the app more tailored to your style"
     },
     {
-      "type": "feature",
-      "tone": "light",
-      "image": "/assets/img/vibefit/home.webp",
-      "background": "ink",
-      "phone": 0.6403
-    },
-    {
       "type": "panel",
       "tone": "light",
-      "background": "#998A9D",
+      "background": "ink",
       "image": "/assets/img/vibefit/vibe-result.webp",
       "phone": 0.6403,
       "caption": "Check out VibeFit for yourself",
