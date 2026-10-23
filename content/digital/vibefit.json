@@ -1,5 +1,5 @@
 {
-  "hero_wide": true,
+  "hero_wide": false,
   "draft": false,
   "order": 3,
   "title": "VibeFit",
@@ -17,9 +17,9 @@
     },
     {
       "type": "feature",
-      "tone": "dark",
+      "tone": "light",
       "image": "/assets/uploads/looks-u3ex.jpg",
-      "background": "sand",
+      "background": "ink",
       "caption": "Step 2: Get inspiration for your outfit that fits your vibe."
     },
     {
@@ -42,9 +42,9 @@
     },
     {
       "type": "feature",
-      "tone": "dark",
+      "tone": "light",
       "image": "/assets/uploads/home-u38b.jpg",
-      "background": "paper"
+      "background": "ink"
     }
   ]
 }
