@@ -543,7 +543,7 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .by-hs-stage .car-heading { position: absolute; left: 0; right: 0; margin: 0 auto; padding: 0 20px; }
 .by-hs-row { position: absolute; left: 0; display: flex; width: max-content; will-change: transform; }
 /* Each stop screen: full screen-size inside the phone, fading out at the bottom as it leaves it. */
-.by-card { --near: 0; margin: 0; flex: none; width: var(--cw, 393px); height: var(--chh, 852px); padding-top: var(--pad, 47px); overflow: hidden; background: #fff;
+.by-card { --near: 0; opacity: calc(.5 + .5 * var(--near)); margin: 0; flex: none; width: var(--cw, 393px); height: var(--chh, 852px); padding-top: var(--pad, 47px); overflow: hidden; background: #fff;
   border-radius: calc(var(--rad, 55px) * var(--near));
   -webkit-mask-image: linear-gradient(to bottom, #000 calc(55% + 45% * var(--near)), transparent calc(100% + 45% * var(--near)));
   mask-image: linear-gradient(to bottom, #000 calc(55% + 45% * var(--near)), transparent calc(100% + 45% * var(--near))); }
