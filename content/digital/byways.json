@@ -25,5 +25,25 @@
       "image": "/assets/img/byways/stop-leavenworth.webp",
       "text": ""
     }
+  ],
+  "carousel2_title": "Set your own preferences for how trips come to life – what types of stops you like, how far you want to drive each day, etc.",
+  "carousel2_background": "#C4937E",
+  "carousel2": [
+    {
+      "image": "/assets/img/byways/settings-what-you-like.webp",
+      "text": ""
+    },
+    {
+      "image": "/assets/img/byways/settings-driving-per-day.webp",
+      "text": ""
+    },
+    {
+      "image": "/assets/img/byways/settings-pace.webp",
+      "text": ""
+    },
+    {
+      "image": "/assets/img/byways/settings-roads-to-avoid.webp",
+      "text": ""
+    }
   ]
 }

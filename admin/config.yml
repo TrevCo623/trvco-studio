@@ -72,5 +72,7 @@ collections:
       - { label: Carousel heading, name: carousel_title, widget: string, required: false, hint: 'Optional line above the carousel.' }
       - { label: Carousel closing line, name: carousel_title_end, widget: string, required: false, hint: 'Byways only: replaces the heading while the last screen scrolls through its full page.' }
       - { label: Carousel, name: carousel, widget: photos, multiple: true, captions: true, required: false, hint: 'A click-through carousel near the end of the page (landscape images work best). Drop them all at once; the line under each is optional.' }
+      - { label: Second carousel heading, name: carousel2_title, widget: string, required: false, hint: 'Byways only.' }
+      - { label: Second carousel, name: carousel2, widget: photos, multiple: true, captions: true, required: false, hint: 'Byways only: a second phone carousel under the first.' }
       - { label: Position on the Digital page, name: order, widget: position, folder: content/digital, required: false }
       - { label: Hidden, name: draft, widget: boolean, required: false, default: false, hint: 'Hide this project from the site without deleting it.' }

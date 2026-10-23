@@ -856,6 +856,62 @@ const clamp01 = (t) => Math.max(0, Math.min(1, t));
 const ramp = (u, a, b) => clamp01((u - a) / (b - a));
 const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
+// Byways scroll carousels: a phone pinned in the middle with app screens beside it. Click a screen to
+// bring it into the phone; scrolling down moves that screen through its whole page, then the page
+// carries on. Each carousel is { title, background, items: [{ img, text }] }.
+function phoneCarouselHTML(c, name) {
+  return `<section class="by-more" style="${c.background ? `background:${c.background};` : ''}"><div class="by-hs"><div class="by-hs-stage">
+      ${c.title ? `<h2 class="car-heading">${esc(c.title).replace(/\n/g, '<br>')}</h2>` : ''}
+      <div class="by-hs-row">${c.items.map((it, i) => `<figure class="by-card" role="button" tabindex="0" aria-label="Show screen ${i + 1}">${img(it.img, { alt: it.text || name, lazy: false })}</figure>`).join('')}</div>
+      <div class="by-hs-phone" aria-hidden="true"><img class="by-frame-img" src="/assets/img/byways/phone-frame.webp" alt=""></div>
+    </div></div></section>`;
+}
+function phoneCarousel(hs) {
+  const row = $('.by-hs-row', hs), stage = $('.by-hs-stage', hs), phone = $('.by-hs-phone', hs), cards = $$('.by-card', hs);
+  const car = { cur: 0, p: 0, base: 0, anim: 0 }, g = {};
+  function measure(vw, vh, hh, mobile) {
+    const head = $('.car-heading', stage), headTop = hh + (mobile ? 20 : 40);
+    if (head) head.style.top = `${headTop}px`;
+    const top = headTop + (head ? head.offsetHeight + (mobile ? 24 : 40) : 0);
+    const cs = Math.min(1, (vh - top - 24) / 878, (vw * 0.7) / 419);
+    const cw = 393 * cs, gap = mobile ? 28 : Math.max(48, Math.min(160, vw * 0.09));
+    phone.style.transform = `translate3d(${(vw - 419 * cs) / 2}px, ${top}px, 0) scale(${cs})`;
+    row.style.top = `${top + 13 * cs}px`;
+    row.style.setProperty('--cw', `${cw}px`); row.style.setProperty('--chh', `${852 * cs}px`);
+    row.style.setProperty('--pad', `${47 * cs}px`); row.style.setProperty('--rad', `${55 * cs}px`); row.style.gap = `${gap}px`;
+    const lens = cards.map((c) => { const im = $('img', c); return im && im.naturalWidth ? Math.max(0, cw * im.naturalHeight / im.naturalWidth + 47 * cs - 852 * cs) : 0; });
+    Object.assign(g, { step: cw + gap, first: vw / 2 - cw / 2, fin: vh * 1.8, lens });
+    hs.style.height = `${vh + g.fin + vh * 0.25}px`;
+  }
+  function paint() {
+    if (!g.fin) return;
+    const f = clamp01(-hs.getBoundingClientRect().top / g.fin);
+    if (f < car.base) car.base = f;                                   // scrolling back up rewinds this screen
+    const local = clamp01((f - car.base) / Math.max(0.0001, 1 - car.base));
+    cards.forEach((c, k) => {
+      const im = $('img', c);
+      if (im) im.style.transform = `translate3d(0, ${k === car.cur ? -ramp(local, 0.04, 0.96) * (g.lens[k] || 0) : 0}px, 0)`;
+      c.style.setProperty('--near', clamp01(1 - Math.abs(k - car.p)).toFixed(3));
+      c.classList.toggle('is-current', k === car.cur);
+    });
+    row.style.transform = `translate3d(${g.first - car.p * g.step}px, 0, 0)`;
+  }
+  function goTo(k) {
+    if (k === car.cur || k < 0 || k >= cards.length) return;
+    const from = car.p, t0 = performance.now(), dur = 950;
+    // Jump back to the start of this carousel (invisible: it's pinned) so the new screen gets its full scroll.
+    car.cur = k; car.base = 0;
+    const startY = hs.getBoundingClientRect().top + scrollY;
+    if (scrollY > startY + 1) scrollTo({ top: startY, behavior: 'instant' });
+    cancelAnimationFrame(car.anim);
+    const step = (now) => { const t = clamp01((now - t0) / dur); car.p = lerp(from, k, ease(t)); paint(); if (t < 1) car.anim = requestAnimationFrame(step); };
+    car.anim = requestAnimationFrame(step);
+  }
+  row.addEventListener('click', (e) => { const c = e.target.closest('.by-card'); if (c) goTo(cards.indexOf(c)); });
+  row.addEventListener('keydown', (e) => { const c = e.target.closest('.by-card'); if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); goTo(cards.indexOf(c)); } });
+  return { measure, paint, destroy() { cancelAnimationFrame(car.anim); } };
+}
+
 function BywaysPage(d) {
   const B = BYWAYS;
   const el = h(`<div class="digital-page by">
@@ -869,18 +925,11 @@ function BywaysPage(d) {
         <div class="by-steps">${B.steps.map((st, i) => `<div class="by-step tone-${st.tone}" data-i="${i}"><p class="by-step-n">${esc(st.n)}</p><p>${esc(st.text)}</p></div>`).join('')}</div>
       </div>
     </div>
-    ${d.carousel?.length ? `<section class="by-more"><div class="by-hs"><div class="by-hs-stage">
-      ${d.carouselTitle ? `<h2 class="car-heading">${esc(d.carouselTitle).replace(/\n/g, '<br>')}</h2>` : ''}
-      ${d.carouselTitleEnd ? `<h2 class="car-heading is-end" aria-hidden="true">${esc(d.carouselTitleEnd).replace(/\n/g, '<br>')}</h2>` : ''}
-      <div class="by-hs-row">${d.carousel.map((c, i) => `<figure class="by-card" role="button" tabindex="0" aria-label="Show screen ${i + 1}">${img(c.img, { alt: c.text || d.title, lazy: false })}</figure>`).join('')}</div>
-      <div class="by-hs-phone" aria-hidden="true">
-        <img class="by-frame-img" src="/assets/img/byways/phone-frame.webp" alt="">
-      </div>
-    </div></div></section>` : ''}
+    ${(d.carousels || []).map((c) => phoneCarouselHTML(c, d.title)).join('')}
     ${cta()}
   </div>`);
   const stage = $('.by-stage', el), wipe = $('.by-wipe', el);
-  const hs = $('.by-hs', el), hsRow = $('.by-hs-row', el), hsStage = $('.by-hs-stage', el), hsPhone = $('.by-hs-phone', el), cards = $$('.by-card', el);
+  const carousels = $$('.by-hs', el).map((hs) => phoneCarousel(hs));
   const track = $('.by-track', el), phone = $('.by-phone', el), shots = $$('.by-shot', el), steps = $$('.by-step', el), hero = $('.by-hero', el);
   let geo;
   function measure() {
@@ -895,22 +944,7 @@ function BywaysPage(d) {
       text: mobile ? { x: (vw - Math.min(369, vw - 40)) / 2, y: hh + 12 + ph + 22, w: Math.min(369, vw - 40) } : { x: Math.min(x0 + (973 / 1440) * W, (vw + pw) / 2 + 48), y: null, w: Math.min(369, vw - ((vw + pw) / 2 + 48) - 24) },
     };
     track.style.height = `${(B.end + 1) * vh}px`;
-    if (hs) {   // Carousel: the phone stays put in the middle; the stop screens slide through it as you scroll
-      const heads = $$('.car-heading', hsStage), headTop = hh + (mobile ? 20 : 40);
-      heads.forEach((x) => { x.style.top = `${headTop}px`; });
-      const headH = Math.max(0, ...heads.map((x) => x.offsetHeight));
-      const top = headTop + (heads.length ? headH + (mobile ? 24 : 40) : 0);
-      const cs = Math.min(1, (vh - top - 24) / 878, (vw * 0.7) / 419);
-      const cw = 393 * cs, gap = mobile ? 28 : Math.max(48, Math.min(160, vw * 0.09));
-      hsPhone.style.transform = `translate3d(${(vw - 419 * cs) / 2}px, ${top}px, 0) scale(${cs})`;
-      hsRow.style.top = `${top + 13 * cs}px`;
-      hsRow.style.setProperty('--cw', `${cw}px`); hsRow.style.setProperty('--chh', `${852 * cs}px`);
-      hsRow.style.setProperty('--pad', `${47 * cs}px`); hsRow.style.setProperty('--rad', `${55 * cs}px`); hsRow.style.gap = `${gap}px`;
-      // Scrolling down moves the screen in the phone through its whole page; clicks change the screen.
-      const lens = cards.map((c) => { const im = $('img', c); return im && im.naturalWidth ? Math.max(0, cw * im.naturalHeight / im.naturalWidth + 47 * cs - 852 * cs) : 0; });
-      Object.assign(geo, { hsStep: cw + gap, hsFirst: vw / 2 - cw / 2, hsN: cards.length, hsFin: vh * 1.8, hsLens: lens });
-      hs.style.height = `${vh + geo.hsFin + vh * 0.25}px`;
-    }
+    carousels.forEach((c) => c.measure(vw, vh, hh, mobile));
     steps.forEach((st) => { st.style.left = `${geo.text.x}px`; st.style.width = `${geo.text.w}px`; st.style.top = geo.text.y != null ? `${geo.text.y}px` : `${hh + (vh - hh) / 2 - st.offsetHeight / 2}px`; });
     paint();
   }
@@ -937,40 +971,15 @@ function BywaysPage(d) {
     const vis = [ramp(u, 0.8, 1.2) * (1 - ramp(u, 2.4, 2.75)), ramp(u, 2.95, 3.3) * (1 - ramp(u, 5.8, 6.15)), ramp(u, 6.35, 6.7)];
     steps.forEach((st, i) => { st.style.opacity = vis[i]; st.style.transform = `translate3d(0, ${(1 - vis[i]) * 18}px, 0)`; st.style.visibility = vis[i] > 0.01 ? 'visible' : 'hidden'; });
     hero.style.opacity = 1 - ramp(u, 0.05, 0.5);
-    if (hs) {
-      const f = clamp01(-hs.getBoundingClientRect().top / geo.hsFin);
-      if (f < car.base) car.base = f;                                 // scrolling back up rewinds this screen
-      const local = clamp01((f - car.base) / Math.max(0.0001, 1 - car.base));
-      cards.forEach((c, k) => { const im = $('img', c); if (im) im.style.transform = `translate3d(0, ${k === car.cur ? -ramp(local, 0.04, 0.96) * (geo.hsLens[k] || 0) : 0}px, 0)`; });
-      const heads = $$('.car-heading', hsStage);
-      if (heads[1]) { heads[0].style.opacity = 1 - ramp(local, 0, 0.08); heads[1].style.opacity = ramp(local, 0.1, 0.2); }
-      hsRow.style.transform = `translate3d(${geo.hsFirst - car.p * geo.hsStep}px, 0, 0)`;
-      cards.forEach((c, k) => { const near = clamp01(1 - Math.abs(k - car.p)); c.style.setProperty('--near', near.toFixed(3)); c.classList.toggle('is-current', k === car.cur); });
-    }
+    carousels.forEach((c) => c.paint());
   }
-  // Carousel: click a screen beside the phone to bring it in. The new screen starts at its top.
-  const car = { cur: 0, p: 0, base: 0, anim: 0 };
-  function goTo(k) {
-    if (!hs || k === car.cur || k < 0 || k >= cards.length) return;
-    const from = car.p, t0 = performance.now(), dur = 950;
-    // Jump the page back to the start of the carousel (invisible: the carousel is pinned), so the
-    // new screen gets the full scroll distance for its details straight away.
-    car.cur = k; car.base = 0;
-    const startY = hs.getBoundingClientRect().top + scrollY;
-    if (scrollY > startY + 1) scrollTo({ top: startY, behavior: "instant" });
-    cancelAnimationFrame(car.anim);
-    const step = (now) => { const t = clamp01((now - t0) / dur); car.p = lerp(from, k, ease(t)); paint(); if (t < 1) car.anim = requestAnimationFrame(step); };
-    car.anim = requestAnimationFrame(step);
-  }
-  hsRow?.addEventListener('click', (e) => { const c = e.target.closest('.by-card'); if (c) goTo(cards.indexOf(c)); });
-  hsRow?.addEventListener('keydown', (e) => { const c = e.target.closest('.by-card'); if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); goTo(cards.indexOf(c)); } });
   const onResize = () => measure();
   addEventListener('resize', onResize);
   return {
     el, title: d.title,
     mount() { measure(); requestAnimationFrame(measure); $$('img', el).forEach((im) => im.complete || im.addEventListener('load', measure, { once: true })); },
     onScroll: paint,
-    destroy() { removeEventListener('resize', onResize); cancelAnimationFrame(car.anim); },
+    destroy() { removeEventListener('resize', onResize); carousels.forEach((c) => c.destroy()); },
   };
 }
 

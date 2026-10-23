@@ -38,6 +38,7 @@ export const DIGITAL = [
     "intro": "A mental health check-in app to help people understand their emotions, explore their thoughts, and find peace in their every day.",
     "carouselTitle": "",
     "carouselTitleEnd": "",
+    "carousels": [],
     "carousel": [],
     "thumb": "/assets/img/digital/feelgood-thumb.jpg",
     "hero": "/assets/img/feelgood/hero.png",
@@ -99,6 +100,7 @@ export const DIGITAL = [
     "intro": "An AI-assisted writing editor that understands your unique style, makes suggestions to maintain your voice, prose, and story.",
     "carouselTitle": "",
     "carouselTitleEnd": "",
+    "carousels": [],
     "carousel": [],
     "thumb": "/assets/img/digital/storyright-thumb.jpg",
     "hero": "/assets/img/storyright/hero.jpg",
@@ -149,6 +151,52 @@ export const DIGITAL = [
     "layout": "byways",
     "carouselTitle": "See details and helpful links about each stop and see how adding that stop will alter your route",
     "carouselTitleEnd": "",
+    "carousels": [
+      {
+        "title": "See details and helpful links about each stop and see how adding that stop will alter your route",
+        "background": "",
+        "items": [
+          {
+            "img": "/assets/img/byways/stop-ladder-creek-falls.webp",
+            "text": ""
+          },
+          {
+            "img": "/assets/img/byways/stop-maple-pass.webp",
+            "text": ""
+          },
+          {
+            "img": "/assets/img/byways/stop-mountains-to-sound.webp",
+            "text": ""
+          },
+          {
+            "img": "/assets/img/byways/stop-leavenworth.webp",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "title": "Set your own preferences for how trips come to life – what types of stops you like, how far you want to drive each day, etc.",
+        "background": "#C4937E",
+        "items": [
+          {
+            "img": "/assets/img/byways/settings-what-you-like.webp",
+            "text": ""
+          },
+          {
+            "img": "/assets/img/byways/settings-driving-per-day.webp",
+            "text": ""
+          },
+          {
+            "img": "/assets/img/byways/settings-pace.webp",
+            "text": ""
+          },
+          {
+            "img": "/assets/img/byways/settings-roads-to-avoid.webp",
+            "text": ""
+          }
+        ]
+      }
+    ],
     "carousel": [
       {
         "img": "/assets/img/byways/stop-ladder-creek-falls.webp",
@@ -178,6 +226,7 @@ export const DIGITAL = [
     "intro": "An app that lets you and your partner find the right outfits for the evening's vibe, together",
     "carouselTitle": "",
     "carouselTitleEnd": "",
+    "carousels": [],
     "carousel": [],
     "thumb": "/assets/uploads/look-details-i82q.jpg",
     "hero": "/assets/uploads/home-2mjx.jpg",
@@ -687,6 +736,30 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 786,
     "h": 2990
+  },
+  "/assets/img/byways/settings-what-you-like.webp": {
+    "src": "assets/img/byways/settings-what-you-like.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 1986
+  },
+  "/assets/img/byways/settings-driving-per-day.webp": {
+    "src": "assets/img/byways/settings-driving-per-day.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 1704
+  },
+  "/assets/img/byways/settings-pace.webp": {
+    "src": "assets/img/byways/settings-pace.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 1704
+  },
+  "/assets/img/byways/settings-roads-to-avoid.webp": {
+    "src": "assets/img/byways/settings-roads-to-avoid.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 1704
   },
   "/assets/img/byways/thumb.jpg": {
     "src": "assets/img/byways/thumb.jpg",

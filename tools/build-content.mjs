@@ -76,6 +76,9 @@ const DIGITAL = load('digital').map((d) => {
   slug: d.slug, title: d.title, intro: d.intro || '', ...(d.layout ? { layout: d.layout } : {}),
   carouselTitle: d.carousel_title || '',
   carouselTitleEnd: d.carousel_title_end || '',
+  carousels: [['carousel', 'carousel_title', 'carousel_background'], ['carousel2', 'carousel2_title', 'carousel2_background']]
+    .map(([k, t, b]) => ({ title: d[t] || '', background: d[b] || '', items: (d[k] || []).map((c, i) => ({ img: useImage(c.image, `Digital "${d.title}" ${k} ${i + 1}`), text: c.text || '' })).filter((c) => c.img) }))
+    .filter((c) => c.items.length),
   carousel: (d.carousel || []).map((c, i) => ({ img: useImage(c.image, `Digital "${d.title}" carousel ${i + 1}`), text: c.text || '' })).filter((c) => c.img),
   thumb: useImage(d.thumb || d.heroSrc, `Digital "${d.title}" thumbnail`),
   hero: useImage(d.heroSrc, `Digital "${d.title}" hero`), heroWide: !!d.hero_wide,
