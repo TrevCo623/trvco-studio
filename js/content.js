@@ -268,7 +268,7 @@ export const DIGITAL = [
         "tone": "light",
         "caption": "Step 2: Choose an outfit that matches your vibe for the night",
         "bg": "var(--ink)",
-        "phone": 0.4246,
+        "phone": 0.2967,
         "img": "/assets/img/vibefit/looks.webp"
       },
       {
