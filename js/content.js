@@ -196,7 +196,7 @@ export const DIGITAL = [
       },
       {
         "title": "Set your own preferences for how trips come to life – what types of stops you like, how far you want to drive each day, etc.",
-        "background": "#C4937E",
+        "background": "#EBE5E5",
         "items": [
           {
             "img": "/assets/img/byways/settings-what-you-like.webp",
