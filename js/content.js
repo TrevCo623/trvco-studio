@@ -38,6 +38,7 @@ export const DIGITAL = [
     "intro": "A mental health check-in app to help people understand their emotions, explore their thoughts, and find peace in their every day.",
     "carouselTitle": "",
     "carouselTitleEnd": "",
+    "panels": [],
     "carousels": [],
     "carousel": [],
     "thumb": "/assets/img/digital/feelgood-thumb.jpg",
@@ -100,6 +101,7 @@ export const DIGITAL = [
     "intro": "An AI-assisted writing editor that understands your unique style, makes suggestions to maintain your voice, prose, and story.",
     "carouselTitle": "",
     "carouselTitleEnd": "",
+    "panels": [],
     "carousels": [],
     "carousel": [],
     "thumb": "/assets/img/digital/storyright-thumb.jpg",
@@ -151,6 +153,24 @@ export const DIGITAL = [
     "layout": "byways",
     "carouselTitle": "See details and helpful links about each stop and see how adding that stop will alter your route",
     "carouselTitleEnd": "",
+    "panels": [
+      {
+        "title": "Save your trips so you can plan ahead of time",
+        "background": "",
+        "color": "",
+        "img": "",
+        "button": "",
+        "url": ""
+      },
+      {
+        "title": "Check out Byways for yourself",
+        "background": "#316E59",
+        "color": "#F8F6F6",
+        "img": "",
+        "button": "See the Byways site",
+        "url": ""
+      }
+    ],
     "carousels": [
       {
         "title": "See details and helpful links about each stop and see how adding that stop will alter your route",
@@ -226,6 +246,7 @@ export const DIGITAL = [
     "intro": "An app that lets you and your partner find the right outfits for the evening's vibe, together",
     "carouselTitle": "",
     "carouselTitleEnd": "",
+    "panels": [],
     "carousels": [],
     "carousel": [],
     "thumb": "/assets/uploads/look-details-i82q.jpg",

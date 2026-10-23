@@ -45,5 +45,22 @@
       "image": "/assets/img/byways/settings-roads-to-avoid.webp",
       "text": ""
     }
+  ],
+  "panels": [
+    {
+      "title": "Save your trips so you can plan ahead of time",
+      "background": "",
+      "image": "",
+      "button": "",
+      "url": ""
+    },
+    {
+      "title": "Check out Byways for yourself",
+      "background": "#316E59",
+      "color": "#F8F6F6",
+      "image": "",
+      "button": "See the Byways site",
+      "url": ""
+    }
   ]
 }

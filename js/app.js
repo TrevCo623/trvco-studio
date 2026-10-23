@@ -926,6 +926,11 @@ function BywaysPage(d) {
       </div>
     </div>
     ${(d.carousels || []).map((c) => phoneCarouselHTML(c, d.title)).join('')}
+    ${(d.panels || []).map((p) => `<section class="by-panel" style="${p.background ? `background:${p.background};` : ''}${p.color ? `color:${p.color};` : ''}">
+      ${p.title ? `<h2 class="car-heading">${esc(p.title)}</h2>` : ''}
+      ${p.img ? `<div class="by-panel-img">${img(p.img, { alt: p.title || d.title })}</div>` : ''}
+      ${p.button ? `<a class="btn by-panel-btn" href="${esc(p.url || '#')}"${/^https?:/.test(p.url || '') ? ' target="_blank" rel="noopener"' : ''}>${esc(p.button)}</a>` : ''}
+    </section>`).join('')}
     ${cta()}
   </div>`);
   const stage = $('.by-stage', el), wipe = $('.by-wipe', el);

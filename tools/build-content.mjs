@@ -76,6 +76,7 @@ const DIGITAL = load('digital').map((d) => {
   slug: d.slug, title: d.title, intro: d.intro || '', ...(d.layout ? { layout: d.layout } : {}),
   carouselTitle: d.carousel_title || '',
   carouselTitleEnd: d.carousel_title_end || '',
+  panels: (d.panels || []).map((p, i) => ({ title: p.title || '', background: p.background || '', color: p.color || '', img: p.image ? useImage(p.image, `Digital "${d.title}" panel ${i + 1}`) : '', button: p.button || '', url: p.url || '' })),
   carousels: [['carousel', 'carousel_title', 'carousel_background'], ['carousel2', 'carousel2_title', 'carousel2_background']]
     .map(([k, t, b]) => ({ title: d[t] || '', background: d[b] || '', items: (d[k] || []).map((c, i) => ({ img: useImage(c.image, `Digital "${d.title}" ${k} ${i + 1}`), text: c.text || '' })).filter((c) => c.img) }))
     .filter((c) => c.items.length),
