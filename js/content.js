@@ -158,7 +158,7 @@ export const DIGITAL = [
         "title": "Save your trips so you can plan ahead of time",
         "background": "",
         "color": "",
-        "img": "",
+        "img": "/assets/img/byways/panel-trips.webp",
         "button": "",
         "url": ""
       },
@@ -166,7 +166,7 @@ export const DIGITAL = [
         "title": "Check out Byways for yourself",
         "background": "#316E59",
         "color": "#F8F6F6",
-        "img": "",
+        "img": "/assets/img/byways/panel-saved-trip.webp",
         "button": "See the Byways site",
         "url": ""
       }
@@ -735,6 +735,18 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 2500,
     "h": 1379
+  },
+  "/assets/img/byways/panel-trips.webp": {
+    "src": "assets/img/byways/panel-trips.webp",
+    "cdn": "",
+    "w": 998,
+    "h": 1916
+  },
+  "/assets/img/byways/panel-saved-trip.webp": {
+    "src": "assets/img/byways/panel-saved-trip.webp",
+    "cdn": "",
+    "w": 998,
+    "h": 1916
   },
   "/assets/img/byways/stop-ladder-creek-falls.webp": {
     "src": "assets/img/byways/stop-ladder-creek-falls.webp",

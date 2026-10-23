@@ -575,7 +575,7 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 /* Byways closing panels */
 .by-panel { display: flex; flex-direction: column; align-items: center; gap: 64px; padding: 166px 24px 174px; background: var(--paper); color: var(--ink); text-align: center; }
 .by-panel .car-heading { margin: 0 auto; color: inherit; }
-.by-panel-img img { display: block; max-width: min(100%, 1100px); max-height: 80vh; width: auto; height: auto; margin: 0 auto; }
+.by-panel-img img { display: block; max-width: min(100%, 499px); max-height: 85vh; width: auto; height: auto; margin: 0 auto; }
 .by-panel-btn { width: 292px; height: 63px; background: var(--ink); color: var(--paper); font-weight: 600; font-size: 17.6px; letter-spacing: .02em; }
 .by-panel-btn:hover { background: #2e2e2b; }
 @media (max-width: 700px) { .by-panel { padding: 96px 20px 104px; gap: 40px; } }

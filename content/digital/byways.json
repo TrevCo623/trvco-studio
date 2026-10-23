@@ -50,7 +50,7 @@
     {
       "title": "Save your trips so you can plan ahead of time",
       "background": "",
-      "image": "",
+      "image": "/assets/img/byways/panel-trips.webp",
       "button": "",
       "url": ""
     },
@@ -58,7 +58,7 @@
       "title": "Check out Byways for yourself",
       "background": "#316E59",
       "color": "#F8F6F6",
-      "image": "",
+      "image": "/assets/img/byways/panel-saved-trip.webp",
       "button": "See the Byways site",
       "url": ""
     }
