@@ -873,12 +873,16 @@ function BywaysPage(d) {
     </div>
     ${d.carousel?.length ? `<section class="by-more"><div class="by-hs"><div class="by-hs-stage">
       ${d.carouselTitle ? `<h2 class="car-heading">${esc(d.carouselTitle).replace(/\n/g, '<br>')}</h2>` : ''}
-      <div class="by-hs-row">${d.carousel.map((c) => `<figure class="by-card">${img(c.img, { alt: c.text || d.title })}${c.text ? `<figcaption>${esc(c.text)}</figcaption>` : ''}</figure>`).join('')}</div>
+      <div class="by-hs-row">${d.carousel.map((c) => `<figure class="by-card">${img(c.img, { alt: c.text || d.title })}</figure>`).join('')}</div>
+      <div class="by-hs-phone" aria-hidden="true">
+        <i class="by-btn by-btn-action"></i><i class="by-btn by-btn-up"></i><i class="by-btn by-btn-down"></i><i class="by-btn by-btn-side"></i>
+        <div class="by-ring by-ring-frame"></div><div class="by-ring by-ring-bezel"></div><div class="by-island"></div>
+      </div>
     </div></div></section>` : ''}
     ${cta()}
   </div>`);
   const stage = $('.by-stage', el), wipe = $('.by-wipe', el);
-  const hs = $('.by-hs', el), hsRow = $('.by-hs-row', el), hsStage = $('.by-hs-stage', el);
+  const hs = $('.by-hs', el), hsRow = $('.by-hs-row', el), hsStage = $('.by-hs-stage', el), hsPhone = $('.by-hs-phone', el), cards = $$('.by-card', el);
   const track = $('.by-track', el), phone = $('.by-phone', el), shots = $$('.by-shot', el), steps = $$('.by-step', el), hero = $('.by-hero', el);
   let geo;
   function measure() {
@@ -889,19 +893,22 @@ function BywaysPage(d) {
     geo = {
       vh, s, mobile,
       start: { x: (vw - pw) / 2, y: heroTop },
-      side: mobile ? { x: (vw - pw) / 2, y: hh + 12 } : { x: x0 + (470 / 1440) * W - pw / 2, y: hh + (vh - hh - ph) / 2 },
-      text: mobile ? { x: (vw - Math.min(369, vw - 40)) / 2, y: hh + 12 + ph + 22, w: Math.min(369, vw - 40) } : { x: x0 + (853 / 1440) * W, y: null, w: 369 },
+      side: mobile ? { x: (vw - pw) / 2, y: hh + 12 } : { x: (vw - pw) / 2, y: hh + (vh - hh - ph) / 2 },
+      text: mobile ? { x: (vw - Math.min(369, vw - 40)) / 2, y: hh + 12 + ph + 22, w: Math.min(369, vw - 40) } : { x: Math.min(x0 + (973 / 1440) * W, (vw + pw) / 2 + 48), y: null, w: Math.min(369, vw - ((vw + pw) / 2 + 48) - 24) },
     };
     track.style.height = `${(B.end + 1) * vh}px`;
-    if (hs) {   // Carousel: a sticky row that slides sideways while you scroll down
-      const head = $('.car-heading', hsStage), top = hh + (mobile ? 24 : 48) + (head ? head.offsetHeight + (mobile ? 28 : 56) : 0);
-      const ch = Math.max(260, Math.min(779, vh - top - (mobile ? 24 : 48)));
-      hsRow.style.top = `${top}px`; hsRow.style.setProperty('--ch', `${ch}px`);
-      if (head) head.style.top = `${hh + (mobile ? 24 : 48)}px`;
-      const padX = mobile ? 20 : Math.max(24, (93 / 1440) * Math.min(vw, 1440) + (vw - Math.min(vw, 1440)) / 2);
-      hsRow.style.paddingLeft = hsRow.style.paddingRight = `${padX}px`;
-      geo.hsShift = Math.max(0, hsRow.scrollWidth - vw);
-      hs.style.height = `${vh + geo.hsShift + vh * 0.25}px`;
+    if (hs) {   // Carousel: the phone stays put in the middle; the stop screens slide through it as you scroll
+      const head = $('.car-heading', hsStage), headTop = hh + (mobile ? 20 : 40);
+      if (head) head.style.top = `${headTop}px`;
+      const top = headTop + (head ? head.offsetHeight + (mobile ? 24 : 40) : 0);
+      const cs = Math.min(1, (vh - top - 24) / 878, (vw * 0.7) / 419);
+      const cw = 393 * cs, gap = mobile ? 28 : Math.max(48, Math.min(160, vw * 0.09));
+      hsPhone.style.transform = `translate3d(${(vw - 419 * cs) / 2}px, ${top}px, 0) scale(${cs})`;
+      hsRow.style.top = `${top + 13 * cs}px`;
+      hsRow.style.setProperty('--cw', `${cw}px`); hsRow.style.setProperty('--chh', `${852 * cs}px`);
+      hsRow.style.setProperty('--pad', `${47 * cs}px`); hsRow.style.setProperty('--rad', `${55 * cs}px`); hsRow.style.gap = `${gap}px`;
+      Object.assign(geo, { hsStep: cw + gap, hsFirst: vw / 2 - cw / 2, hsN: cards.length });
+      hs.style.height = `${vh + Math.max(1, cards.length - 1) * vh * 0.9 + vh * 0.3}px`;
     }
     steps.forEach((st) => { st.style.left = `${geo.text.x}px`; st.style.width = `${geo.text.w}px`; st.style.top = geo.text.y != null ? `${geo.text.y}px` : `${hh + (vh - hh) / 2 - st.offsetHeight / 2}px`; });
     paint();
@@ -930,8 +937,11 @@ function BywaysPage(d) {
     steps.forEach((st, i) => { st.style.opacity = vis[i]; st.style.transform = `translate3d(0, ${(1 - vis[i]) * 18}px, 0)`; st.style.visibility = vis[i] > 0.01 ? 'visible' : 'hidden'; });
     hero.style.opacity = 1 - ramp(u, 0.05, 0.5);
     if (hs) {
-      const r = hs.getBoundingClientRect(), span = Math.max(1, hs.offsetHeight - geo.vh - geo.vh * 0.25);
-      hsRow.style.transform = `translate3d(${-clamp01(-r.top / span) * geo.hsShift}px, 0, 0)`;
+      const r = hs.getBoundingClientRect(), span = Math.max(1, hs.offsetHeight - geo.vh - geo.vh * 0.3);
+      const t = clamp01(-r.top / span) * Math.max(0, geo.hsN - 1);
+      const i = Math.floor(t), f = t - i, p = Math.min(geo.hsN - 1, i + ease(ramp(f, 0.3, 1)));   // pause on each screen, then glide
+      hsRow.style.transform = `translate3d(${geo.hsFirst - p * geo.hsStep}px, 0, 0)`;
+      cards.forEach((c, k) => { const near = clamp01(1 - Math.abs(k - p)); c.style.setProperty('--near', near.toFixed(3)); });
     }
   }
   const onResize = () => measure();
