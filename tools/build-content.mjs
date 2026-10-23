@@ -97,6 +97,7 @@ const DIGITAL = load('digital').map((d) => {
     if (s.button) { o.button = s.button; o.url = s.url || ''; }
     if (s.image) o.img = useImage(s.image, where);
     if (s.screen) o.screen = useImage(s.screen, where);
+    if (s.frame) o.frame = useImage(s.frame, where);
     if (s.hole) o.hole = s.hole;
     if (s.images) o.imgs = s.images.map((im) => useImage(im, where)).filter(Boolean);
     return o;

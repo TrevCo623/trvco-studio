@@ -10,17 +10,18 @@
   ],
   "sections": [
     {
-      "type": "phones",
+      "type": "phone-carousel",
       "tone": "dark",
       "background": "paper",
       "phone": 0.6403,
       "caption": "An onboarding quiz helps set your style and what you want to accomplish with your fits",
       "images": [
-        "/assets/img/vibefit/quiz-fit.webp",
-        "/assets/img/vibefit/quiz-colors.webp",
-        "/assets/img/vibefit/quiz-off-the-table.webp",
-        "/assets/img/vibefit/quiz-struggle.webp"
-      ]
+        "/assets/img/vibefit/quiz-fit-screen.webp",
+        "/assets/img/vibefit/quiz-colors-screen.webp",
+        "/assets/img/vibefit/quiz-off-the-table-screen.webp",
+        "/assets/img/vibefit/quiz-struggle-screen.webp"
+      ],
+      "frame": "/assets/img/vibefit/phone-frame.webp"
     },
     {
       "type": "full",

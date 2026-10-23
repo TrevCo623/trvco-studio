@@ -638,3 +638,20 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .cs-panel-btn { margin-top: 8px; width: 292px; height: 63px; background: var(--ink); color: var(--paper); font-weight: 600; font-size: 17.6px; letter-spacing: .02em; }
 .cs-panel-btn:hover { background: #2e2e2b; }
 @media (max-width: 760px) { .cs-panel { padding: 56px 18px 88px; } .cs-panel-img { margin-top: 24px; } }
+
+/* Byways-style phone carousel on Digital pages. Frame image is 2224x3336; its screen is the
+   1320x2866 rect at (452,197), corner radius 189. Cards are that screen. */
+.cs-pcar { padding: 102px 0 120px; overflow: hidden; text-align: center; --W: calc(var(--phone-w, 286px) / var(--pf, .6403)); --cw: calc(var(--W) * 1320 / 2224); --gap: 64px; }
+.cs-pcar .cs-caption { max-width: 292px; }
+.pcar-stage { position: relative; margin: 48px auto 0; width: var(--W); aspect-ratio: 2224 / 3336; touch-action: pan-y; }
+.pcar-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; -webkit-mask-image: linear-gradient(to bottom, #000 88%, transparent); mask-image: linear-gradient(to bottom, #000 88%, transparent); }
+.pcar-row { position: absolute; left: calc(var(--W) * 452 / 2224); top: calc(var(--W) * 197 / 2224); width: var(--cw); aspect-ratio: 1320 / 2866; }
+.pcar-card { --x: 0; --near: 0; position: absolute; inset: 0; padding: 0; border: 0; background: #f3f3f1; overflow: hidden; cursor: pointer;
+  transform: translateX(calc(var(--x) * (var(--cw) + var(--gap)))); opacity: calc(.5 + .5 * var(--near));
+  border-radius: calc(var(--cw) * 189 / 1320 * var(--near));
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(55% + 45% * var(--near)), transparent calc(100% + 45% * var(--near)));
+  mask-image: linear-gradient(to bottom, #000 calc(55% + 45% * var(--near)), transparent calc(100% + 45% * var(--near))); }
+.pcar-card.is-on { cursor: default; }
+.pcar-card img { display: block; width: 100%; height: 100%; }
+.cs-pcar .dnav { position: relative; margin-top: calc(var(--W) * -0.06); }
+@media (max-width: 760px) { .cs-pcar { padding: 32px 0 72px; --gap: 28px; } .pcar-stage { margin-top: 24px; } }

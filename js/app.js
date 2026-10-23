@@ -1038,6 +1038,17 @@ function DigitalPage(route) {
         ${s.button ? `<a class="btn cs-panel-btn" href="${esc(s.url || '#')}"${/^https?:/.test(s.url || '') ? ' target="_blank" rel="noopener"' : ''}>${esc(s.button)}</a>` : ''}
       </section>`;
     }
+    if (s.type === 'phone-carousel' && s.imgs?.length && s.frame) {
+      // Byways-style: one phone frame fixed in the middle; the screens slide through it, the ones
+      // either side shown without a frame, dimmed and fading out at the bottom.
+      return `<section class="cs cs-pcar ${tone}" style="${style}">${head}
+        <div class="pcar-stage">
+          <div class="pcar-row">${s.imgs.map((k, i) => `<button class="pcar-card" type="button" data-i="${i}" aria-label="Screen ${i + 1}">${img(k, { alt: `${s.caption || d.title} — ${i + 1} of ${s.imgs.length}` })}</button>`).join('')}</div>
+          ${img(s.frame, { alt: '', lazy: false, cls: 'pcar-frame' })}
+        </div>
+        <div class="dnav"><button class="dbtn" type="button" data-d="-1" aria-label="Previous" disabled>${arrow('left')}</button><button class="dbtn" type="button" data-d="1" aria-label="Next">${arrow('right')}</button></div>
+      </section>`;
+    }
     if (s.type === 'phones' && s.imgs?.length) {
       // A row of phone images: the current one in the middle, neighbours dimmed. Click, swipe or arrows.
       return `<section class="cs cs-phones ${tone}" style="${style}">${head}
@@ -1107,6 +1118,26 @@ function DigitalPage(route) {
     box.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
     box.addEventListener('touchend', (e) => { const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) go(cur + (dx < 0 ? 1 : -1)); }, { passive: true });
     go(0);
+  });
+  $$('.cs-pcar', el).forEach((box) => {
+    const cards = $$('.pcar-card', box), [prev, next] = $$('.dbtn', box); let cur = 0, p = 0, anim = 0;
+    const paint = () => cards.forEach((c, k) => { c.style.setProperty('--x', (k - p).toFixed(4)); c.style.setProperty('--near', clamp01(1 - Math.abs(k - p)).toFixed(3)); c.classList.toggle('is-on', k === cur); });
+    const go = (k) => {
+      k = Math.max(0, Math.min(cards.length - 1, k)); if (k === cur) return;
+      cur = k; prev.disabled = cur === 0; next.disabled = cur === cards.length - 1;
+      const from = p, t0 = performance.now(), dur = 700;
+      cancelAnimationFrame(anim);
+      const step = (now) => { const t = clamp01((now - t0) / dur); p = lerp(from, k, ease(t)); paint(); if (t < 1) anim = requestAnimationFrame(step); };
+      anim = requestAnimationFrame(step);
+    };
+    box.addEventListener('click', (e) => {
+      const b = e.target.closest('.dbtn'); if (b) return go(cur + Number(b.dataset.d));
+      const c = e.target.closest('.pcar-card'); if (c) go(Number(c.dataset.i));
+    });
+    let sx = 0, sy = 0;
+    box.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    box.addEventListener('touchend', (e) => { const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) go(cur + (dx < 0 ? 1 : -1)); }, { passive: true });
+    paint();
   });
   const scrollers = $$('.cs-scroll', el);
   const paintScroll = () => scrollers.forEach((sec) => {

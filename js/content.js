@@ -258,16 +258,17 @@ export const DIGITAL = [
     "heroPhone": 0.6403,
     "sections": [
       {
-        "type": "phones",
+        "type": "phone-carousel",
         "tone": "dark",
         "caption": "An onboarding quiz helps set your style and what you want to accomplish with your fits",
         "bg": "var(--paper)",
         "phone": 0.6403,
+        "frame": "/assets/img/vibefit/phone-frame.webp",
         "imgs": [
-          "/assets/img/vibefit/quiz-fit.webp",
-          "/assets/img/vibefit/quiz-colors.webp",
-          "/assets/img/vibefit/quiz-off-the-table.webp",
-          "/assets/img/vibefit/quiz-struggle.webp"
+          "/assets/img/vibefit/quiz-fit-screen.webp",
+          "/assets/img/vibefit/quiz-colors-screen.webp",
+          "/assets/img/vibefit/quiz-off-the-table-screen.webp",
+          "/assets/img/vibefit/quiz-struggle-screen.webp"
         ]
       },
       {
@@ -850,29 +851,35 @@ export const CONTENT_IMG = {
     "w": 2224,
     "h": 3336
   },
-  "/assets/img/vibefit/quiz-fit.webp": {
-    "src": "assets/img/vibefit/quiz-fit.webp",
+  "/assets/img/vibefit/phone-frame.webp": {
+    "src": "assets/img/vibefit/phone-frame.webp",
     "cdn": "",
     "w": 2224,
     "h": 3336
   },
-  "/assets/img/vibefit/quiz-colors.webp": {
-    "src": "assets/img/vibefit/quiz-colors.webp",
+  "/assets/img/vibefit/quiz-fit-screen.webp": {
+    "src": "assets/img/vibefit/quiz-fit-screen.webp",
     "cdn": "",
-    "w": 2224,
-    "h": 3336
+    "w": 1320,
+    "h": 2866
   },
-  "/assets/img/vibefit/quiz-off-the-table.webp": {
-    "src": "assets/img/vibefit/quiz-off-the-table.webp",
+  "/assets/img/vibefit/quiz-colors-screen.webp": {
+    "src": "assets/img/vibefit/quiz-colors-screen.webp",
     "cdn": "",
-    "w": 2224,
-    "h": 3336
+    "w": 1320,
+    "h": 2866
   },
-  "/assets/img/vibefit/quiz-struggle.webp": {
-    "src": "assets/img/vibefit/quiz-struggle.webp",
+  "/assets/img/vibefit/quiz-off-the-table-screen.webp": {
+    "src": "assets/img/vibefit/quiz-off-the-table-screen.webp",
     "cdn": "",
-    "w": 2224,
-    "h": 3336
+    "w": 1320,
+    "h": 2866
+  },
+  "/assets/img/vibefit/quiz-struggle-screen.webp": {
+    "src": "assets/img/vibefit/quiz-struggle-screen.webp",
+    "cdn": "",
+    "w": 1320,
+    "h": 2866
   },
   "/assets/img/vibefit/choose-vibe.jpg": {
     "src": "assets/img/vibefit/choose-vibe.jpg",
@@ -885,12 +892,6 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 3200,
     "h": 2224
-  },
-  "/assets/img/vibefit/phone-frame.webp": {
-    "src": "assets/img/vibefit/phone-frame.webp",
-    "cdn": "",
-    "w": 2224,
-    "h": 3336
   },
   "/assets/img/vibefit/look-details-screen.jpg": {
     "src": "assets/img/vibefit/look-details-screen.jpg",
