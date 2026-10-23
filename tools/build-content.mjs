@@ -99,6 +99,9 @@ const DIGITAL = load('digital').map((d) => {
     if (s.screen) o.screen = useImage(s.screen, where);
     if (s.frame) o.frame = useImage(s.frame, where);
     if (s.hole) o.hole = s.hole;
+    if (/^#[0-9a-f]{6}$/i.test(s.background || '')) o.bgHex = s.background;
+    if (s.intro) o.intro = { caption: s.intro.caption || '', tone: s.intro.tone || 'dark', bg: s.intro.background || '#F8F6F6',
+      sides: useImage(s.intro.sides, where), screen: useImage(s.intro.screen, where), sidesX: s.intro.sides_x, sidesW: s.intro.sides_w, geo: s.intro.geo };
     if (s.images) o.imgs = s.images.map((im) => useImage(im, where)).filter(Boolean);
     return o;
   }),

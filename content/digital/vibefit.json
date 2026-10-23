@@ -18,12 +18,16 @@
       "phone": 0.6403
     },
     {
-      "type": "panel",
-      "tone": "dark",
-      "image": "/assets/img/vibefit/looks.webp",
-      "background": "paper",
-      "caption": "Step 2: Choose an outfit that matches your vibe for the night",
-      "phone": 0.2967
+      "type": "row",
+      "tone": "light",
+      "caption": "Step 2: Share with a partner to sync your vibe and fits for the night",
+      "background": "#998A9D",
+      "phone": 0.6403,
+      "images": [
+        "/assets/img/vibefit/share-waiting-notice.webp",
+        "/assets/img/vibefit/share-waiting.webp",
+        "/assets/img/vibefit/share-fun-night.webp"
+      ]
     },
     {
       "type": "scroll",
@@ -38,19 +42,26 @@
         "h": 2612
       },
       "phone": 0.6403,
-      "caption": "Step 3: Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet"
-    },
-    {
-      "type": "row",
-      "tone": "light",
-      "caption": "Share with a partner to sync your vibe and fits for the night",
-      "background": "#998A9D",
-      "phone": 0.6403,
-      "images": [
-        "/assets/img/vibefit/share-waiting-notice.webp",
-        "/assets/img/vibefit/share-waiting.webp",
-        "/assets/img/vibefit/share-fun-night.webp"
-      ]
+      "caption": "Step 4: Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet",
+      "intro": {
+        "caption": "Step 3: Choose an outfit that matches your vibe for the night",
+        "tone": "dark",
+        "background": "#F8F6F6",
+        "sides": "/assets/img/vibefit/looks-sides.webp",
+        "screen": "/assets/img/vibefit/looks-screen.jpg",
+        "sides_x": 1288,
+        "sides_w": 4800,
+        "geo": {
+          "holeW": 1320,
+          "holeTop": 193,
+          "card": {
+            "x": 80,
+            "y": 678,
+            "w": 1150
+          },
+          "photoY": 428
+        }
+      }
     },
     {
       "type": "phone-carousel",

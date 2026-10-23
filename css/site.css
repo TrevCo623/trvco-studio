@@ -688,3 +688,11 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 }
 .uniform-phones .cs-panel { overflow-x: clip; }
 @media (min-width: 761px) { .uniform-phones .cs-panel .cs-caption, .uniform-phones .cs-pcar .cs-caption, .uniform-phones .cs-scroll .cs-caption { max-width: 1000px; } }
+
+/* Scrolling phone with an intro state (VibeFit Step 3 -> 4) */
+.cs-scroll.has-intro { height: calc(var(--vh, 100vh) * 4); }
+.cs-scroll.has-intro .cs-scroll-stage { overflow: hidden; }
+.cs-caps { display: grid; width: 100%; }
+.cs-caps > .cs-caption { grid-area: 1 / 1; }
+.cs-scroll-sides { position: absolute; top: 0; height: 100%; max-width: none; pointer-events: none; }
+.cs-scroll-intro { position: absolute; left: 0; top: 0; width: 100%; height: auto; transform-origin: 0 0; will-change: transform, opacity; }

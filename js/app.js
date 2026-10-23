@@ -1065,11 +1065,17 @@ function DigitalPage(route) {
     if (s.type === 'scroll' && s.img && s.screen) {
       // A phone whose screen scrolls through a long screenshot while the section is pinned.
       // s.hole = the screen opening in the frame image, in its pixels: { x, y, w, h }.
-      const F = IMG[s.img], H = s.hole;
-      return `<section class="cs cs-scroll ${tone}" style="${style}"><div class="cs-scroll-stage">
-        ${head}
+      // Optional s.intro: an earlier state the section starts in and morphs out of (see paintScroll).
+      const F = IMG[s.img], H = s.hole, I = s.intro;
+      const caps = I
+        ? `<div class="cs-caps"><p class="cs-caption cap-a" style="color:${I.tone === 'light' ? 'var(--paper)' : 'var(--ink)'}">${esc(I.caption)}</p><p class="cs-caption cap-b">${esc(s.caption || '')}</p></div>`
+        : head;
+      const SW = I?.sidesW || F.w;
+      return `<section class="cs cs-scroll ${tone}${I ? ' has-intro' : ''}" style="${style}"${I ? ` data-from="${esc(I.bg)}" data-to="${esc(s.bgHex || '')}"` : ''}><div class="cs-scroll-stage">
+        ${caps}
         <div class="cs-scroll-phone${s.phone ? ' has-phone' : ''}" style="aspect-ratio:${F.w}/${F.h}">
-          <div class="cs-scroll-screen" style="left:${(H.x / F.w) * 100}%;top:${(H.y / F.h) * 100}%;width:${(H.w / F.w) * 100}%;height:${(H.h / F.h) * 100}%">${img(s.screen, { alt: s.caption || '', lazy: false })}</div>
+          ${I ? img(I.sides, { alt: '', lazy: false, cls: 'cs-scroll-sides' }).replace('<img ', `<img style="left:${(-I.sidesX / F.w) * 100}%;width:${(SW / F.w) * 100}%" `) : ''}
+          <div class="cs-scroll-screen" style="left:${(H.x / F.w) * 100}%;top:${(H.y / F.h) * 100}%;width:${(H.w / F.w) * 100}%;height:${(H.h / F.h) * 100}%">${img(s.screen, { alt: s.caption || '', lazy: false, cls: 'cs-scroll-main' })}${I ? img(I.screen, { alt: I.caption, lazy: false, cls: 'cs-scroll-intro' }) : ''}</div>
           ${img(s.img, { alt: '', lazy: false, cls: 'cs-scroll-frame' })}
         </div>
       </div></section>`;
@@ -1146,12 +1152,31 @@ function DigitalPage(route) {
     paint();
   });
   const scrollers = $$('.cs-scroll', el);
+  const DIGITAL_INTRO = []; d.sections.forEach((x) => { if (x.type === 'scroll' && x.intro) DIGITAL_INTRO.push(x.intro.geo); });
+  $$('.cs-scroll.has-intro', el).forEach((sec, i) => { sec.dataset.k = i; });
+  const hex = (c) => { const n = parseInt(c.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
   const paintScroll = () => scrollers.forEach((sec) => {
     const st = $('.cs-scroll-stage', sec), r = sec.getBoundingClientRect(), span = r.height - st.offsetHeight;
     const f = span > 0 ? clamp01((parseFloat(getComputedStyle(st).top) - r.top) / span) : 0;
-    const box = $('.cs-scroll-screen', sec), im = $('img', box);
+    const box = $('.cs-scroll-screen', sec), im = $('.cs-scroll-main', box);
     const len = Math.max(0, im.offsetHeight - box.offsetHeight);
-    im.style.transform = `translate3d(0, ${-ramp(f, 0.1, 0.9) * len}px, 0)`;
+    if (!sec.classList.contains('has-intro')) { im.style.transform = `translate3d(0, ${-ramp(f, 0.1, 0.9) * len}px, 0)`; return; }
+    // Intro: the outfit card in the phone grows into the details screen, the cards outside fade,
+    // the background and caption change; then the details screen scrolls.
+    const I = DIGITAL_INTRO[sec.dataset.k], k = box.offsetWidth / I.holeW, t = ease(ramp(f, 0.1, 0.36));
+    const sc = lerp(1, I.holeW / I.card.w, t);
+    const x = lerp(0, -I.card.x * (I.holeW / I.card.w), t) * k;
+    const y = lerp(-I.holeTop, I.photoY - I.card.y * (I.holeW / I.card.w) - I.holeTop, t) * k;
+    const intro = $('.cs-scroll-intro', box);
+    intro.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${sc})`;
+    intro.style.opacity = 1 - ramp(f, 0.34, 0.4);
+    im.style.opacity = ramp(f, 0.3, 0.38);
+    $('.cs-scroll-sides', sec).style.opacity = 1 - ramp(f, 0.1, 0.24);
+    const a = hex(sec.dataset.from), b = hex(sec.dataset.to), c = ease(ramp(f, 0.1, 0.34));
+    st.style.background = `rgb(${a.map((v, i) => Math.round(lerp(v, b[i], c))).join(',')})`;
+    $('.cap-a', sec).style.opacity = 1 - ramp(f, 0.1, 0.2);
+    $('.cap-b', sec).style.opacity = ramp(f, 0.24, 0.34);
+    im.style.transform = `translate3d(0, ${-ramp(f, 0.42, 0.95) * len}px, 0)`;
   });
   // uniform_phones pages: one phone size for the whole page, the largest that lets every section's
   // caption, phone and button/arrows fit on screen at once (like Byways). Phone images share one
