@@ -565,3 +565,9 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 
 .by-hs-stage .car-heading.is-end { opacity: 0; }
 .by-card img { will-change: transform; }
+
+.by-hs-row { pointer-events: auto; }
+.by-card { cursor: pointer; transition: box-shadow .2s ease; }
+.by-card.is-current { cursor: default; }
+@media (hover: hover) { .by-card:not(.is-current):hover { opacity: .8; } }
+.by-card:focus-visible { outline: 2px solid var(--clay); outline-offset: 4px; }
