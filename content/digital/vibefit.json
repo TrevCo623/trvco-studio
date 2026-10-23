@@ -5,45 +5,45 @@
   "title": "VibeFit",
   "intro": "An app that lets you and your partner find the right outfits for the evening's vibe, together",
   "photos": [
-    "/assets/uploads/look-details-i82q.jpg",
-    "/assets/uploads/home-2mjx.jpg"
+    "/assets/img/vibefit/look-details.jpg",
+    "/assets/img/vibefit/home.webp"
   ],
   "sections": [
     {
       "type": "full",
-      "image": "/assets/uploads/choose-vibe-u358.jpg",
+      "image": "/assets/img/vibefit/choose-vibe.jpg",
       "tone": "light",
       "caption": "Step 1: Choose the vibe for the night"
     },
     {
       "type": "feature",
       "tone": "light",
-      "image": "/assets/uploads/looks-u3ex.jpg",
+      "image": "/assets/img/vibefit/looks.webp",
       "background": "ink",
       "caption": "Step 2: Choose an outfit that matches your vibe for the night"
     },
     {
       "type": "full",
-      "image": "/assets/uploads/look-details-u3bj.jpg",
+      "image": "/assets/img/vibefit/look-details.jpg",
       "tone": "light",
       "caption": "Step 3: Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet"
     },
     {
       "type": "full",
-      "image": "/assets/uploads/invite-u39r.jpg",
+      "image": "/assets/img/vibefit/invite.jpg",
       "tone": "light",
       "caption": "Share with a partner to sync your vibe and fits for the night"
     },
     {
       "type": "full",
-      "image": "/assets/uploads/closet-u36s.jpg",
+      "image": "/assets/img/vibefit/closet.jpg",
       "tone": "light",
       "caption": "Add clothes you have to Your Closet to make the app more tailored to your style"
     },
     {
       "type": "feature",
       "tone": "light",
-      "image": "/assets/uploads/home-u38b.jpg",
+      "image": "/assets/img/vibefit/home.webp",
       "background": "ink"
     }
   ]

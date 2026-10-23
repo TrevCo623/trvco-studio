@@ -251,46 +251,46 @@ export const DIGITAL = [
     "panels": [],
     "carousels": [],
     "carousel": [],
-    "thumb": "/assets/uploads/look-details-i82q.jpg",
-    "hero": "/assets/uploads/home-2mjx.jpg",
+    "thumb": "/assets/img/vibefit/look-details.jpg",
+    "hero": "/assets/img/vibefit/home.webp",
     "heroWide": false,
     "sections": [
       {
         "type": "full",
         "tone": "light",
         "caption": "Step 1: Choose the vibe for the night",
-        "img": "/assets/uploads/choose-vibe-u358.jpg"
+        "img": "/assets/img/vibefit/choose-vibe.jpg"
       },
       {
         "type": "feature",
         "tone": "light",
         "caption": "Step 2: Choose an outfit that matches your vibe for the night",
         "bg": "var(--ink)",
-        "img": "/assets/uploads/looks-u3ex.jpg"
+        "img": "/assets/img/vibefit/looks.webp"
       },
       {
         "type": "full",
         "tone": "light",
         "caption": "Step 3: Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet",
-        "img": "/assets/uploads/look-details-u3bj.jpg"
+        "img": "/assets/img/vibefit/look-details.jpg"
       },
       {
         "type": "full",
         "tone": "light",
         "caption": "Share with a partner to sync your vibe and fits for the night",
-        "img": "/assets/uploads/invite-u39r.jpg"
+        "img": "/assets/img/vibefit/invite.jpg"
       },
       {
         "type": "full",
         "tone": "light",
         "caption": "Add clothes you have to Your Closet to make the app more tailored to your style",
-        "img": "/assets/uploads/closet-u36s.jpg"
+        "img": "/assets/img/vibefit/closet.jpg"
       },
       {
         "type": "feature",
         "tone": "light",
         "bg": "var(--ink)",
-        "img": "/assets/uploads/home-u38b.jpg"
+        "img": "/assets/img/vibefit/home.webp"
       }
     ]
   }
@@ -802,53 +802,41 @@ export const CONTENT_IMG = {
     "w": 2500,
     "h": 1667
   },
-  "/assets/uploads/look-details-i82q.jpg": {
-    "src": "assets/uploads/look-details-i82q.jpg",
+  "/assets/img/vibefit/look-details.jpg": {
+    "src": "assets/img/vibefit/look-details.jpg",
     "cdn": "",
-    "w": 2000,
-    "h": 1328
+    "w": 4000,
+    "h": 2656
   },
-  "/assets/uploads/home-2mjx.jpg": {
-    "src": "assets/uploads/home-2mjx.jpg",
+  "/assets/img/vibefit/home.webp": {
+    "src": "assets/img/vibefit/home.webp",
     "cdn": "",
-    "w": 1112,
-    "h": 1668
+    "w": 2224,
+    "h": 3336
   },
-  "/assets/uploads/choose-vibe-u358.jpg": {
-    "src": "assets/uploads/choose-vibe-u358.jpg",
+  "/assets/img/vibefit/choose-vibe.jpg": {
+    "src": "assets/img/vibefit/choose-vibe.jpg",
     "cdn": "",
-    "w": 2000,
-    "h": 1328
+    "w": 4000,
+    "h": 2656
   },
-  "/assets/uploads/looks-u3ex.jpg": {
-    "src": "assets/uploads/looks-u3ex.jpg",
+  "/assets/img/vibefit/looks.webp": {
+    "src": "assets/img/vibefit/looks.webp",
     "cdn": "",
-    "w": 2000,
-    "h": 1533
+    "w": 3200,
+    "h": 2224
   },
-  "/assets/uploads/look-details-u3bj.jpg": {
-    "src": "assets/uploads/look-details-u3bj.jpg",
+  "/assets/img/vibefit/invite.jpg": {
+    "src": "assets/img/vibefit/invite.jpg",
     "cdn": "",
-    "w": 2000,
-    "h": 1328
+    "w": 4000,
+    "h": 2656
   },
-  "/assets/uploads/invite-u39r.jpg": {
-    "src": "assets/uploads/invite-u39r.jpg",
+  "/assets/img/vibefit/closet.jpg": {
+    "src": "assets/img/vibefit/closet.jpg",
     "cdn": "",
-    "w": 2000,
-    "h": 1328
-  },
-  "/assets/uploads/closet-u36s.jpg": {
-    "src": "assets/uploads/closet-u36s.jpg",
-    "cdn": "",
-    "w": 2000,
-    "h": 1328
-  },
-  "/assets/uploads/home-u38b.jpg": {
-    "src": "assets/uploads/home-u38b.jpg",
-    "cdn": "",
-    "w": 1112,
-    "h": 1668
+    "w": 4000,
+    "h": 2656
   },
   "/assets/img/goods/go-outside-hat-1.jpg": {
     "src": "assets/img/goods/go-outside-hat-1.jpg",
