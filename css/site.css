@@ -696,3 +696,6 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .cs-caps > .cs-caption { grid-area: 1 / 1; }
 .cs-scroll-sides { position: absolute; top: 0; height: 100%; max-width: none; pointer-events: none; }
 .cs-scroll-intro { position: absolute; left: 0; top: 0; width: 100%; height: auto; transform-origin: 0 0; will-change: transform, opacity; }
+
+.cs-scroll-card { position: absolute; left: 0; top: 0; width: 100%; height: auto; transform-origin: 0 0; z-index: 2; will-change: transform, opacity; }
+.cs-scroll.has-intro .cs-scroll-main { position: relative; z-index: 3; }

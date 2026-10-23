@@ -1075,7 +1075,7 @@ function DigitalPage(route) {
         ${caps}
         <div class="cs-scroll-phone${s.phone ? ' has-phone' : ''}" style="aspect-ratio:${F.w}/${F.h}">
           ${I ? img(I.sides, { alt: '', lazy: false, cls: 'cs-scroll-sides' }).replace('<img ', `<img style="left:${(-I.sidesX / F.w) * 100}%;width:${(SW / F.w) * 100}%" `) : ''}
-          <div class="cs-scroll-screen" style="left:${(H.x / F.w) * 100}%;top:${(H.y / F.h) * 100}%;width:${(H.w / F.w) * 100}%;height:${(H.h / F.h) * 100}%">${img(s.screen, { alt: s.caption || '', lazy: false, cls: 'cs-scroll-main' })}${I ? img(I.screen, { alt: I.caption, lazy: false, cls: 'cs-scroll-intro' }) : ''}</div>
+          <div class="cs-scroll-screen" style="left:${(H.x / F.w) * 100}%;top:${(H.y / F.h) * 100}%;width:${(H.w / F.w) * 100}%;height:${(H.h / F.h) * 100}%">${img(s.screen, { alt: s.caption || '', lazy: false, cls: 'cs-scroll-main' })}${I ? img(I.screen, { alt: I.caption, lazy: false, cls: 'cs-scroll-intro' }) : ''}${I?.card ? img(I.card, { alt: '', lazy: false, cls: 'cs-scroll-card' }) : ''}</div>
           ${img(s.img, { alt: '', lazy: false, cls: 'cs-scroll-frame' })}
         </div>
       </div></section>`;
@@ -1163,12 +1163,18 @@ function DigitalPage(route) {
     if (!sec.classList.contains('has-intro')) { im.style.transform = `translate3d(0, ${-ramp(f, 0.1, 0.9) * len}px, 0)`; return; }
     // Intro: the outfit card in the phone grows into the details screen, the cards outside fade,
     // the background and caption change; then the details screen scrolls.
-    // The outfits screen fades all the way out, then the details screen fades in.
+    // The outfit card grows to fill the phone while everything around it fades; then the details
+    // screen fades in over it.
     const I = DIGITAL_INTRO[sec.dataset.k], k = box.offsetWidth / I.holeW;
-    const intro = $('.cs-scroll-intro', box);
+    const intro = $('.cs-scroll-intro', box), card = $('.cs-scroll-card', box);
     intro.style.transform = `translate3d(0, ${-I.holeTop * k}px, 0)`;
-    intro.style.opacity = 1 - ramp(f, 0.12, 0.22);
-    im.style.opacity = ramp(f, 0.25, 0.35);
+    intro.style.opacity = 1 - ramp(f, 0.08, 0.18);
+    if (card) {
+      const t = ease(ramp(f, 0.1, 0.3)), sc = lerp(I.card.w / I.holeW, 1, t);
+      card.style.transform = `translate3d(${lerp(I.card.x, 0, t) * k}px, ${(lerp(I.card.y, I.endY, t) - I.holeTop) * k}px, 0) scale(${sc})`;
+      card.style.opacity = 1 - ramp(f, 0.34, 0.35);
+    }
+    im.style.opacity = ramp(f, 0.31, 0.34);
     $('.cs-scroll-sides', sec).style.opacity = 1 - ramp(f, 0.1, 0.24);
     const a = hex(sec.dataset.from), b = hex(sec.dataset.to), c = ease(ramp(f, 0.1, 0.34));
     st.style.background = `rgb(${a.map((v, i) => Math.round(lerp(v, b[i], c))).join(',')})`;

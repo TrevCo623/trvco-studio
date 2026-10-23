@@ -48,7 +48,7 @@
         "tone": "dark",
         "background": "#F8F6F6",
         "sides": "/assets/img/vibefit/looks-sides.webp",
-        "screen": "/assets/img/vibefit/looks-screen.jpg",
+        "screen": "/assets/img/vibefit/looks-screen-bg.jpg",
         "sides_x": 1288,
         "sides_w": 4800,
         "geo": {
@@ -59,8 +59,9 @@
             "y": 678,
             "w": 1150
           },
-          "photoY": 428
-        }
+          "endY": 362
+        },
+        "card": "/assets/img/vibefit/looks-card.webp"
       }
     },
     {

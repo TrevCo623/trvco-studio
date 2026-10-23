@@ -298,7 +298,8 @@ export const DIGITAL = [
           "tone": "dark",
           "bg": "#F8F6F6",
           "sides": "/assets/img/vibefit/looks-sides.webp",
-          "screen": "/assets/img/vibefit/looks-screen.jpg",
+          "screen": "/assets/img/vibefit/looks-screen-bg.jpg",
+          "card": "/assets/img/vibefit/looks-card.webp",
           "sidesX": 1288,
           "sidesW": 4800,
           "geo": {
@@ -309,7 +310,7 @@ export const DIGITAL = [
               "y": 678,
               "w": 1150
             },
-            "photoY": 428
+            "endY": 362
           }
         }
       },
@@ -911,11 +912,17 @@ export const CONTENT_IMG = {
     "w": 3200,
     "h": 2224
   },
-  "/assets/img/vibefit/looks-screen.jpg": {
-    "src": "assets/img/vibefit/looks-screen.jpg",
+  "/assets/img/vibefit/looks-screen-bg.jpg": {
+    "src": "assets/img/vibefit/looks-screen-bg.jpg",
     "cdn": "",
     "w": 1320,
     "h": 2866
+  },
+  "/assets/img/vibefit/looks-card.webp": {
+    "src": "assets/img/vibefit/looks-card.webp",
+    "cdn": "",
+    "w": 1320,
+    "h": 2331
   },
   "/assets/img/vibefit/quiz-fit-screen.webp": {
     "src": "assets/img/vibefit/quiz-fit-screen.webp",
