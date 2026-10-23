@@ -37,6 +37,7 @@ export const DIGITAL = [
     "title": "Feel Good app",
     "intro": "A mental health check-in app to help people understand their emotions, explore their thoughts, and find peace in their every day.",
     "carouselTitle": "",
+    "carouselTitleEnd": "",
     "carousel": [],
     "thumb": "/assets/img/digital/feelgood-thumb.jpg",
     "hero": "/assets/img/feelgood/hero.png",
@@ -97,6 +98,7 @@ export const DIGITAL = [
     "title": "Storyright",
     "intro": "An AI-assisted writing editor that understands your unique style, makes suggestions to maintain your voice, prose, and story.",
     "carouselTitle": "",
+    "carouselTitleEnd": "",
     "carousel": [],
     "thumb": "/assets/img/digital/storyright-thumb.jpg",
     "hero": "/assets/img/storyright/hero.jpg",
@@ -146,13 +148,10 @@ export const DIGITAL = [
     "intro": "A routing app that helps you appreciate the journey, not just get to your destination.",
     "layout": "byways",
     "carouselTitle": "Byways will help you get the most out of your trip\nby showing you cool sites, towns, activities, and more byways",
+    "carouselTitleEnd": "See details and helpful links about each stop and see how adding that stop will alter your route",
     "carousel": [
       {
         "img": "/assets/img/byways/stop-ladder-creek-falls.webp",
-        "text": ""
-      },
-      {
-        "img": "/assets/img/byways/stop-leavenworth.webp",
         "text": ""
       },
       {
@@ -161,6 +160,10 @@ export const DIGITAL = [
       },
       {
         "img": "/assets/img/byways/stop-mountains-to-sound.webp",
+        "text": ""
+      },
+      {
+        "img": "/assets/img/byways/stop-leavenworth.webp",
         "text": ""
       }
     ],
@@ -174,6 +177,7 @@ export const DIGITAL = [
     "title": "VibeFit",
     "intro": "An app that lets you and your partner find the right outfits for the evening's vibe, together",
     "carouselTitle": "",
+    "carouselTitleEnd": "",
     "carousel": [],
     "thumb": "/assets/uploads/look-details-i82q.jpg",
     "hero": "/assets/uploads/home-2mjx.jpg",
@@ -666,12 +670,6 @@ export const CONTENT_IMG = {
     "w": 786,
     "h": 2592
   },
-  "/assets/img/byways/stop-leavenworth.webp": {
-    "src": "assets/img/byways/stop-leavenworth.webp",
-    "cdn": "",
-    "w": 786,
-    "h": 2990
-  },
   "/assets/img/byways/stop-maple-pass.webp": {
     "src": "assets/img/byways/stop-maple-pass.webp",
     "cdn": "",
@@ -683,6 +681,12 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 786,
     "h": 2688
+  },
+  "/assets/img/byways/stop-leavenworth.webp": {
+    "src": "assets/img/byways/stop-leavenworth.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 2990
   },
   "/assets/img/byways/thumb.jpg": {
     "src": "assets/img/byways/thumb.jpg",

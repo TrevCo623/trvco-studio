@@ -871,7 +871,8 @@ function BywaysPage(d) {
     </div>
     ${d.carousel?.length ? `<section class="by-more"><div class="by-hs"><div class="by-hs-stage">
       ${d.carouselTitle ? `<h2 class="car-heading">${esc(d.carouselTitle).replace(/\n/g, '<br>')}</h2>` : ''}
-      <div class="by-hs-row">${d.carousel.map((c) => `<figure class="by-card">${img(c.img, { alt: c.text || d.title })}</figure>`).join('')}</div>
+      ${d.carouselTitleEnd ? `<h2 class="car-heading is-end" aria-hidden="true">${esc(d.carouselTitleEnd).replace(/\n/g, '<br>')}</h2>` : ''}
+      <div class="by-hs-row">${d.carousel.map((c) => `<figure class="by-card">${img(c.img, { alt: c.text || d.title, lazy: false })}</figure>`).join('')}</div>
       <div class="by-hs-phone" aria-hidden="true">
         <img class="by-frame-img" src="/assets/img/byways/phone-frame.webp" alt="">
       </div>
@@ -895,17 +896,22 @@ function BywaysPage(d) {
     };
     track.style.height = `${(B.end + 1) * vh}px`;
     if (hs) {   // Carousel: the phone stays put in the middle; the stop screens slide through it as you scroll
-      const head = $('.car-heading', hsStage), headTop = hh + (mobile ? 20 : 40);
-      if (head) head.style.top = `${headTop}px`;
-      const top = headTop + (head ? head.offsetHeight + (mobile ? 24 : 40) : 0);
+      const heads = $$('.car-heading', hsStage), headTop = hh + (mobile ? 20 : 40);
+      heads.forEach((x) => { x.style.top = `${headTop}px`; });
+      const headH = Math.max(0, ...heads.map((x) => x.offsetHeight));
+      const top = headTop + (heads.length ? headH + (mobile ? 24 : 40) : 0);
       const cs = Math.min(1, (vh - top - 24) / 878, (vw * 0.7) / 419);
       const cw = 393 * cs, gap = mobile ? 28 : Math.max(48, Math.min(160, vw * 0.09));
       hsPhone.style.transform = `translate3d(${(vw - 419 * cs) / 2}px, ${top}px, 0) scale(${cs})`;
       hsRow.style.top = `${top + 13 * cs}px`;
       hsRow.style.setProperty('--cw', `${cw}px`); hsRow.style.setProperty('--chh', `${852 * cs}px`);
       hsRow.style.setProperty('--pad', `${47 * cs}px`); hsRow.style.setProperty('--rad', `${55 * cs}px`); hsRow.style.gap = `${gap}px`;
-      Object.assign(geo, { hsStep: cw + gap, hsFirst: vw / 2 - cw / 2, hsN: cards.length });
-      hs.style.height = `${vh + Math.max(1, cards.length - 1) * vh * 0.9 + vh * 0.3}px`;
+      // The last screen then scrolls through its whole page inside the phone.
+      const lastImg = $('img', cards.at(-1));
+      const lastH = lastImg && lastImg.naturalWidth ? cw * lastImg.naturalHeight / lastImg.naturalWidth : 0;
+      const move = Math.max(1, cards.length - 1) * vh * 0.9, fin = vh * 1.6;
+      Object.assign(geo, { hsStep: cw + gap, hsFirst: vw / 2 - cw / 2, hsN: cards.length, hsMove: move, hsFin: fin, hsLastScroll: Math.max(0, lastH + 47 * cs - 852 * cs) });
+      hs.style.height = `${vh + move + fin + vh * 0.3}px`;
     }
     steps.forEach((st) => { st.style.left = `${geo.text.x}px`; st.style.width = `${geo.text.w}px`; st.style.top = geo.text.y != null ? `${geo.text.y}px` : `${hh + (vh - hh) / 2 - st.offsetHeight / 2}px`; });
     paint();
@@ -934,8 +940,13 @@ function BywaysPage(d) {
     steps.forEach((st, i) => { st.style.opacity = vis[i]; st.style.transform = `translate3d(0, ${(1 - vis[i]) * 18}px, 0)`; st.style.visibility = vis[i] > 0.01 ? 'visible' : 'hidden'; });
     hero.style.opacity = 1 - ramp(u, 0.05, 0.5);
     if (hs) {
-      const r = hs.getBoundingClientRect(), span = Math.max(1, hs.offsetHeight - geo.vh - geo.vh * 0.3);
-      const t = clamp01(-r.top / span) * Math.max(0, geo.hsN - 1);
+      const y = -hs.getBoundingClientRect().top;
+      const t = clamp01(y / geo.hsMove) * Math.max(0, geo.hsN - 1);
+      const f2 = clamp01((y - geo.hsMove) / geo.hsFin);              // last screen: scroll its full page
+      const last = cards.at(-1), lastImg = $('img', last);
+      if (lastImg) lastImg.style.transform = `translate3d(0, ${-ease(ramp(f2, 0.15, 0.9)) * geo.hsLastScroll}px, 0)`;
+      const heads = $$('.car-heading', hsStage);
+      if (heads[1]) { heads[0].style.opacity = 1 - ramp(f2, 0, 0.12); heads[1].style.opacity = ramp(f2, 0.14, 0.26); }
       const i = Math.floor(t), f = t - i, p = Math.min(geo.hsN - 1, i + ease(ramp(f, 0.3, 1)));   // pause on each screen, then glide
       hsRow.style.transform = `translate3d(${geo.hsFirst - p * geo.hsStep}px, 0, 0)`;
       cards.forEach((c, k) => { const near = clamp01(1 - Math.abs(k - p)); c.style.setProperty('--near', near.toFixed(3)); });

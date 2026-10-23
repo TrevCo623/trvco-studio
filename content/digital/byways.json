@@ -14,16 +14,17 @@
       "text": ""
     },
     {
-      "image": "/assets/img/byways/stop-leavenworth.webp",
-      "text": ""
-    },
-    {
       "image": "/assets/img/byways/stop-maple-pass.webp",
       "text": ""
     },
     {
       "image": "/assets/img/byways/stop-mountains-to-sound.webp",
       "text": ""
+    },
+    {
+      "image": "/assets/img/byways/stop-leavenworth.webp",
+      "text": ""
     }
-  ]
+  ],
+  "carousel_title_end": "See details and helpful links about each stop and see how adding that stop will alter your route"
 }

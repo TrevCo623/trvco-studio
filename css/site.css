@@ -562,3 +562,6 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 /* Phone frame from Trev's blank-phone image (screen cut out), drawn over the screens. */
 .by-frame-img { position: absolute; left: -40px; top: -11.5px; width: 499px; height: 958px; max-width: none; pointer-events: none; z-index: 1; }
 .by-phone .by-island, .by-hs-phone .by-island { z-index: 2; }
+
+.by-hs-stage .car-heading.is-end { opacity: 0; }
+.by-card img { will-change: transform; }
