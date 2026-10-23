@@ -869,11 +869,11 @@ function phoneCarouselHTML(c, name) {
 function phoneCarousel(hs) {
   const row = $('.by-hs-row', hs), stage = $('.by-hs-stage', hs), phone = $('.by-hs-phone', hs), cards = $$('.by-card', hs);
   const car = { cur: 0, p: 0, base: 0, anim: 0 }, g = {};
-  function measure(vw, vh, hh, mobile) {
+  function measure(vw, vh, hh, mobile, S) {
     const head = $('.car-heading', stage), headTop = hh + (mobile ? 20 : 40);
     if (head) head.style.top = `${headTop}px`;
     const top = headTop + (head ? head.offsetHeight + (mobile ? 24 : 40) : 0);
-    const cs = Math.min(1, (vh - top - 24) / 878, (vw * 0.7) / 419);
+    const cs = S || Math.min(1, (vh - top - 24) / 878, (vw * 0.7) / 419);
     const cw = 393 * cs, gap = mobile ? 28 : Math.max(48, Math.min(160, vw * 0.09));
     phone.style.transform = `translate3d(${(vw - 419 * cs) / 2}px, ${top}px, 0) scale(${cs})`;
     row.style.top = `${top + 13 * cs}px`;
@@ -940,7 +940,17 @@ function BywaysPage(d) {
   let geo;
   function measure() {
     const vw = innerWidth, vh = innerHeight, hh = $('#header')?.offsetHeight || 84, mobile = vw < 900;
-    const s = mobile ? Math.min((vh - hh - 190) / 878, (vw * 0.62) / 419) : Math.min(1, (vh - hh - 48) / 878);
+    // One phone size for the whole page: the largest that lets every section (heading, phone, button)
+    // fit on screen at once.
+    const fits = [mobile ? (vh - hh - 190) / 878 : (vh - hh - 48) / 878, (vw * (mobile ? 0.62 : 0.7)) / 419];
+    $$('.by-hs-stage', el).forEach((st) => { const hd = $('.car-heading', st); fits.push((vh - hh - (mobile ? 44 : 80) - (hd ? hd.offsetHeight : 0) - 24) / 878); });
+    $$('.by-panel', el).forEach((pn) => {
+      const hd = $('.car-heading', pn), bt = $('.by-panel-btn', pn), gap = mobile ? 28 : 32;
+      // the panel images are 958 tall per 878 of phone (they include the shadow)
+      fits.push((vh - hh - (mobile ? 24 : 40) - (hd ? hd.offsetHeight + gap : 0) - (bt ? bt.offsetHeight + gap : 0) - 24) / 958);
+    });
+    const s = Math.min(1, ...fits);
+    el.style.setProperty('--phone-s', s);
     const pw = 419 * s, ph = 878 * s, W = Math.min(vw, 1440), x0 = (vw - W) / 2;
     const heroTop = mobile ? Math.max(hh + 250, vh * 0.56) : Math.min(557, vh * 0.6);
     geo = {
@@ -950,7 +960,7 @@ function BywaysPage(d) {
       text: mobile ? { x: (vw - Math.min(369, vw - 40)) / 2, y: hh + 12 + ph + 22, w: Math.min(369, vw - 40) } : { x: Math.min(x0 + (973 / 1440) * W, (vw + pw) / 2 + 48), y: null, w: Math.min(369, vw - ((vw + pw) / 2 + 48) - 24) },
     };
     track.style.height = `${(B.end + 1) * vh}px`;
-    carousels.forEach((c) => c.measure(vw, vh, hh, mobile));
+    carousels.forEach((c) => c.measure(vw, vh, hh, mobile, s));
     el.style.setProperty('--hh', `${hh}px`);
     steps.forEach((st) => { st.style.left = `${geo.text.x}px`; st.style.width = `${geo.text.w}px`; st.style.top = geo.text.y != null ? `${geo.text.y}px` : `${hh + (vh - hh) / 2 - st.offsetHeight / 2}px`; });
     paint();
