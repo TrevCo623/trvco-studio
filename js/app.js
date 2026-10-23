@@ -863,10 +863,8 @@ function BywaysPage(d) {
       <section class="by-hero"><h1>${esc(d.title)}</h1><p>${esc(d.intro)}</p></section>
       <div class="by-stage"><div class="by-wipe"></div>
         <div class="by-phone" aria-hidden="true">
-          <i class="by-btn by-btn-action"></i><i class="by-btn by-btn-up"></i><i class="by-btn by-btn-down"></i><i class="by-btn by-btn-side"></i>
-          <div class="by-frame"></div><div class="by-bezel"></div>
           <div class="by-screen">${B.screens.map((sc) => `<div class="by-shot" data-key="${sc.key}" style="padding-top:${sc.pad}px"><img src="${sc.src}" alt="" width="393" height="${sc.h}"></div>`).join('')}</div>
-          <div class="by-glare"></div><div class="by-island"></div>
+          <img class="by-frame-img" src="/assets/img/byways/phone-frame.webp" alt=""><div class="by-island"></div>
         </div>
         <div class="by-steps">${B.steps.map((st, i) => `<div class="by-step tone-${st.tone}" data-i="${i}"><p class="by-step-n">${esc(st.n)}</p><p>${esc(st.text)}</p></div>`).join('')}</div>
       </div>
@@ -875,8 +873,7 @@ function BywaysPage(d) {
       ${d.carouselTitle ? `<h2 class="car-heading">${esc(d.carouselTitle).replace(/\n/g, '<br>')}</h2>` : ''}
       <div class="by-hs-row">${d.carousel.map((c) => `<figure class="by-card">${img(c.img, { alt: c.text || d.title })}</figure>`).join('')}</div>
       <div class="by-hs-phone" aria-hidden="true">
-        <i class="by-btn by-btn-action"></i><i class="by-btn by-btn-up"></i><i class="by-btn by-btn-down"></i><i class="by-btn by-btn-side"></i>
-        <div class="by-ring by-ring-frame"></div><div class="by-ring by-ring-bezel"></div><div class="by-island"></div>
+        <img class="by-frame-img" src="/assets/img/byways/phone-frame.webp" alt=""><div class="by-island"></div>
       </div>
     </div></div></section>` : ''}
     ${cta()}
@@ -927,8 +924,8 @@ function BywaysPage(d) {
     const x = lerp(geo.start.x, geo.side.x, t), y = lerp(geo.start.y, geo.side.y, t);
     phone.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${geo.s})`;
     // Screens: search -> route (scrolls) -> plan (scrolls)
-    const fadeRoute = ramp(u, 2.2, 2.75), fadePlan = ramp(u, 5.2, 5.75);
-    const op = [1 - fadeRoute, fadeRoute * (1 - fadePlan), fadePlan];
+    // One screen fades all the way out (to a blank screen) before the next fades in.
+    const op = [1 - ramp(u, 2.2, 2.46), ramp(u, 2.49, 2.75) * (1 - ramp(u, 5.2, 5.46)), ramp(u, 5.49, 5.75)];
     const scrollFor = (i, a, b) => { const sc = B.screens[i]; return -ease(ramp(u, a, b)) * Math.max(0, sc.h + sc.pad - 852); };
     const ty = [0, scrollFor(1, ...B.route), scrollFor(2, ...B.plan)];
     shots.forEach((sh, i) => { sh.style.opacity = op[i]; sh.style.transform = `translate3d(0, ${ty[i]}px, 0)`; });
