@@ -310,7 +310,8 @@ export const DIGITAL = [
               "y": 678,
               "w": 1150
             },
-            "endY": 362
+            "endY": 362,
+            "photoFrac": 0.5662
           }
         }
       },
