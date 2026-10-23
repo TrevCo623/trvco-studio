@@ -687,3 +687,4 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
   .uniform-phones .cs-row .cs-panel-img.has-phone { scroll-snap-align: center; }
 }
 .uniform-phones .cs-panel { overflow-x: clip; }
+@media (min-width: 761px) { .uniform-phones .cs-panel .cs-caption, .uniform-phones .cs-pcar .cs-caption, .uniform-phones .cs-scroll .cs-caption { max-width: 1000px; } }
