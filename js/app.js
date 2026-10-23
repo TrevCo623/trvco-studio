@@ -864,7 +864,7 @@ function BywaysPage(d) {
       <div class="by-stage"><div class="by-wipe"></div>
         <div class="by-phone" aria-hidden="true">
           <div class="by-screen">${B.screens.map((sc) => `<div class="by-shot" data-key="${sc.key}" style="padding-top:${sc.pad}px"><img src="${sc.src}" alt="" width="393" height="${sc.h}"></div>`).join('')}</div>
-          <img class="by-frame-img" src="/assets/img/byways/phone-frame.webp" alt=""><div class="by-island"></div>
+          <img class="by-frame-img" src="/assets/img/byways/phone-frame.webp" alt="">
         </div>
         <div class="by-steps">${B.steps.map((st, i) => `<div class="by-step tone-${st.tone}" data-i="${i}"><p class="by-step-n">${esc(st.n)}</p><p>${esc(st.text)}</p></div>`).join('')}</div>
       </div>
@@ -873,7 +873,7 @@ function BywaysPage(d) {
       ${d.carouselTitle ? `<h2 class="car-heading">${esc(d.carouselTitle).replace(/\n/g, '<br>')}</h2>` : ''}
       <div class="by-hs-row">${d.carousel.map((c) => `<figure class="by-card">${img(c.img, { alt: c.text || d.title })}</figure>`).join('')}</div>
       <div class="by-hs-phone" aria-hidden="true">
-        <img class="by-frame-img" src="/assets/img/byways/phone-frame.webp" alt=""><div class="by-island"></div>
+        <img class="by-frame-img" src="/assets/img/byways/phone-frame.webp" alt="">
       </div>
     </div></div></section>` : ''}
     ${cta()}
