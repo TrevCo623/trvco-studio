@@ -69,5 +69,7 @@ collections:
         hint: 'Photo 1 is the homepage thumbnail. Photo 2 is the big image at the top of the page (if there''s only one, it''s used for both).'
       - { label: Wide hero, name: hero_wide, widget: boolean, required: false, default: false, hint: 'Turn on for landscape (desktop) screenshots.' }
       - { label: Sections, name: sections, widget: sections, required: false, hint: 'The case study under the hero, top to bottom, as it will look. Drag ⋮⋮ to reorder.' }
+      - { label: Carousel heading, name: carousel_title, widget: string, required: false, hint: 'Optional line above the carousel.' }
+      - { label: Carousel, name: carousel, widget: photos, multiple: true, captions: true, required: false, hint: 'A click-through carousel near the end of the page (landscape images work best). Drop them all at once; the line under each is optional.' }
       - { label: Position on the Digital page, name: order, widget: position, folder: content/digital, required: false }
       - { label: Hidden, name: draft, widget: boolean, required: false, default: false, hint: 'Hide this project from the site without deleting it.' }

@@ -816,12 +816,26 @@ function ProductPage(route) {
 }
 
 /* ═════════════════════════════ DIGITAL detail ═════════════════════════════ */
+// A click-through carousel (same build as the Type details carousel), for landscape images.
+function carouselHTML(items, heading, name) {
+  const pad = (k) => String(k).padStart(2, '0'), n = items.length, hasText = items.some((c) => c.text);
+  return `${heading ? `<h2 class="car-heading reveal">${esc(heading)}</h2>` : ''}
+    <div class="dcar is-wide reveal" style="--n:${n}">
+      <div class="dcar-view"><div class="dcar-track">${items.map((c, i) => `<button class="dfig${i ? '' : ' is-on'}" type="button" data-i="${i}" tabindex="-1" aria-label="Image ${i + 1}">${img(c.img, { alt: c.text || `${name} ${i + 1}` })}</button>`).join('')}</div></div>
+      <div class="dcar-copy">
+        <p class="dcount"><span class="dcount-now">${pad(1)}</span> / ${pad(n)}</p>
+        ${hasText ? `<div class="dtexts" aria-live="polite">${items.map((c, i) => `<p class="dtext${i ? '' : ' is-on'}" data-i="${i}">${esc(c.text || '')}</p>`).join('')}</div>` : '<div class="dtexts"></div>'}
+        ${n > 1 ? `<div class="dnav"><button class="dbtn" type="button" data-d="-1" aria-label="Previous image" disabled>${arrow('left')}</button><button class="dbtn" type="button" data-d="1" aria-label="Next image">${arrow('right')}</button></div>` : ''}
+      </div>
+    </div>`;
+}
+
 /* ── Byways: a scroll story. The phone starts centred on black like the other case studies, then
    slides left and holds while the background changes, a step dissolves in beside it, and the
    screen inside the phone changes and scrolls. Everything is driven by how far you've scrolled. ── */
 const BYWAYS = {
   screens: [
-    { key: 'search', src: '/assets/img/byways/search.webp', fallback: '/assets/img/byways/route.webp', h: 852, pad: 0 },
+    { key: 'search', src: '/assets/img/byways/search.webp', h: 852, pad: 0 },
     { key: 'route', src: '/assets/img/byways/route.webp', h: 1189, pad: 47 },
     { key: 'plan', src: '/assets/img/byways/plan.webp', h: 1305, pad: 47 },
   ],
@@ -830,43 +844,37 @@ const BYWAYS = {
     { n: 'Step 2', text: 'Choose the route that’s best for you – fastest, most scenic, or the one with the best stops.', tone: 'light' },
     { n: 'Step 3', text: 'Customize your plan – rearrange the order, extend it over two days, and add stops. You’re in the driver’s seat.', tone: 'dark' },
   ],
-  // Scroll timeline, in screen-heights of scrolling.
-  colors: [[0, '#0E1009'], [0.35, '#0E1009'], [0.9, '#D9D9D9'], [1.8, '#D9D9D9'], [2.3, '#145A42'], [4.3, '#145A42'], [4.8, '#C8DDF7'], [6.8, '#C8DDF7'], [7.3, '#0E1009']],
-  end: 7.3,
+  // Scroll timeline, in screen-heights of scrolling. Each colour change wipes up from the bottom.
+  // Every screen gets a pause after it finishes scrolling, before the next one takes over.
+  wipes: [[0.3, 0.95, '#0E1009', '#D9D9D9'], [2.2, 2.75, '#D9D9D9', '#145A42'], [5.2, 5.75, '#145A42', '#C8DDF7'], [8.2, 8.75, '#C8DDF7', '#F8F6F6']],
+  route: [2.75, 4.5], plan: [5.75, 7.5],
+  end: 8.75,
 };
 const lerp = (a, b, t) => a + (b - a) * t;
 const clamp01 = (t) => Math.max(0, Math.min(1, t));
 const ramp = (u, a, b) => clamp01((u - a) / (b - a));
 const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-const hexRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
-function colorAt(stops, u) {
-  for (let i = 1; i < stops.length; i++) {
-    if (u <= stops[i][0]) {
-      const [a0, c0] = stops[i - 1], [a1, c1] = stops[i], t = ease(ramp(u, a0, a1));
-      const x = hexRgb(c0), y = hexRgb(c1);
-      return `rgb(${x.map((v, k) => Math.round(lerp(v, y[k], t))).join(',')})`;
-    }
-  }
-  return stops.at(-1)[1];
-}
 
 function BywaysPage(d) {
   const B = BYWAYS;
   const el = h(`<div class="digital-page by">
     <div class="by-track">
       <section class="by-hero"><h1>${esc(d.title)}</h1><p>${esc(d.intro)}</p></section>
-      <div class="by-stage">
+      <div class="by-stage"><div class="by-wipe"></div>
         <div class="by-phone" aria-hidden="true">
           <i class="by-btn by-btn-action"></i><i class="by-btn by-btn-up"></i><i class="by-btn by-btn-down"></i><i class="by-btn by-btn-side"></i>
           <div class="by-frame"></div><div class="by-bezel"></div>
-          <div class="by-screen">${B.screens.map((sc) => `<div class="by-shot" data-key="${sc.key}" style="padding-top:${sc.pad}px"><img src="${sc.src}" alt="" width="393" height="${sc.h}" ${sc.fallback ? `onerror="this.onerror=null;this.src='${sc.fallback}'"` : ''}></div>`).join('')}</div>
+          <div class="by-screen">${B.screens.map((sc) => `<div class="by-shot" data-key="${sc.key}" style="padding-top:${sc.pad}px"><img src="${sc.src}" alt="" width="393" height="${sc.h}"></div>`).join('')}</div>
           <div class="by-glare"></div><div class="by-island"></div>
         </div>
         <div class="by-steps">${B.steps.map((st, i) => `<div class="by-step tone-${st.tone}" data-i="${i}"><p class="by-step-n">${esc(st.n)}</p><p>${esc(st.text)}</p></div>`).join('')}</div>
       </div>
     </div>
+    ${d.carousel?.length ? `<section class="by-more">${carouselHTML(d.carousel, d.carouselTitle, d.title)}</section>` : ''}
     ${cta()}
   </div>`);
+  wireDetails(el);
+  const stage = $('.by-stage', el), wipe = $('.by-wipe', el);
   const track = $('.by-track', el), phone = $('.by-phone', el), shots = $$('.by-shot', el), steps = $$('.by-step', el), hero = $('.by-hero', el);
   let geo;
   function measure() {
@@ -887,20 +895,24 @@ function BywaysPage(d) {
   function paint() {
     if (!geo) return;
     const u = Math.max(0, Math.min(B.end, (scrollY - (track.getBoundingClientRect().top + scrollY)) / geo.vh));
-    // Background
-    el.style.setProperty('--by-bg', colorAt(B.colors, u));
+    // Background: the next colour rises from the bottom
+    let base = B.wipes[0][2], next = B.wipes[0][3], t0 = 0;
+    for (const [a, z, from, to] of B.wipes) { if (u >= a) { base = from; next = to; t0 = ease(ramp(u, a, z)); } }
+    if (t0 >= 1) { base = next; t0 = 0; }
+    stage.style.background = base; wipe.style.background = next;
+    wipe.style.transform = `translate3d(0, ${(1 - t0) * 100}%, 0)`;
     // Phone: hero pose -> beside the steps
     const t = ease(ramp(u, 0.1, 1));
     const x = lerp(geo.start.x, geo.side.x, t), y = lerp(geo.start.y, geo.side.y, t);
     phone.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${geo.s})`;
     // Screens: search -> route (scrolls) -> plan (scrolls)
-    const fadeRoute = ramp(u, 1.8, 2.3), fadePlan = ramp(u, 4.3, 4.8);
+    const fadeRoute = ramp(u, 2.2, 2.75), fadePlan = ramp(u, 5.2, 5.75);
     const op = [1 - fadeRoute, fadeRoute * (1 - fadePlan), fadePlan];
     const scrollFor = (i, a, b) => { const sc = B.screens[i]; return -ease(ramp(u, a, b)) * Math.max(0, sc.h + sc.pad - 852); };
-    const ty = [0, scrollFor(1, 2.3, 4.3), scrollFor(2, 4.8, 6.8)];
+    const ty = [0, scrollFor(1, ...B.route), scrollFor(2, ...B.plan)];
     shots.forEach((sh, i) => { sh.style.opacity = op[i]; sh.style.transform = `translate3d(0, ${ty[i]}px, 0)`; });
     // Steps dissolve in and out
-    const vis = [ramp(u, 0.7, 1) * (1 - ramp(u, 1.8, 2.05)), ramp(u, 2.05, 2.3) * (1 - ramp(u, 4.3, 4.55)), ramp(u, 4.55, 4.8) * (1 - ramp(u, 6.8, 7.05))];
+    const vis = [ramp(u, 0.7, 1) * (1 - ramp(u, 2.2, 2.45)), ramp(u, 2.5, 2.75) * (1 - ramp(u, 5.2, 5.45)), ramp(u, 5.5, 5.75) * (1 - ramp(u, 8.2, 8.45))];
     steps.forEach((st, i) => { st.style.opacity = vis[i]; st.style.transform = `translate3d(0, ${(1 - vis[i]) * 18}px, 0)`; st.style.visibility = vis[i] > 0.01 ? 'visible' : 'hidden'; });
     hero.style.opacity = 1 - ramp(u, 0.05, 0.5);
   }
@@ -940,6 +952,7 @@ function DigitalPage(route) {
       ${img(d.hero, { alt: `${d.title} — hero`, lazy: false })}
     </section>
     ${d.sections.map(sec).join('')}
+    ${d.carousel?.length ? `<section class="cs cs-carousel">${carouselHTML(d.carousel, d.carouselTitle, d.title)}</section>` : ''}
     ${cta()}
   </div>`);
   // Simple slide carousel
@@ -957,6 +970,7 @@ function DigitalPage(route) {
     });
     paint();
   });
+  wireDetails(el);
   return { el, title: d.title };
 }
 

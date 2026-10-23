@@ -6,5 +6,20 @@
     "/assets/img/byways/thumb.jpg"
   ],
   "layout": "byways",
-  "sections": []
+  "sections": [],
+  "carousel_title": "Byways will help you get the most out of your trip",
+  "carousel": [
+    {
+      "image": "/assets/img/byways/carousel-1.jpg",
+      "text": ""
+    },
+    {
+      "image": "/assets/img/byways/carousel-2.jpg",
+      "text": ""
+    },
+    {
+      "image": "/assets/img/byways/carousel-3.jpg",
+      "text": ""
+    }
+  ]
 }

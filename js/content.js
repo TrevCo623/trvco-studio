@@ -36,6 +36,8 @@ export const DIGITAL = [
     "slug": "feelgood",
     "title": "Feel Good app",
     "intro": "A mental health check-in app to help people understand their emotions, explore their thoughts, and find peace in their every day.",
+    "carouselTitle": "",
+    "carousel": [],
     "thumb": "/assets/img/digital/feelgood-thumb.jpg",
     "hero": "/assets/img/feelgood/hero.png",
     "heroWide": false,
@@ -94,6 +96,8 @@ export const DIGITAL = [
     "slug": "storyright",
     "title": "Storyright",
     "intro": "An AI-assisted writing editor that understands your unique style, makes suggestions to maintain your voice, prose, and story.",
+    "carouselTitle": "",
+    "carousel": [],
     "thumb": "/assets/img/digital/storyright-thumb.jpg",
     "hero": "/assets/img/storyright/hero.jpg",
     "heroWide": true,
@@ -141,6 +145,21 @@ export const DIGITAL = [
     "title": "Byways",
     "intro": "A routing app that helps you appreciate the journey, not just get to your destination.",
     "layout": "byways",
+    "carouselTitle": "Byways will help you get the most out of your trip",
+    "carousel": [
+      {
+        "img": "/assets/img/byways/carousel-1.jpg",
+        "text": ""
+      },
+      {
+        "img": "/assets/img/byways/carousel-2.jpg",
+        "text": ""
+      },
+      {
+        "img": "/assets/img/byways/carousel-3.jpg",
+        "text": ""
+      }
+    ],
     "thumb": "/assets/img/byways/thumb.jpg",
     "hero": "/assets/img/byways/thumb.jpg",
     "heroWide": false,
@@ -150,6 +169,8 @@ export const DIGITAL = [
     "slug": "vibefit",
     "title": "VibeFit",
     "intro": "An app that lets you and your partner find the right outfits for the evening's vibe, together",
+    "carouselTitle": "",
+    "carousel": [],
     "thumb": "/assets/uploads/look-details-i82q.jpg",
     "hero": "/assets/uploads/home-2mjx.jpg",
     "heroWide": false,
@@ -634,6 +655,24 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 2500,
     "h": 1379
+  },
+  "/assets/img/byways/carousel-1.jpg": {
+    "src": "assets/img/byways/carousel-1.jpg",
+    "cdn": "",
+    "w": 1600,
+    "h": 1000
+  },
+  "/assets/img/byways/carousel-2.jpg": {
+    "src": "assets/img/byways/carousel-2.jpg",
+    "cdn": "",
+    "w": 1600,
+    "h": 1000
+  },
+  "/assets/img/byways/carousel-3.jpg": {
+    "src": "assets/img/byways/carousel-3.jpg",
+    "cdn": "",
+    "w": 1600,
+    "h": 1000
   },
   "/assets/img/byways/thumb.jpg": {
     "src": "assets/img/byways/thumb.jpg",
