@@ -19,9 +19,9 @@
     },
     {
       "type": "row",
-      "tone": "light",
+      "tone": "dark",
       "caption": "Step 2: Share with a partner to sync your vibe and fits for the night",
-      "background": "#998A9D",
+      "background": "paper",
       "phone": 0.6403,
       "images": [
         "/assets/img/vibefit/share-waiting-notice.webp",

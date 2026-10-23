@@ -268,11 +268,10 @@ export const DIGITAL = [
       },
       {
         "type": "row",
-        "tone": "light",
+        "tone": "dark",
         "caption": "Step 2: Share with a partner to sync your vibe and fits for the night",
-        "bg": "#998A9D",
+        "bg": "var(--paper)",
         "phone": 0.6403,
-        "bgHex": "#998A9D",
         "imgs": [
           "/assets/img/vibefit/share-waiting-notice.webp",
           "/assets/img/vibefit/share-waiting.webp",

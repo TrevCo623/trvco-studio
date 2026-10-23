@@ -1163,14 +1163,12 @@ function DigitalPage(route) {
     if (!sec.classList.contains('has-intro')) { im.style.transform = `translate3d(0, ${-ramp(f, 0.1, 0.9) * len}px, 0)`; return; }
     // Intro: the outfit card in the phone grows into the details screen, the cards outside fade,
     // the background and caption change; then the details screen scrolls.
-    const I = DIGITAL_INTRO[sec.dataset.k], k = box.offsetWidth / I.holeW, t = ease(ramp(f, 0.1, 0.36));
-    const sc = lerp(1, I.holeW / I.card.w, t);
-    const x = lerp(0, -I.card.x * (I.holeW / I.card.w), t) * k;
-    const y = lerp(-I.holeTop, I.photoY - I.card.y * (I.holeW / I.card.w) - I.holeTop, t) * k;
+    // The outfits screen fades all the way out, then the details screen fades in.
+    const I = DIGITAL_INTRO[sec.dataset.k], k = box.offsetWidth / I.holeW;
     const intro = $('.cs-scroll-intro', box);
-    intro.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${sc})`;
-    intro.style.opacity = 1 - ramp(f, 0.34, 0.4);
-    im.style.opacity = ramp(f, 0.3, 0.38);
+    intro.style.transform = `translate3d(0, ${-I.holeTop * k}px, 0)`;
+    intro.style.opacity = 1 - ramp(f, 0.12, 0.22);
+    im.style.opacity = ramp(f, 0.25, 0.35);
     $('.cs-scroll-sides', sec).style.opacity = 1 - ramp(f, 0.1, 0.24);
     const a = hex(sec.dataset.from), b = hex(sec.dataset.to), c = ease(ramp(f, 0.1, 0.34));
     st.style.background = `rgb(${a.map((v, i) => Math.round(lerp(v, b[i], c))).join(',')})`;
