@@ -7,7 +7,7 @@
   ],
   "layout": "byways",
   "sections": [],
-  "carousel_title": "Byways will help you get the most out of your trip\nby showing you cool sites, towns, activities, and more byways",
+  "carousel_title": "See details and helpful links about each stop and see how adding that stop will alter your route",
   "carousel": [
     {
       "image": "/assets/img/byways/stop-ladder-creek-falls.webp",
@@ -25,6 +25,5 @@
       "image": "/assets/img/byways/stop-leavenworth.webp",
       "text": ""
     }
-  ],
-  "carousel_title_end": "See details and helpful links about each stop and see how adding that stop will alter your route"
+  ]
 }

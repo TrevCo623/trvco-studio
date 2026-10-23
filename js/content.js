@@ -147,8 +147,8 @@ export const DIGITAL = [
     "title": "Byways",
     "intro": "A routing app that helps you appreciate the journey, not just get to your destination.",
     "layout": "byways",
-    "carouselTitle": "Byways will help you get the most out of your trip\nby showing you cool sites, towns, activities, and more byways",
-    "carouselTitleEnd": "See details and helpful links about each stop and see how adding that stop will alter your route",
+    "carouselTitle": "See details and helpful links about each stop and see how adding that stop will alter your route",
+    "carouselTitleEnd": "",
     "carousel": [
       {
         "img": "/assets/img/byways/stop-ladder-creek-falls.webp",
