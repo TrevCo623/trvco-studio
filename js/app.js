@@ -842,7 +842,7 @@ const BYWAYS = {
   steps: [
     { n: 'Step 1', text: 'Tell Byways where you want to go', tone: 'dark' },
     { n: 'Step 2', text: 'Choose the route that’s best for you – fastest, most scenic, or the one with the best stops.', tone: 'light' },
-    { n: 'Step 3', text: 'Customize your plan – rearrange the order, extend it over two days, and add stops. You’re in the driver’s seat.', tone: 'dark' },
+    { n: 'Step 3', text: 'Customize your plan – rearrange the order, extend it over multiple days, and add stops. You’re in the driver’s seat.', tone: 'dark' },
   ],
   // Scroll timeline, in screen-heights of scrolling. Each colour change wipes up from the bottom.
   // Every screen gets a pause after it finishes scrolling, before the next one takes over.
