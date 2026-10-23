@@ -1,0 +1,15 @@
+{
+  "hero_wide": false,
+  "draft": false,
+  "order": 3,
+  "title": "VibeFit",
+  "intro": "An app that lets you and your partner find the right outfits for the evening's vibe, together",
+  "photos": [
+    "/assets/uploads/look-details-i82q.jpg",
+    "/assets/uploads/choose-vibe-i7xo.jpg",
+    "/assets/uploads/home-i7zk.jpg",
+    "/assets/uploads/closet-i7y1.jpg",
+    "/assets/uploads/invite-i814.jpg",
+    "/assets/uploads/looks-i85y.jpg"
+  ]
+}
