@@ -964,9 +964,8 @@ function BywaysPage(d) {
     if (t0 >= 1) { base = next; t0 = 0; }
     stage.style.background = base; wipe.style.background = next;
     wipe.style.transform = `translate3d(0, ${(1 - t0) * 100}%, 0)`;
-    // Phone: hero pose -> beside the steps
-    const t = ease(ramp(u, 0.1, 1.2));
-    const x = lerp(geo.start.x, geo.side.x, t), y = lerp(geo.start.y, geo.side.y, t);
+    // Phone: scrolls up with the page from its hero spot, then locks once it reaches the centre.
+    const x = geo.start.x, y = Math.max(geo.side.y, geo.start.y - u * geo.vh);
     phone.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${geo.s})`;
     // Screens: search -> route (scrolls) -> plan (scrolls)
     // One screen fades all the way out (to a blank screen) before the next fades in.
