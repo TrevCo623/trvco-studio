@@ -34,7 +34,7 @@
       "tone": "light",
       "background": "#B5A784",
       "image": "/assets/img/vibefit/phone-frame.webp",
-      "screen": "/assets/img/vibefit/look-details-screen.jpg",
+      "screen": "/assets/img/vibefit/look-details-screen-v2.jpg",
       "hole": {
         "x": 452,
         "y": 390,
@@ -62,7 +62,7 @@
           "endY": 362,
           "photoFrac": 0.5662
         },
-        "card": "/assets/img/vibefit/looks-card.webp"
+        "card": "/assets/img/vibefit/looks-card-v2.webp"
       }
     },
     {

@@ -285,7 +285,7 @@ export const DIGITAL = [
         "bg": "#B5A784",
         "phone": 0.6403,
         "img": "/assets/img/vibefit/phone-frame.webp",
-        "screen": "/assets/img/vibefit/look-details-screen.jpg",
+        "screen": "/assets/img/vibefit/look-details-screen-v2.jpg",
         "hole": {
           "x": 452,
           "y": 390,
@@ -299,7 +299,7 @@ export const DIGITAL = [
           "bg": "#F8F6F6",
           "sides": "/assets/img/vibefit/looks-sides.webp",
           "screen": "/assets/img/vibefit/looks-screen-bg.jpg",
-          "card": "/assets/img/vibefit/looks-card.webp",
+          "card": "/assets/img/vibefit/looks-card-v2.webp",
           "sidesX": 1288,
           "sidesW": 4800,
           "geo": {
@@ -901,8 +901,8 @@ export const CONTENT_IMG = {
     "w": 2224,
     "h": 3336
   },
-  "/assets/img/vibefit/look-details-screen.jpg": {
-    "src": "assets/img/vibefit/look-details-screen.jpg",
+  "/assets/img/vibefit/look-details-screen-v2.jpg": {
+    "src": "assets/img/vibefit/look-details-screen-v2.jpg",
     "cdn": "",
     "w": 1320,
     "h": 5146
@@ -919,8 +919,8 @@ export const CONTENT_IMG = {
     "w": 1320,
     "h": 2866
   },
-  "/assets/img/vibefit/looks-card.webp": {
-    "src": "assets/img/vibefit/looks-card.webp",
+  "/assets/img/vibefit/looks-card-v2.webp": {
+    "src": "assets/img/vibefit/looks-card-v2.webp",
     "cdn": "",
     "w": 1320,
     "h": 2331

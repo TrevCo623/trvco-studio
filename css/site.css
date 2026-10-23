@@ -700,3 +700,6 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .cs-scroll-card { position: absolute; left: 0; top: 0; width: 100%; height: auto; transform-origin: 0 0; z-index: 2; will-change: transform, opacity; }
 .cs-scroll.has-intro .cs-scroll-main { position: relative; z-index: 3; }
 .cs-scroll-card { -webkit-mask-image: linear-gradient(#000 0 var(--pf-cut, 100%), rgba(0,0,0,var(--ta, 1)) var(--pf-cut, 100%)); mask-image: linear-gradient(#000 0 var(--pf-cut, 100%), rgba(0,0,0,var(--ta, 1)) var(--pf-cut, 100%)); }
+.cs-scroll-screen { z-index: 1; isolation: isolate; }
+.cs-scroll-frame { z-index: 2; }
+.cs-scroll-sides { z-index: 0; }
