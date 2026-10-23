@@ -258,6 +258,19 @@ export const DIGITAL = [
     "heroPhone": 0.6403,
     "sections": [
       {
+        "type": "phones",
+        "tone": "dark",
+        "caption": "An onboarding quiz helps set your style and what you want to accomplish with your fits",
+        "bg": "var(--paper)",
+        "phone": 0.6403,
+        "imgs": [
+          "/assets/img/vibefit/quiz-fit.webp",
+          "/assets/img/vibefit/quiz-colors.webp",
+          "/assets/img/vibefit/quiz-off-the-table.webp",
+          "/assets/img/vibefit/quiz-struggle.webp"
+        ]
+      },
+      {
         "type": "full",
         "tone": "light",
         "caption": "Step 1: Choose the vibe for the night",
@@ -304,6 +317,16 @@ export const DIGITAL = [
         "bg": "var(--ink)",
         "phone": 0.6403,
         "img": "/assets/img/vibefit/home.webp"
+      },
+      {
+        "type": "panel",
+        "tone": "light",
+        "caption": "Check out VibeFit for yourself",
+        "bg": "#998A9D",
+        "phone": 0.6403,
+        "button": "See VibeFit app",
+        "url": "",
+        "img": "/assets/img/vibefit/vibe-result.webp"
       }
     ]
   }
@@ -827,6 +850,30 @@ export const CONTENT_IMG = {
     "w": 2224,
     "h": 3336
   },
+  "/assets/img/vibefit/quiz-fit.webp": {
+    "src": "assets/img/vibefit/quiz-fit.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/vibefit/quiz-colors.webp": {
+    "src": "assets/img/vibefit/quiz-colors.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/vibefit/quiz-off-the-table.webp": {
+    "src": "assets/img/vibefit/quiz-off-the-table.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/vibefit/quiz-struggle.webp": {
+    "src": "assets/img/vibefit/quiz-struggle.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
   "/assets/img/vibefit/choose-vibe.jpg": {
     "src": "assets/img/vibefit/choose-vibe.jpg",
     "cdn": "",
@@ -862,6 +909,12 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 4000,
     "h": 2656
+  },
+  "/assets/img/vibefit/vibe-result.webp": {
+    "src": "assets/img/vibefit/vibe-result.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
   },
   "/assets/img/goods/go-outside-hat-1.jpg": {
     "src": "assets/img/goods/go-outside-hat-1.jpg",

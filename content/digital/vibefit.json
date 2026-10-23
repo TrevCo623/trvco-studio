@@ -10,6 +10,19 @@
   ],
   "sections": [
     {
+      "type": "phones",
+      "tone": "dark",
+      "background": "paper",
+      "phone": 0.6403,
+      "caption": "An onboarding quiz helps set your style and what you want to accomplish with your fits",
+      "images": [
+        "/assets/img/vibefit/quiz-fit.webp",
+        "/assets/img/vibefit/quiz-colors.webp",
+        "/assets/img/vibefit/quiz-off-the-table.webp",
+        "/assets/img/vibefit/quiz-struggle.webp"
+      ]
+    },
+    {
       "type": "full",
       "image": "/assets/img/vibefit/choose-vibe.jpg",
       "tone": "light",
@@ -56,6 +69,16 @@
       "image": "/assets/img/vibefit/home.webp",
       "background": "ink",
       "phone": 0.6403
+    },
+    {
+      "type": "panel",
+      "tone": "light",
+      "background": "#998A9D",
+      "image": "/assets/img/vibefit/vibe-result.webp",
+      "phone": 0.6403,
+      "caption": "Check out VibeFit for yourself",
+      "button": "See VibeFit app",
+      "url": ""
     }
   ],
   "uniform_phones": true,

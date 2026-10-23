@@ -94,6 +94,7 @@ const DIGITAL = load('digital').map((d) => {
     if (s.image_width) o.w = Number(s.image_width);
     if (s.side) o.side = s.side;
     if (s.phone) o.phone = Number(s.phone);
+    if (s.button) { o.button = s.button; o.url = s.url || ''; }
     if (s.image) o.img = useImage(s.image, where);
     if (s.screen) o.screen = useImage(s.screen, where);
     if (s.hole) o.hole = s.hole;

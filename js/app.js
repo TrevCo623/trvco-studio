@@ -1031,6 +1031,20 @@ function DigitalPage(route) {
     if (s.type === 'full') return `<section class="cs cs-full ${tone}" style="${style}">${img(s.img, { alt: s.caption })}${head}</section>`;
     if (s.type === 'split') return `<section class="cs cs-split ${tone} ${s.side === 'right' ? 'img-right' : ''}" style="${style}"><div class="cs-media reveal">${img(s.img, { alt: s.title || s.caption })}</div><div class="cs-split-text">${head}</div></section>`;
     if (s.type === 'feature') return `<section class="cs cs-feature ${tone}" style="${style}"><div>${head}</div><div class="cs-media reveal${s.phone ? ' has-phone' : ''}">${img(s.img, { alt: s.title || s.caption })}</div></section>`;
+    if (s.type === 'panel') {
+      // Closing section: headline, one phone, a button.
+      return `<section class="cs cs-panel ${tone}" style="${style}">${head}
+        ${s.img ? `<div class="cs-panel-img${s.phone ? ' has-phone' : ''}">${img(s.img, { alt: s.caption || d.title })}</div>` : ''}
+        ${s.button ? `<a class="btn cs-panel-btn" href="${esc(s.url || '#')}"${/^https?:/.test(s.url || '') ? ' target="_blank" rel="noopener"' : ''}>${esc(s.button)}</a>` : ''}
+      </section>`;
+    }
+    if (s.type === 'phones' && s.imgs?.length) {
+      // A row of phone images: the current one in the middle, neighbours dimmed. Click, swipe or arrows.
+      return `<section class="cs cs-phones ${tone}" style="${style}">${head}
+        <div class="ph-row">${s.imgs.map((k, i) => `<button class="ph-item${s.phone ? ' has-phone' : ''}${i ? '' : ' is-on'}" type="button" data-i="${i}" aria-label="Screen ${i + 1}">${img(k, { alt: `${s.caption || d.title} — ${i + 1} of ${s.imgs.length}` })}</button>`).join('')}</div>
+        <div class="dnav"><button class="dbtn" type="button" data-d="-1" aria-label="Previous" disabled>${arrow('left')}</button><button class="dbtn" type="button" data-d="1" aria-label="Next">${arrow('right')}</button></div>
+      </section>`;
+    }
     if (s.type === 'scroll' && s.img && s.screen) {
       // A phone whose screen scrolls through a long screenshot while the section is pinned.
       // s.hole = the screen opening in the frame image, in its pixels: { x, y, w, h }.
@@ -1078,6 +1092,22 @@ function DigitalPage(route) {
     paint();
   });
   wireDetails(el);
+  $$('.cs-phones', el).forEach((box) => {
+    const items = $$('.ph-item', box), [prev, next] = $$('.dbtn', box); let cur = 0;
+    const go = (k) => {
+      cur = Math.max(0, Math.min(items.length - 1, k));
+      items.forEach((it, j) => { it.style.setProperty('--off', j - cur); it.classList.toggle('is-on', j === cur); });
+      prev.disabled = cur === 0; next.disabled = cur === items.length - 1;
+    };
+    box.addEventListener('click', (e) => {
+      const b = e.target.closest('.dbtn'); if (b) return go(cur + Number(b.dataset.d));
+      const it = e.target.closest('.ph-item'); if (it) go(Number(it.dataset.i));
+    });
+    let sx = 0, sy = 0;
+    box.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    box.addEventListener('touchend', (e) => { const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) go(cur + (dx < 0 ? 1 : -1)); }, { passive: true });
+    go(0);
+  });
   const scrollers = $$('.cs-scroll', el);
   const paintScroll = () => scrollers.forEach((sec) => {
     const st = $('.cs-scroll-stage', sec), r = sec.getBoundingClientRect(), span = r.height - st.offsetHeight;
