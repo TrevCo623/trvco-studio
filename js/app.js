@@ -964,7 +964,7 @@ function BywaysPage(d) {
     if (mobile) steps.forEach((st) => { st.style.width = `${tw}px`; stepH = Math.max(stepH, st.offsetHeight); });
     // One phone size for the whole page: the largest that lets every section (heading, phone, button)
     // fit on screen at once.
-    const fits = [mobile ? (vh - hh - 20 - stepH - 20 - 20) / 878 : (vh - hh - 48) / 878, (vw * (mobile ? 0.62 : 0.7)) / 419];
+    const fits = [mobile ? (vh - hh - 20 - stepH - 40 - 20) / 878 : (vh - hh - 48) / 878, (vw * (mobile ? 0.62 : 0.7)) / 419];
     $$('.by-hs-stage', el).forEach((st) => { const hd = $('.car-heading', st); fits.push((vh - hh - (mobile ? 44 : 80) - (hd ? hd.offsetHeight : 0) - 24) / 878); });
     $$('.by-panel', el).forEach((pn) => {
       const hd = $('.car-heading', pn), bt = $('.by-panel-btn', pn), gap = mobile ? 28 : 32;
@@ -979,7 +979,7 @@ function BywaysPage(d) {
     geo = {
       vh, s, mobile,
       start: { x: (vw - pw) / 2, y: heroTop },
-      side: mobile ? { x: (vw - pw) / 2, y: textTop + stepH + 20 } : { x: (vw - pw) / 2, y: hh + (vh - hh - ph) / 2 },
+      side: mobile ? { x: (vw - pw) / 2, y: textTop + stepH + 40 } : { x: (vw - pw) / 2, y: hh + (vh - hh - ph) / 2 },
       text: mobile ? { x: (vw - tw) / 2, y: textTop, w: tw } : { x: Math.min(x0 + (973 / 1440) * W, (vw + pw) / 2 + 48), y: null, w: Math.min(369, vw - ((vw + pw) / 2 + 48) - 24) },
     };
     track.style.height = `${(B.end + 1) * vh}px`;
