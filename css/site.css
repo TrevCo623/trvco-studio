@@ -676,3 +676,14 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .uniform-phones .case-hero { padding-bottom: 140px; }
 .uniform-phones .case-hero img.has-phone { margin-bottom: calc(var(--phone-w) * -.163); }
 @media (max-width: 760px) { .uniform-phones .case-hero { padding-bottom: 96px; } }
+
+/* Row of phones: side-by-side, 40px between phone bodies (images carry 18% transparent sides) */
+.cs-row { display: flex; justify-content: center; max-width: 100%; }
+.uniform-phones .cs-row .cs-panel-img.has-phone { flex: none; margin-left: calc(20px - var(--phone-w) / var(--pf) * .18); margin-right: calc(20px - var(--phone-w) / var(--pf) * .18); }
+@media (max-width: 760px) {
+  .cs-rowsec { overflow: hidden; }
+  .cs-row { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 calc(50vw - var(--phone-w) / 2 - 20px); margin: 0 -18px; max-width: 100vw; }
+  .cs-row::-webkit-scrollbar { display: none; }
+  .uniform-phones .cs-row .cs-panel-img.has-phone { scroll-snap-align: center; }
+}
+.uniform-phones .cs-panel { overflow-x: clip; }

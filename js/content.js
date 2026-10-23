@@ -289,12 +289,16 @@ export const DIGITAL = [
         }
       },
       {
-        "type": "panel",
+        "type": "row",
         "tone": "light",
         "caption": "Share with a partner to sync your vibe and fits for the night",
         "bg": "#998A9D",
         "phone": 0.6403,
-        "img": "/assets/img/vibefit/invite-phone.webp"
+        "imgs": [
+          "/assets/img/vibefit/share-waiting-notice.webp",
+          "/assets/img/vibefit/share-waiting.webp",
+          "/assets/img/vibefit/share-fun-night.webp"
+        ]
       },
       {
         "type": "phone-carousel",
@@ -874,8 +878,20 @@ export const CONTENT_IMG = {
     "w": 1320,
     "h": 5146
   },
-  "/assets/img/vibefit/invite-phone.webp": {
-    "src": "assets/img/vibefit/invite-phone.webp",
+  "/assets/img/vibefit/share-waiting-notice.webp": {
+    "src": "assets/img/vibefit/share-waiting-notice.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/vibefit/share-waiting.webp": {
+    "src": "assets/img/vibefit/share-waiting.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/vibefit/share-fun-night.webp": {
+    "src": "assets/img/vibefit/share-fun-night.webp",
     "cdn": "",
     "w": 2224,
     "h": 3336

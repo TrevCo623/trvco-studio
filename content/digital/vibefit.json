@@ -41,12 +41,16 @@
       "caption": "Step 3: Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet"
     },
     {
-      "type": "panel",
-      "image": "/assets/img/vibefit/invite-phone.webp",
+      "type": "row",
       "tone": "light",
       "caption": "Share with a partner to sync your vibe and fits for the night",
       "background": "#998A9D",
-      "phone": 0.6403
+      "phone": 0.6403,
+      "images": [
+        "/assets/img/vibefit/share-waiting-notice.webp",
+        "/assets/img/vibefit/share-waiting.webp",
+        "/assets/img/vibefit/share-fun-night.webp"
+      ]
     },
     {
       "type": "phone-carousel",
