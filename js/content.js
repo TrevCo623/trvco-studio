@@ -258,20 +258,6 @@ export const DIGITAL = [
     "heroPhone": 0.6403,
     "sections": [
       {
-        "type": "phone-carousel",
-        "tone": "dark",
-        "caption": "An onboarding quiz helps set your style and what you want to accomplish with your fits",
-        "bg": "var(--paper)",
-        "phone": 0.6403,
-        "frame": "/assets/img/vibefit/phone-frame.webp",
-        "imgs": [
-          "/assets/img/vibefit/quiz-fit-screen.webp",
-          "/assets/img/vibefit/quiz-colors-screen.webp",
-          "/assets/img/vibefit/quiz-off-the-table-screen.webp",
-          "/assets/img/vibefit/quiz-struggle-screen.webp"
-        ]
-      },
-      {
         "type": "full",
         "tone": "light",
         "caption": "Step 1: Choose the vibe for the night",
@@ -307,6 +293,20 @@ export const DIGITAL = [
         "img": "/assets/img/vibefit/invite.jpg"
       },
       {
+        "type": "phone-carousel",
+        "tone": "dark",
+        "caption": "An onboarding quiz helps set your style and what you want to accomplish with your fits",
+        "bg": "var(--paper)",
+        "phone": 0.6403,
+        "frame": "/assets/img/vibefit/phone-frame.webp",
+        "imgs": [
+          "/assets/img/vibefit/quiz-fit-screen.webp",
+          "/assets/img/vibefit/quiz-colors-screen.webp",
+          "/assets/img/vibefit/quiz-off-the-table-screen.webp",
+          "/assets/img/vibefit/quiz-struggle-screen.webp"
+        ]
+      },
+      {
         "type": "full",
         "tone": "light",
         "caption": "Add clothes you have to Your Closet to make the app more tailored to your style",
@@ -316,7 +316,7 @@ export const DIGITAL = [
         "type": "panel",
         "tone": "light",
         "caption": "Check out VibeFit for yourself",
-        "bg": "var(--ink)",
+        "bg": "#998A9D",
         "phone": 0.6403,
         "button": "See VibeFit app",
         "url": "",
@@ -844,11 +844,35 @@ export const CONTENT_IMG = {
     "w": 2224,
     "h": 3336
   },
+  "/assets/img/vibefit/choose-vibe.jpg": {
+    "src": "assets/img/vibefit/choose-vibe.jpg",
+    "cdn": "",
+    "w": 4000,
+    "h": 2656
+  },
+  "/assets/img/vibefit/looks.webp": {
+    "src": "assets/img/vibefit/looks.webp",
+    "cdn": "",
+    "w": 3200,
+    "h": 2224
+  },
   "/assets/img/vibefit/phone-frame.webp": {
     "src": "assets/img/vibefit/phone-frame.webp",
     "cdn": "",
     "w": 2224,
     "h": 3336
+  },
+  "/assets/img/vibefit/look-details-screen.jpg": {
+    "src": "assets/img/vibefit/look-details-screen.jpg",
+    "cdn": "",
+    "w": 1320,
+    "h": 5146
+  },
+  "/assets/img/vibefit/invite.jpg": {
+    "src": "assets/img/vibefit/invite.jpg",
+    "cdn": "",
+    "w": 4000,
+    "h": 2656
   },
   "/assets/img/vibefit/quiz-fit-screen.webp": {
     "src": "assets/img/vibefit/quiz-fit-screen.webp",
@@ -873,30 +897,6 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 1320,
     "h": 2866
-  },
-  "/assets/img/vibefit/choose-vibe.jpg": {
-    "src": "assets/img/vibefit/choose-vibe.jpg",
-    "cdn": "",
-    "w": 4000,
-    "h": 2656
-  },
-  "/assets/img/vibefit/looks.webp": {
-    "src": "assets/img/vibefit/looks.webp",
-    "cdn": "",
-    "w": 3200,
-    "h": 2224
-  },
-  "/assets/img/vibefit/look-details-screen.jpg": {
-    "src": "assets/img/vibefit/look-details-screen.jpg",
-    "cdn": "",
-    "w": 1320,
-    "h": 5146
-  },
-  "/assets/img/vibefit/invite.jpg": {
-    "src": "assets/img/vibefit/invite.jpg",
-    "cdn": "",
-    "w": 4000,
-    "h": 2656
   },
   "/assets/img/vibefit/closet.jpg": {
     "src": "assets/img/vibefit/closet.jpg",
