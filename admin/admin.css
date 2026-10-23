@@ -105,8 +105,8 @@ a { color: var(--rose); }
 .trv-photo.is-drag { opacity: .4; }
 .trv-photo img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
 .trv-photo-tag { position: absolute; left: 6px; bottom: 6px; padding: 3px 6px; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
-.trv-photo-x { position: absolute; top: 6px; right: 6px; width: 26px !important; height: 26px !important; min-width: 0 !important; padding: 0 !important; border: 0 !important; border-radius: 50% !important; background: rgba(14,16,9,.75) !important; color: #fff !important; font-size: 17px !important; line-height: 26px !important; text-align: center; cursor: pointer; }
-.trv-photo-x:hover { background: var(--ink) !important; }
+.trv-photos .trv-photo-x { position: absolute; top: 6px; right: 6px; width: 26px !important; height: 26px !important; min-width: 0 !important; padding: 0 !important; border: 0 !important; border-radius: 50% !important; background: rgba(14,16,9,.75) !important; color: #fff !important; font-size: 17px !important; line-height: 26px !important; text-align: center; cursor: pointer; }
+.trv-photos .trv-photo-x:hover { background: var(--ink) !important; }
 .trv-photos-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
 .trv-photos-bar .trv-btn { border: 0; cursor: pointer; }
 .trv-photos-bar .trv-btn:disabled { opacity: .6; cursor: default; }
@@ -129,3 +129,9 @@ a { color: var(--rose); }
 .trv-pos-tag.is-muted { background: var(--sand); color: var(--ink); }
 .trv-pos-grip { color: var(--grey); letter-spacing: -2px; font-size: 16px; }
 .trv-pos-note { margin: 10px 4px 0; font-size: 15px; color: #565555; }
+.trv-photo-img { position: absolute; inset: 0; cursor: grab; }
+.trv-photos.has-captions .trv-photos-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.trv-photos.has-captions .trv-photo { aspect-ratio: auto; background: none; cursor: default; }
+.trv-photos.has-captions .trv-photo-img { position: relative; aspect-ratio: 292 / 394; background: var(--sand); }
+.trv-photo-num { position: absolute; left: 6px; top: 6px; min-width: 22px; padding: 2px 6px; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 11px; text-align: center; }
+.trv-photo-text { display: block; width: 100%; margin-top: 8px; padding: 8px 10px; border: 1px solid var(--sand) !important; background: var(--paper); font-size: 16px; line-height: 1.35; resize: vertical; }

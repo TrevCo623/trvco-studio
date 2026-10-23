@@ -60,8 +60,12 @@ collections:
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Intro, name: intro, widget: text, hint: 'The paragraph under the title.' }
-      - { label: Thumbnail, name: thumbnail, widget: photos, hint: 'Shown on the homepage grid.' }
-      - { label: Hero image, name: hero, widget: photos, hint: 'The big image at the top of the page.' }
+      - label: Photos
+        name: photos
+        widget: photos
+        multiple: true
+        tags: [Thumbnail, Hero]
+        hint: 'Drop them all at once and drag to reorder. Photo 1 is the homepage thumbnail, photo 2 is the big image at the top of the page, and the rest run down the page full width (before any sections below).'
       - { label: Wide hero, name: hero_wide, widget: boolean, required: false, default: false, hint: 'Turn on for landscape (desktop) screenshots.' }
       - label: Sections
         name: sections

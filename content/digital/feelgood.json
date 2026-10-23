@@ -1,9 +1,11 @@
 {
   "title": "Feel Good app",
   "order": 1,
-  "thumbnail": "/assets/img/digital/feelgood-thumb.jpg",
   "intro": "A mental health check-in app to help people understand their emotions, explore their thoughts, and find peace in their every day.",
-  "hero": "/assets/img/feelgood/hero.png",
+  "photos": [
+    "/assets/img/digital/feelgood-thumb.jpg",
+    "/assets/img/feelgood/hero.png"
+  ],
   "hero_wide": false,
   "sections": [
     {

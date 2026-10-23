@@ -1,0 +1,20 @@
+{
+  "details": [
+    {
+      "image": "/assets/img/type/oxomoco-detail-1.webp",
+      "text": "A 3×3 grid of nine squares. Every letter starts there, so they all share one height and width."
+    },
+    {
+      "image": "/assets/img/type/oxomoco-detail-2.webp",
+      "text": "Then come the circles, to loosen up the hard lines."
+    },
+    {
+      "image": "/assets/img/type/oxomoco-detail-3.webp",
+      "text": "Squares, right triangles, circles. That’s the whole toolkit."
+    },
+    {
+      "image": "/assets/img/type/oxomoco-detail-4.webp",
+      "text": "Regular for sharp corners. Round for something friendlier."
+    }
+  ]
+}

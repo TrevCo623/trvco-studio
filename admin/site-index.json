@@ -80,7 +80,9 @@
     }
   ],
   "type": [
-    "kadoka"
+    "bastrop",
+    "kadoka",
+    "oxomoco"
   ],
   "builtInFonts": [
     "oxomoco-font",

@@ -1,9 +1,11 @@
 {
   "title": "Storyright",
   "order": 2,
-  "thumbnail": "/assets/img/digital/storyright-thumb.jpg",
   "intro": "An AI-assisted writing editor that understands your unique style, makes suggestions to maintain your voice, prose, and story.",
-  "hero": "/assets/img/storyright/hero.jpg",
+  "photos": [
+    "/assets/img/digital/storyright-thumb.jpg",
+    "/assets/img/storyright/hero.jpg"
+  ],
   "hero_wide": true,
   "sections": [
     {

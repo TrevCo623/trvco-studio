@@ -65,10 +65,17 @@ const PRINT = load('print').map((p) => ({
   images: (p.images || []).map((im, i) => useImage(im, `Print "${p.title}" image ${i + 1}`)).filter(Boolean),
 })).filter((p) => p.images.length || (problems.push(`Print "${p.title}" has no images, so it's hidden`), false));
 
-const DIGITAL = load('digital').map((d) => ({
+// Digital photos: 1 = homepage thumbnail, 2 = hero (or 1 if there's only one), the rest run down the
+// page full width ahead of any sections. Older files may still set thumbnail / hero directly.
+const DIGITAL = load('digital').map((d) => {
+  const photos = (d.photos || []).filter(Boolean);
+  const thumb = d.thumbnail || photos[0], hero = d.hero || photos[1] || photos[0];
+  const extra = photos.slice(2).map((image) => ({ type: 'full', image }));
+  return { ...d, thumb, heroSrc: hero, sections: [...extra, ...(d.sections || [])] };
+}).map((d) => ({
   slug: d.slug, title: d.title, intro: d.intro || '',
-  thumb: useImage(d.thumbnail || d.hero, `Digital "${d.title}" thumbnail`),
-  hero: useImage(d.hero, `Digital "${d.title}" hero`), heroWide: !!d.hero_wide,
+  thumb: useImage(d.thumb || d.heroSrc, `Digital "${d.title}" thumbnail`),
+  hero: useImage(d.heroSrc, `Digital "${d.title}" hero`), heroWide: !!d.hero_wide,
   sections: (d.sections || []).map((s, i) => {
     const where = `Digital "${d.title}" section ${i + 1}`;
     const o = { type: s.type, tone: s.tone || 'light' };
@@ -101,6 +108,7 @@ for (const t of load('type')) {
   if (t.lowercase != null) o.lowercase = !!t.lowercase;
   if (t.hero_size) o.heroSize = Number(t.hero_size);
   if (t.thumbnail_scale) o.scale = Number(t.thumbnail_scale);
+  if (t.details?.length) o.details = t.details.map((d, i) => ({ img: useImage(d.image, `Type "${t.slug}" detail ${i + 1}`), text: d.text || '' })).filter((d) => d.img || d.text);
   if (Object.keys(o).length) TYPE_TWEAKS[t.slug] = o;
 }
 

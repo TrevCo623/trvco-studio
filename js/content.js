@@ -2,33 +2,19 @@
 // use the admin page (/admin) or edit content/*.json and re-run the script.
 export const PRINT = [
   {
-    "slug": "wedding-invitation",
-    "title": "Wedding invitation",
+    "slug": "carlin-valentin-wedding-stationery",
+    "title": "Carlin-Valentin wedding stationery",
     "desc": [
-      "Invitation suite for Alex & Andi — San Juan, Puerto Rico."
+      "A tropical-themed wedding stationery set for clients getting married in the Jungles of Puerto Rico."
     ],
     "images": [
-      "/assets/img/print/wedding-invite.jpg"
-    ]
-  },
-  {
-    "slug": "save-the-date",
-    "title": "Save the date",
-    "desc": [
-      "Save-the-date postcard and envelope."
-    ],
-    "images": [
-      "/assets/img/print/save-the-date.jpg"
-    ]
-  },
-  {
-    "slug": "fiesta",
-    "title": "Fiesta",
-    "desc": [
-      "Party coaster — food & fiesta to follow."
-    ],
-    "images": [
-      "/assets/img/print/fiesta.jpg"
+      "/assets/uploads/tropical-puerto-rico-wedding-stationery-ggl5.jpg",
+      "/assets/uploads/tropical-green-wedding-invitation-ggf5.jpg",
+      "/assets/uploads/embossed-botanical-wedding-invitation-gg3i.jpg",
+      "/assets/uploads/terracotta-puerto-rico-wedding-save-the-date-ggcb.jpg",
+      "/assets/uploads/puerto-rico-wedding-save-the-date-2-gg6i.jpg",
+      "/assets/uploads/retro-wedding-itinerary-and-rsvp-stationery-gg9j.jpg",
+      "/assets/uploads/tropical-letterpress-wedding-invitation-flat-lay-jphv.jpg"
     ]
   },
   {
@@ -360,29 +346,93 @@ export const GOODS = [
   }
 ];
 export const TYPE_TWEAKS = {
+  "bastrop": {
+    "details": [
+      {
+        "img": "/assets/img/type/bastrop-detail-1.webp",
+        "text": "Every serif is a slab, scooped into the stem with a quarter circle and flared at the ends."
+      },
+      {
+        "img": "/assets/img/type/bastrop-detail-2.webp",
+        "text": "A tall x-height. The lowercase reaches 70% of the height of the capitals."
+      },
+      {
+        "img": "/assets/img/type/bastrop-detail-3.webp",
+        "text": "Three weights. Only the stems thicken; the serifs stay put."
+      },
+      {
+        "img": "/assets/img/type/bastrop-detail-4.webp",
+        "text": "When letters meet, they share. Fs and ts join up across one crossbar."
+      }
+    ]
+  },
   "kadoka": {
     "display": "Kadoka",
     "lowercase": true
+  },
+  "oxomoco": {
+    "details": [
+      {
+        "img": "/assets/img/type/oxomoco-detail-1.webp",
+        "text": "A 3×3 grid of nine squares. Every letter starts there, so they all share one height and width."
+      },
+      {
+        "img": "/assets/img/type/oxomoco-detail-2.webp",
+        "text": "Then come the circles, to loosen up the hard lines."
+      },
+      {
+        "img": "/assets/img/type/oxomoco-detail-3.webp",
+        "text": "Squares, right triangles, circles. That’s the whole toolkit."
+      },
+      {
+        "img": "/assets/img/type/oxomoco-detail-4.webp",
+        "text": "Regular for sharp corners. Round for something friendlier."
+      }
+    ]
   }
 };
 export const CONTENT_IMG = {
-  "/assets/img/print/wedding-invite.jpg": {
-    "src": "assets/img/print/wedding-invite.jpg",
+  "/assets/uploads/tropical-puerto-rico-wedding-stationery-ggl5.jpg": {
+    "src": "assets/uploads/tropical-puerto-rico-wedding-stationery-ggl5.jpg",
     "cdn": "",
-    "w": 912,
-    "h": 1174
+    "w": 1536,
+    "h": 1024
   },
-  "/assets/img/print/save-the-date.jpg": {
-    "src": "assets/img/print/save-the-date.jpg",
+  "/assets/uploads/tropical-green-wedding-invitation-ggf5.jpg": {
+    "src": "assets/uploads/tropical-green-wedding-invitation-ggf5.jpg",
     "cdn": "",
-    "w": 2500,
-    "h": 1875
+    "w": 1536,
+    "h": 1024
   },
-  "/assets/img/print/fiesta.jpg": {
-    "src": "assets/img/print/fiesta.jpg",
+  "/assets/uploads/embossed-botanical-wedding-invitation-gg3i.jpg": {
+    "src": "assets/uploads/embossed-botanical-wedding-invitation-gg3i.jpg",
     "cdn": "",
-    "w": 750,
-    "h": 717
+    "w": 1536,
+    "h": 1024
+  },
+  "/assets/uploads/terracotta-puerto-rico-wedding-save-the-date-ggcb.jpg": {
+    "src": "assets/uploads/terracotta-puerto-rico-wedding-save-the-date-ggcb.jpg",
+    "cdn": "",
+    "w": 1536,
+    "h": 1024
+  },
+  "/assets/uploads/puerto-rico-wedding-save-the-date-2-gg6i.jpg": {
+    "src": "assets/uploads/puerto-rico-wedding-save-the-date-2-gg6i.jpg",
+    "cdn": "",
+    "w": 1536,
+    "h": 1024
+  },
+  "/assets/uploads/retro-wedding-itinerary-and-rsvp-stationery-gg9j.jpg": {
+    "src": "assets/uploads/retro-wedding-itinerary-and-rsvp-stationery-gg9j.jpg",
+    "cdn": "",
+    "w": 1536,
+    "h": 1024
+  },
+  "/assets/uploads/tropical-letterpress-wedding-invitation-flat-lay-jphv.jpg": {
+    "src": "assets/uploads/tropical-letterpress-wedding-invitation-flat-lay-jphv.jpg",
+    "cdn": "",
+    "w": 1403,
+    "h": 1121
   },
   "/assets/uploads/the-intent-journal-on-cream-background.webp": {
     "src": "assets/uploads/the-intent-journal-on-cream-background.webp",
@@ -827,5 +877,53 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 1500,
     "h": 1000
+  },
+  "/assets/img/type/bastrop-detail-1.webp": {
+    "src": "assets/img/type/bastrop-detail-1.webp",
+    "cdn": "",
+    "w": 1600,
+    "h": 2170
+  },
+  "/assets/img/type/bastrop-detail-2.webp": {
+    "src": "assets/img/type/bastrop-detail-2.webp",
+    "cdn": "",
+    "w": 1600,
+    "h": 2170
+  },
+  "/assets/img/type/bastrop-detail-3.webp": {
+    "src": "assets/img/type/bastrop-detail-3.webp",
+    "cdn": "",
+    "w": 1600,
+    "h": 2170
+  },
+  "/assets/img/type/bastrop-detail-4.webp": {
+    "src": "assets/img/type/bastrop-detail-4.webp",
+    "cdn": "",
+    "w": 1600,
+    "h": 2170
+  },
+  "/assets/img/type/oxomoco-detail-1.webp": {
+    "src": "assets/img/type/oxomoco-detail-1.webp",
+    "cdn": "",
+    "w": 1600,
+    "h": 2170
+  },
+  "/assets/img/type/oxomoco-detail-2.webp": {
+    "src": "assets/img/type/oxomoco-detail-2.webp",
+    "cdn": "",
+    "w": 1600,
+    "h": 2170
+  },
+  "/assets/img/type/oxomoco-detail-3.webp": {
+    "src": "assets/img/type/oxomoco-detail-3.webp",
+    "cdn": "",
+    "w": 1600,
+    "h": 2170
+  },
+  "/assets/img/type/oxomoco-detail-4.webp": {
+    "src": "assets/img/type/oxomoco-detail-4.webp",
+    "cdn": "",
+    "w": 1600,
+    "h": 2170
   }
 };

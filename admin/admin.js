@@ -108,11 +108,18 @@ const b64 = (blob) => new Promise((r) => { const fr = new FileReader(); fr.onloa
 const thumbUrl = (path) => /^https?:/.test(path) ? path : `${RAW}${path.startsWith('/') ? '' : '/'}${path}`;
 const toList = (v) => (v == null ? [] : v.toJS ? v.toJS() : Array.isArray(v) ? v : [v]).filter(Boolean);
 
+// Options on the field: multiple (many photos), captions (a paragraph under each photo; saved as
+// [{ image, text }]), tags (labels for the first photos, e.g. [Thumbnail, Hero]).
 const Photos = createClass({
   getInitialState() { return { local: {}, busy: 0, error: '', drag: null, over: false }; },
   multiple() { return !!this.props.field.get('multiple'); },
-  items() { return toList(this.props.value); },
-  set(list) { this.props.onChange(this.multiple() ? list : (list[0] || '')); },
+  captions() { return !!this.props.field.get('captions'); },
+  tags() { const t = this.props.field.get('tags'); return t ? (t.toJS ? t.toJS() : t) : (this.multiple() && !this.captions() ? ['Thumbnail'] : []); },
+  items() { return toList(this.props.value).map((x) => typeof x === 'string' ? { path: x, text: '' } : { path: x.image || '', text: x.text || '' }).filter((x) => x.path || x.text); },
+  set(items) {
+    const out = this.captions() ? items.map((i) => ({ image: i.path, text: i.text || '' })) : items.map((i) => i.path);
+    this.props.onChange(this.multiple() ? out : (out[0] || ''));
+  },
   async add(files) {
     files = [...files].filter((f) => f.type.startsWith('image/'));
     if (!files.length) return;
@@ -122,35 +129,39 @@ const Photos = createClass({
     try {
       const prepared = await Promise.all(files.map(prepare));
       const local = { ...this.state.local };
-      const paths = prepared.map((p) => { const path = `/assets/uploads/${p.name}`; local[path] = URL.createObjectURL(p.blob); return path; });
+      const added = prepared.map((p) => { const path = `/assets/uploads/${p.name}`; local[path] = URL.createObjectURL(p.blob); return { path, text: '' }; });
       this.setState({ local });
       if (!window.TRV_TEST_BACKEND) await commitFiles(await Promise.all(prepared.map(async (p) => ({ path: `assets/uploads/${p.name}`, base64: await b64(p.blob) }))),
         `Upload ${prepared.length} photo${prepared.length > 1 ? 's' : ''}`);
-      this.set(this.multiple() ? [...this.items(), ...paths] : paths);
+      this.set(this.multiple() ? [...this.items(), ...added] : added);
     } catch (e) { this.setState({ error: `Upload failed. ${e.message}` }); }
     this.setState((s) => ({ busy: Math.max(0, s.busy - files.length) }));
   },
   remove(i) { const l = this.items(); l.splice(i, 1); this.set(l); },
   move(from, to) { const l = this.items(); const [x] = l.splice(from, 1); l.splice(to, 0, x); this.set(l); },
+  text(i, t) { const l = this.items(); l[i] = { ...l[i], text: t }; this.set(l); },
   render() {
-    const items = this.items(), multi = this.multiple(), { busy, error, over, drag } = this.state;
+    const items = this.items(), multi = this.multiple(), caps = this.captions(), tags = this.tags(), { busy, error, over, drag } = this.state;
     const pick = () => this.input && this.input.click();
     return h('div', {
-      className: 'trv-photos' + (over ? ' is-over' : ''),
+      className: 'trv-photos' + (over ? ' is-over' : '') + (caps ? ' has-captions' : ''),
       onDragOver: (e) => { if (e.dataTransfer.types.includes('Files')) { e.preventDefault(); this.setState({ over: true }); } },
       onDragLeave: () => this.setState({ over: false }),
       onDrop: (e) => { if (e.dataTransfer.files.length) { e.preventDefault(); this.setState({ over: false }); this.add(e.dataTransfer.files); } },
     },
-      items.length ? h('div', { className: 'trv-photos-grid' }, ...items.map((path, i) => h('figure', {
-        key: path + i, className: 'trv-photo' + (drag === i ? ' is-drag' : ''), draggable: multi,
-        onDragStart: (e) => { e.dataTransfer.effectAllowed = 'move'; this.setState({ drag: i }); },
+      items.length ? h('div', { className: 'trv-photos-grid' }, ...items.map((it, i) => h('figure', {
+        key: it.path + i, className: 'trv-photo' + (drag === i ? ' is-drag' : ''),
         onDragOver: (e) => { if (this.state.drag != null) e.preventDefault(); },
         onDrop: (e) => { if (this.state.drag != null) { e.preventDefault(); e.stopPropagation(); this.move(this.state.drag, i); this.setState({ drag: null }); } },
-        onDragEnd: () => this.setState({ drag: null }),
       },
-        h('img', { src: this.state.local[path] || thumbUrl(path), alt: '', onError: (e) => { const s = location.origin + (path.startsWith('/') ? '' : '/') + path; if (e.target.src !== s) e.target.src = s; } }),
-        multi && i === 0 ? h('span', { className: 'trv-photo-tag' }, 'Thumbnail') : null,
-        h('button', { type: 'button', className: 'trv-photo-x', 'aria-label': 'Remove photo', onClick: () => this.remove(i) }, '×')))) : null,
+        h('div', { className: 'trv-photo-img', draggable: multi,
+          onDragStart: (e) => { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', String(i)); this.setState({ drag: i }); },
+          onDragEnd: () => this.setState({ drag: null }) },
+          it.path ? h('img', { src: this.state.local[it.path] || thumbUrl(it.path), alt: '', onError: (e) => { const s = location.origin + (it.path.startsWith('/') ? '' : '/') + it.path; if (e.target.src !== s) e.target.src = s; } }) : null,
+          multi && tags[i] ? h('span', { className: 'trv-photo-tag' }, tags[i]) : null,
+          caps ? h('span', { className: 'trv-photo-num' }, String(i + 1)) : null,
+          h('button', { type: 'button', className: 'trv-photo-x', 'aria-label': 'Remove photo', onClick: () => this.remove(i) }, '×')),
+        caps ? h('textarea', { className: 'trv-photo-text', rows: 3, placeholder: 'Write the line that goes with this image…', value: it.text, onChange: (e) => this.text(i, e.target.value) }) : null))) : null,
       h('div', { className: 'trv-photos-bar' },
         h('button', { type: 'button', className: 'trv-btn', onClick: pick, disabled: busy > 0 },
           busy ? `Uploading ${busy} photo${busy > 1 ? 's' : ''}…` : multi ? (items.length ? 'Add photos' : 'Choose photos') : (items.length ? 'Replace photo' : 'Choose photo')),
@@ -263,6 +274,7 @@ CMS.registerWidget('position', Position, () => null);
           { label: 'Word shown on the site', name: 'display', widget: 'string', required: false, hint: 'How the name appears in the carousel and thumbnail. Leave empty for the name in capitals.' },
           { label: 'Sentence case specimen', name: 'lowercase', widget: 'boolean', required: false, hint: 'Show the sample lines in sentence case (for fonts with lowercase letters).' },
           { label: 'Carousel size (px)', name: 'hero_size', widget: 'number', value_type: 'int', required: false, hint: 'Leave empty to size automatically. Typical: 80–150.' },
+          { label: 'Details', name: 'details', widget: 'photos', multiple: true, captions: true, required: false, hint: 'The image-and-paragraph carousel on the font’s page. Drop all the images at once, write a line under each, and drag to reorder.' },
         ],
       };
     }),
