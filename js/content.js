@@ -237,8 +237,8 @@ export const DIGITAL = [
         "text": ""
       }
     ],
-    "thumb": "/assets/img/byways/thumb.jpg",
-    "hero": "/assets/img/byways/thumb.jpg",
+    "thumb": "/assets/img/byways/thumb-v2.jpg",
+    "hero": "/assets/img/byways/thumb-v2.jpg",
     "heroWide": false,
     "sections": []
   },
@@ -796,8 +796,8 @@ export const CONTENT_IMG = {
     "w": 786,
     "h": 1704
   },
-  "/assets/img/byways/thumb.jpg": {
-    "src": "assets/img/byways/thumb.jpg",
+  "/assets/img/byways/thumb-v2.jpg": {
+    "src": "assets/img/byways/thumb-v2.jpg",
     "cdn": "",
     "w": 2500,
     "h": 1667
