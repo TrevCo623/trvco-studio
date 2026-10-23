@@ -574,12 +574,12 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .by-card:focus-visible { outline: 2px solid var(--clay); outline-offset: 4px; }
 
 /* Byways closing panels: headline, phone and button all fit in one screen */
-.by-panel { display: flex; flex-direction: column; align-items: center; gap: 40px; height: 100vh; height: 100svh; min-height: 560px; padding: calc(var(--hh, 126px) + 40px) 24px 48px; background: var(--paper); color: var(--ink); text-align: center; box-sizing: border-box; }
+.by-panel { display: flex; flex-direction: column; align-items: center; gap: 40px; height: calc(100vh + 160px); height: calc(100svh + 160px); min-height: 720px; padding: calc(var(--hh, 126px) + 40px) 24px 208px; background: var(--paper); color: var(--ink); text-align: center; box-sizing: border-box; }
 .by-panel .car-heading { margin: 0 auto; color: inherit; flex: none; }
 .by-panel-img { flex: 1 1 0; min-height: 0; display: flex; justify-content: center; }
 .by-panel-img img { display: block; height: 100%; width: auto; max-width: 100%; object-fit: contain; }
 .by-panel-btn { flex: none; width: 292px; height: 63px; background: var(--ink); color: var(--paper); font-weight: 600; font-size: 17.6px; letter-spacing: .02em; }
 .by-panel-btn:hover { background: #2e2e2b; }
-@media (max-width: 700px) { .by-panel { gap: 28px; padding: calc(var(--hh, 84px) + 24px) 20px 32px; } }
+@media (max-width: 700px) { .by-panel { gap: 28px; height: calc(100svh + 96px); padding: calc(var(--hh, 84px) + 24px) 20px 128px; } }
 .by-more[data-fixed] { padding-bottom: 120px; }
 @media (max-width: 700px) { .by-more[data-fixed] { padding-bottom: 72px; } }
