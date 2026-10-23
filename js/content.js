@@ -285,7 +285,7 @@ export const DIGITAL = [
         "bg": "#B5A784",
         "phone": 0.6403,
         "img": "/assets/img/vibefit/phone-frame.webp",
-        "screen": "/assets/img/vibefit/look-details-screen-v2.jpg",
+        "screen": "/assets/img/vibefit/look-details-screen-v3.jpg",
         "hole": {
           "x": 452,
           "y": 390,
@@ -310,8 +310,8 @@ export const DIGITAL = [
               "y": 678,
               "w": 1150
             },
-            "endY": 362,
-            "photoFrac": 0.5662
+            "endY": 193,
+            "keepFrac": 0.712
           }
         }
       },
@@ -901,8 +901,8 @@ export const CONTENT_IMG = {
     "w": 2224,
     "h": 3336
   },
-  "/assets/img/vibefit/look-details-screen-v2.jpg": {
-    "src": "assets/img/vibefit/look-details-screen-v2.jpg",
+  "/assets/img/vibefit/look-details-screen-v3.jpg": {
+    "src": "assets/img/vibefit/look-details-screen-v3.jpg",
     "cdn": "",
     "w": 1320,
     "h": 5146

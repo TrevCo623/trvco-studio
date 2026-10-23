@@ -1173,10 +1173,10 @@ function DigitalPage(route) {
       const t = ease(ramp(f, 0.1, 0.3)), sc = lerp(I.card.w / I.holeW, 1, t);
       card.style.transform = `translate3d(${lerp(I.card.x, 0, t) * k}px, ${(lerp(I.card.y, I.endY, t) - I.holeTop) * k}px, 0) scale(${sc})`;
       card.style.opacity = 1 - ramp(f, 0.34, 0.35);
-      // The card's own text fades as it grows (it's laid out differently from the details screen),
-      // leaving just the photo to hand over.
+      // The card's description is set differently from the details screen's, so it fades as the
+      // card grows; the photo and title line up and hand over cleanly.
       card.style.setProperty('--ta', (1 - ramp(f, 0.14, 0.26)).toFixed(3));
-      card.style.setProperty('--pf-cut', `${(I.photoFrac || 1) * 100}%`);
+      card.style.setProperty('--pf-cut', `${(I.keepFrac || 1) * 100}%`);
     }
     im.style.opacity = ramp(f, 0.31, 0.34);
     $('.cs-scroll-sides', sec).style.opacity = 1 - ramp(f, 0.1, 0.24);
