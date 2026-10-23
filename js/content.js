@@ -254,6 +254,8 @@ export const DIGITAL = [
     "thumb": "/assets/img/vibefit/look-details.jpg",
     "hero": "/assets/img/vibefit/home.webp",
     "heroWide": false,
+    "phones": true,
+    "heroPhone": 0.6403,
     "sections": [
       {
         "type": "full",
@@ -266,6 +268,7 @@ export const DIGITAL = [
         "tone": "light",
         "caption": "Step 2: Choose an outfit that matches your vibe for the night",
         "bg": "var(--ink)",
+        "phone": 0.4246,
         "img": "/assets/img/vibefit/looks.webp"
       },
       {
@@ -290,6 +293,7 @@ export const DIGITAL = [
         "type": "feature",
         "tone": "light",
         "bg": "var(--ink)",
+        "phone": 0.6403,
         "img": "/assets/img/vibefit/home.webp"
       }
     ]

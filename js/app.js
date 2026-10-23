@@ -1025,12 +1025,12 @@ function DigitalPage(route) {
   const d = DIGITAL.find((x) => x.slug === route.slug);
   if (d?.layout === 'byways') return BywaysPage(d);
   const sec = (s) => {
-    const style = `${s.bg ? `background:${s.bg};` : ''}${s.w ? `--w:${s.w}px;` : ''}`;
+    const style = `${s.bg ? `background:${s.bg};` : ''}${s.w ? `--w:${s.w}px;` : ''}${s.phone ? `--pf:${s.phone};` : ''}`;
     const tone = `tone-${s.tone || 'light'}`;
     const head = `${s.title ? `<h2 class="cs-title reveal">${esc(s.title)}</h2>` : ''}${s.caption ? `<p class="cs-caption reveal">${esc(s.caption)}</p>` : ''}`;
     if (s.type === 'full') return `<section class="cs cs-full ${tone}" style="${style}">${img(s.img, { alt: s.caption })}${head}</section>`;
     if (s.type === 'split') return `<section class="cs cs-split ${tone} ${s.side === 'right' ? 'img-right' : ''}" style="${style}"><div class="cs-media reveal">${img(s.img, { alt: s.title || s.caption })}</div><div class="cs-split-text">${head}</div></section>`;
-    if (s.type === 'feature') return `<section class="cs cs-feature ${tone}" style="${style}"><div>${head}</div><div class="cs-media reveal">${img(s.img, { alt: s.title || s.caption })}</div></section>`;
+    if (s.type === 'feature') return `<section class="cs cs-feature ${tone}" style="${style}"><div>${head}</div><div class="cs-media reveal${s.phone ? ' has-phone' : ''}">${img(s.img, { alt: s.title || s.caption })}</div></section>`;
     if (s.type === 'slides') return `<section class="cs cs-slides ${tone}" style="${style}" data-slides>
         ${head}
         ${s.imgs.map((k, i) => `<div class="slide" data-slide="${i}">${img(k, { alt: `${s.caption} — ${i + 1} of ${s.imgs.length}` })}</div>`).join('')}
@@ -1040,11 +1040,11 @@ function DigitalPage(route) {
     if (s.type === 'icons') return `<section class="cs cs-icons ${tone}" style="${style}">${head}<div class="icon-grid reveal">${s.imgs.map((k) => img(k, { alt: 'App icon option' })).join('')}</div>${s.note ? `<p class="cs-note">${esc(s.note)}</p>` : ''}</section>`;
     return '';
   };
-  const el = h(`<div class="digital-page">
-    <section class="case-hero ${d.heroWide ? 'wide' : ''}">
+  const el = h(`<div class="digital-page${d.phones ? ' uniform-phones' : ''}">
+    <section class="case-hero ${d.heroWide ? 'wide' : ''}"${d.heroPhone ? ` style="--pf:${d.heroPhone}"` : ''}>
       <h1>${esc(d.title)}</h1>
       <p>${esc(d.intro)}</p>
-      ${img(d.hero, { alt: `${d.title} — hero`, lazy: false })}
+      ${img(d.hero, { alt: `${d.title} — hero`, lazy: false, cls: d.heroPhone ? 'has-phone' : '' })}
     </section>
     ${d.sections.map(sec).join('')}
     ${d.carousel?.length ? `<section class="cs cs-carousel">${carouselHTML(d.carousel, d.carouselTitle, d.title)}</section>` : ''}

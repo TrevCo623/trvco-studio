@@ -591,3 +591,14 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
   .by .car-heading { font-size: 13px; line-height: 21px; letter-spacing: .6px; max-width: min(750px, calc(100vw - 64px)); }
   .by-hs-stage .car-heading { padding: 0; }
 }
+
+/* Pages with uniform_phones: every phone matches the phones in the full-width colour shots, which are
+   4000x2656 with a 784px-wide phone, shown cover-cropped at 1440:968 (4:5 on mobile). Images that hold
+   a phone say how much of their width it takes (--pf) and are sized from that. */
+.uniform-phones { --phone-w: calc(100vw * 0.19843); }
+.uniform-phones .cs-media.has-phone { max-width: none; width: calc(var(--phone-w) / var(--pf)); }
+.uniform-phones .case-hero img.has-phone { width: calc(var(--phone-w) / var(--pf)); }
+@media (max-width: 760px) {
+  .uniform-phones { --phone-w: calc(100vw * 0.36898); }
+  .uniform-phones .cs-full img { aspect-ratio: 4 / 5; }
+}

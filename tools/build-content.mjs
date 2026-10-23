@@ -83,6 +83,7 @@ const DIGITAL = load('digital').map((d) => {
   carousel: (d.carousel || []).map((c, i) => ({ img: useImage(c.image, `Digital "${d.title}" carousel ${i + 1}`), text: c.text || '' })).filter((c) => c.img),
   thumb: useImage(d.thumb || d.heroSrc, `Digital "${d.title}" thumbnail`),
   hero: useImage(d.heroSrc, `Digital "${d.title}" hero`), heroWide: !!d.hero_wide,
+  ...(d.uniform_phones ? { phones: true, heroPhone: Number(d.hero_phone) || 0 } : {}),
   sections: (d.sections || []).map((s, i) => {
     const where = `Digital "${d.title}" section ${i + 1}`;
     const o = { type: s.type, tone: s.tone || 'light' };
@@ -92,6 +93,7 @@ const DIGITAL = load('digital').map((d) => {
     if (s.background) o.bg = BG[s.background] || s.background;
     if (s.image_width) o.w = Number(s.image_width);
     if (s.side) o.side = s.side;
+    if (s.phone) o.phone = Number(s.phone);
     if (s.image) o.img = useImage(s.image, where);
     if (s.images) o.imgs = s.images.map((im) => useImage(im, where)).filter(Boolean);
     return o;

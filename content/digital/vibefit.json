@@ -20,7 +20,8 @@
       "tone": "light",
       "image": "/assets/img/vibefit/looks.webp",
       "background": "ink",
-      "caption": "Step 2: Choose an outfit that matches your vibe for the night"
+      "caption": "Step 2: Choose an outfit that matches your vibe for the night",
+      "phone": 0.4246
     },
     {
       "type": "full",
@@ -44,7 +45,10 @@
       "type": "feature",
       "tone": "light",
       "image": "/assets/img/vibefit/home.webp",
-      "background": "ink"
+      "background": "ink",
+      "phone": 0.6403
     }
-  ]
+  ],
+  "uniform_phones": true,
+  "hero_phone": 0.6403
 }
