@@ -1080,8 +1080,8 @@ function DigitalPage(route) {
   wireDetails(el);
   const scrollers = $$('.cs-scroll', el);
   const paintScroll = () => scrollers.forEach((sec) => {
-    const r = sec.getBoundingClientRect(), span = r.height - innerHeight;
-    const f = span > 0 ? clamp01(-r.top / span) : 0;
+    const st = $('.cs-scroll-stage', sec), r = sec.getBoundingClientRect(), span = r.height - st.offsetHeight;
+    const f = span > 0 ? clamp01((parseFloat(getComputedStyle(st).top) - r.top) / span) : 0;
     const box = $('.cs-scroll-screen', sec), im = $('img', box);
     const len = Math.max(0, im.offsetHeight - box.offsetHeight);
     im.style.transform = `translate3d(0, ${-ramp(f, 0.1, 0.9) * len}px, 0)`;

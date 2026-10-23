@@ -603,14 +603,15 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
   .uniform-phones .cs-full img { aspect-ratio: 4 / 5; }
 }
 
-/* Scrolling-screen section: pinned while the screenshot inside the phone scrolls */
-.cs-scroll { height: 280vh; }
-.cs-scroll-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; padding: calc(var(--header-h) + 24px) 18px 24px; box-sizing: border-box; }
-.cs-scroll .cs-caption { position: static; max-width: 292px; margin: 0; text-align: center; }
-.cs-scroll-phone { position: relative; width: min(447px, 70vw); flex: none; }
+/* Scrolling-screen section: laid out exactly like a full-width colour shot (same height, caption
+   and phone position), pinned just below the header while the screenshot inside the phone scrolls. */
+.cs-scroll { --stage-h: calc(100vw * 968 / 1440); --cap-top: 102px; --phone-top: calc(100vw * 0.11425); height: calc(var(--stage-h) + 150vh); }
+.cs-scroll-stage { position: sticky; top: calc(var(--header-h) - var(--cap-top) + 24px); height: var(--stage-h); overflow: hidden; }
+.cs-scroll .cs-caption { position: absolute; left: 0; right: 0; top: var(--cap-top); max-width: 292px; }
+.cs-scroll-phone { position: absolute; left: 0; right: 0; top: var(--phone-top); margin: 0 auto; width: min(447px, 70vw); }
 .uniform-phones .cs-scroll-phone.has-phone { width: calc(var(--phone-w) / var(--pf)); }
 .cs-scroll-screen { position: absolute; overflow: hidden; background: #f3f3f1; }
 .cs-scroll-screen img { display: block; width: 100%; height: auto; will-change: transform; }
 .cs-scroll-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-@media (max-width: 760px) { .cs-scroll { height: 240vh; } .cs-scroll-stage { gap: 24px; } }
+@media (max-width: 760px) { .cs-scroll { --stage-h: 125vw; --cap-top: 32px; --phone-top: calc(100vw * 0.2119); height: calc(var(--stage-h) + 120vh); } }
 .uniform-phones .cs-feature { overflow-x: clip; }
