@@ -299,7 +299,7 @@ export const DIGITAL = [
           "bg": "#F8F6F6",
           "sides": "/assets/img/vibefit/looks-sides.webp",
           "screen": "/assets/img/vibefit/looks-screen-bg.jpg",
-          "card": "/assets/img/vibefit/looks-card-v2.webp",
+          "card": "/assets/img/vibefit/looks-card-v3.webp",
           "sidesX": 1288,
           "sidesW": 4800,
           "geo": {
@@ -310,8 +310,7 @@ export const DIGITAL = [
               "y": 678,
               "w": 1150
             },
-            "endY": 193,
-            "keepFrac": 0.712
+            "endY": 181
           }
         }
       },
@@ -919,8 +918,8 @@ export const CONTENT_IMG = {
     "w": 1320,
     "h": 2866
   },
-  "/assets/img/vibefit/looks-card-v2.webp": {
-    "src": "assets/img/vibefit/looks-card-v2.webp",
+  "/assets/img/vibefit/looks-card-v3.webp": {
+    "src": "assets/img/vibefit/looks-card-v3.webp",
     "cdn": "",
     "w": 1320,
     "h": 2331
