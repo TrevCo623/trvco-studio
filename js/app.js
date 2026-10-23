@@ -1031,6 +1031,18 @@ function DigitalPage(route) {
     if (s.type === 'full') return `<section class="cs cs-full ${tone}" style="${style}">${img(s.img, { alt: s.caption })}${head}</section>`;
     if (s.type === 'split') return `<section class="cs cs-split ${tone} ${s.side === 'right' ? 'img-right' : ''}" style="${style}"><div class="cs-media reveal">${img(s.img, { alt: s.title || s.caption })}</div><div class="cs-split-text">${head}</div></section>`;
     if (s.type === 'feature') return `<section class="cs cs-feature ${tone}" style="${style}"><div>${head}</div><div class="cs-media reveal${s.phone ? ' has-phone' : ''}">${img(s.img, { alt: s.title || s.caption })}</div></section>`;
+    if (s.type === 'scroll' && s.img && s.screen) {
+      // A phone whose screen scrolls through a long screenshot while the section is pinned.
+      // s.hole = the screen opening in the frame image, in its pixels: { x, y, w, h }.
+      const F = IMG[s.img], H = s.hole;
+      return `<section class="cs cs-scroll ${tone}" style="${style}"><div class="cs-scroll-stage">
+        ${head}
+        <div class="cs-scroll-phone${s.phone ? ' has-phone' : ''}" style="aspect-ratio:${F.w}/${F.h}">
+          <div class="cs-scroll-screen" style="left:${(H.x / F.w) * 100}%;top:${(H.y / F.h) * 100}%;width:${(H.w / F.w) * 100}%;height:${(H.h / F.h) * 100}%">${img(s.screen, { alt: s.caption || '', lazy: false })}</div>
+          ${img(s.img, { alt: '', lazy: false, cls: 'cs-scroll-frame' })}
+        </div>
+      </div></section>`;
+    }
     if (s.type === 'slides') return `<section class="cs cs-slides ${tone}" style="${style}" data-slides>
         ${head}
         ${s.imgs.map((k, i) => `<div class="slide" data-slide="${i}">${img(k, { alt: `${s.caption} — ${i + 1} of ${s.imgs.length}` })}</div>`).join('')}
@@ -1066,7 +1078,15 @@ function DigitalPage(route) {
     paint();
   });
   wireDetails(el);
-  return { el, title: d.title };
+  const scrollers = $$('.cs-scroll', el);
+  const paintScroll = () => scrollers.forEach((sec) => {
+    const r = sec.getBoundingClientRect(), span = r.height - innerHeight;
+    const f = span > 0 ? clamp01(-r.top / span) : 0;
+    const box = $('.cs-scroll-screen', sec), im = $('img', box);
+    const len = Math.max(0, im.offsetHeight - box.offsetHeight);
+    im.style.transform = `translate3d(0, ${-ramp(f, 0.1, 0.9) * len}px, 0)`;
+  });
+  return { el, title: d.title, onScroll: paintScroll, mount() { paintScroll(); $$('.cs-scroll img', el).forEach((im) => im.complete || im.addEventListener('load', paintScroll, { once: true })); } };
 }
 
 /* ═════════════════════════════ CART ═════════════════════════════ */

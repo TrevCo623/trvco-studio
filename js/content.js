@@ -272,10 +272,19 @@ export const DIGITAL = [
         "img": "/assets/img/vibefit/looks.webp"
       },
       {
-        "type": "full",
+        "type": "scroll",
         "tone": "light",
         "caption": "Step 3: Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet",
-        "img": "/assets/img/vibefit/look-details.jpg"
+        "bg": "#B5A784",
+        "phone": 0.6403,
+        "img": "/assets/img/vibefit/phone-frame.webp",
+        "screen": "/assets/img/vibefit/look-details-screen.jpg",
+        "hole": {
+          "x": 452,
+          "y": 390,
+          "w": 1320,
+          "h": 2601
+        }
       },
       {
         "type": "full",
@@ -829,6 +838,18 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 3200,
     "h": 2224
+  },
+  "/assets/img/vibefit/phone-frame.webp": {
+    "src": "assets/img/vibefit/phone-frame.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/vibefit/look-details-screen.jpg": {
+    "src": "assets/img/vibefit/look-details-screen.jpg",
+    "cdn": "",
+    "w": 1320,
+    "h": 5146
   },
   "/assets/img/vibefit/invite.jpg": {
     "src": "assets/img/vibefit/invite.jpg",

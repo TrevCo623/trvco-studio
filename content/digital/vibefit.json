@@ -24,9 +24,18 @@
       "phone": 0.4246
     },
     {
-      "type": "full",
-      "image": "/assets/img/vibefit/look-details.jpg",
+      "type": "scroll",
       "tone": "light",
+      "background": "#B5A784",
+      "image": "/assets/img/vibefit/phone-frame.webp",
+      "screen": "/assets/img/vibefit/look-details-screen.jpg",
+      "hole": {
+        "x": 452,
+        "y": 390,
+        "w": 1320,
+        "h": 2601
+      },
+      "phone": 0.6403,
       "caption": "Step 3: Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet"
     },
     {
