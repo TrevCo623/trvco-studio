@@ -31,9 +31,9 @@
     },
     {
       "type": "feature",
-      "tone": "light",
+      "tone": "dark",
       "image": "/assets/img/vibefit/looks.webp",
-      "background": "ink",
+      "background": "paper",
       "caption": "Step 2: Choose an outfit that matches your vibe for the night",
       "phone": 0.2967
     },
