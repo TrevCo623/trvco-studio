@@ -951,6 +951,7 @@ function BywaysPage(d) {
     };
     track.style.height = `${(B.end + 1) * vh}px`;
     carousels.forEach((c) => c.measure(vw, vh, hh, mobile));
+    el.style.setProperty('--hh', `${hh}px`);
     steps.forEach((st) => { st.style.left = `${geo.text.x}px`; st.style.width = `${geo.text.w}px`; st.style.top = geo.text.y != null ? `${geo.text.y}px` : `${hh + (vh - hh) / 2 - st.offsetHeight / 2}px`; });
     paint();
   }
