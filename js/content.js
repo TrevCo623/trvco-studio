@@ -175,6 +175,7 @@ export const DIGITAL = [
       {
         "title": "See details and helpful links about each stop and see how adding that stop will alter your route",
         "background": "",
+        "fixed": false,
         "items": [
           {
             "img": "/assets/img/byways/stop-ladder-creek-falls.webp",
@@ -197,6 +198,7 @@ export const DIGITAL = [
       {
         "title": "Set your own preferences for how trips come to life – what types of stops you like, how far you want to drive each day, etc.",
         "background": "#EBE5E5",
+        "fixed": true,
         "items": [
           {
             "img": "/assets/img/byways/settings-what-you-like.webp",

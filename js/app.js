@@ -858,9 +858,9 @@ const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
 // Byways scroll carousels: a phone pinned in the middle with app screens beside it. Click a screen to
 // bring it into the phone; scrolling down moves that screen through its whole page, then the page
-// carries on. Each carousel is { title, background, items: [{ img, text }] }.
+// carries on. Each carousel is { title, background, fixed, items } (fixed: screens don't scroll).
 function phoneCarouselHTML(c, name) {
-  return `<section class="by-more" style="${c.background ? `background:${c.background};` : ''}"><div class="by-hs"><div class="by-hs-stage">
+  return `<section class="by-more"${c.fixed ? ' data-fixed' : ''} style="${c.background ? `background:${c.background};` : ''}"><div class="by-hs"><div class="by-hs-stage">
       ${c.title ? `<h2 class="car-heading">${esc(c.title).replace(/\n/g, '<br>')}</h2>` : ''}
       <div class="by-hs-row">${c.items.map((it, i) => `<figure class="by-card" role="button" tabindex="0" aria-label="Show screen ${i + 1}">${img(it.img, { alt: it.text || name, lazy: false })}</figure>`).join('')}</div>
       <div class="by-hs-phone" aria-hidden="true"><img class="by-frame-img" src="/assets/img/byways/phone-frame.webp" alt=""></div>
@@ -879,13 +879,14 @@ function phoneCarousel(hs) {
     row.style.top = `${top + 13 * cs}px`;
     row.style.setProperty('--cw', `${cw}px`); row.style.setProperty('--chh', `${852 * cs}px`);
     row.style.setProperty('--pad', `${47 * cs}px`); row.style.setProperty('--rad', `${55 * cs}px`); row.style.gap = `${gap}px`;
-    const lens = cards.map((c) => { const im = $('img', c); return im && im.naturalWidth ? Math.max(0, cw * im.naturalHeight / im.naturalWidth + 47 * cs - 852 * cs) : 0; });
-    Object.assign(g, { step: cw + gap, first: vw / 2 - cw / 2, fin: vh * 1.8, lens });
-    hs.style.height = `${vh + g.fin + vh * 0.25}px`;
+    const fixed = hs.closest('[data-fixed]');
+    const lens = fixed ? cards.map(() => 0) : cards.map((c) => { const im = $('img', c); return im && im.naturalWidth ? Math.max(0, cw * im.naturalHeight / im.naturalWidth + 47 * cs - 852 * cs) : 0; });
+    Object.assign(g, { step: cw + gap, first: vw / 2 - cw / 2, fin: fixed ? 0 : vh * 1.8, lens });
+    hs.style.height = `${fixed ? vh : vh + g.fin + vh * 0.25}px`;
   }
   function paint() {
-    if (!g.fin) return;
-    const f = clamp01(-hs.getBoundingClientRect().top / g.fin);
+    if (!g.step) return;
+    const f = g.fin ? clamp01(-hs.getBoundingClientRect().top / g.fin) : 0;
     if (f < car.base) car.base = f;                                   // scrolling back up rewinds this screen
     const local = clamp01((f - car.base) / Math.max(0.0001, 1 - car.base));
     cards.forEach((c, k) => {
@@ -902,7 +903,7 @@ function phoneCarousel(hs) {
     // Jump back to the start of this carousel (invisible: it's pinned) so the new screen gets its full scroll.
     car.cur = k; car.base = 0;
     const startY = hs.getBoundingClientRect().top + scrollY;
-    if (scrollY > startY + 1) scrollTo({ top: startY, behavior: 'instant' });
+    if (g.fin && scrollY > startY + 1) scrollTo({ top: startY, behavior: 'instant' });
     cancelAnimationFrame(car.anim);
     const step = (now) => { const t = clamp01((now - t0) / dur); car.p = lerp(from, k, ease(t)); paint(); if (t < 1) car.anim = requestAnimationFrame(step); };
     car.anim = requestAnimationFrame(step);
