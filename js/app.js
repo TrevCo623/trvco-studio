@@ -909,6 +909,14 @@ function phoneCarousel(hs) {
     car.anim = requestAnimationFrame(step);
   }
   row.addEventListener('click', (e) => { const c = e.target.closest('.by-card'); if (c) goTo(cards.indexOf(c)); });
+  // Horizontal swipes step through the screens, like clicking the neighbour.
+  let sx = 0, sy = 0, swiping = false;
+  stage.addEventListener('touchstart', (e) => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; swiping = true; }, { passive: true });
+  stage.addEventListener('touchend', (e) => {
+    if (!swiping) return; swiping = false;
+    const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) goTo(car.cur + (dx < 0 ? 1 : -1));
+  }, { passive: true });
   row.addEventListener('keydown', (e) => { const c = e.target.closest('.by-card'); if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); goTo(cards.indexOf(c)); } });
   return { measure, paint, destroy() { cancelAnimationFrame(car.anim); } };
 }
@@ -938,11 +946,25 @@ function BywaysPage(d) {
   const carousels = $$('.by-hs', el).map((hs) => phoneCarousel(hs));
   const track = $('.by-track', el), phone = $('.by-phone', el), shots = $$('.by-shot', el), steps = $$('.by-step', el), hero = $('.by-hero', el);
   let geo;
+  let lastW = 0, lastH = 0;
   function measure() {
-    const vw = innerWidth, vh = innerHeight, hh = $('#header')?.offsetHeight || 84, mobile = vw < 900;
+    const vw = innerWidth, hh = $('#header')?.offsetHeight || 84, mobile = vw < 900;
+    // Phones show and hide the address bar while scrolling, which changes innerHeight. Re-laying out
+    // the page on each change made the animation jump, so on touch screens keep the first height
+    // until the width changes (rotation) or the height changes a lot.
+    const touch = matchMedia('(pointer: coarse)').matches;
+    if (!(touch && vw === lastW && Math.abs(innerHeight - lastH) < 160)) lastH = innerHeight;
+    lastW = vw;
+    const vh = lastH;
+    el.style.setProperty('--vh', `${vh}px`);
+    el.style.setProperty('--hh', `${hh}px`);
+    // Step text: beside the phone on desktop, above it on mobile.
+    const tw = mobile ? Math.min(369, vw - 64) : 0;
+    let stepH = 0;
+    if (mobile) steps.forEach((st) => { st.style.width = `${tw}px`; stepH = Math.max(stepH, st.offsetHeight); });
     // One phone size for the whole page: the largest that lets every section (heading, phone, button)
     // fit on screen at once.
-    const fits = [mobile ? (vh - hh - 190) / 878 : (vh - hh - 48) / 878, (vw * (mobile ? 0.62 : 0.7)) / 419];
+    const fits = [mobile ? (vh - hh - 20 - stepH - 20 - 20) / 878 : (vh - hh - 48) / 878, (vw * (mobile ? 0.62 : 0.7)) / 419];
     $$('.by-hs-stage', el).forEach((st) => { const hd = $('.car-heading', st); fits.push((vh - hh - (mobile ? 44 : 80) - (hd ? hd.offsetHeight : 0) - 24) / 878); });
     $$('.by-panel', el).forEach((pn) => {
       const hd = $('.car-heading', pn), bt = $('.by-panel-btn', pn), gap = mobile ? 28 : 32;
@@ -953,15 +975,15 @@ function BywaysPage(d) {
     el.style.setProperty('--phone-s', s);
     const pw = 419 * s, ph = 878 * s, W = Math.min(vw, 1440), x0 = (vw - W) / 2;
     const heroTop = mobile ? Math.max(hh + 250, vh * 0.56) : Math.min(557, vh * 0.6);
+    const textTop = hh + 20;
     geo = {
       vh, s, mobile,
       start: { x: (vw - pw) / 2, y: heroTop },
-      side: mobile ? { x: (vw - pw) / 2, y: hh + 12 } : { x: (vw - pw) / 2, y: hh + (vh - hh - ph) / 2 },
-      text: mobile ? { x: (vw - Math.min(369, vw - 40)) / 2, y: hh + 12 + ph + 22, w: Math.min(369, vw - 40) } : { x: Math.min(x0 + (973 / 1440) * W, (vw + pw) / 2 + 48), y: null, w: Math.min(369, vw - ((vw + pw) / 2 + 48) - 24) },
+      side: mobile ? { x: (vw - pw) / 2, y: textTop + stepH + 20 } : { x: (vw - pw) / 2, y: hh + (vh - hh - ph) / 2 },
+      text: mobile ? { x: (vw - tw) / 2, y: textTop, w: tw } : { x: Math.min(x0 + (973 / 1440) * W, (vw + pw) / 2 + 48), y: null, w: Math.min(369, vw - ((vw + pw) / 2 + 48) - 24) },
     };
     track.style.height = `${(B.end + 1) * vh}px`;
     carousels.forEach((c) => c.measure(vw, vh, hh, mobile, s));
-    el.style.setProperty('--hh', `${hh}px`);
     steps.forEach((st) => { st.style.left = `${geo.text.x}px`; st.style.width = `${geo.text.w}px`; st.style.top = geo.text.y != null ? `${geo.text.y}px` : `${hh + (vh - hh) / 2 - st.offsetHeight / 2}px`; });
     paint();
   }

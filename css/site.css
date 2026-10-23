@@ -512,7 +512,7 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .by-hero { position: absolute; top: 0; left: 0; right: 0; z-index: 2; text-align: center; padding: calc(var(--header-h) + 165px) 18px 0; color: var(--paper); pointer-events: none; }
 .by-hero h1 { margin: 0; font-weight: 300; font-size: clamp(40px, 4.44vw, 64px); line-height: 46px; letter-spacing: 1.344px; }
 .by-hero p { margin: 32px auto 0; max-width: 578px; font-family: var(--mono); font-weight: 300; font-size: 16px; line-height: 28px; letter-spacing: 1px; }
-.by-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--ink); }
+.by-stage { position: sticky; top: 0; height: 100vh; height: var(--vh, 100svh); overflow: hidden; background: var(--ink); }
 .by-wipe { position: absolute; inset: 0; transform: translate3d(0, 100%, 0); will-change: transform; }
 .by-phone { position: absolute; left: 0; top: 0; width: 419px; height: 878px; transform-origin: 0 0; will-change: transform; }
 .by-frame { position: absolute; inset: 0; border-radius: 68px; border: 1.5px solid rgba(255,255,255,.18);
@@ -540,7 +540,7 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .by-more { background: var(--paper); color: var(--ink); padding-bottom: 160px; }
 @media (max-width: 700px) { .by-more { padding-bottom: 96px; } }
 .by-hs { position: relative; }
-.by-hs-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.by-hs-stage { position: sticky; top: 0; height: 100vh; height: var(--vh, 100svh); touch-action: pan-y; overflow: hidden; }
 .by-hs-stage .car-heading { position: absolute; left: 0; right: 0; margin: 0 auto; padding: 0 20px; }
 .by-hs-row { position: absolute; left: 0; display: flex; width: max-content; will-change: transform; }
 /* Each stop screen: full screen-size inside the phone, fading out at the bottom as it leaves it. */
@@ -583,3 +583,11 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 @media (max-width: 700px) { .by-panel { gap: 28px; padding: calc(var(--hh, 84px) + 24px) 20px 128px; } }
 .by-more[data-fixed] { padding-bottom: 120px; }
 @media (max-width: 700px) { .by-more[data-fixed] { padding-bottom: 72px; } }
+
+/* Byways on mobile: smaller text, kept clear of the screen edges */
+@media (max-width: 899px) {
+  .by-step { font-size: 13px; line-height: 21px; letter-spacing: .6px; }
+  .by-hero p { font-size: 13px; line-height: 21px; max-width: calc(100vw - 64px); }
+  .by .car-heading { font-size: 13px; line-height: 21px; letter-spacing: .6px; max-width: min(750px, calc(100vw - 64px)); }
+  .by-hs-stage .car-heading { padding: 0; }
+}
