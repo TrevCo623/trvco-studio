@@ -536,8 +536,16 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 @media (prefers-reduced-motion: reduce) { .by-phone, .by-shot, .by-step { will-change: auto; } }
 
 /* Click-through carousel (Byways, and any Digital project with carousel images) */
-.by-more, .cs-carousel { background: var(--paper); color: var(--ink); padding: 166px var(--gutter) 140px; }
+.cs-carousel { background: var(--paper); color: var(--ink); padding: 166px var(--gutter) 140px; }
+.by-more { background: var(--paper); color: var(--ink); }
+.by-hs { position: relative; }
+.by-hs-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.by-hs-stage .car-heading { position: absolute; left: 0; right: 0; margin: 0 auto; padding: 0 20px; }
+.by-hs-row { position: absolute; left: 0; display: flex; gap: clamp(32px, 6vw, 96px); width: max-content; will-change: transform; }
+.by-card { margin: 0; flex: none; height: var(--ch, 779px); aspect-ratio: 392 / 779; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%); mask-image: linear-gradient(to bottom, #000 55%, transparent 100%); }
+.by-card img { display: block; width: 100%; height: auto; }
 .car-heading { margin: 0 auto 72px; max-width: 750px; text-align: center; font-family: var(--mono); font-weight: 500; font-size: 16px; line-height: 28px; letter-spacing: 1px; }
 .dcar.is-wide { --fw: min(960px, 84vw); }
 .dcar.is-wide .dfig { aspect-ratio: 16 / 10; }
-@media (max-width: 760px) { .by-more, .cs-carousel { padding: 96px var(--gutter) 96px; } .car-heading { margin-bottom: 40px; font-size: 14px; line-height: 23px; } }
+@media (max-width: 760px) { .cs-carousel { padding: 96px var(--gutter) 96px; } .car-heading { margin-bottom: 40px; font-size: 14px; line-height: 23px; } }

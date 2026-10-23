@@ -145,18 +145,22 @@ export const DIGITAL = [
     "title": "Byways",
     "intro": "A routing app that helps you appreciate the journey, not just get to your destination.",
     "layout": "byways",
-    "carouselTitle": "Byways will help you get the most out of your trip",
+    "carouselTitle": "Byways will help you get the most out of your trip\nby showing you cool sites, towns, activities, and more byways",
     "carousel": [
       {
-        "img": "/assets/img/byways/carousel-1.jpg",
+        "img": "/assets/img/byways/route.webp",
         "text": ""
       },
       {
-        "img": "/assets/img/byways/carousel-2.jpg",
+        "img": "/assets/img/byways/plan.webp",
         "text": ""
       },
       {
-        "img": "/assets/img/byways/carousel-3.jpg",
+        "img": "/assets/img/byways/search.webp",
+        "text": ""
+      },
+      {
+        "img": "/assets/img/byways/route.webp",
         "text": ""
       }
     ],
@@ -656,23 +660,23 @@ export const CONTENT_IMG = {
     "w": 2500,
     "h": 1379
   },
-  "/assets/img/byways/carousel-1.jpg": {
-    "src": "assets/img/byways/carousel-1.jpg",
+  "/assets/img/byways/route.webp": {
+    "src": "assets/img/byways/route.webp",
     "cdn": "",
-    "w": 1600,
-    "h": 1000
+    "w": 786,
+    "h": 2378
   },
-  "/assets/img/byways/carousel-2.jpg": {
-    "src": "assets/img/byways/carousel-2.jpg",
+  "/assets/img/byways/plan.webp": {
+    "src": "assets/img/byways/plan.webp",
     "cdn": "",
-    "w": 1600,
-    "h": 1000
+    "w": 786,
+    "h": 2610
   },
-  "/assets/img/byways/carousel-3.jpg": {
-    "src": "assets/img/byways/carousel-3.jpg",
+  "/assets/img/byways/search.webp": {
+    "src": "assets/img/byways/search.webp",
     "cdn": "",
-    "w": 1600,
-    "h": 1000
+    "w": 786,
+    "h": 1704
   },
   "/assets/img/byways/thumb.jpg": {
     "src": "assets/img/byways/thumb.jpg",

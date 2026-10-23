@@ -871,11 +871,14 @@ function BywaysPage(d) {
         <div class="by-steps">${B.steps.map((st, i) => `<div class="by-step tone-${st.tone}" data-i="${i}"><p class="by-step-n">${esc(st.n)}</p><p>${esc(st.text)}</p></div>`).join('')}</div>
       </div>
     </div>
-    ${d.carousel?.length ? `<section class="by-more">${carouselHTML(d.carousel, d.carouselTitle, d.title)}</section>` : ''}
+    ${d.carousel?.length ? `<section class="by-more"><div class="by-hs"><div class="by-hs-stage">
+      ${d.carouselTitle ? `<h2 class="car-heading">${esc(d.carouselTitle).replace(/\n/g, '<br>')}</h2>` : ''}
+      <div class="by-hs-row">${d.carousel.map((c) => `<figure class="by-card">${img(c.img, { alt: c.text || d.title })}${c.text ? `<figcaption>${esc(c.text)}</figcaption>` : ''}</figure>`).join('')}</div>
+    </div></div></section>` : ''}
     ${cta()}
   </div>`);
-  wireDetails(el);
   const stage = $('.by-stage', el), wipe = $('.by-wipe', el);
+  const hs = $('.by-hs', el), hsRow = $('.by-hs-row', el), hsStage = $('.by-hs-stage', el);
   const track = $('.by-track', el), phone = $('.by-phone', el), shots = $$('.by-shot', el), steps = $$('.by-step', el), hero = $('.by-hero', el);
   let geo;
   function measure() {
@@ -890,6 +893,16 @@ function BywaysPage(d) {
       text: mobile ? { x: (vw - Math.min(369, vw - 40)) / 2, y: hh + 12 + ph + 22, w: Math.min(369, vw - 40) } : { x: x0 + (853 / 1440) * W, y: null, w: 369 },
     };
     track.style.height = `${(B.end + 1) * vh}px`;
+    if (hs) {   // Carousel: a sticky row that slides sideways while you scroll down
+      const head = $('.car-heading', hsStage), top = hh + (mobile ? 24 : 48) + (head ? head.offsetHeight + (mobile ? 28 : 56) : 0);
+      const ch = Math.max(260, Math.min(779, vh - top - (mobile ? 24 : 48)));
+      hsRow.style.top = `${top}px`; hsRow.style.setProperty('--ch', `${ch}px`);
+      if (head) head.style.top = `${hh + (mobile ? 24 : 48)}px`;
+      const padX = mobile ? 20 : Math.max(24, (93 / 1440) * Math.min(vw, 1440) + (vw - Math.min(vw, 1440)) / 2);
+      hsRow.style.paddingLeft = hsRow.style.paddingRight = `${padX}px`;
+      geo.hsShift = Math.max(0, hsRow.scrollWidth - vw);
+      hs.style.height = `${vh + geo.hsShift + vh * 0.25}px`;
+    }
     steps.forEach((st) => { st.style.left = `${geo.text.x}px`; st.style.width = `${geo.text.w}px`; st.style.top = geo.text.y != null ? `${geo.text.y}px` : `${hh + (vh - hh) / 2 - st.offsetHeight / 2}px`; });
     paint();
   }
@@ -916,6 +929,10 @@ function BywaysPage(d) {
     const vis = [ramp(u, 0.7, 1) * (1 - ramp(u, 2.2, 2.45)), ramp(u, 2.5, 2.75) * (1 - ramp(u, 5.2, 5.45)), ramp(u, 5.5, 5.75)];
     steps.forEach((st, i) => { st.style.opacity = vis[i]; st.style.transform = `translate3d(0, ${(1 - vis[i]) * 18}px, 0)`; st.style.visibility = vis[i] > 0.01 ? 'visible' : 'hidden'; });
     hero.style.opacity = 1 - ramp(u, 0.05, 0.5);
+    if (hs) {
+      const r = hs.getBoundingClientRect(), span = Math.max(1, hs.offsetHeight - geo.vh - geo.vh * 0.25);
+      hsRow.style.transform = `translate3d(${-clamp01(-r.top / span) * geo.hsShift}px, 0, 0)`;
+    }
   }
   const onResize = () => measure();
   addEventListener('resize', onResize);
