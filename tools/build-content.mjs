@@ -73,7 +73,7 @@ const DIGITAL = load('digital').map((d) => {
   const extra = photos.slice(2).map((image) => ({ type: 'full', image }));
   return { ...d, thumb, heroSrc: hero, sections: [...extra, ...(d.sections || [])] };
 }).map((d) => ({
-  slug: d.slug, title: d.title, intro: d.intro || '',
+  slug: d.slug, title: d.title, intro: d.intro || '', ...(d.layout ? { layout: d.layout } : {}),
   thumb: useImage(d.thumb || d.heroSrc, `Digital "${d.title}" thumbnail`),
   hero: useImage(d.heroSrc, `Digital "${d.title}" hero`), heroWide: !!d.hero_wide,
   sections: (d.sections || []).map((s, i) => {

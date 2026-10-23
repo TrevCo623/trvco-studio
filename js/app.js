@@ -816,8 +816,107 @@ function ProductPage(route) {
 }
 
 /* ═════════════════════════════ DIGITAL detail ═════════════════════════════ */
+/* ── Byways: a scroll story. The phone starts centred on black like the other case studies, then
+   slides left and holds while the background changes, a step dissolves in beside it, and the
+   screen inside the phone changes and scrolls. Everything is driven by how far you've scrolled. ── */
+const BYWAYS = {
+  screens: [
+    { key: 'search', src: '/assets/img/byways/search.webp', fallback: '/assets/img/byways/route.webp', h: 852, pad: 0 },
+    { key: 'route', src: '/assets/img/byways/route.webp', h: 1189, pad: 47 },
+    { key: 'plan', src: '/assets/img/byways/plan.webp', h: 1305, pad: 47 },
+  ],
+  steps: [
+    { n: 'Step 1', text: 'Tell Byways where you want to go', tone: 'dark' },
+    { n: 'Step 2', text: 'Choose the route that’s best for you – fastest, most scenic, or the one with the best stops.', tone: 'light' },
+    { n: 'Step 3', text: 'Customize your plan – rearrange the order, extend it over two days, and add stops. You’re in the driver’s seat.', tone: 'dark' },
+  ],
+  // Scroll timeline, in screen-heights of scrolling.
+  colors: [[0, '#0E1009'], [0.35, '#0E1009'], [0.9, '#D9D9D9'], [1.8, '#D9D9D9'], [2.3, '#145A42'], [4.3, '#145A42'], [4.8, '#C8DDF7'], [6.8, '#C8DDF7'], [7.3, '#0E1009']],
+  end: 7.3,
+};
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp01 = (t) => Math.max(0, Math.min(1, t));
+const ramp = (u, a, b) => clamp01((u - a) / (b - a));
+const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const hexRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+function colorAt(stops, u) {
+  for (let i = 1; i < stops.length; i++) {
+    if (u <= stops[i][0]) {
+      const [a0, c0] = stops[i - 1], [a1, c1] = stops[i], t = ease(ramp(u, a0, a1));
+      const x = hexRgb(c0), y = hexRgb(c1);
+      return `rgb(${x.map((v, k) => Math.round(lerp(v, y[k], t))).join(',')})`;
+    }
+  }
+  return stops.at(-1)[1];
+}
+
+function BywaysPage(d) {
+  const B = BYWAYS;
+  const el = h(`<div class="digital-page by">
+    <div class="by-track">
+      <section class="by-hero"><h1>${esc(d.title)}</h1><p>${esc(d.intro)}</p></section>
+      <div class="by-stage">
+        <div class="by-phone" aria-hidden="true">
+          <i class="by-btn by-btn-action"></i><i class="by-btn by-btn-up"></i><i class="by-btn by-btn-down"></i><i class="by-btn by-btn-side"></i>
+          <div class="by-frame"></div><div class="by-bezel"></div>
+          <div class="by-screen">${B.screens.map((sc) => `<div class="by-shot" data-key="${sc.key}" style="padding-top:${sc.pad}px"><img src="${sc.src}" alt="" width="393" height="${sc.h}" ${sc.fallback ? `onerror="this.onerror=null;this.src='${sc.fallback}'"` : ''}></div>`).join('')}</div>
+          <div class="by-glare"></div><div class="by-island"></div>
+        </div>
+        <div class="by-steps">${B.steps.map((st, i) => `<div class="by-step tone-${st.tone}" data-i="${i}"><p class="by-step-n">${esc(st.n)}</p><p>${esc(st.text)}</p></div>`).join('')}</div>
+      </div>
+    </div>
+    ${cta()}
+  </div>`);
+  const track = $('.by-track', el), phone = $('.by-phone', el), shots = $$('.by-shot', el), steps = $$('.by-step', el), hero = $('.by-hero', el);
+  let geo;
+  function measure() {
+    const vw = innerWidth, vh = innerHeight, hh = $('#header')?.offsetHeight || 84, mobile = vw < 900;
+    const s = mobile ? Math.min((vh - hh - 190) / 878, (vw * 0.62) / 419) : Math.min(1, (vh - hh - 48) / 878);
+    const pw = 419 * s, ph = 878 * s, W = Math.min(vw, 1440), x0 = (vw - W) / 2;
+    const heroTop = mobile ? Math.max(hh + 250, vh * 0.56) : Math.min(557, vh * 0.6);
+    geo = {
+      vh, s, mobile,
+      start: { x: (vw - pw) / 2, y: heroTop },
+      side: mobile ? { x: (vw - pw) / 2, y: hh + 12 } : { x: x0 + (470 / 1440) * W - pw / 2, y: hh + (vh - hh - ph) / 2 },
+      text: mobile ? { x: (vw - Math.min(369, vw - 40)) / 2, y: hh + 12 + ph + 22, w: Math.min(369, vw - 40) } : { x: x0 + (853 / 1440) * W, y: null, w: 369 },
+    };
+    track.style.height = `${(B.end + 1) * vh}px`;
+    steps.forEach((st) => { st.style.left = `${geo.text.x}px`; st.style.width = `${geo.text.w}px`; st.style.top = geo.text.y != null ? `${geo.text.y}px` : `${hh + (vh - hh) / 2 - st.offsetHeight / 2}px`; });
+    paint();
+  }
+  function paint() {
+    if (!geo) return;
+    const u = Math.max(0, Math.min(B.end, (scrollY - (track.getBoundingClientRect().top + scrollY)) / geo.vh));
+    // Background
+    el.style.setProperty('--by-bg', colorAt(B.colors, u));
+    // Phone: hero pose -> beside the steps
+    const t = ease(ramp(u, 0.1, 1));
+    const x = lerp(geo.start.x, geo.side.x, t), y = lerp(geo.start.y, geo.side.y, t);
+    phone.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${geo.s})`;
+    // Screens: search -> route (scrolls) -> plan (scrolls)
+    const fadeRoute = ramp(u, 1.8, 2.3), fadePlan = ramp(u, 4.3, 4.8);
+    const op = [1 - fadeRoute, fadeRoute * (1 - fadePlan), fadePlan];
+    const scrollFor = (i, a, b) => { const sc = B.screens[i]; return -ease(ramp(u, a, b)) * Math.max(0, sc.h + sc.pad - 852); };
+    const ty = [0, scrollFor(1, 2.3, 4.3), scrollFor(2, 4.8, 6.8)];
+    shots.forEach((sh, i) => { sh.style.opacity = op[i]; sh.style.transform = `translate3d(0, ${ty[i]}px, 0)`; });
+    // Steps dissolve in and out
+    const vis = [ramp(u, 0.7, 1) * (1 - ramp(u, 1.8, 2.05)), ramp(u, 2.05, 2.3) * (1 - ramp(u, 4.3, 4.55)), ramp(u, 4.55, 4.8) * (1 - ramp(u, 6.8, 7.05))];
+    steps.forEach((st, i) => { st.style.opacity = vis[i]; st.style.transform = `translate3d(0, ${(1 - vis[i]) * 18}px, 0)`; st.style.visibility = vis[i] > 0.01 ? 'visible' : 'hidden'; });
+    hero.style.opacity = 1 - ramp(u, 0.05, 0.5);
+  }
+  const onResize = () => measure();
+  addEventListener('resize', onResize);
+  return {
+    el, title: d.title,
+    mount() { measure(); requestAnimationFrame(measure); $$('img', el).forEach((im) => im.complete || im.addEventListener('load', measure, { once: true })); },
+    onScroll: paint,
+    destroy() { removeEventListener('resize', onResize); },
+  };
+}
+
 function DigitalPage(route) {
   const d = DIGITAL.find((x) => x.slug === route.slug);
+  if (d?.layout === 'byways') return BywaysPage(d);
   const sec = (s) => {
     const style = `${s.bg ? `background:${s.bg};` : ''}${s.w ? `--w:${s.w}px;` : ''}`;
     const tone = `tone-${s.tone || 'light'}`;

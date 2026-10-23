@@ -137,32 +137,59 @@ export const DIGITAL = [
     ]
   },
   {
+    "slug": "byways",
+    "title": "Byways",
+    "intro": "A routing app that helps you appreciate the journey, not just get to your destination.",
+    "layout": "byways",
+    "thumb": "/assets/img/byways/thumb.jpg",
+    "hero": "/assets/img/byways/thumb.jpg",
+    "heroWide": false,
+    "sections": []
+  },
+  {
     "slug": "vibefit",
     "title": "VibeFit",
     "intro": "An app that lets you and your partner find the right outfits for the evening's vibe, together",
     "thumb": "/assets/uploads/look-details-i82q.jpg",
-    "hero": "/assets/uploads/choose-vibe-i7xo.jpg",
+    "hero": "/assets/uploads/home-2mjx.jpg",
     "heroWide": false,
     "sections": [
       {
         "type": "full",
         "tone": "light",
-        "img": "/assets/uploads/home-i7zk.jpg"
+        "caption": "Step 1: Choose the vibe for the night",
+        "img": "/assets/uploads/choose-vibe-u358.jpg"
+      },
+      {
+        "type": "feature",
+        "tone": "light",
+        "caption": "Step 2: Choose an outfit that matches your vibe for the night",
+        "bg": "var(--ink)",
+        "img": "/assets/uploads/looks-u3ex.jpg"
       },
       {
         "type": "full",
         "tone": "light",
-        "img": "/assets/uploads/closet-i7y1.jpg"
+        "caption": "Step 3: Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet",
+        "img": "/assets/uploads/look-details-u3bj.jpg"
       },
       {
         "type": "full",
         "tone": "light",
-        "img": "/assets/uploads/invite-i814.jpg"
+        "caption": "Share with a partner to sync your vibe and fits for the night",
+        "img": "/assets/uploads/invite-u39r.jpg"
       },
       {
         "type": "full",
         "tone": "light",
-        "img": "/assets/uploads/looks-i85y.jpg"
+        "caption": "Add clothes you have to Your Closet to make the app more tailored to your style",
+        "img": "/assets/uploads/closet-u36s.jpg"
+      },
+      {
+        "type": "feature",
+        "tone": "light",
+        "bg": "var(--ink)",
+        "img": "/assets/uploads/home-u38b.jpg"
       }
     ]
   }
@@ -608,41 +635,59 @@ export const CONTENT_IMG = {
     "w": 2500,
     "h": 1379
   },
+  "/assets/img/byways/thumb.jpg": {
+    "src": "assets/img/byways/thumb.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1667
+  },
   "/assets/uploads/look-details-i82q.jpg": {
     "src": "assets/uploads/look-details-i82q.jpg",
     "cdn": "",
     "w": 2000,
     "h": 1328
   },
-  "/assets/uploads/choose-vibe-i7xo.jpg": {
-    "src": "assets/uploads/choose-vibe-i7xo.jpg",
-    "cdn": "",
-    "w": 2000,
-    "h": 1328
-  },
-  "/assets/uploads/home-i7zk.jpg": {
-    "src": "assets/uploads/home-i7zk.jpg",
+  "/assets/uploads/home-2mjx.jpg": {
+    "src": "assets/uploads/home-2mjx.jpg",
     "cdn": "",
     "w": 1112,
     "h": 1668
   },
-  "/assets/uploads/closet-i7y1.jpg": {
-    "src": "assets/uploads/closet-i7y1.jpg",
+  "/assets/uploads/choose-vibe-u358.jpg": {
+    "src": "assets/uploads/choose-vibe-u358.jpg",
     "cdn": "",
     "w": 2000,
     "h": 1328
   },
-  "/assets/uploads/invite-i814.jpg": {
-    "src": "assets/uploads/invite-i814.jpg",
-    "cdn": "",
-    "w": 2000,
-    "h": 1328
-  },
-  "/assets/uploads/looks-i85y.jpg": {
-    "src": "assets/uploads/looks-i85y.jpg",
+  "/assets/uploads/looks-u3ex.jpg": {
+    "src": "assets/uploads/looks-u3ex.jpg",
     "cdn": "",
     "w": 2000,
     "h": 1533
+  },
+  "/assets/uploads/look-details-u3bj.jpg": {
+    "src": "assets/uploads/look-details-u3bj.jpg",
+    "cdn": "",
+    "w": 2000,
+    "h": 1328
+  },
+  "/assets/uploads/invite-u39r.jpg": {
+    "src": "assets/uploads/invite-u39r.jpg",
+    "cdn": "",
+    "w": 2000,
+    "h": 1328
+  },
+  "/assets/uploads/closet-u36s.jpg": {
+    "src": "assets/uploads/closet-u36s.jpg",
+    "cdn": "",
+    "w": 2000,
+    "h": 1328
+  },
+  "/assets/uploads/home-u38b.jpg": {
+    "src": "assets/uploads/home-u38b.jpg",
+    "cdn": "",
+    "w": 1112,
+    "h": 1668
   },
   "/assets/img/goods/go-outside-hat-1.jpg": {
     "src": "assets/img/goods/go-outside-hat-1.jpg",

@@ -505,3 +505,31 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 
 /* Let horizontal swipes on the type carousel through to the page script. */
 .type-hero { touch-action: pan-y; }
+
+/* ── Byways scroll story ── */
+.by { --by-bg: #0E1009; background: var(--by-bg); }
+.by-track { position: relative; }
+.by-hero { position: absolute; top: 0; left: 0; right: 0; z-index: 2; text-align: center; padding: calc(var(--header-h) + 165px) 18px 0; color: var(--paper); pointer-events: none; }
+.by-hero h1 { margin: 0; font-weight: 300; font-size: clamp(40px, 4.44vw, 64px); line-height: 46px; letter-spacing: 1.344px; }
+.by-hero p { margin: 32px auto 0; max-width: 578px; font-family: var(--mono); font-weight: 300; font-size: 16px; line-height: 28px; letter-spacing: 1px; }
+.by-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.by-phone { position: absolute; left: 0; top: 0; width: 419px; height: 878px; transform-origin: 0 0; will-change: transform; }
+.by-frame { position: absolute; inset: 0; border-radius: 68px; border: 1.5px solid rgba(255,255,255,.18);
+  background: linear-gradient(115.5deg, #6b6c68 14.286%, #2c2d2a 27.143%, #1a1b19 50%, #2c2d2a 72.857%, #7a7b77 85.714%);
+  box-shadow: 0 6px 10px rgba(14,16,9,.18), 0 30px 40px rgba(14,16,9,.22); }
+.by-bezel { position: absolute; left: 4.5px; top: 4.5px; width: 410px; height: 869px; border-radius: 63.5px; background: #151614; }
+.by-screen { position: absolute; left: 13px; top: 13px; width: 393px; height: 852px; border-radius: 55px; overflow: hidden; background: #fff; isolation: isolate; }
+.by-shot { position: absolute; left: 0; top: 0; width: 393px; background: #fff; will-change: transform, opacity; }
+.by-shot img { display: block; width: 393px; height: auto; }
+.by-glare { position: absolute; left: 13px; top: 13px; width: 393px; height: 852px; border-radius: 55px; pointer-events: none;
+  background: linear-gradient(122deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 38%, rgba(255,255,255,0) 100%); }
+.by-island { position: absolute; left: 147px; top: 24px; width: 125px; height: 37px; border-radius: 19px; background: #000; }
+.by-btn { position: absolute; width: 3.5px; border-radius: 1.5px; background: #2a2b28; }
+.by-btn-side { left: 418px; top: 205px; height: 98px; } .by-btn-up { left: -2.5px; top: 178px; height: 62px; }
+.by-btn-down { left: -2.5px; top: 252px; height: 62px; } .by-btn-action { left: -2.5px; top: 118px; height: 30px; }
+.by-step { position: absolute; margin: 0; font-family: var(--mono); font-weight: 300; font-size: 16px; line-height: 28px; letter-spacing: 1px; opacity: 0; visibility: hidden; will-change: opacity, transform; }
+.by-step p { margin: 0; }
+.by-step .by-step-n { font-weight: 500; text-transform: uppercase; }
+.by-step.tone-dark { color: var(--ink); } .by-step.tone-light { color: var(--paper); }
+@media (max-width: 899px) { .by-step { text-align: center; font-size: 14px; line-height: 23px; } .by-hero p { font-size: 14px; line-height: 22px; } }
+@media (prefers-reduced-motion: reduce) { .by-phone, .by-shot, .by-step { will-change: auto; } }
