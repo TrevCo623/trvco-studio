@@ -155,7 +155,7 @@ export const DIGITAL = [
     "carouselTitleEnd": "",
     "panels": [
       {
-        "title": "Save your trips so you can plan ahead of time",
+        "title": "Save your trips so you can plan ahead",
         "background": "",
         "color": "",
         "img": "/assets/img/byways/panel-trips.webp",
