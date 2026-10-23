@@ -655,3 +655,4 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .pcar-card img { display: block; width: 100%; height: 100%; }
 .cs-pcar .dnav { position: relative; margin-top: calc(var(--W) * -0.06); }
 @media (max-width: 760px) { .cs-pcar { padding: 32px 0 72px; --gap: 28px; } .pcar-stage { margin-top: 24px; } }
+.uniform-phones .cs-media.has-phone img, .uniform-phones .case-hero img.has-phone { -webkit-mask-image: linear-gradient(to bottom, #000 88%, transparent); mask-image: linear-gradient(to bottom, #000 88%, transparent); }
