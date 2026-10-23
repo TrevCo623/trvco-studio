@@ -135,6 +135,36 @@ export const DIGITAL = [
         "img": "/assets/img/storyright/projects.jpg"
       }
     ]
+  },
+  {
+    "slug": "vibefit",
+    "title": "VibeFit",
+    "intro": "An app that lets you and your partner find the right outfits for the evening's vibe, together",
+    "thumb": "/assets/uploads/look-details-i82q.jpg",
+    "hero": "/assets/uploads/choose-vibe-i7xo.jpg",
+    "heroWide": false,
+    "sections": [
+      {
+        "type": "full",
+        "tone": "light",
+        "img": "/assets/uploads/home-i7zk.jpg"
+      },
+      {
+        "type": "full",
+        "tone": "light",
+        "img": "/assets/uploads/closet-i7y1.jpg"
+      },
+      {
+        "type": "full",
+        "tone": "light",
+        "img": "/assets/uploads/invite-i814.jpg"
+      },
+      {
+        "type": "full",
+        "tone": "light",
+        "img": "/assets/uploads/looks-i85y.jpg"
+      }
+    ]
   }
 ];
 export const GOODS = [
@@ -577,6 +607,42 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 2500,
     "h": 1379
+  },
+  "/assets/uploads/look-details-i82q.jpg": {
+    "src": "assets/uploads/look-details-i82q.jpg",
+    "cdn": "",
+    "w": 2000,
+    "h": 1328
+  },
+  "/assets/uploads/choose-vibe-i7xo.jpg": {
+    "src": "assets/uploads/choose-vibe-i7xo.jpg",
+    "cdn": "",
+    "w": 2000,
+    "h": 1328
+  },
+  "/assets/uploads/home-i7zk.jpg": {
+    "src": "assets/uploads/home-i7zk.jpg",
+    "cdn": "",
+    "w": 1112,
+    "h": 1668
+  },
+  "/assets/uploads/closet-i7y1.jpg": {
+    "src": "assets/uploads/closet-i7y1.jpg",
+    "cdn": "",
+    "w": 2000,
+    "h": 1328
+  },
+  "/assets/uploads/invite-i814.jpg": {
+    "src": "assets/uploads/invite-i814.jpg",
+    "cdn": "",
+    "w": 2000,
+    "h": 1328
+  },
+  "/assets/uploads/looks-i85y.jpg": {
+    "src": "assets/uploads/looks-i85y.jpg",
+    "cdn": "",
+    "w": 2000,
+    "h": 1533
   },
   "/assets/img/goods/go-outside-hat-1.jpg": {
     "src": "assets/img/goods/go-outside-hat-1.jpg",

@@ -823,6 +823,7 @@ function DigitalPage(route) {
     const tone = `tone-${s.tone || 'light'}`;
     const head = `${s.title ? `<h2 class="cs-title reveal">${esc(s.title)}</h2>` : ''}${s.caption ? `<p class="cs-caption reveal">${esc(s.caption)}</p>` : ''}`;
     if (s.type === 'full') return `<section class="cs cs-full ${tone}" style="${style}">${img(s.img, { alt: s.caption })}${head}</section>`;
+    if (s.type === 'split') return `<section class="cs cs-split ${tone} ${s.side === 'right' ? 'img-right' : ''}" style="${style}"><div class="cs-media reveal">${img(s.img, { alt: s.title || s.caption })}</div><div class="cs-split-text">${head}</div></section>`;
     if (s.type === 'feature') return `<section class="cs cs-feature ${tone}" style="${style}"><div>${head}</div><div class="cs-media reveal">${img(s.img, { alt: s.title || s.caption })}</div></section>`;
     if (s.type === 'slides') return `<section class="cs cs-slides ${tone}" style="${style}" data-slides>
         ${head}

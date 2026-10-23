@@ -124,6 +124,8 @@ const Photos = createClass({
     files = [...files].filter((f) => f.type.startsWith('image/'));
     if (!files.length) return;
     if (!this.multiple()) files = files.slice(0, 1);
+    const max = this.props.field.get('max'); if (max) files = files.slice(0, Math.max(0, max - this.items().length));
+    if (!files.length) { this.setState({ error: `Up to ${max} photos here. Remove one to add another.` }); return; }
     if (!ghToken() && !window.TRV_TEST_BACKEND) { this.setState({ error: 'Sign in again to upload.' }); return; }
     this.setState((s) => ({ busy: s.busy + files.length, error: '' }));
     try {
@@ -247,6 +249,146 @@ const Position = createClass({
   },
 });
 CMS.registerWidget('position', Position, () => null);
+
+// ── Sections editor: the case study as it will look, top to bottom ──
+// Each section is a small live preview: pick its layout, see its image(s), type its text in place,
+// and choose a background from the site palette or any colour. Drop a batch of images on the top
+// bar to add one full-screen section per image, in order.
+const LOCAL = {};                                     // uploaded this session: path -> blob URL
+async function uploadImages(files) {
+  files = [...files].filter((f) => f.type.startsWith('image/'));
+  if (!files.length) return [];
+  if (!ghToken() && !window.TRV_TEST_BACKEND) throw new Error('Sign in again to upload.');
+  const prepared = await Promise.all(files.map(prepare));
+  const paths = prepared.map((p) => { const path = `/assets/uploads/${p.name}`; LOCAL[path] = URL.createObjectURL(p.blob); return path; });
+  if (!window.TRV_TEST_BACKEND) await commitFiles(await Promise.all(prepared.map(async (p) => ({ path: `assets/uploads/${p.name}`, base64: await b64(p.blob) }))),
+    `Upload ${prepared.length} photo${prepared.length > 1 ? 's' : ''}`);
+  return paths;
+}
+const src = (path) => LOCAL[path] || thumbUrl(path);
+const imgFallback = (path) => (e) => { const u = location.origin + (path.startsWith('/') ? '' : '/') + path; if (e.target.src !== u) e.target.src = u; };
+const PALETTE = [['rose', '#B17C72'], ['sand', '#EBE5E5'], ['paper', '#F8F6F6'], ['ink', '#0E1009'], ['clay', '#C4937E']];
+const bgColor = (b) => (PALETTE.find(([n]) => n === b) || [])[1] || b || '';
+const LAYOUTS = [
+  ['full', 'Full screen'], ['split', 'Split screen'], ['feature', 'On a colour band'], ['slides', 'Slideshow'], ['icons', 'Icon grid'],
+];
+const DEFAULT_TONE = { full: 'light', split: 'dark', feature: 'dark', slides: 'light', icons: 'dark' };
+const WIDTHS = [[400, 'Phone'], [739, 'Tablet'], [1100, 'Desktop']];
+const many = (t) => t === 'slides' || t === 'icons';
+const imagesOf = (s) => many(s.type) ? (s.images || (s.image ? [s.image] : [])) : [s.image || (s.images || [])[0]].filter(Boolean);
+function convert(s, type) {                            // keep the images and text when switching layout
+  const imgs = imagesOf(s), out = { ...s, type };
+  delete out.image; delete out.images;
+  if (many(type)) out.images = imgs; else if (imgs[0]) out.image = imgs[0];
+  if (s.tone == null || s.tone === DEFAULT_TONE[s.type]) out.tone = DEFAULT_TONE[type];
+  return out;
+}
+
+const Sections = createClass({
+  getInitialState() { return { busy: 0, error: '', drag: null, over: false }; },
+  list() { const v = this.props.value; return (v == null ? [] : v.toJS ? v.toJS() : v).map((x) => ({ ...x })); },
+  save(list) { this.props.onChange(list); },
+  patch(i, p) { const l = this.list(); l[i] = { ...l[i], ...p }; this.save(l); },
+  async upload(files, then) {
+    const n = [...files].filter((f) => f.type.startsWith('image/')).length; if (!n) return;
+    this.setState((st) => ({ busy: st.busy + n, error: '' }));
+    try { then(await uploadImages(files)); } catch (e) { this.setState({ error: `Upload failed. ${e.message}` }); }
+    this.setState((st) => ({ busy: Math.max(0, st.busy - n) }));
+  },
+  addImages(files) { this.upload(files, (paths) => this.save([...this.list(), ...paths.map((image) => ({ type: 'full', image, tone: 'light' }))])); },
+  addEmpty(type) { this.save([...this.list(), convert({ tone: DEFAULT_TONE[type] }, type)]); },
+  setImage(i, files, k = 0) {
+    this.upload(files, (paths) => {
+      const s = this.list()[i];
+      if (many(s.type)) { const imgs = [...(s.images || [])]; if (k === -1) imgs.push(...paths); else imgs.splice(k, 1, ...paths); this.patch(i, { images: imgs }); }
+      else this.patch(i, { image: paths[0] });
+    });
+  },
+  removeImage(i, k) { const s = this.list()[i]; const imgs = [...(s.images || [])]; imgs.splice(k, 1); this.patch(i, { images: imgs }); },
+  move(from, to) { const l = this.list(); const [x] = l.splice(from, 1); l.splice(to, 0, x); this.save(l); },
+  remove(i) { const l = this.list(); l.splice(i, 1); this.save(l); },
+
+  picker(onFiles, multiple, label, cls = 'trv-btn') {
+    let input;
+    return h('span', { className: 'trv-pick' },
+      h('button', { type: 'button', className: cls, onClick: () => input && input.click() }, label),
+      h('input', { type: 'file', accept: 'image/*', multiple, hidden: true, ref: (el) => { input = el; }, onChange: (e) => { onFiles(e.target.files); e.target.value = ''; } }));
+  },
+  ed(value, onChange, cls, placeholder, multiline) {
+    return h(multiline ? 'textarea' : 'input', { className: `trv-ed ${cls}`, value: value || '', placeholder, rows: multiline ? 2 : undefined, onChange: (e) => onChange(e.target.value) });
+  },
+  image(i, s, path, k, cls) {
+    const drop = (e) => { if (e.dataTransfer.files.length) { e.preventDefault(); e.stopPropagation(); this.setImage(i, e.dataTransfer.files, k); } };
+    let input;
+    return h('div', { className: `trv-sec-img ${cls || ''}`, onDragOver: (e) => { if (e.dataTransfer.types.includes('Files')) e.preventDefault(); }, onDrop: drop, onClick: () => input && input.click(), title: 'Click or drop to replace' },
+      path ? h('img', { src: src(path), alt: '', onError: imgFallback(path) }) : h('span', { className: 'trv-sec-empty' }, 'Click or drop an image'),
+      h('input', { type: 'file', accept: 'image/*', hidden: true, ref: (el) => { input = el; }, onClick: (e) => e.stopPropagation(), onChange: (e) => { this.setImage(i, e.target.files, k); e.target.value = ''; } }));
+  },
+  preview(i, s) {
+    const t = s.type, bg = bgColor(s.background), tone = s.tone || DEFAULT_TONE[t];
+    const style = { background: t === 'full' || t === 'slides' ? undefined : (bg || undefined), '--w': `${(s.image_width || 739) / 1440 * 100}%` };
+    const title = (cls = '') => this.ed(s.title, (v) => this.patch(i, { title: v }), `trv-sec-title ${cls}`, 'Heading (optional)');
+    const caption = (cls = '') => this.ed(s.caption, (v) => this.patch(i, { caption: v }), `trv-sec-caption ${cls}`, 'Caption (optional)', true);
+    const imgs = imagesOf(s);
+    let body;
+    if (t === 'full') body = [this.image(i, s, imgs[0], 0, 'is-cover'), h('div', { className: 'trv-sec-over' }, caption())];
+    else if (t === 'split') body = h('div', { className: `trv-sec-split ${s.side === 'right' ? 'img-right' : ''}` }, this.image(i, s, imgs[0], 0), h('div', { className: 'trv-sec-text' }, title('is-left'), caption('is-left')));
+    else if (t === 'feature') body = h('div', { className: 'trv-sec-feature' }, title(), caption(), h('div', { className: 'trv-sec-media' }, this.image(i, s, imgs[0], 0)));
+    else if (t === 'slides') body = [this.image(i, s, imgs[0], 0, 'is-cover is-slides'), h('div', { className: 'trv-sec-over' }, caption()), imgs.length > 1 ? h('span', { className: 'trv-sec-count' }, `1 of ${imgs.length}`) : null];
+    else body = h('div', { className: 'trv-sec-icons' }, title(), caption(),
+      h('div', { className: 'trv-sec-grid' }, ...imgs.map((p, k) => h('div', { key: p + k, className: 'trv-sec-icon' }, this.image(i, s, p, k), h('button', { type: 'button', className: 'trv-sec-x', onClick: () => this.removeImage(i, k) }, '×'))),
+        this.picker((f) => this.setImage(i, f, -1), true, '+', 'trv-sec-addicon')),
+      this.ed(s.note, (v) => this.patch(i, { note: v }), 'trv-sec-note', 'Small note under the grid (optional)'));
+    return h('div', { className: `trv-sec-prev is-${t} tone-${tone}`, style }, body);
+  },
+  controls(i, s) {
+    const t = s.type, tone = s.tone || DEFAULT_TONE[t];
+    const swatches = t === 'full' || t === 'slides' ? null : h('div', { className: 'trv-sec-row' }, h('span', { className: 'trv-sec-lbl' }, 'Background'),
+      ...PALETTE.map(([n, c]) => h('span', { key: n, role: 'button', tabIndex: 0, title: n, className: 'trv-swatch' + (s.background === n ? ' is-on' : ''), style: { background: c }, onClick: () => this.patch(i, { background: n }), onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.patch(i, { background: n }); } } })),
+      h('label', { className: 'trv-swatch is-custom' + (s.background && !PALETTE.some(([n]) => n === s.background) ? ' is-on' : ''), title: 'Custom colour', style: s.background && s.background.startsWith('#') ? { background: s.background } : {} },
+        h('input', { type: 'color', value: s.background && s.background.startsWith('#') ? s.background : '#B17C72', onChange: (e) => this.patch(i, { background: e.target.value }) })),
+      s.background ? h('button', { type: 'button', className: 'trv-link', onClick: () => this.patch(i, { background: '' }) }, 'None') : null);
+    const seg = (label, opts, cur, key) => h('div', { className: 'trv-sec-row' }, h('span', { className: 'trv-sec-lbl' }, label),
+      h('div', { className: 'trv-seg' }, ...opts.map(([v, l]) => h('button', { key: v, type: 'button', className: cur === v ? 'is-on' : '', onClick: () => this.patch(i, { [key]: v }) }, l))));
+    return h('div', { className: 'trv-sec-controls' },
+      swatches,
+      seg('Text', [['light', 'Light'], ['dark', 'Dark']], tone, 'tone'),
+      t === 'split' ? seg('Image', [['left', 'Left'], ['right', 'Right']], s.side || 'left', 'side') : null,
+      t === 'feature' ? seg('Image size', WIDTHS.map(([w, l]) => [w, l]), Number(s.image_width) || 739, 'image_width') : null,
+      t === 'slides' ? h('div', { className: 'trv-sec-row' }, h('span', { className: 'trv-sec-lbl' }, 'Slides'),
+        h('div', { className: 'trv-sec-thumbs' }, ...imagesOf(s).map((p, k) => h('span', { key: p + k, className: 'trv-sec-thumb' }, h('img', { src: src(p), alt: '', onError: imgFallback(p) }), h('button', { type: 'button', className: 'trv-sec-x', onClick: () => this.removeImage(i, k) }, '×'))),
+          this.picker((f) => this.setImage(i, f, -1), true, 'Add images', 'trv-link'))) : null);
+  },
+  render() {
+    const list = this.list(), { busy, error, drag, over } = this.state;
+    return h('div', { className: 'trv-secs' },
+      h('div', { className: 'trv-secs-top' + (over ? ' is-over' : ''),
+        onDragOver: (e) => { if (e.dataTransfer.types.includes('Files')) { e.preventDefault(); this.setState({ over: true }); } },
+        onDragLeave: () => this.setState({ over: false }),
+        onDrop: (e) => { if (e.dataTransfer.files.length) { e.preventDefault(); this.setState({ over: false }); this.addImages(e.dataTransfer.files); } } },
+        this.picker((f) => this.addImages(f), true, busy ? `Uploading ${busy}…` : 'Add images'),
+        h('span', { className: 'trv-photos-hint' }, 'or drop them here · one section per image'),
+        h('span', { className: 'trv-secs-add' }, h('span', { className: 'trv-sec-lbl' }, 'Or add an empty'),
+          h('select', { value: '', onChange: (e) => { if (e.target.value) this.addEmpty(e.target.value); } }, h('option', { value: '' }, 'Choose a layout…'), ...LAYOUTS.map(([v, l]) => h('option', { key: v, value: v }, l)))),
+        error ? h('span', { className: 'trv-photos-error' }, error) : null),
+      list.length ? null : h('p', { className: 'trv-pos-note' }, 'No sections yet. Add images to start the case study.'),
+      ...list.map((s, i) => h('div', {
+        key: i, className: 'trv-sec' + (drag === i ? ' is-drag' : ''),
+        onDragOver: (e) => { if (this.state.drag != null) e.preventDefault(); },
+        onDrop: (e) => { if (this.state.drag != null) { e.preventDefault(); e.stopPropagation(); this.move(this.state.drag, i); this.setState({ drag: null }); } },
+      },
+        h('div', { className: 'trv-sec-head' },
+          h('span', { className: 'trv-sec-grip', draggable: true, title: 'Drag to reorder',
+            onDragStart: (e) => { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', String(i)); this.setState({ drag: i }); },
+            onDragEnd: () => this.setState({ drag: null }) }, '⋮⋮'),
+          h('span', { className: 'trv-sec-n' }, String(i + 1)),
+          h('div', { className: 'trv-seg is-layout' }, ...LAYOUTS.map(([v, l]) => h('button', { key: v, type: 'button', className: s.type === v ? 'is-on' : '', onClick: () => { const lst = this.list(); lst[i] = convert(lst[i], v); this.save(lst); } }, l))),
+          h('button', { type: 'button', className: 'trv-sec-del', 'aria-label': 'Remove section', onClick: () => this.remove(i) }, 'Remove')),
+        this.preview(i, s),
+        this.controls(i, s))));
+  },
+});
+CMS.registerWidget('sections', Sections, () => null);
 
 // ── Build the config: Type and Goods from Shopify, then Print and Digital ─────
 (async () => {

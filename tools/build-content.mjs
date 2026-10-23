@@ -84,6 +84,7 @@ const DIGITAL = load('digital').map((d) => {
     if (s.note) o.note = s.note;
     if (s.background) o.bg = BG[s.background] || s.background;
     if (s.image_width) o.w = Number(s.image_width);
+    if (s.side) o.side = s.side;
     if (s.image) o.img = useImage(s.image, where);
     if (s.images) o.imgs = s.images.map((im) => useImage(im, where)).filter(Boolean);
     return o;

@@ -405,6 +405,12 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .cs-feature > div { width: 100%; display: flex; flex-direction: column; align-items: center; }
 .cs-media { max-width: min(var(--w, 739px), 100%); }
 .cs-media img { width: 100%; height: auto; }
+.cs-split { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(32px, 6vw, 96px); padding: clamp(64px, 8vw, 120px) max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter))); }
+.cs-split .cs-media { max-width: none; }
+.cs-split.img-right .cs-media { order: 2; }
+.cs-split .cs-title, .cs-split .cs-caption { text-align: left; margin-left: 0; padding: 0; }
+.cs-split .cs-caption { max-width: 460px; font-size: 18px; line-height: 1.4; }
+@media (max-width: 760px) { .cs-split { grid-template-columns: 1fr; } .cs-split.img-right .cs-media { order: 0; } }
 .cs-slides { position: relative; overflow: hidden; aspect-ratio: 1440 / 996; }
 .cs-slides .cs-caption { position: absolute; left: 0; right: 0; top: 96px; z-index: 2; }
 .slide { position: absolute; inset: 0; transition: transform .7s var(--ease), opacity .7s ease; }

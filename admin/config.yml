@@ -64,50 +64,10 @@ collections:
         name: photos
         widget: photos
         multiple: true
+        max: 2
         tags: [Thumbnail, Hero]
-        hint: 'Drop them all at once and drag to reorder. Photo 1 is the homepage thumbnail, photo 2 is the big image at the top of the page, and the rest run down the page full width (before any sections below).'
+        hint: 'Photo 1 is the homepage thumbnail. Photo 2 is the big image at the top of the page (if there''s only one, it''s used for both).'
       - { label: Wide hero, name: hero_wide, widget: boolean, required: false, default: false, hint: 'Turn on for landscape (desktop) screenshots.' }
-      - label: Sections
-        name: sections
-        label_singular: section
-        widget: list
-        required: false
-        hint: The case study, top to bottom. Add a section and pick its layout.
-        typeKey: type
-        types:
-          - label: Full-bleed image
-            name: full
-            summary: '{{fields.caption}}'
-            fields:
-              - { label: Image, name: image, widget: photos }
-              - { label: Caption, name: caption, widget: string, required: false }
-              - { label: Text colour, name: tone, widget: select, options: [{ label: Light, value: light }, { label: Dark, value: dark }], default: light }
-          - label: Image on a colour band
-            name: feature
-            summary: '{{fields.title}} {{fields.caption}}'
-            fields:
-              - { label: Image, name: image, widget: photos }
-              - { label: Heading, name: title, widget: string, required: false }
-              - { label: Caption, name: caption, widget: text, required: false }
-              - &bg { label: Background, name: background, widget: select, required: false, options: [{ label: Rose, value: rose }, { label: Sand, value: sand }, { label: Paper (off-white), value: paper }, { label: Ink (black), value: ink }, { label: Clay, value: clay }] }
-              - &tone { label: Text colour, name: tone, widget: select, options: [{ label: Light, value: light }, { label: Dark, value: dark }], default: dark }
-              - { label: Image width (px), name: image_width, widget: number, value_type: int, required: false, hint: 'e.g. 400 for a phone screen, 1100 for a desktop screen.' }
-          - label: Slideshow
-            name: slides
-            summary: '{{fields.caption}}'
-            fields:
-              - { label: Images, name: images, widget: photos, multiple: true }
-              - { label: Caption, name: caption, widget: string, required: false }
-              - *bg
-              - *tone
-          - label: Grid of small images (icons)
-            name: icons
-            summary: '{{fields.caption}}'
-            fields:
-              - { label: Images, name: images, widget: photos, multiple: true }
-              - { label: Caption, name: caption, widget: string, required: false }
-              - { label: Note, name: note, widget: string, required: false, hint: 'Small text under the grid, e.g. "Coming soon to App Store".' }
-              - *bg
-              - *tone
+      - { label: Sections, name: sections, widget: sections, required: false, hint: 'The case study under the hero, top to bottom, as it will look. Drag ⋮⋮ to reorder.' }
       - { label: Position on the Digital page, name: order, widget: position, folder: content/digital, required: false }
       - { label: Hidden, name: draft, widget: boolean, required: false, default: false, hint: 'Hide this project from the site without deleting it.' }
