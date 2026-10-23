@@ -148,19 +148,19 @@ export const DIGITAL = [
     "carouselTitle": "Byways will help you get the most out of your trip\nby showing you cool sites, towns, activities, and more byways",
     "carousel": [
       {
-        "img": "/assets/img/byways/route.webp",
+        "img": "/assets/img/byways/stop-ladder-creek-falls.webp",
         "text": ""
       },
       {
-        "img": "/assets/img/byways/plan.webp",
+        "img": "/assets/img/byways/stop-leavenworth.webp",
         "text": ""
       },
       {
-        "img": "/assets/img/byways/search.webp",
+        "img": "/assets/img/byways/stop-maple-pass.webp",
         "text": ""
       },
       {
-        "img": "/assets/img/byways/route.webp",
+        "img": "/assets/img/byways/stop-mountains-to-sound.webp",
         "text": ""
       }
     ],
@@ -660,23 +660,29 @@ export const CONTENT_IMG = {
     "w": 2500,
     "h": 1379
   },
-  "/assets/img/byways/route.webp": {
-    "src": "assets/img/byways/route.webp",
+  "/assets/img/byways/stop-ladder-creek-falls.webp": {
+    "src": "assets/img/byways/stop-ladder-creek-falls.webp",
     "cdn": "",
     "w": 786,
-    "h": 2378
+    "h": 2592
   },
-  "/assets/img/byways/plan.webp": {
-    "src": "assets/img/byways/plan.webp",
+  "/assets/img/byways/stop-leavenworth.webp": {
+    "src": "assets/img/byways/stop-leavenworth.webp",
     "cdn": "",
     "w": 786,
-    "h": 2610
+    "h": 2990
   },
-  "/assets/img/byways/search.webp": {
-    "src": "assets/img/byways/search.webp",
+  "/assets/img/byways/stop-maple-pass.webp": {
+    "src": "assets/img/byways/stop-maple-pass.webp",
     "cdn": "",
     "w": 786,
-    "h": 1704
+    "h": 2832
+  },
+  "/assets/img/byways/stop-mountains-to-sound.webp": {
+    "src": "assets/img/byways/stop-mountains-to-sound.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 2688
   },
   "/assets/img/byways/thumb.jpg": {
     "src": "assets/img/byways/thumb.jpg",
