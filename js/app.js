@@ -953,7 +953,11 @@ function BywaysPage(d) {
   function goTo(k) {
     if (!hs || k === car.cur || k < 0 || k >= cards.length) return;
     const from = car.p, t0 = performance.now(), dur = 950;
-    car.cur = k; car.base = clamp01(-hs.getBoundingClientRect().top / geo.hsFin);
+    // Jump the page back to the start of the carousel (invisible: the carousel is pinned), so the
+    // new screen gets the full scroll distance for its details straight away.
+    car.cur = k; car.base = 0;
+    const startY = hs.getBoundingClientRect().top + scrollY;
+    if (Math.abs(scrollY - startY) > 1) scrollTo({ top: startY, behavior: 'instant' });
     cancelAnimationFrame(car.anim);
     const step = (now) => { const t = clamp01((now - t0) / dur); car.p = lerp(from, k, ease(t)); paint(); if (t < 1) car.anim = requestAnimationFrame(step); };
     car.anim = requestAnimationFrame(step);
