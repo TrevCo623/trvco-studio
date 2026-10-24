@@ -702,3 +702,5 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .cs-scroll-frame { z-index: 2; }
 .cs-scroll-sides { z-index: 0; }
 @media (max-width: 760px) { .uniform-phones .cs-panel .cs-caption, .uniform-phones .cs-pcar .cs-caption, .uniform-phones .cs-scroll .cs-caption { max-width: calc(100vw - 40px); padding: 0; } }
+.uniform-phones .cs-panel:has(.cs-panel-btn) { --gap: 64px; }
+@media (max-width: 760px) { .uniform-phones .cs-panel:has(.cs-panel-btn) { --gap: 40px; } }

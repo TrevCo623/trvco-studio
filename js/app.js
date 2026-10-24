@@ -1215,6 +1215,7 @@ function DigitalPage(route) {
     const fits = [400, (vw - 36) * 0.6403];
     $$('.cs-panel, .cs-pcar, .cs-scroll', el).forEach((sec) => {
       const cap = $('.cs-caption', sec), btn = $('.cs-panel-btn', sec), nav = $('.dnav', sec);
+      const gap = parseFloat(getComputedStyle(sec).getPropertyValue('--gap')) || (mobile ? 24 : 32);
       const extra = btn ? btn.offsetHeight + gap : nav ? nav.offsetHeight + 24 : 0;
       fits.push((vh - top - (cap ? cap.offsetHeight + gap : 0) - extra - 24) / 2.073);
     });
