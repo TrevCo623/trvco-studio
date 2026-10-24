@@ -46,7 +46,7 @@
       "intro": {
         "caption": "Step 3: Choose an outfit that matches your vibe for the night",
         "tone": "dark",
-        "background": "#F8F6F6",
+        "background": "#EBE5E5",
         "sides": "/assets/img/vibefit/looks-sides.webp",
         "screen": "/assets/img/vibefit/looks-screen-bg.jpg",
         "sides_x": 1288,
@@ -81,9 +81,9 @@
     {
       "type": "panel",
       "image": "/assets/img/vibefit/closet-phone.webp",
-      "tone": "light",
+      "tone": "dark",
       "caption": "Add clothes you have to Your Closet to make the app more tailored to your style",
-      "background": "#B17C72",
+      "background": "#EBE5E5",
       "phone": 0.6403
     },
     {

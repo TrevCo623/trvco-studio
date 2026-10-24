@@ -296,7 +296,7 @@ export const DIGITAL = [
         "intro": {
           "caption": "Step 3: Choose an outfit that matches your vibe for the night",
           "tone": "dark",
-          "bg": "#F8F6F6",
+          "bg": "#EBE5E5",
           "sides": "/assets/img/vibefit/looks-sides.webp",
           "screen": "/assets/img/vibefit/looks-screen-bg.jpg",
           "card": "/assets/img/vibefit/looks-card-v3.webp",
@@ -330,12 +330,12 @@ export const DIGITAL = [
       },
       {
         "type": "panel",
-        "tone": "light",
+        "tone": "dark",
         "caption": "Add clothes you have to Your Closet to make the app more tailored to your style",
-        "bg": "#B17C72",
+        "bg": "#EBE5E5",
         "phone": 0.6403,
         "img": "/assets/img/vibefit/closet-phone.webp",
-        "bgHex": "#B17C72"
+        "bgHex": "#EBE5E5"
       },
       {
         "type": "panel",
