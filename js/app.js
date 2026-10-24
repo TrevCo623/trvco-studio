@@ -172,7 +172,7 @@ function priceLabel(p) {
 const ITEMS = [
   ...TYPE.map((t) => ({ key: `type/${t.slug}`, cat: 'type', href: `/type/${t.slug}`, title: t.name, ratio: 432 / 307, type: t, meta: t.shopify ? priceLabel(t) : '' })),
   ...DIGITAL.map((d) => ({ key: `digital/${d.slug}`, cat: 'digital', href: `/digital/${d.slug}`, title: d.title, ratio: 432 / 400, img: d.thumb })),
-  ...PRINT.map((p) => ({ key: `print/${p.slug}`, cat: 'print', href: `/print/${p.slug}`, title: p.title, ratio: IMG[p.images[0]].w / IMG[p.images[0]].h, img: p.images[0] })),
+  ...PRINT.map((p) => ({ key: `print/${p.slug}`, cat: 'print', href: `/print/${p.slug}`, title: p.title, ratio: 3 / 2, img: p.images[0] })),
   ...GOODS.map((g) => ({ key: `goods/${g.slug}`, cat: 'goods', href: `/goods/${g.slug}`, title: g.name, ratio: 432 / 289, img: g.images[0], meta: priceLabel(g) })),
 ];
 const byKey = new Map(ITEMS.map((i) => [i.key, i]));
