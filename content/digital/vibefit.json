@@ -5,7 +5,7 @@
   "title": "VibeFit",
   "intro": "An app that lets you and your partner find the right outfits for the evening's vibe, together",
   "photos": [
-    "/assets/img/vibefit/look-details.jpg",
+    "/assets/img/vibefit/look-details-rose.jpg",
     "/assets/img/vibefit/home.webp"
   ],
   "sections": [
@@ -32,7 +32,7 @@
     {
       "type": "scroll",
       "tone": "light",
-      "background": "#B5A784",
+      "background": "#B17C72",
       "image": "/assets/img/vibefit/phone-frame.webp",
       "screen": "/assets/img/vibefit/look-details-screen-v3.jpg",
       "hole": {
@@ -83,7 +83,7 @@
       "image": "/assets/img/vibefit/closet-phone.webp",
       "tone": "light",
       "caption": "Add clothes you have to Your Closet to make the app more tailored to your style",
-      "background": "#B5A784",
+      "background": "#B17C72",
       "phone": 0.6403
     },
     {

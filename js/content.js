@@ -251,7 +251,7 @@ export const DIGITAL = [
     "panels": [],
     "carousels": [],
     "carousel": [],
-    "thumb": "/assets/img/vibefit/look-details.jpg",
+    "thumb": "/assets/img/vibefit/look-details-rose.jpg",
     "hero": "/assets/img/vibefit/home.webp",
     "heroWide": false,
     "phones": true,
@@ -282,7 +282,7 @@ export const DIGITAL = [
         "type": "scroll",
         "tone": "light",
         "caption": "Step 4: Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet",
-        "bg": "#B5A784",
+        "bg": "#B17C72",
         "phone": 0.6403,
         "img": "/assets/img/vibefit/phone-frame.webp",
         "screen": "/assets/img/vibefit/look-details-screen-v3.jpg",
@@ -292,7 +292,7 @@ export const DIGITAL = [
           "w": 1320,
           "h": 2612
         },
-        "bgHex": "#B5A784",
+        "bgHex": "#B17C72",
         "intro": {
           "caption": "Step 3: Choose an outfit that matches your vibe for the night",
           "tone": "dark",
@@ -332,10 +332,10 @@ export const DIGITAL = [
         "type": "panel",
         "tone": "light",
         "caption": "Add clothes you have to Your Closet to make the app more tailored to your style",
-        "bg": "#B5A784",
+        "bg": "#B17C72",
         "phone": 0.6403,
         "img": "/assets/img/vibefit/closet-phone.webp",
-        "bgHex": "#B5A784"
+        "bgHex": "#B17C72"
       },
       {
         "type": "panel",
@@ -858,8 +858,8 @@ export const CONTENT_IMG = {
     "w": 2500,
     "h": 1667
   },
-  "/assets/img/vibefit/look-details.jpg": {
-    "src": "assets/img/vibefit/look-details.jpg",
+  "/assets/img/vibefit/look-details-rose.jpg": {
+    "src": "assets/img/vibefit/look-details-rose.jpg",
     "cdn": "",
     "w": 4000,
     "h": 2656
