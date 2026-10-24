@@ -1131,6 +1131,21 @@ function DigitalPage(route) {
     box.addEventListener('touchend', (e) => { const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) go(cur + (dx < 0 ? 1 : -1)); }, { passive: true });
     go(0);
   });
+  // Row of phones: on narrow screens it's a swipeable strip (moved with transforms, no scroll box).
+  $$('.cs-rowsec', el).forEach((sec) => {
+    const row = $('.cs-row', sec), items = $$('.cs-panel-img', row); let cur = 0;
+    const place = () => {
+      if (innerWidth > 760) { row.style.transform = ''; return; }
+      const rr = row.getBoundingClientRect(), ir = items[cur].getBoundingClientRect(), sr = sec.getBoundingClientRect();
+      const tx = new DOMMatrixReadOnly(getComputedStyle(row).transform).m41;
+      row.style.transform = `translateX(${sr.left + sr.width / 2 - (rr.left - tx) - (ir.left - rr.left + ir.width / 2)}px)`;
+    };
+    let sx = 0, sy = 0;
+    row.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    row.addEventListener('touchend', (e) => { const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) { cur = Math.max(0, Math.min(items.length - 1, cur + (dx < 0 ? 1 : -1))); place(); } }, { passive: true });
+    row.addEventListener('click', (e) => { const it = e.target.closest('.cs-panel-img'); if (it && innerWidth <= 760) { cur = items.indexOf(it); place(); } });
+    addEventListener('resize', place); new ResizeObserver(place).observe(row); $$('img', row).forEach((im) => im.complete || im.addEventListener('load', place, { once: true }));
+  });
   $$('.cs-pcar', el).forEach((box) => {
     const cards = $$('.pcar-card', box), [prev, next] = $$('.dbtn', box); let cur = 0, p = 0, anim = 0;
     const paint = () => cards.forEach((c, k) => { c.style.setProperty('--x', (k - p).toFixed(4)); c.style.setProperty('--near', clamp01(1 - Math.abs(k - p)).toFixed(3)); c.classList.toggle('is-on', k === cur); });

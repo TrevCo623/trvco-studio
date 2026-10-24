@@ -682,9 +682,7 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .uniform-phones .cs-row .cs-panel-img.has-phone { flex: none; margin-left: calc(20px - var(--phone-w) / var(--pf) * .18); margin-right: calc(20px - var(--phone-w) / var(--pf) * .18); }
 @media (max-width: 760px) {
   .cs-rowsec { overflow: hidden; }
-  .cs-row { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 calc(50vw - var(--phone-w) / 2 - 20px); margin: 0 -18px; max-width: 100vw; }
-  .cs-row::-webkit-scrollbar { display: none; }
-  .uniform-phones .cs-row .cs-panel-img.has-phone { scroll-snap-align: center; }
+  .cs-row { justify-content: flex-start; align-self: flex-start; max-width: none; transition: transform .45s cubic-bezier(.65,0,.35,1); touch-action: pan-y; }
 }
 .uniform-phones .cs-panel { overflow-x: clip; }
 @media (min-width: 761px) { .uniform-phones .cs-panel .cs-caption, .uniform-phones .cs-pcar .cs-caption, .uniform-phones .cs-scroll .cs-caption { max-width: 1000px; } }
@@ -703,3 +701,4 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .cs-scroll-screen { z-index: 1; isolation: isolate; }
 .cs-scroll-frame { z-index: 2; }
 .cs-scroll-sides { z-index: 0; }
+@media (max-width: 760px) { .uniform-phones .cs-panel .cs-caption, .uniform-phones .cs-pcar .cs-caption, .uniform-phones .cs-scroll .cs-caption { max-width: calc(100vw - 40px); padding: 0; } }
