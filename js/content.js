@@ -254,7 +254,7 @@ export const DIGITAL = [
         "bg": "var(--ink)",
         "w": 1100,
         "bare": true,
-        "img": "/assets/img/storyright/v2-notes-anim.webp"
+        "img": "/assets/img/storyright/v3-notes.webp"
       },
       {
         "type": "feature",
@@ -907,8 +907,8 @@ export const CONTENT_IMG = {
     "w": 2440,
     "h": 1688
   },
-  "/assets/img/storyright/v2-notes-anim.webp": {
-    "src": "assets/img/storyright/v2-notes-anim.webp",
+  "/assets/img/storyright/v3-notes.webp": {
+    "src": "assets/img/storyright/v3-notes.webp",
     "cdn": "",
     "w": 1444,
     "h": 950
