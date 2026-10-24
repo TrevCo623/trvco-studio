@@ -423,6 +423,7 @@ function HomePage(route) {
     inner.classList.add('no-fade');
     filter = f;
     el.classList.toggle('is-filtered', !!f);
+    el.dataset.filter = f || '';
     hero.classList.toggle('is-gone', !!f);
     hero.classList.remove('is-hidden');
     const keys = f ? CAT_LIST(f) : HOME_LIST;
