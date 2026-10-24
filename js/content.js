@@ -96,6 +96,114 @@ export const DIGITAL = [
     ]
   },
   {
+    "slug": "vibefit",
+    "title": "VibeFit",
+    "intro": "An app that matches your outfit with your vibe, with or without your partner",
+    "carouselTitle": "",
+    "carouselTitleEnd": "",
+    "panels": [],
+    "carousels": [],
+    "carousel": [],
+    "thumb": "/assets/img/vibefit/look-details-rose.jpg",
+    "hero": "/assets/img/vibefit/home.webp",
+    "heroWide": false,
+    "phones": true,
+    "heroPhone": 0.6403,
+    "sections": [
+      {
+        "type": "panel",
+        "tone": "light",
+        "caption": "Choose the vibe for the night",
+        "bg": "#998A9D",
+        "phone": 0.6403,
+        "img": "/assets/img/vibefit/choose-vibe-phone.webp",
+        "bgHex": "#998A9D"
+      },
+      {
+        "type": "row",
+        "tone": "dark",
+        "caption": "Share with a partner to sync your vibe and fits for the night",
+        "bg": "var(--paper)",
+        "phone": 0.6403,
+        "imgs": [
+          "/assets/img/vibefit/share-waiting.webp",
+          "/assets/img/vibefit/share-waiting-notice.webp",
+          "/assets/img/vibefit/share-fun-night.webp"
+        ]
+      },
+      {
+        "type": "scroll",
+        "tone": "light",
+        "caption": "Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet",
+        "bg": "#B17C72",
+        "phone": 0.6403,
+        "img": "/assets/img/vibefit/phone-frame.webp",
+        "screen": "/assets/img/vibefit/look-details-screen-v3.jpg",
+        "hole": {
+          "x": 452,
+          "y": 390,
+          "w": 1320,
+          "h": 2612
+        },
+        "bgHex": "#B17C72",
+        "intro": {
+          "caption": "Choose an outfit that matches your vibe for the night",
+          "tone": "dark",
+          "bg": "#EBE5E5",
+          "sides": "/assets/img/vibefit/looks-sides.webp",
+          "screen": "/assets/img/vibefit/looks-screen-bg.jpg",
+          "card": "/assets/img/vibefit/looks-card-v3.webp",
+          "sidesX": 1288,
+          "sidesW": 4800,
+          "geo": {
+            "holeW": 1320,
+            "holeTop": 193,
+            "card": {
+              "x": 80,
+              "y": 678,
+              "w": 1150
+            },
+            "endY": 181
+          }
+        }
+      },
+      {
+        "type": "phone-carousel",
+        "tone": "dark",
+        "caption": "An onboarding quiz helps set your style and what you want to accomplish with your fits",
+        "bg": "var(--paper)",
+        "phone": 0.6403,
+        "frame": "/assets/img/vibefit/phone-frame.webp",
+        "imgs": [
+          "/assets/img/vibefit/quiz-fit-screen.webp",
+          "/assets/img/vibefit/quiz-colors-screen.webp",
+          "/assets/img/vibefit/quiz-off-the-table-screen.webp",
+          "/assets/img/vibefit/quiz-struggle-screen.webp"
+        ]
+      },
+      {
+        "type": "panel",
+        "tone": "dark",
+        "caption": "Add clothes you have to Your Closet to make the app more tailored to your style",
+        "bg": "#EBE5E5",
+        "phone": 0.6403,
+        "img": "/assets/img/vibefit/closet-phone.webp",
+        "bgHex": "#EBE5E5"
+      },
+      {
+        "type": "panel",
+        "tone": "light",
+        "caption": "Check out VibeFit for yourself",
+        "bg": "#998A9D",
+        "phone": 0.6403,
+        "button": "See VibeFit app",
+        "url": "",
+        "img": "/assets/img/vibefit/vibe-result.webp",
+        "bgHex": "#998A9D"
+      }
+    ]
+  },
+  {
     "slug": "storyright",
     "title": "Storyright",
     "intro": "An AI-assisted writing editor that understands your unique style, makes suggestions to maintain your voice, prose, and story.",
@@ -241,114 +349,6 @@ export const DIGITAL = [
     "hero": "/assets/img/byways/thumb-v2.jpg",
     "heroWide": false,
     "sections": []
-  },
-  {
-    "slug": "vibefit",
-    "title": "VibeFit",
-    "intro": "An app that matches your outfit with your vibe, with or without your partner",
-    "carouselTitle": "",
-    "carouselTitleEnd": "",
-    "panels": [],
-    "carousels": [],
-    "carousel": [],
-    "thumb": "/assets/img/vibefit/look-details-rose.jpg",
-    "hero": "/assets/img/vibefit/home.webp",
-    "heroWide": false,
-    "phones": true,
-    "heroPhone": 0.6403,
-    "sections": [
-      {
-        "type": "panel",
-        "tone": "light",
-        "caption": "Choose the vibe for the night",
-        "bg": "#998A9D",
-        "phone": 0.6403,
-        "img": "/assets/img/vibefit/choose-vibe-phone.webp",
-        "bgHex": "#998A9D"
-      },
-      {
-        "type": "row",
-        "tone": "dark",
-        "caption": "Share with a partner to sync your vibe and fits for the night",
-        "bg": "var(--paper)",
-        "phone": 0.6403,
-        "imgs": [
-          "/assets/img/vibefit/share-waiting.webp",
-          "/assets/img/vibefit/share-waiting-notice.webp",
-          "/assets/img/vibefit/share-fun-night.webp"
-        ]
-      },
-      {
-        "type": "scroll",
-        "tone": "light",
-        "caption": "Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet",
-        "bg": "#B17C72",
-        "phone": 0.6403,
-        "img": "/assets/img/vibefit/phone-frame.webp",
-        "screen": "/assets/img/vibefit/look-details-screen-v3.jpg",
-        "hole": {
-          "x": 452,
-          "y": 390,
-          "w": 1320,
-          "h": 2612
-        },
-        "bgHex": "#B17C72",
-        "intro": {
-          "caption": "Choose an outfit that matches your vibe for the night",
-          "tone": "dark",
-          "bg": "#EBE5E5",
-          "sides": "/assets/img/vibefit/looks-sides.webp",
-          "screen": "/assets/img/vibefit/looks-screen-bg.jpg",
-          "card": "/assets/img/vibefit/looks-card-v3.webp",
-          "sidesX": 1288,
-          "sidesW": 4800,
-          "geo": {
-            "holeW": 1320,
-            "holeTop": 193,
-            "card": {
-              "x": 80,
-              "y": 678,
-              "w": 1150
-            },
-            "endY": 181
-          }
-        }
-      },
-      {
-        "type": "phone-carousel",
-        "tone": "dark",
-        "caption": "An onboarding quiz helps set your style and what you want to accomplish with your fits",
-        "bg": "var(--paper)",
-        "phone": 0.6403,
-        "frame": "/assets/img/vibefit/phone-frame.webp",
-        "imgs": [
-          "/assets/img/vibefit/quiz-fit-screen.webp",
-          "/assets/img/vibefit/quiz-colors-screen.webp",
-          "/assets/img/vibefit/quiz-off-the-table-screen.webp",
-          "/assets/img/vibefit/quiz-struggle-screen.webp"
-        ]
-      },
-      {
-        "type": "panel",
-        "tone": "dark",
-        "caption": "Add clothes you have to Your Closet to make the app more tailored to your style",
-        "bg": "#EBE5E5",
-        "phone": 0.6403,
-        "img": "/assets/img/vibefit/closet-phone.webp",
-        "bgHex": "#EBE5E5"
-      },
-      {
-        "type": "panel",
-        "tone": "light",
-        "caption": "Check out VibeFit for yourself",
-        "bg": "#998A9D",
-        "phone": 0.6403,
-        "button": "See VibeFit app",
-        "url": "",
-        "img": "/assets/img/vibefit/vibe-result.webp",
-        "bgHex": "#998A9D"
-      }
-    ]
   }
 ];
 export const GOODS = [
@@ -756,108 +756,6 @@ export const CONTENT_IMG = {
     "w": 141,
     "h": 141
   },
-  "/assets/img/digital/storyright-thumb.jpg": {
-    "src": "assets/img/digital/storyright-thumb.jpg",
-    "cdn": "",
-    "w": 2500,
-    "h": 1667
-  },
-  "/assets/img/storyright/hero.jpg": {
-    "src": "assets/img/storyright/hero.jpg",
-    "cdn": "",
-    "w": 2500,
-    "h": 1379
-  },
-  "/assets/img/storyright/just-write.jpg": {
-    "src": "assets/img/storyright/just-write.jpg",
-    "cdn": "",
-    "w": 2500,
-    "h": 1379
-  },
-  "/assets/img/storyright/review.jpg": {
-    "src": "assets/img/storyright/review.jpg",
-    "cdn": "",
-    "w": 2500,
-    "h": 1379
-  },
-  "/assets/img/storyright/focus.jpg": {
-    "src": "assets/img/storyright/focus.jpg",
-    "cdn": "",
-    "w": 2500,
-    "h": 1379
-  },
-  "/assets/img/storyright/projects.jpg": {
-    "src": "assets/img/storyright/projects.jpg",
-    "cdn": "",
-    "w": 2500,
-    "h": 1379
-  },
-  "/assets/img/byways/panel-trips.webp": {
-    "src": "assets/img/byways/panel-trips.webp",
-    "cdn": "",
-    "w": 998,
-    "h": 1916
-  },
-  "/assets/img/byways/panel-saved-trip.webp": {
-    "src": "assets/img/byways/panel-saved-trip.webp",
-    "cdn": "",
-    "w": 998,
-    "h": 1916
-  },
-  "/assets/img/byways/stop-ladder-creek-falls.webp": {
-    "src": "assets/img/byways/stop-ladder-creek-falls.webp",
-    "cdn": "",
-    "w": 786,
-    "h": 2592
-  },
-  "/assets/img/byways/stop-maple-pass.webp": {
-    "src": "assets/img/byways/stop-maple-pass.webp",
-    "cdn": "",
-    "w": 786,
-    "h": 2832
-  },
-  "/assets/img/byways/stop-mountains-to-sound.webp": {
-    "src": "assets/img/byways/stop-mountains-to-sound.webp",
-    "cdn": "",
-    "w": 786,
-    "h": 2688
-  },
-  "/assets/img/byways/stop-leavenworth.webp": {
-    "src": "assets/img/byways/stop-leavenworth.webp",
-    "cdn": "",
-    "w": 786,
-    "h": 2990
-  },
-  "/assets/img/byways/settings-what-you-like.webp": {
-    "src": "assets/img/byways/settings-what-you-like.webp",
-    "cdn": "",
-    "w": 786,
-    "h": 1986
-  },
-  "/assets/img/byways/settings-driving-per-day.webp": {
-    "src": "assets/img/byways/settings-driving-per-day.webp",
-    "cdn": "",
-    "w": 786,
-    "h": 1704
-  },
-  "/assets/img/byways/settings-pace.webp": {
-    "src": "assets/img/byways/settings-pace.webp",
-    "cdn": "",
-    "w": 786,
-    "h": 1704
-  },
-  "/assets/img/byways/settings-roads-to-avoid.webp": {
-    "src": "assets/img/byways/settings-roads-to-avoid.webp",
-    "cdn": "",
-    "w": 786,
-    "h": 1704
-  },
-  "/assets/img/byways/thumb-v2.jpg": {
-    "src": "assets/img/byways/thumb-v2.jpg",
-    "cdn": "",
-    "w": 2500,
-    "h": 1667
-  },
   "/assets/img/vibefit/look-details-rose.jpg": {
     "src": "assets/img/vibefit/look-details-rose.jpg",
     "cdn": "",
@@ -959,6 +857,108 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 2224,
     "h": 3336
+  },
+  "/assets/img/digital/storyright-thumb.jpg": {
+    "src": "assets/img/digital/storyright-thumb.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1667
+  },
+  "/assets/img/storyright/hero.jpg": {
+    "src": "assets/img/storyright/hero.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1379
+  },
+  "/assets/img/storyright/just-write.jpg": {
+    "src": "assets/img/storyright/just-write.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1379
+  },
+  "/assets/img/storyright/review.jpg": {
+    "src": "assets/img/storyright/review.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1379
+  },
+  "/assets/img/storyright/focus.jpg": {
+    "src": "assets/img/storyright/focus.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1379
+  },
+  "/assets/img/storyright/projects.jpg": {
+    "src": "assets/img/storyright/projects.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1379
+  },
+  "/assets/img/byways/panel-trips.webp": {
+    "src": "assets/img/byways/panel-trips.webp",
+    "cdn": "",
+    "w": 998,
+    "h": 1916
+  },
+  "/assets/img/byways/panel-saved-trip.webp": {
+    "src": "assets/img/byways/panel-saved-trip.webp",
+    "cdn": "",
+    "w": 998,
+    "h": 1916
+  },
+  "/assets/img/byways/stop-ladder-creek-falls.webp": {
+    "src": "assets/img/byways/stop-ladder-creek-falls.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 2592
+  },
+  "/assets/img/byways/stop-maple-pass.webp": {
+    "src": "assets/img/byways/stop-maple-pass.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 2832
+  },
+  "/assets/img/byways/stop-mountains-to-sound.webp": {
+    "src": "assets/img/byways/stop-mountains-to-sound.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 2688
+  },
+  "/assets/img/byways/stop-leavenworth.webp": {
+    "src": "assets/img/byways/stop-leavenworth.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 2990
+  },
+  "/assets/img/byways/settings-what-you-like.webp": {
+    "src": "assets/img/byways/settings-what-you-like.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 1986
+  },
+  "/assets/img/byways/settings-driving-per-day.webp": {
+    "src": "assets/img/byways/settings-driving-per-day.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 1704
+  },
+  "/assets/img/byways/settings-pace.webp": {
+    "src": "assets/img/byways/settings-pace.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 1704
+  },
+  "/assets/img/byways/settings-roads-to-avoid.webp": {
+    "src": "assets/img/byways/settings-roads-to-avoid.webp",
+    "cdn": "",
+    "w": 786,
+    "h": 1704
+  },
+  "/assets/img/byways/thumb-v2.jpg": {
+    "src": "assets/img/byways/thumb-v2.jpg",
+    "cdn": "",
+    "w": 2500,
+    "h": 1667
   },
   "/assets/img/goods/go-outside-hat-1.jpg": {
     "src": "assets/img/goods/go-outside-hat-1.jpg",
