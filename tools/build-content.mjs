@@ -93,6 +93,7 @@ const DIGITAL = load('digital').map((d) => {
     if (s.background) o.bg = BG[s.background] || s.background;
     if (s.image_width) o.w = Number(s.image_width);
     if (s.side) o.side = s.side;
+    if (s.bare) o.bare = true;
     if (s.phone) o.phone = Number(s.phone);
     if (s.button) { o.button = s.button; o.url = s.url || ''; }
     if (s.image) o.img = useImage(s.image, where);

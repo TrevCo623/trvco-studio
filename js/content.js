@@ -253,7 +253,8 @@ export const DIGITAL = [
         "caption": "A helpful AI assistant with suggestions to make your story sing, sharpen your themes, and bring your unique voice forward.",
         "bg": "var(--ink)",
         "w": 1100,
-        "img": "/assets/img/storyright/v2-notes.webp"
+        "bare": true,
+        "img": "/assets/img/storyright/v2-notes-anim.webp"
       },
       {
         "type": "feature",
@@ -906,11 +907,11 @@ export const CONTENT_IMG = {
     "w": 2440,
     "h": 1688
   },
-  "/assets/img/storyright/v2-notes.webp": {
-    "src": "assets/img/storyright/v2-notes.webp",
+  "/assets/img/storyright/v2-notes-anim.webp": {
+    "src": "assets/img/storyright/v2-notes-anim.webp",
     "cdn": "",
-    "w": 2440,
-    "h": 1688
+    "w": 1444,
+    "h": 950
   },
   "/assets/img/storyright/v2-insights.webp": {
     "src": "assets/img/storyright/v2-insights.webp",
