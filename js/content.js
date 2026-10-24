@@ -44,6 +44,7 @@ export const DIGITAL = [
     "thumb": "/assets/img/digital/feelgood-thumb.jpg",
     "hero": "/assets/img/feelgood/hero.png",
     "heroWide": false,
+    "fit": false,
     "sections": [
       {
         "type": "full",
@@ -107,6 +108,7 @@ export const DIGITAL = [
     "thumb": "/assets/img/vibefit/look-details-rose.jpg",
     "hero": "/assets/img/vibefit/home.webp",
     "heroWide": false,
+    "fit": false,
     "phones": true,
     "heroPhone": 0.6403,
     "sections": [
@@ -213,13 +215,13 @@ export const DIGITAL = [
     "carousels": [],
     "carousel": [],
     "thumb": "/assets/img/digital/storyright-thumb.jpg",
-    "hero": "/assets/img/storyright/hero.jpg",
-    "heroWide": true,
+    "hero": "",
+    "heroWide": false,
+    "fit": true,
     "sections": [
       {
         "type": "feature",
         "tone": "light",
-        "title": "All your stories.",
         "caption": "A place for all your story projects.",
         "bg": "var(--ink)",
         "w": 1100,
@@ -228,7 +230,6 @@ export const DIGITAL = [
       {
         "type": "wide-carousel",
         "tone": "light",
-        "title": "The outline.",
         "caption": "Detail what your story is about, the chapter outlines, and the characters and places that bring it to life.",
         "bg": "var(--ink)",
         "w": 1100,
@@ -241,7 +242,6 @@ export const DIGITAL = [
       {
         "type": "feature",
         "tone": "light",
-        "title": "The editor.",
         "caption": "A clean space for you to write.",
         "bg": "var(--ink)",
         "w": 1100,
@@ -250,7 +250,6 @@ export const DIGITAL = [
       {
         "type": "feature",
         "tone": "light",
-        "title": "Notes.",
         "caption": "A helpful AI assistant with suggestions to make your story sing, sharpen your themes, and bring your unique voice forward.",
         "bg": "var(--ink)",
         "w": 1100,
@@ -259,7 +258,6 @@ export const DIGITAL = [
       {
         "type": "feature",
         "tone": "light",
-        "title": "Intelligence & insights.",
         "caption": "As you write, Storyright captures new characters and places, and makes sure you keep things consistent across chapters.",
         "bg": "var(--ink)",
         "w": 1100,
@@ -361,6 +359,7 @@ export const DIGITAL = [
     "thumb": "/assets/img/byways/thumb-v2.jpg",
     "hero": "/assets/img/byways/thumb-v2.jpg",
     "heroWide": false,
+    "fit": false,
     "sections": []
   }
 ];
@@ -876,12 +875,6 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 2500,
     "h": 1667
-  },
-  "/assets/img/storyright/hero.jpg": {
-    "src": "assets/img/storyright/hero.jpg",
-    "cdn": "",
-    "w": 2500,
-    "h": 1379
   },
   "/assets/img/storyright/v2-stories.webp": {
     "src": "assets/img/storyright/v2-stories.webp",

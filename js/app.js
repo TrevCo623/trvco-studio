@@ -1126,7 +1126,7 @@ function DigitalPage(route) {
     if (s.type === 'icons') return `<section class="cs cs-icons ${tone}" style="${style}">${head}<div class="icon-grid reveal">${s.imgs.map((k) => img(k, { alt: 'App icon option' })).join('')}</div>${s.note ? `<p class="cs-note">${esc(s.note)}</p>` : ''}</section>`;
     return '';
   };
-  const el = h(`<div class="digital-page${d.phones ? ' uniform-phones' : ''}">
+  const el = h(`<div class="digital-page${d.phones ? ' uniform-phones' : ''}${d.fit ? ' fit-screens' : ''}">
     <section class="case-hero ${d.heroWide ? 'wide' : ''}"${d.heroPhone ? ` style="--pf:${d.heroPhone}"` : ''}>
       <h1>${esc(d.title)}</h1>
       <p>${esc(d.intro)}</p>
@@ -1277,6 +1277,21 @@ function DigitalPage(route) {
     paintScroll();
   };
   addEventListener('resize', sizePhones);
+  // fit_screens pages (wide screenshots): one image width for the page, the largest that lets every
+  // section's caption, screenshot and arrows sit on one screen. Screenshots are 4880x3376 with ~7%
+  // transparent shadow top and bottom, cancelled with negative margins in CSS.
+  const fitScreens = () => {
+    if (!d.fit) return;
+    const vw = innerWidth, hh = $('#header')?.offsetHeight || 84, mobile = vw <= 760, vh = innerHeight;
+    const top = hh + (mobile ? 24 : 40), gap = mobile ? 24 : 32, bottom = 24;
+    const fits = [1100, vw - (mobile ? 24 : 72)];
+    $$('.cs-feature', el).forEach((sec) => {
+      const cap = $('.cs-caption', sec), nav = $('.dnav', sec);
+      fits.push((vh - top - (cap ? cap.offsetHeight + gap : 0) - (nav ? nav.offsetHeight + 16 : 0) - bottom) / 0.594);
+    });
+    el.style.setProperty('--fit-w', `${Math.floor(Math.min(...fits))}px`);
+  };
+  if (d.fit) { addEventListener('resize', fitScreens); requestAnimationFrame(fitScreens); }
   return { el, title: d.title, onScroll: paintScroll,
     mount() { sizePhones(); requestAnimationFrame(sizePhones); $$('.cs-scroll img', el).forEach((im) => im.complete || im.addEventListener('load', paintScroll, { once: true })); },
     destroy() { removeEventListener('resize', sizePhones); } };

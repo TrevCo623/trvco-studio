@@ -82,7 +82,7 @@ const DIGITAL = load('digital').map((d) => {
     .filter((c) => c.items.length),
   carousel: (d.carousel || []).map((c, i) => ({ img: useImage(c.image, `Digital "${d.title}" carousel ${i + 1}`), text: c.text || '' })).filter((c) => c.img),
   thumb: useImage(d.thumb || d.heroSrc, `Digital "${d.title}" thumbnail`),
-  hero: useImage(d.heroSrc, `Digital "${d.title}" hero`), heroWide: !!d.hero_wide,
+  hero: d.no_hero ? '' : useImage(d.heroSrc, `Digital "${d.title}" hero`), heroWide: !!d.hero_wide, fit: !!d.fit_screens,
   ...(d.uniform_phones ? { phones: true, heroPhone: Number(d.hero_phone) || 0 } : {}),
   sections: (d.sections || []).map((s, i) => {
     const where = `Digital "${d.title}" section ${i + 1}`;

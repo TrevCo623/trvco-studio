@@ -725,3 +725,12 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 @media (hover: hover) { .cs-wcar.tone-light .dbtn:not(:disabled):hover { background: var(--paper); color: var(--ink); } }
 .cs-feature > .wcar-stage { width: min(var(--w, 1100px), 100%); }
 .wcar-row { width: 100%; }
+
+/* fit_screens pages (Storyright): caption + screenshot (+ arrows) on one screen */
+.fit-screens .case-hero { padding-bottom: 40px; }
+.fit-screens .cs-feature { gap: 32px; padding: calc(var(--header-h) + 40px) 18px 140px; }
+.fit-screens .cs-feature .cs-media, .fit-screens .cs-feature > .wcar-stage { width: var(--fit-w, 900px); max-width: none; }
+.fit-screens .cs-feature .cs-media img, .fit-screens .wcar-row { margin: calc(var(--fit-w, 900px) * -.049) 0; }
+.fit-screens .cs-wcar .dnav { margin-top: 16px; }
+.fit-screens .cs-caption { max-width: 640px; font-size: 18px; line-height: 26px; }
+@media (max-width: 760px) { .fit-screens .cs-feature { gap: 24px; padding: calc(var(--header-h) + 24px) 12px 96px; } .fit-screens .cs-caption { font-size: 16px; line-height: 22px; } }

@@ -3,14 +3,11 @@
   "order": 3,
   "intro": "An AI-assisted writing editor that understands your unique style, makes suggestions to maintain your voice, prose, and story.",
   "photos": [
-    "/assets/img/digital/storyright-thumb.jpg",
-    "/assets/img/storyright/hero.jpg"
+    "/assets/img/digital/storyright-thumb.jpg"
   ],
-  "hero_wide": true,
   "sections": [
     {
       "type": "feature",
-      "title": "All your stories.",
       "caption": "A place for all your story projects.",
       "image": "/assets/img/storyright/v2-stories.webp",
       "background": "ink",
@@ -19,7 +16,6 @@
     },
     {
       "type": "wide-carousel",
-      "title": "The outline.",
       "caption": "Detail what your story is about, the chapter outlines, and the characters and places that bring it to life.",
       "images": [
         "/assets/img/storyright/v2-outline-summary.webp",
@@ -32,7 +28,6 @@
     },
     {
       "type": "feature",
-      "title": "The editor.",
       "caption": "A clean space for you to write.",
       "image": "/assets/img/storyright/v2-editor.webp",
       "background": "ink",
@@ -41,7 +36,6 @@
     },
     {
       "type": "feature",
-      "title": "Notes.",
       "caption": "A helpful AI assistant with suggestions to make your story sing, sharpen your themes, and bring your unique voice forward.",
       "image": "/assets/img/storyright/v2-notes.webp",
       "background": "ink",
@@ -50,12 +44,13 @@
     },
     {
       "type": "feature",
-      "title": "Intelligence & insights.",
       "caption": "As you write, Storyright captures new characters and places, and makes sure you keep things consistent across chapters.",
       "image": "/assets/img/storyright/v2-insights.webp",
       "background": "ink",
       "tone": "light",
       "image_width": 1100
     }
-  ]
+  ],
+  "no_hero": true,
+  "fit_screens": true
 }
