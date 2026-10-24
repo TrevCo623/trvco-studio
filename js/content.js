@@ -184,7 +184,7 @@ export const DIGITAL = [
       {
         "type": "panel",
         "tone": "dark",
-        "caption": "Add clothes you have to Your Closet to make the app more tailored to your style",
+        "caption": "Add clothes you have to Your Closet to tailor the app to your style",
         "bg": "#EBE5E5",
         "phone": 0.6403,
         "img": "/assets/img/vibefit/closet-phone.webp",
