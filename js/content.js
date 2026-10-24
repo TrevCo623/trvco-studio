@@ -245,7 +245,7 @@ export const DIGITAL = [
   {
     "slug": "vibefit",
     "title": "VibeFit",
-    "intro": "An app that lets you and your partner find the right outfits for the evening's vibe, together",
+    "intro": "Match your fit to your vibe, with or without your partner",
     "carouselTitle": "",
     "carouselTitleEnd": "",
     "panels": [],
