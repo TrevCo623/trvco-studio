@@ -707,3 +707,4 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 /* Type filter only: font tiles sit on the page background (not on the homepage mix) */
 [data-filter="type"] .type-tile { background: transparent !important; }
 .type-tile { transition: filter .4s ease, background-color .4s ease; }
+[data-filter="type"] .tile:has(.type-tile) { background: transparent; }
