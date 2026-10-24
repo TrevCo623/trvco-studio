@@ -138,7 +138,7 @@ body.is-leaving .site-footer { opacity: 0; transition: opacity var(--fade) ease;
 .grid-inner.no-fade .tile { transition: none; }
 .tile.is-gone { display: none; }
 .tile img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease); }
-@media (hover: hover) { .tile:hover img { transform: scale(1.03); } }
+@media (hover: hover) { .tile:hover img { transform: scale(1.08); } }
 .tile-label {
   position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; gap: 12px;
   padding: 40px 18px 14px; font-size: 16px; line-height: 20px; color: #333333; background: none;
@@ -152,7 +152,7 @@ body.is-leaving .site-footer { opacity: 0; transition: opacity var(--fade) ease;
 .type-tile { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; color: var(--paper); background: #1E2019; transition: filter .4s ease; }
 @media (hover: hover) { .tile:hover .type-tile { filter: brightness(.97); } }
 .type-tile span { font-size: var(--fs, 48px); line-height: 1; white-space: nowrap; transition: transform .9s var(--ease); }
-@media (hover: hover) { .tile:hover .type-tile span { transform: scale(1.06); } }
+@media (hover: hover) { .tile:hover .type-tile span { transform: scale(1.15); } }
 .type-tile + .tile-label { background: none; color: var(--paper); }
 .type-tile + .tile-label em { color: var(--paper); }
 
@@ -708,3 +708,5 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 [data-filter="type"] .type-tile { background: transparent !important; }
 .type-tile { transition: filter .4s ease, background-color .4s ease; }
 [data-filter="type"] .tile:has(.type-tile) { background: transparent; }
+/* Filtered views: no name/price overlay on hover */
+[data-filter]:not([data-filter=""]) .tile-label { display: none; }
