@@ -396,24 +396,53 @@ function HomePage(route) {
     inner.append(a); tiles.set(key, a);
   }
   let filter = route.filter;
-  let shown = [];
+  let shown = [], shownOrder = [];
 
+  // Homepage (no filter): a random order each visit, chosen so a tile's neighbours (above, left,
+  // right) are a different kind of project wherever possible. Several shuffles are tried and the one
+  // with the fewest same-kind neighbours wins; it's kept per column count so resizing is stable.
+  const shuffle = (a) => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const homePlans = {};
+  function plan(keys, cols, cw, gap, spread) {
+    const hs = new Array(cols).fill(0), pool = [...keys], placed = [], out = [];
+    let clashes = 0;
+    while (pool.length) {
+      const c = hs.indexOf(Math.min(...hs)), y = hs[c];
+      let pick = 0;
+      if (spread) {
+        const near = new Set(placed.filter((p) => (p.c === c && p.y + p.h + gap >= y - 1) || (Math.abs(p.c - c) === 1 && p.y < y + cw && p.y + p.h > y)).map((p) => p.cat));
+        const left = {}; pool.forEach((k) => { const ct = byKey.get(k).cat; left[ct] = (left[ct] || 0) + 1; });
+        let best = -1;
+        pool.forEach((k, i) => { const ct = byKey.get(k).cat; if (!near.has(ct) && (best < 0 || left[ct] > left[byKey.get(pool[best]).cat])) best = i; });
+        if (best >= 0) pick = best; else clashes++;
+      }
+      const k = pool.splice(pick, 1)[0], it = byKey.get(k), th = Math.round(cw / it.ratio);
+      placed.push({ c, y, h: th, cat: it.cat }); out.push({ k, c, y: hs[c], th });
+      hs[c] += th + gap;
+    }
+    return { out, clashes, height: Math.max(0, Math.max(...hs) - gap) };
+  }
   function layout(keys) {
     const W = inner.clientWidth;
     const cols = W >= 960 ? 3 : W >= 600 ? 2 : 1;
     const gap = cols === 1 ? 12 : 15;
     const cw = (W - gap * (cols - 1)) / cols;
-    const hs = new Array(cols).fill(0);
-    for (const k of keys) {
+    let p;
+    if (keys === HOME_LIST) {
+      if (!homePlans[cols]) {
+        let best = null;
+        for (let i = 0; i < 60 && (!best || best.clashes); i++) { const q = plan(shuffle(HOME_LIST), cols, cw, gap, true); if (!best || q.clashes < best.clashes) best = q; }
+        homePlans[cols] = best.out.map((o) => o.k);
+      }
+      p = plan(homePlans[cols], cols, cw, gap, false);
+    } else p = plan(keys, cols, cw, gap, false);
+    for (const { k, c, y, th } of p.out) {
       const it = byKey.get(k), t = tiles.get(k);
-      const th = Math.round(cw / it.ratio);
-      const c = hs.indexOf(Math.min(...hs));
-      Object.assign(t.style, { left: `${c * (cw + gap)}px`, top: `${hs[c]}px`, width: `${cw}px`, height: `${th}px` });
+      Object.assign(t.style, { left: `${c * (cw + gap)}px`, top: `${y}px`, width: `${cw}px`, height: `${th}px` });
       if (it.type) t.querySelector('span').style.setProperty('--fs', `${Math.round(cw * 0.111 * (it.type.scale || 1))}px`);
-      hs[c] += th + gap;
     }
-    inner.style.height = `${Math.max(0, Math.max(...hs) - gap)}px`;
-    shown = keys;
+    inner.style.height = `${p.height}px`;
+    shown = keys; shownOrder = p.out.map((o) => o.k);
   }
   const ro = new ResizeObserver(() => layout(shown));
 
@@ -500,7 +529,7 @@ function HomePage(route) {
     if (f) { window.scrollTo(0, 0); fadeInTiles(CAT_LIST(f)); return; }
     // Back to everything: reverse of filtering — park at the docked point, fade in, scroll up.
     const p = scrollHomeFromHeader();
-    fadeInTiles(HOME_LIST);
+    fadeInTiles(shownOrder);
     await p;
   }
 
