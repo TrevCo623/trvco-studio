@@ -24,8 +24,8 @@
       "background": "paper",
       "phone": 0.6403,
       "images": [
-        "/assets/img/vibefit/share-waiting-notice.webp",
         "/assets/img/vibefit/share-waiting.webp",
+        "/assets/img/vibefit/share-waiting-notice.webp",
         "/assets/img/vibefit/share-fun-night.webp"
       ]
     },

@@ -273,8 +273,8 @@ export const DIGITAL = [
         "bg": "var(--paper)",
         "phone": 0.6403,
         "imgs": [
-          "/assets/img/vibefit/share-waiting-notice.webp",
           "/assets/img/vibefit/share-waiting.webp",
+          "/assets/img/vibefit/share-waiting-notice.webp",
           "/assets/img/vibefit/share-fun-night.webp"
         ]
       },
@@ -876,14 +876,14 @@ export const CONTENT_IMG = {
     "w": 2224,
     "h": 3336
   },
-  "/assets/img/vibefit/share-waiting-notice.webp": {
-    "src": "assets/img/vibefit/share-waiting-notice.webp",
+  "/assets/img/vibefit/share-waiting.webp": {
+    "src": "assets/img/vibefit/share-waiting.webp",
     "cdn": "",
     "w": 2224,
     "h": 3336
   },
-  "/assets/img/vibefit/share-waiting.webp": {
-    "src": "assets/img/vibefit/share-waiting.webp",
+  "/assets/img/vibefit/share-waiting-notice.webp": {
+    "src": "assets/img/vibefit/share-waiting-notice.webp",
     "cdn": "",
     "w": 2224,
     "h": 3336
