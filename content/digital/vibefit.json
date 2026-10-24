@@ -13,14 +13,14 @@
       "type": "panel",
       "image": "/assets/img/vibefit/choose-vibe-phone.webp",
       "tone": "light",
-      "caption": "Step 1: Choose the vibe for the night",
+      "caption": "Choose the vibe for the night",
       "background": "#998A9D",
       "phone": 0.6403
     },
     {
       "type": "row",
       "tone": "dark",
-      "caption": "Step 2: Share with a partner to sync your vibe and fits for the night",
+      "caption": "Share with a partner to sync your vibe and fits for the night",
       "background": "paper",
       "phone": 0.6403,
       "images": [
@@ -42,9 +42,9 @@
         "h": 2612
       },
       "phone": 0.6403,
-      "caption": "Step 4: Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet",
+      "caption": "Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet",
       "intro": {
-        "caption": "Step 3: Choose an outfit that matches your vibe for the night",
+        "caption": "Choose an outfit that matches your vibe for the night",
         "tone": "dark",
         "background": "#EBE5E5",
         "sides": "/assets/img/vibefit/looks-sides.webp",

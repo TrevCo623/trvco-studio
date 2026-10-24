@@ -260,7 +260,7 @@ export const DIGITAL = [
       {
         "type": "panel",
         "tone": "light",
-        "caption": "Step 1: Choose the vibe for the night",
+        "caption": "Choose the vibe for the night",
         "bg": "#998A9D",
         "phone": 0.6403,
         "img": "/assets/img/vibefit/choose-vibe-phone.webp",
@@ -269,7 +269,7 @@ export const DIGITAL = [
       {
         "type": "row",
         "tone": "dark",
-        "caption": "Step 2: Share with a partner to sync your vibe and fits for the night",
+        "caption": "Share with a partner to sync your vibe and fits for the night",
         "bg": "var(--paper)",
         "phone": 0.6403,
         "imgs": [
@@ -281,7 +281,7 @@ export const DIGITAL = [
       {
         "type": "scroll",
         "tone": "light",
-        "caption": "Step 4: Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet",
+        "caption": "Get styling tips, see versions of this look on Pinterest, or figure out how to use items you have in your closet",
         "bg": "#B17C72",
         "phone": 0.6403,
         "img": "/assets/img/vibefit/phone-frame.webp",
@@ -294,7 +294,7 @@ export const DIGITAL = [
         },
         "bgHex": "#B17C72",
         "intro": {
-          "caption": "Step 3: Choose an outfit that matches your vibe for the night",
+          "caption": "Choose an outfit that matches your vibe for the night",
           "tone": "dark",
           "bg": "#EBE5E5",
           "sides": "/assets/img/vibefit/looks-sides.webp",
