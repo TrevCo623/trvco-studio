@@ -10,36 +10,49 @@
   "sections": [
     {
       "type": "feature",
-      "title": "Just write.",
-      "caption": "Write your story free from distraction – let it flow uninterrupted. No suggested edits will be surfaced until you’re ready to review.",
-      "image": "/assets/img/storyright/just-write.jpg",
-      "background": "ink",
-      "tone": "light",
-      "image_width": 1100
-    },
-    {
-      "type": "feature",
-      "title": "Review & Edit.",
-      "caption": "When you’re ready, hit the review button. Your personalized AI will review for style & voice consistency, story structure cohesion, and pacing.",
-      "image": "/assets/img/storyright/review.jpg",
-      "background": "ink",
-      "tone": "light",
-      "image_width": 1100
-    },
-    {
-      "type": "feature",
-      "title": "Focus mode.",
-      "caption": "Focus on editing one suggestion at a time, or dismiss the suggestion. Hit done to lock in the change.",
-      "image": "/assets/img/storyright/focus.jpg",
-      "background": "ink",
-      "tone": "light",
-      "image_width": 1100
-    },
-    {
-      "type": "feature",
       "title": "All your stories.",
-      "caption": "The AI assistant will maintain story details and style within each project, while also making suggestions on how to keep your unique voice across all.",
-      "image": "/assets/img/storyright/projects.jpg",
+      "caption": "A place for all your story projects.",
+      "image": "/assets/img/storyright/v2-stories.webp",
+      "background": "ink",
+      "tone": "light",
+      "image_width": 1100
+    },
+    {
+      "type": "wide-carousel",
+      "title": "The outline.",
+      "caption": "Detail what your story is about, the chapter outlines, and the characters and places that bring it to life.",
+      "images": [
+        "/assets/img/storyright/v2-outline-summary.webp",
+        "/assets/img/storyright/v2-outline-chapters.webp",
+        "/assets/img/storyright/v2-outline-characters.webp"
+      ],
+      "background": "ink",
+      "tone": "light",
+      "image_width": 1100
+    },
+    {
+      "type": "feature",
+      "title": "The editor.",
+      "caption": "A clean space for you to write.",
+      "image": "/assets/img/storyright/v2-editor.webp",
+      "background": "ink",
+      "tone": "light",
+      "image_width": 1100
+    },
+    {
+      "type": "feature",
+      "title": "Notes.",
+      "caption": "A helpful AI assistant with suggestions to make your story sing, sharpen your themes, and bring your unique voice forward.",
+      "image": "/assets/img/storyright/v2-notes.webp",
+      "background": "ink",
+      "tone": "light",
+      "image_width": 1100
+    },
+    {
+      "type": "feature",
+      "title": "Intelligence & insights.",
+      "caption": "As you write, Storyright captures new characters and places, and makes sure you keep things consistent across chapters.",
+      "image": "/assets/img/storyright/v2-insights.webp",
       "background": "ink",
       "tone": "light",
       "image_width": 1100

@@ -710,3 +710,18 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 [data-filter="type"] .tile:has(.type-tile) { background: transparent; }
 /* Filtered views: no name/price overlay on hover */
 [data-filter]:not([data-filter=""]) .tile-label { display: none; }
+
+/* Wide screenshot carousel (Storyright outline) */
+.cs-wcar { overflow: hidden; }
+.wcar-stage { width: min(var(--w, 1100px), 100%); }
+.wcar-row { position: relative; aspect-ratio: 4880 / 3376; touch-action: pan-y; }
+.wcar-item { --x: 0; position: absolute; inset: 0; padding: 0; border: 0; background: none; cursor: pointer; opacity: .35;
+  transform: translateX(calc(var(--x) * 92%)) scale(calc(1 - .08 * min(1, max(var(--x), calc(-1 * var(--x))))));
+  transition: transform .7s var(--ease), opacity .5s ease; }
+.wcar-item.is-on { opacity: 1; cursor: default; z-index: 1; }
+.wcar-item img { display: block; width: 100%; height: auto; }
+.cs-wcar .dnav { margin-top: 8px; }
+.cs-wcar.tone-light .dbtn { border-color: var(--paper); color: var(--paper); }
+@media (hover: hover) { .cs-wcar.tone-light .dbtn:not(:disabled):hover { background: var(--paper); color: var(--ink); } }
+.cs-feature > .wcar-stage { width: min(var(--w, 1100px), 100%); }
+.wcar-row { width: 100%; }

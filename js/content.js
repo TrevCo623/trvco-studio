@@ -219,38 +219,51 @@ export const DIGITAL = [
       {
         "type": "feature",
         "tone": "light",
-        "title": "Just write.",
-        "caption": "Write your story free from distraction – let it flow uninterrupted. No suggested edits will be surfaced until you’re ready to review.",
-        "bg": "var(--ink)",
-        "w": 1100,
-        "img": "/assets/img/storyright/just-write.jpg"
-      },
-      {
-        "type": "feature",
-        "tone": "light",
-        "title": "Review & Edit.",
-        "caption": "When you’re ready, hit the review button. Your personalized AI will review for style & voice consistency, story structure cohesion, and pacing.",
-        "bg": "var(--ink)",
-        "w": 1100,
-        "img": "/assets/img/storyright/review.jpg"
-      },
-      {
-        "type": "feature",
-        "tone": "light",
-        "title": "Focus mode.",
-        "caption": "Focus on editing one suggestion at a time, or dismiss the suggestion. Hit done to lock in the change.",
-        "bg": "var(--ink)",
-        "w": 1100,
-        "img": "/assets/img/storyright/focus.jpg"
-      },
-      {
-        "type": "feature",
-        "tone": "light",
         "title": "All your stories.",
-        "caption": "The AI assistant will maintain story details and style within each project, while also making suggestions on how to keep your unique voice across all.",
+        "caption": "A place for all your story projects.",
         "bg": "var(--ink)",
         "w": 1100,
-        "img": "/assets/img/storyright/projects.jpg"
+        "img": "/assets/img/storyright/v2-stories.webp"
+      },
+      {
+        "type": "wide-carousel",
+        "tone": "light",
+        "title": "The outline.",
+        "caption": "Detail what your story is about, the chapter outlines, and the characters and places that bring it to life.",
+        "bg": "var(--ink)",
+        "w": 1100,
+        "imgs": [
+          "/assets/img/storyright/v2-outline-summary.webp",
+          "/assets/img/storyright/v2-outline-chapters.webp",
+          "/assets/img/storyright/v2-outline-characters.webp"
+        ]
+      },
+      {
+        "type": "feature",
+        "tone": "light",
+        "title": "The editor.",
+        "caption": "A clean space for you to write.",
+        "bg": "var(--ink)",
+        "w": 1100,
+        "img": "/assets/img/storyright/v2-editor.webp"
+      },
+      {
+        "type": "feature",
+        "tone": "light",
+        "title": "Notes.",
+        "caption": "A helpful AI assistant with suggestions to make your story sing, sharpen your themes, and bring your unique voice forward.",
+        "bg": "var(--ink)",
+        "w": 1100,
+        "img": "/assets/img/storyright/v2-notes.webp"
+      },
+      {
+        "type": "feature",
+        "tone": "light",
+        "title": "Intelligence & insights.",
+        "caption": "As you write, Storyright captures new characters and places, and makes sure you keep things consistent across chapters.",
+        "bg": "var(--ink)",
+        "w": 1100,
+        "img": "/assets/img/storyright/v2-insights.webp"
       }
     ]
   },
@@ -870,29 +883,47 @@ export const CONTENT_IMG = {
     "w": 2500,
     "h": 1379
   },
-  "/assets/img/storyright/just-write.jpg": {
-    "src": "assets/img/storyright/just-write.jpg",
+  "/assets/img/storyright/v2-stories.webp": {
+    "src": "assets/img/storyright/v2-stories.webp",
     "cdn": "",
-    "w": 2500,
-    "h": 1379
+    "w": 2440,
+    "h": 1688
   },
-  "/assets/img/storyright/review.jpg": {
-    "src": "assets/img/storyright/review.jpg",
+  "/assets/img/storyright/v2-outline-summary.webp": {
+    "src": "assets/img/storyright/v2-outline-summary.webp",
     "cdn": "",
-    "w": 2500,
-    "h": 1379
+    "w": 2440,
+    "h": 1688
   },
-  "/assets/img/storyright/focus.jpg": {
-    "src": "assets/img/storyright/focus.jpg",
+  "/assets/img/storyright/v2-outline-chapters.webp": {
+    "src": "assets/img/storyright/v2-outline-chapters.webp",
     "cdn": "",
-    "w": 2500,
-    "h": 1379
+    "w": 2440,
+    "h": 1688
   },
-  "/assets/img/storyright/projects.jpg": {
-    "src": "assets/img/storyright/projects.jpg",
+  "/assets/img/storyright/v2-outline-characters.webp": {
+    "src": "assets/img/storyright/v2-outline-characters.webp",
     "cdn": "",
-    "w": 2500,
-    "h": 1379
+    "w": 2440,
+    "h": 1688
+  },
+  "/assets/img/storyright/v2-editor.webp": {
+    "src": "assets/img/storyright/v2-editor.webp",
+    "cdn": "",
+    "w": 2440,
+    "h": 1688
+  },
+  "/assets/img/storyright/v2-notes.webp": {
+    "src": "assets/img/storyright/v2-notes.webp",
+    "cdn": "",
+    "w": 2440,
+    "h": 1688
+  },
+  "/assets/img/storyright/v2-insights.webp": {
+    "src": "assets/img/storyright/v2-insights.webp",
+    "cdn": "",
+    "w": 2440,
+    "h": 1688
   },
   "/assets/img/byways/panel-trips.webp": {
     "src": "assets/img/byways/panel-trips.webp",

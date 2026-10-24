@@ -1074,6 +1074,13 @@ function DigitalPage(route) {
         ${s.button ? `<a class="btn cs-panel-btn" href="${esc(s.url || '#')}"${/^https?:/.test(s.url || '') ? ' target="_blank" rel="noopener"' : ''}>${esc(s.button)}</a>` : ''}
       </section>`;
     }
+    if (s.type === 'wide-carousel' && s.imgs?.length) {
+      // Wide screenshots: the current one centred, neighbours dimmed either side. Click, swipe or arrows.
+      return `<section class="cs cs-feature cs-wcar ${tone}" style="${style}"><div>${head}</div>
+        <div class="wcar-stage"><div class="wcar-row">${s.imgs.map((k, i) => `<button class="wcar-item" type="button" data-i="${i}" aria-label="Screen ${i + 1}">${img(k, { alt: `${s.title || d.title} — ${i + 1} of ${s.imgs.length}` })}</button>`).join('')}</div>
+        <div class="dnav"><button class="dbtn" type="button" data-d="-1" aria-label="Previous" disabled>${arrow('left')}</button><button class="dbtn" type="button" data-d="1" aria-label="Next">${arrow('right')}</button></div></div>
+      </section>`;
+    }
     if (s.type === 'phone-carousel' && s.imgs?.length && s.frame) {
       // Byways-style: one phone frame fixed in the middle; the screens slide through it, the ones
       // either side shown without a frame, dimmed and fading out at the bottom.
@@ -1175,6 +1182,22 @@ function DigitalPage(route) {
     row.addEventListener('touchend', (e) => { const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) { cur = Math.max(0, Math.min(items.length - 1, cur + (dx < 0 ? 1 : -1))); place(); } }, { passive: true });
     row.addEventListener('click', (e) => { const it = e.target.closest('.cs-panel-img'); if (it && innerWidth <= 760) { cur = items.indexOf(it); place(); } });
     addEventListener('resize', place); new ResizeObserver(place).observe(row); $$('img', row).forEach((im) => im.complete || im.addEventListener('load', place, { once: true }));
+  });
+  $$('.cs-wcar', el).forEach((box) => {
+    const items = $$('.wcar-item', box), [prev, next] = $$('.dbtn', box); let cur = 0;
+    const go = (k) => {
+      cur = Math.max(0, Math.min(items.length - 1, k));
+      items.forEach((it, j) => { it.style.setProperty('--x', j - cur); it.classList.toggle('is-on', j === cur); });
+      prev.disabled = cur === 0; next.disabled = cur === items.length - 1;
+    };
+    box.addEventListener('click', (e) => {
+      const b = e.target.closest('.dbtn'); if (b) return go(cur + Number(b.dataset.d));
+      const it = e.target.closest('.wcar-item'); if (it) go(Number(it.dataset.i));
+    });
+    let sx = 0, sy = 0;
+    box.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    box.addEventListener('touchend', (e) => { const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) go(cur + (dx < 0 ? 1 : -1)); }, { passive: true });
+    go(0);
   });
   $$('.cs-pcar', el).forEach((box) => {
     const cards = $$('.pcar-card', box), [prev, next] = $$('.dbtn', box); let cur = 0, p = 0, anim = 0;
