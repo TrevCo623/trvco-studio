@@ -380,29 +380,26 @@ export const DIGITAL = [
     "heroPhone": 0.6403,
     "sections": [
       {
-        "type": "row",
+        "type": "phone-carousel",
         "tone": "dark",
         "caption": "A weekly rhythm that gives each day a theme, so every task has a home",
         "bg": "var(--paper)",
         "phone": 0.6403,
+        "frame": "/assets/img/tackle/phone-frame.webp",
         "imgs": [
-          "/assets/img/tackle/rhythm.webp",
-          "/assets/img/tackle/rhythm-sheet.webp",
-          "/assets/img/tackle/rhythm-fri.webp"
+          "/assets/img/tackle/rhythm-screen.webp",
+          "/assets/img/tackle/rhythm-sheet-screen.webp",
+          "/assets/img/tackle/rhythm-fri-screen.webp"
         ]
       },
       {
-        "type": "row",
+        "type": "panel",
         "tone": "light",
         "caption": "Add a task and Tackle suggests where it lands in your week",
         "bg": "#93A596",
         "phone": 0.6403,
-        "bgHex": "#93A596",
-        "imgs": [
-          "/assets/img/tackle/add-2.webp",
-          "/assets/img/tackle/add-3.webp",
-          "/assets/img/tackle/add-1.webp"
-        ]
+        "img": "/assets/img/tackle/add-3.webp",
+        "bgHex": "#93A596"
       },
       {
         "type": "panel",
@@ -1071,29 +1068,29 @@ export const CONTENT_IMG = {
     "w": 2224,
     "h": 3336
   },
-  "/assets/img/tackle/rhythm.webp": {
-    "src": "assets/img/tackle/rhythm.webp",
+  "/assets/img/tackle/phone-frame.webp": {
+    "src": "assets/img/tackle/phone-frame.webp",
     "cdn": "",
     "w": 2224,
     "h": 3336
   },
-  "/assets/img/tackle/rhythm-sheet.webp": {
-    "src": "assets/img/tackle/rhythm-sheet.webp",
+  "/assets/img/tackle/rhythm-screen.webp": {
+    "src": "assets/img/tackle/rhythm-screen.webp",
     "cdn": "",
-    "w": 2224,
-    "h": 3336
+    "w": 1320,
+    "h": 2866
   },
-  "/assets/img/tackle/rhythm-fri.webp": {
-    "src": "assets/img/tackle/rhythm-fri.webp",
+  "/assets/img/tackle/rhythm-sheet-screen.webp": {
+    "src": "assets/img/tackle/rhythm-sheet-screen.webp",
     "cdn": "",
-    "w": 2224,
-    "h": 3336
+    "w": 1320,
+    "h": 2866
   },
-  "/assets/img/tackle/add-2.webp": {
-    "src": "assets/img/tackle/add-2.webp",
+  "/assets/img/tackle/rhythm-fri-screen.webp": {
+    "src": "assets/img/tackle/rhythm-fri-screen.webp",
     "cdn": "",
-    "w": 2224,
-    "h": 3336
+    "w": 1320,
+    "h": 2866
   },
   "/assets/img/tackle/add-3.webp": {
     "src": "assets/img/tackle/add-3.webp",
@@ -1101,20 +1098,8 @@ export const CONTENT_IMG = {
     "w": 2224,
     "h": 3336
   },
-  "/assets/img/tackle/add-1.webp": {
-    "src": "assets/img/tackle/add-1.webp",
-    "cdn": "",
-    "w": 2224,
-    "h": 3336
-  },
   "/assets/img/tackle/week-drag.webp": {
     "src": "assets/img/tackle/week-drag.webp",
-    "cdn": "",
-    "w": 2224,
-    "h": 3336
-  },
-  "/assets/img/tackle/phone-frame.webp": {
-    "src": "assets/img/tackle/phone-frame.webp",
     "cdn": "",
     "w": 2224,
     "h": 3336

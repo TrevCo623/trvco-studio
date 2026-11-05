@@ -11,28 +11,25 @@
   "hero_phone": 0.6403,
   "sections": [
     {
-      "type": "row",
+      "type": "phone-carousel",
       "tone": "dark",
       "background": "paper",
       "phone": 0.6403,
       "caption": "A weekly rhythm that gives each day a theme, so every task has a home",
       "images": [
-        "/assets/img/tackle/rhythm.webp",
-        "/assets/img/tackle/rhythm-sheet.webp",
-        "/assets/img/tackle/rhythm-fri.webp"
-      ]
+        "/assets/img/tackle/rhythm-screen.webp",
+        "/assets/img/tackle/rhythm-sheet-screen.webp",
+        "/assets/img/tackle/rhythm-fri-screen.webp"
+      ],
+      "frame": "/assets/img/tackle/phone-frame.webp"
     },
     {
-      "type": "row",
+      "type": "panel",
       "tone": "light",
       "background": "#93A596",
       "phone": 0.6403,
       "caption": "Add a task and Tackle suggests where it lands in your week",
-      "images": [
-        "/assets/img/tackle/add-2.webp",
-        "/assets/img/tackle/add-3.webp",
-        "/assets/img/tackle/add-1.webp"
-      ]
+      "image": "/assets/img/tackle/add-3.webp"
     },
     {
       "type": "panel",
