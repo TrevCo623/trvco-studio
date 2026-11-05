@@ -639,7 +639,7 @@ function wireBuy(el, getProduct, kind) {
 }
 // Credit band on every Digital page, just above the "collaborate" footer: Trev designs, Claude builds.
 const madeBy = () => `<section class="made-by"><div class="made-by-in reveal">
-    <h2>Designed by me. <span>Built with Claude.</span></h2>
+    <h2>Designed by me.<br><span>Built with Claude.</span></h2>
     <p>I shaped the product, designed every screen and directed the details. Claude wrote the code from my designs and specs.</p>
     <dl>
       <div><dt>Product &amp; UX architecture</dt><dd>Me</dd></div>
