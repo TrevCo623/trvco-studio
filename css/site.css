@@ -738,3 +738,5 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 /* A screenshot without the baked-in shadow margin (e.g. the Notes animation): sized to match the
    window in the shadowed screenshots (90.2% of their width) and given its own shadow. */
 .fit-screens .cs-feature .cs-media.is-bare img { width: 90.2%; margin: calc(var(--fit-w, 900px) * .019) auto; border-radius: calc(var(--fit-w, 900px) * .011); box-shadow: 0 calc(var(--fit-w, 900px) * .02) calc(var(--fit-w, 900px) * .05) rgba(0,0,0,.45); }
+.cs-pcar.tone-light .dbtn { border-color: var(--paper); color: var(--paper); }
+@media (hover: hover) { .cs-pcar.tone-light .dbtn:not(:disabled):hover { background: var(--paper); color: var(--ink); } }

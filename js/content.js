@@ -372,7 +372,7 @@ export const DIGITAL = [
     "panels": [],
     "carousels": [],
     "carousel": [],
-    "thumb": "/assets/img/tackle/thumb.jpg",
+    "thumb": "/assets/img/tackle/thumb-v2.jpg",
     "hero": "/assets/img/tackle/today-mon.webp",
     "heroWide": false,
     "fit": false,
@@ -396,28 +396,25 @@ export const DIGITAL = [
         "type": "panel",
         "tone": "light",
         "caption": "Add a task and Tackle suggests where it lands in your week",
-        "bg": "#93A596",
+        "bg": "var(--ink)",
         "phone": 0.6403,
-        "img": "/assets/img/tackle/add-3.webp",
-        "bgHex": "#93A596"
+        "img": "/assets/img/tackle/add-3.webp"
       },
       {
         "type": "panel",
         "tone": "dark",
         "caption": "A Today screen that tells you what today is for and what's on your plate",
-        "bg": "#EBE5E5",
+        "bg": "var(--paper)",
         "phone": 0.6403,
-        "img": "/assets/img/tackle/today-mon.webp",
-        "bgHex": "#EBE5E5"
+        "img": "/assets/img/tackle/today-mon.webp"
       },
       {
         "type": "panel",
         "tone": "light",
         "caption": "A Week view to make your plan, with drag and drop between days",
-        "bg": "#8E9DB3",
+        "bg": "var(--ink)",
         "phone": 0.6403,
-        "img": "/assets/img/tackle/week-drag.webp",
-        "bgHex": "#8E9DB3"
+        "img": "/assets/img/tackle/week-drag.webp"
       },
       {
         "type": "phone-carousel",
@@ -1056,8 +1053,8 @@ export const CONTENT_IMG = {
     "w": 2500,
     "h": 1667
   },
-  "/assets/img/tackle/thumb.jpg": {
-    "src": "assets/img/tackle/thumb.jpg",
+  "/assets/img/tackle/thumb-v2.jpg": {
+    "src": "assets/img/tackle/thumb-v2.jpg",
     "cdn": "",
     "w": 4000,
     "h": 2656

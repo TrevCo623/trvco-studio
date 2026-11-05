@@ -4,7 +4,7 @@
   "draft": false,
   "intro": "A planner that gives your week a rhythm, so you can focus on one day at a time",
   "photos": [
-    "/assets/img/tackle/thumb.jpg",
+    "/assets/img/tackle/thumb-v2.jpg",
     "/assets/img/tackle/today-mon.webp"
   ],
   "uniform_phones": true,
@@ -26,7 +26,7 @@
     {
       "type": "panel",
       "tone": "light",
-      "background": "#93A596",
+      "background": "ink",
       "phone": 0.6403,
       "caption": "Add a task and Tackle suggests where it lands in your week",
       "image": "/assets/img/tackle/add-3.webp"
@@ -34,7 +34,7 @@
     {
       "type": "panel",
       "tone": "dark",
-      "background": "#EBE5E5",
+      "background": "paper",
       "phone": 0.6403,
       "caption": "A Today screen that tells you what today is for and what's on your plate",
       "image": "/assets/img/tackle/today-mon.webp"
@@ -42,7 +42,7 @@
     {
       "type": "panel",
       "tone": "light",
-      "background": "#8E9DB3",
+      "background": "ink",
       "phone": 0.6403,
       "caption": "A Week view to make your plan, with drag and drop between days",
       "image": "/assets/img/tackle/week-drag.webp"
