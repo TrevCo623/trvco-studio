@@ -398,7 +398,7 @@ export const DIGITAL = [
         "caption": "Tackle uses your weekly rhythm to suggest where each task should fall in your week",
         "bg": "var(--ink)",
         "phone": 0.6403,
-        "img": "/assets/img/tackle/add-3.webp"
+        "img": "/assets/img/tackle/add-suggest.webp"
       },
       {
         "type": "panel",
@@ -1089,8 +1089,8 @@ export const CONTENT_IMG = {
     "w": 1320,
     "h": 2866
   },
-  "/assets/img/tackle/add-3.webp": {
-    "src": "assets/img/tackle/add-3.webp",
+  "/assets/img/tackle/add-suggest.webp": {
+    "src": "assets/img/tackle/add-suggest.webp",
     "cdn": "",
     "w": 2224,
     "h": 3336
