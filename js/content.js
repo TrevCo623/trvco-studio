@@ -372,7 +372,7 @@ export const DIGITAL = [
     "panels": [],
     "carousels": [],
     "carousel": [],
-    "thumb": "/assets/img/tackle/thumb-v2.jpg",
+    "thumb": "/assets/img/tackle/thumb-v3.jpg",
     "hero": "/assets/img/tackle/today-mon.webp",
     "heroWide": false,
     "fit": false,
@@ -1053,8 +1053,8 @@ export const CONTENT_IMG = {
     "w": 2500,
     "h": 1667
   },
-  "/assets/img/tackle/thumb-v2.jpg": {
-    "src": "assets/img/tackle/thumb-v2.jpg",
+  "/assets/img/tackle/thumb-v3.jpg": {
+    "src": "assets/img/tackle/thumb-v3.jpg",
     "cdn": "",
     "w": 4000,
     "h": 2656
