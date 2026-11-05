@@ -362,6 +362,80 @@ export const DIGITAL = [
     "heroWide": false,
     "fit": false,
     "sections": []
+  },
+  {
+    "slug": "tackle",
+    "title": "Tackle",
+    "intro": "A planner that gives your week a rhythm, so you can focus on one day at a time",
+    "carouselTitle": "",
+    "carouselTitleEnd": "",
+    "panels": [],
+    "carousels": [],
+    "carousel": [],
+    "thumb": "/assets/img/tackle/thumb.jpg",
+    "hero": "/assets/img/tackle/today-mon.webp",
+    "heroWide": false,
+    "fit": false,
+    "phones": true,
+    "heroPhone": 0.6403,
+    "sections": [
+      {
+        "type": "row",
+        "tone": "dark",
+        "caption": "A weekly rhythm that gives each day a theme, so every task has a home",
+        "bg": "var(--paper)",
+        "phone": 0.6403,
+        "imgs": [
+          "/assets/img/tackle/rhythm.webp",
+          "/assets/img/tackle/rhythm-sheet.webp",
+          "/assets/img/tackle/rhythm-fri.webp"
+        ]
+      },
+      {
+        "type": "row",
+        "tone": "light",
+        "caption": "Add a task and Tackle suggests where it lands in your week",
+        "bg": "#93A596",
+        "phone": 0.6403,
+        "bgHex": "#93A596",
+        "imgs": [
+          "/assets/img/tackle/add-2.webp",
+          "/assets/img/tackle/add-3.webp",
+          "/assets/img/tackle/add-1.webp"
+        ]
+      },
+      {
+        "type": "panel",
+        "tone": "dark",
+        "caption": "A Today screen that tells you what today is for and what's on your plate",
+        "bg": "#EBE5E5",
+        "phone": 0.6403,
+        "img": "/assets/img/tackle/today-mon.webp",
+        "bgHex": "#EBE5E5"
+      },
+      {
+        "type": "panel",
+        "tone": "light",
+        "caption": "A Week view to make your plan, with drag and drop between days",
+        "bg": "#8E9DB3",
+        "phone": 0.6403,
+        "img": "/assets/img/tackle/week-drag.webp",
+        "bgHex": "#8E9DB3"
+      },
+      {
+        "type": "phone-carousel",
+        "tone": "dark",
+        "caption": "A wrap-up that celebrates your week and helps you reprioritize what's left for next week",
+        "bg": "var(--paper)",
+        "phone": 0.6403,
+        "frame": "/assets/img/tackle/phone-frame.webp",
+        "imgs": [
+          "/assets/img/tackle/wrap1-screen.webp",
+          "/assets/img/tackle/wrap2-screen.webp",
+          "/assets/img/tackle/wrap3-screen.webp"
+        ]
+      }
+    ]
   }
 ];
 export const GOODS = [
@@ -984,6 +1058,84 @@ export const CONTENT_IMG = {
     "cdn": "",
     "w": 2500,
     "h": 1667
+  },
+  "/assets/img/tackle/thumb.jpg": {
+    "src": "assets/img/tackle/thumb.jpg",
+    "cdn": "",
+    "w": 4000,
+    "h": 2656
+  },
+  "/assets/img/tackle/today-mon.webp": {
+    "src": "assets/img/tackle/today-mon.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/tackle/rhythm.webp": {
+    "src": "assets/img/tackle/rhythm.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/tackle/rhythm-sheet.webp": {
+    "src": "assets/img/tackle/rhythm-sheet.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/tackle/rhythm-fri.webp": {
+    "src": "assets/img/tackle/rhythm-fri.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/tackle/add-2.webp": {
+    "src": "assets/img/tackle/add-2.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/tackle/add-3.webp": {
+    "src": "assets/img/tackle/add-3.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/tackle/add-1.webp": {
+    "src": "assets/img/tackle/add-1.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/tackle/week-drag.webp": {
+    "src": "assets/img/tackle/week-drag.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/tackle/phone-frame.webp": {
+    "src": "assets/img/tackle/phone-frame.webp",
+    "cdn": "",
+    "w": 2224,
+    "h": 3336
+  },
+  "/assets/img/tackle/wrap1-screen.webp": {
+    "src": "assets/img/tackle/wrap1-screen.webp",
+    "cdn": "",
+    "w": 1320,
+    "h": 2866
+  },
+  "/assets/img/tackle/wrap2-screen.webp": {
+    "src": "assets/img/tackle/wrap2-screen.webp",
+    "cdn": "",
+    "w": 1320,
+    "h": 2866
+  },
+  "/assets/img/tackle/wrap3-screen.webp": {
+    "src": "assets/img/tackle/wrap3-screen.webp",
+    "cdn": "",
+    "w": 1320,
+    "h": 2866
   },
   "/assets/img/goods/go-outside-hat-1.jpg": {
     "src": "assets/img/goods/go-outside-hat-1.jpg",
