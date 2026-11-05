@@ -637,6 +637,17 @@ function wireBuy(el, getProduct, kind) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(k); li.closest('.opt').querySelector('.opt-btn').focus(); }
   });
 }
+// Credit band on every Digital page, just above the "collaborate" footer: Trev designs, Claude builds.
+const madeBy = () => `<section class="made-by"><div class="made-by-in reveal">
+    <h2>Designed by me. <span>Built with Claude.</span></h2>
+    <p>I shaped the product, designed every screen and directed the details. Claude wrote the code from my designs and specs.</p>
+    <dl>
+      <div><dt>Product &amp; UX architecture</dt><dd>Me</dd></div>
+      <div><dt>Interface design</dt><dd>Me</dd></div>
+      <div><dt>Art direction</dt><dd>Me</dd></div>
+      <div><dt>Code</dt><dd>Claude, from my designs</dd></div>
+    </dl>
+  </div></section>`;
 const cta = () => `<section class="cta"><h2 class="reveal">Want to collaborate on a project?</h2><a class="btn" href="mailto:${SITE.email}?subject=Hello">Say hello</a></section>`;
 const chevronDown = `<svg width="48" height="24" viewBox="0 0 48 24" aria-hidden="true"><path d="M1 1l23 21L47 1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
 const chevron = (dir) => `<svg width="24" height="48" viewBox="0 0 24 48" aria-hidden="true"><path d="${dir === 'left' ? 'M23 1L1 24l22 23' : 'M1 1l22 23L1 47'}" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
@@ -970,6 +981,7 @@ function BywaysPage(d) {
       ${p.img ? `<div class="by-panel-img">${img(p.img, { alt: p.title || d.title })}</div>` : ''}
       ${p.button ? `<a class="btn by-panel-btn" href="${esc(p.url || '#')}"${/^https?:/.test(p.url || '') ? ' target="_blank" rel="noopener"' : ''}>${esc(p.button)}</a>` : ''}
     </section>`).join('')}
+    ${madeBy()}
     ${cta()}
   </div>`);
   const stage = $('.by-stage', el), wipe = $('.by-wipe', el);
@@ -1134,6 +1146,7 @@ function DigitalPage(route) {
     </section>
     ${d.sections.map(sec).join('')}
     ${d.carousel?.length ? `<section class="cs cs-carousel">${carouselHTML(d.carousel, d.carouselTitle, d.title)}</section>` : ''}
+    ${madeBy()}
     ${cta()}
   </div>`);
   // Simple slide carousel

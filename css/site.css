@@ -740,3 +740,15 @@ body.nav-away .filter, body.pnav-on .filter { opacity: 0; transform: translateY(
 .fit-screens .cs-feature .cs-media.is-bare img { width: 90.2%; margin: calc(var(--fit-w, 900px) * .019) auto; border-radius: calc(var(--fit-w, 900px) * .011); box-shadow: 0 calc(var(--fit-w, 900px) * .02) calc(var(--fit-w, 900px) * .05) rgba(0,0,0,.45); }
 .cs-pcar.tone-light .dbtn { border-color: var(--paper); color: var(--paper); }
 @media (hover: hover) { .cs-pcar.tone-light .dbtn:not(:disabled):hover { background: var(--paper); color: var(--ink); } }
+
+/* "Designed by me, built with Claude" band above the footer on Digital pages */
+.made-by { background: var(--sand); color: var(--ink); padding: 104px var(--gutter, 18px) 110px; }
+.made-by-in { max-width: 880px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px 64px; align-items: start; }
+.made-by h2 { grid-column: 1 / -1; margin: 0; font-weight: 300; font-size: 32px; line-height: 40px; letter-spacing: .96px; }
+.made-by h2 span { font-style: italic; }
+.made-by p { margin: 0; font-size: 18px; line-height: 1.45; }
+.made-by dl { margin: 0; font-family: var(--mono); font-size: 13px; line-height: 20px; letter-spacing: .6px; }
+.made-by dl div { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid rgba(14,16,9,.18); }
+.made-by dl div:last-child { border-bottom: 1px solid rgba(14,16,9,.18); }
+.made-by dt { text-transform: uppercase; opacity: .7; } .made-by dd { margin: 0; text-align: right; }
+@media (max-width: 760px) { .made-by { padding: 72px 20px 80px; } .made-by-in { grid-template-columns: 1fr; gap: 20px; } .made-by h2 { font-size: 26px; line-height: 33px; } .made-by p { font-size: 16px; } }
