@@ -648,7 +648,14 @@ const madeBy = () => `<section class="made-by"><div class="made-by-in reveal">
       <div><dt>Code</dt><dd>Claude, from my designs</dd></div>
     </dl>
   </div></section>`;
-const cta = () => `<section class="cta"><h2 class="reveal">Want to collaborate on a project?</h2><a class="btn" href="mailto:${SITE.email}?subject=Hello">Say hello</a></section>`;
+// Footer prompt, worded for the section it sits in.
+const CTA = {
+  type: ['Want your own custom font?', 'Custom font'],
+  digital: ['Want to collaborate on a digital project?', 'Digital project'],
+  print: ['Want something designed for print?', 'Print project'],
+};
+const cta = (kind) => { const [h, subj] = CTA[kind] || ['Want to collaborate on a project?', 'Hello'];
+  return `<section class="cta"><h2 class="reveal">${h}</h2><a class="btn" href="mailto:${SITE.email}?subject=${encodeURIComponent(subj)}">Say hello</a></section>`; };
 const chevronDown = `<svg width="48" height="24" viewBox="0 0 48 24" aria-hidden="true"><path d="M1 1l23 21L47 1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
 const chevron = (dir) => `<svg width="24" height="48" viewBox="0 0 24 48" aria-hidden="true"><path d="${dir === 'left' ? 'M23 1L1 24l22 23' : 'M1 1l22 23L1 47'}" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>`;
 
@@ -746,7 +753,7 @@ function TypePage(route) {
       <button class="scroll-cue" type="button" aria-label="Scroll to details">${chevronDown}</button>
     </section>
     <div class="type-body"></div>
-    ${cta()}
+    ${cta('type')}
   </div>`);
   const tc = $('.tc', el), items = $$('.tc-item', el), meta = $('.type-meta', el), body = $('.type-body', el);
   const pName = $('.pnav-name', el), prices = $$('.js-price', el);
@@ -851,6 +858,7 @@ function ProductPage(route) {
       ${isGoods ? buyRow(p) : ''}
     </section>
     <div class="product-images">${p.images.map((k, i) => `<div class="${i ? 'reveal' : ''}">${img(k, { alt: `${p.title} — image ${i + 1}`, lazy: i > 0 })}</div>`).join('')}</div>
+    ${isGoods ? '' : cta('print')}
   </div>`);
   if (isGoods) wireBuy(el, () => p, 'goods');
   return { el, title: p.title };
@@ -982,7 +990,7 @@ function BywaysPage(d) {
       ${p.button ? `<a class="btn by-panel-btn" href="${esc(p.url || '#')}"${/^https?:/.test(p.url || '') ? ' target="_blank" rel="noopener"' : ''}>${esc(p.button)}</a>` : ''}
     </section>`).join('')}
     ${madeBy()}
-    ${cta()}
+    ${cta('digital')}
   </div>`);
   const stage = $('.by-stage', el), wipe = $('.by-wipe', el);
   const carousels = $$('.by-hs', el).map((hs) => phoneCarousel(hs));
@@ -1147,7 +1155,7 @@ function DigitalPage(route) {
     ${d.sections.map(sec).join('')}
     ${d.carousel?.length ? `<section class="cs cs-carousel">${carouselHTML(d.carousel, d.carouselTitle, d.title)}</section>` : ''}
     ${madeBy()}
-    ${cta()}
+    ${cta('digital')}
   </div>`);
   // Simple slide carousel
   $$('[data-slides]', el).forEach((box) => {
