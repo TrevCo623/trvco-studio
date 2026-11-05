@@ -366,7 +366,7 @@ export const DIGITAL = [
   {
     "slug": "tackle",
     "title": "Tackle",
-    "intro": "A planner that gives your week a rhythm, so you can focus on one day at a time",
+    "intro": "A planner that allows you to set your weekly rhythm, so you can tackle tasks in a focused way",
     "carouselTitle": "",
     "carouselTitleEnd": "",
     "panels": [],
@@ -382,7 +382,7 @@ export const DIGITAL = [
       {
         "type": "phone-carousel",
         "tone": "dark",
-        "caption": "A weekly rhythm that gives each day a theme, so every task has a home",
+        "caption": "Set a weekly rhythm by giving each day a theme",
         "bg": "var(--paper)",
         "phone": 0.6403,
         "frame": "/assets/img/tackle/phone-frame.webp",
@@ -395,7 +395,7 @@ export const DIGITAL = [
       {
         "type": "panel",
         "tone": "light",
-        "caption": "Add a task and Tackle suggests where it lands in your week",
+        "caption": "Tackle uses your weekly rhythm to suggest where each task should fall in your week",
         "bg": "var(--ink)",
         "phone": 0.6403,
         "img": "/assets/img/tackle/add-3.webp"
@@ -403,7 +403,7 @@ export const DIGITAL = [
       {
         "type": "panel",
         "tone": "dark",
-        "caption": "A Today screen that tells you what today is for and what's on your plate",
+        "caption": "The Today screen keeps you focused on today's theme – no distractions",
         "bg": "var(--paper)",
         "phone": 0.6403,
         "img": "/assets/img/tackle/today-mon.webp"
@@ -411,7 +411,7 @@ export const DIGITAL = [
       {
         "type": "panel",
         "tone": "light",
-        "caption": "A Week view to make your plan, with drag and drop between days",
+        "caption": "You can customize your plan for the week in detail with simple drag and drop",
         "bg": "var(--ink)",
         "phone": 0.6403,
         "img": "/assets/img/tackle/week-drag.webp"
@@ -419,7 +419,7 @@ export const DIGITAL = [
       {
         "type": "phone-carousel",
         "tone": "dark",
-        "caption": "A wrap-up that celebrates your week and helps you reprioritize what's left for next week",
+        "caption": "At the end of each week, a wrap-up activity celebrates your accomplishments and helps you reprioritize any unfinished tasks for next week",
         "bg": "var(--paper)",
         "phone": 0.6403,
         "frame": "/assets/img/tackle/phone-frame.webp",
